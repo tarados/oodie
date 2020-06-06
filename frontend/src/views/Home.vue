@@ -1,10 +1,14 @@
 <template>
-  <div class="home">
+  <div>
     <Navbar/>
     <Hamburger/>
-    <div class="shopContent">
-      <div class="mainImage">ss</div>
-    </div>
+    <header class="showcase">
+      <div class="container showcase-inner">
+        <h1>Winter Sale Now On!</h1>
+        <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>
+        <a href="#" class="btn">BUY NOW</a>
+      </div>
+    </header>
   </div>
 </template>
 
@@ -28,23 +32,66 @@
     height: 650px;
   }
 
-  .mainImage {
-    width: 100%;
-    height: 100%;
+  .container {
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0.3rem;
+  }
+
+  .showcase {
+    background-color: var(--primary-color);
+    color: white;
+    height: 100vh;
     position: relative;
-    background-image: url("../assets/tile.jpg");
-    background-size: cover;
-    background-position: center center;
+  }
+
+  .showcase:before {
+    content: '';
+    background: url("../assets/tile.jpg") no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 650px;
+    z-index: -1;
+  }
+
+  .showcase .showcase-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+  }
+
+  .showcase h1 {
+    font-size: 2.5rem;
+  }
+
+  .showcase p {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    border: none;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: opacity 1s ease-in;
+  }
+
+  .btn:hover {
+    opacity: 0.7;
   }
 
   @media screen and (max-width: 750px) {
-    shopContent {
-      height: calc(1512 / 1008 * 45vw);
-    }
 
-    .mainImage {
-      height: calc(1512 / 1008 * 45vw);
-    }
   }
 
 </style>

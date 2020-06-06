@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="container">
+    <div class="container-nav ">
       <div class="item logo">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="115px" style="margin:0 5px"
              viewBox="0 0 3465.000000 1424.000000" preserveAspectRatio="xMidYMid meet">
@@ -76,7 +76,7 @@
 </script>
 
 <style>
-  .container {
+  .container-nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -97,6 +97,7 @@
 
   .link a {
     margin: 25px;
+    text-decoration: none;
     font-family: "Work Sans", "HelveticaNeue", "Helvetica Neue", sans-serif;
   }
 
@@ -127,7 +128,7 @@
       width: 115px;
     }
 
-    .container {
+    .container-nav {
       padding: 14px 45px;
     }
   }
