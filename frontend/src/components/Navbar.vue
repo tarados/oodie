@@ -47,13 +47,7 @@
           <path
               d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path>
         </svg>
-        <a href="#" class="hamburger">
-          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger"
-               viewBox="0 0 37 40">
-            <path
-                d="M33.5 25h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0-11.5h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0 23h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2z"></path>
-          </svg>
-        </a>
+        <div class="hamburger">ssss</div>
       </div>
     </div>
   </div>
@@ -63,6 +57,7 @@
 
     export default {
         name: 'NavBar',
+        components: {},
         data() {
             return {
                 hamburger: false
@@ -75,18 +70,13 @@
     }
 </script>
 
-<style>
+<style scoped>
   .container-nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid blue;
     padding: 1.2vw 4vw;
-  }
-
-  .logo {
-
   }
 
   .link {
@@ -99,10 +89,6 @@
     margin: 25px;
     text-decoration: none;
     font-family: "Work Sans", "HelveticaNeue", "Helvetica Neue", sans-serif;
-  }
-
-  .bascket {
-    /*width: 9.5vmax;*/
   }
 
   .logo svg {
@@ -134,13 +120,28 @@
   }
 
   @media screen and (max-width: 750px) {
-    a.hamburger {
+    .hamburger {
       display: inline;
+      width: 50px;
+      height: 50px;
+      opacity: 0;
       margin-left: 1vw;
     }
 
     .linkList {
       display: none;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    .logo svg {
+      width: 28vw;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .logo svg {
+      width: 34vw;
     }
   }
 

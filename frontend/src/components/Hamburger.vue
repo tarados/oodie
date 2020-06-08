@@ -54,6 +54,7 @@
   }
 
   .menu-wrap {
+    display: none;
     position: fixed;
     top: 4.4vw;
     left: 0;
@@ -61,35 +62,36 @@
   }
 
   .menu-wrap .toggler {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 1.55vw;
+    right: 1vw;
     z-index: 2;
     cursor: pointer;
     width: 50px;
-    height: 50px;
+    height: 40px;
     opacity: 0;
   }
 
   .menu-wrap .hamburger {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 1.55vw;
+    right: 1vw;
     z-index: 1;
-    width: 60px;
-    height: 60px;
-    padding: 1rem;
-    background-color: var(--primary-color);
+    width: 50px;
+    height: 40px;
+    padding: 1.2rem 1rem 1rem 1rem;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+/* Hamburger line*/
   .menu-wrap .hamburger > div {
     position: relative;
     width: 100%;
     height: 2px;
-    background-color: white;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,14 +103,14 @@
     content: '';
     position: absolute;
     z-index: 1;
-    top: -10px;
+    top: -8px;
     width: 100%;
     height: 2px;
     background: inherit;
   }
 
   .menu-wrap .hamburger > div:after {
-    top: 10px;
+    top: 8px;
   }
 
   .menu-wrap .toggler:checked + .hamburger > div {
@@ -184,6 +186,55 @@
     color: inherit;
     text-decoration: none;
     transition: color 0.4s ease;
+  }
+
+  @media screen and (max-width: 750px) {
+    .menu-wrap {
+      display: inline;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    .menu-wrap .hamburger {
+      top: 3.2vw;
+      height: 37px;
+    }
+
+    .menu-wrap .menu {
+      top: 9vmax;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .menu-wrap .hamburger {
+      height: 40px;
+    }
+
+    .menu-wrap .menu {
+      top: 10vmax;
+    }
+  }
+
+
+    @media screen and (max-width: 360px) {
+      .menu-wrap .hamburger {
+        height: 40px;
+      }
+
+      .menu-wrap .menu {
+        top: 10vmax;
+      }
+    }
+
+  @media screen and (max-width: 325px) {
+    .menu-wrap .hamburger {
+      height: 37px;
+    }
+
+    .menu-wrap .menu {
+      top: 10vmax;
+    }
+
   }
 
 </style>
