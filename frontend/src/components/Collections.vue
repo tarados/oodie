@@ -41,7 +41,7 @@
                     },
                     {
                         title: 'Navy Oodie (Sent 25th July)',
-                        linkImage: '/img/Navy_Oodie_(Sent_25th_July).jpg',
+                        linkImage: '/img/Navy_Oodie_(Sent_25th_ July).jpg',
                         price: '$448.00'
                     },
                     {
@@ -61,7 +61,7 @@
                     },
                     {
                         title: 'Panda Oodie (Sent 17th July)',
-                        linkImage: '/img/Panda_Oodie_(Sent_17th_July).jpg',
+                        linkImage: '/img/Panda_Oodie_(Sent_ 17th_July).jpg',
                         price: '$99.00'
                     },
                     {
@@ -148,7 +148,6 @@
 
 <style scoped>
   .wrapper {
-    border: 1px solid red;
     margin-top: 55px;
   }
 
@@ -158,8 +157,9 @@
 
   .header h2 {
     text-transform: uppercase;
+    text-align: center;
     letter-spacing: 0.1em;
-    /*font-family: "montreal-serialbold";*/
+    font-family: "montreal-serialbold",sans-serif;
     font-weight: 600;
     font-size: 23px;
   }
@@ -167,26 +167,47 @@
   .row {
     max-width: 1200px;
     margin: 0 auto;
-    border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     align-content: center;
   }
 
   .item {
-    margin: 0 auto;
+    margin: 15px;
     padding-bottom: 20px;
-    border: 1px solid green;
-    width: 48%;
-    min-width: 37vmax;
+    padding-left: 30px;
+    flex-basis: 560px;
+    flex-grow: 1;
   }
 
   .item img {
     width: 100%;
   }
 
+  /*media queries*/
+  @media screen and (max-width: 1200px) {
+    .item {
+      padding-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+
+  }
+
+  @media screen and (max-width: 420px) {
+
+  }
+
+  @media screen and (max-width: 375px) {
+
+  }
+
+  @media screen and (max-width: 360px) {
+
+  }
 
 
 </style>
