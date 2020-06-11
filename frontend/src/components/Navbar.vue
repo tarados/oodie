@@ -36,8 +36,8 @@
       </div>
       <div class="item link">
         <div class="linkList">
-          <a href="#">Home</a>
-          <a href="#">Sale Products</a>
+          <router-link to="/">Home</router-link>
+          <router-link to="collections/products/">Sale Products</router-link>
           <a href="#">Contact us</a>
         </div>
       </div>
