@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <Hamburger />
-    <Collections />
+    <Collections set-style="small"/>
   </div>
   
 </template>

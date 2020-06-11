@@ -4,7 +4,9 @@
       <h2>which will you choose?</h2>
     </div>
     <div class="row">
-      <div v-for="item in items" :key="item.linkImage" class="item">
+      <div v-for="item in items" :key="item.linkImage"
+           :class="{ item: large, item_sm: small}"
+      >
         <img :src="item.linkImage">
         <h4>{{item.title}}</h4>
         <p>{{item.price}}</p>
@@ -16,8 +18,15 @@
 <script>
     export default {
         name: "Collections",
+        props: {
+            setStyle: {
+                type: String
+            }
+        },
         data() {
             return {
+                large: true,
+                small: false,
                 items: [
                     {
                         title: 'Oodie Family Pack',
@@ -142,6 +151,20 @@
 
                 ]
             }
+        },
+        methods: {
+            setItem() {
+                if (this.setStyle === 'large') {
+                    this.large = true;
+                    this.small = false;
+                } else if (this.setStyle === 'small') {
+                    this.large = false;
+                    this.small = true;
+                }
+            }
+        },
+        mounted() {
+            this.setItem();
         }
     }
 </script>
@@ -180,7 +203,13 @@
     margin: 0 15px;
   }
 
-  .item img {
+  .item_sm {
+    padding-bottom: 20px;
+    width: calc((100% / 12) * 4 - 30px);
+    margin: 0 15px;
+  }
+
+  .item img, .item_sm img {
     width: 100%;
   }
 

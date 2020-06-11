@@ -9,7 +9,7 @@
         <a href="#" class="btn">BUY NOW</a>
       </div>
     </header>
-    <Collections />
+    <Collections set-style="large"/>
   </div>
 </template>
 
