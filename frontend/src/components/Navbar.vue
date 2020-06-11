@@ -87,6 +87,7 @@
 
   .link a {
     margin: 25px;
+    color: #3d4246;
     text-decoration: none;
     font-family: "Work Sans", "HelveticaNeue", "Helvetica Neue", sans-serif;
   }

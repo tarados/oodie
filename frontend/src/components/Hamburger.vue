@@ -188,9 +188,21 @@
     transition: color 0.4s ease;
   }
 
+ /*media queries******************************************************************************************/
+
   @media screen and (max-width: 750px) {
     .menu-wrap {
       display: inline;
+    }
+
+    .menu-wrap .hamburger {
+      top: 5px;
+    }
+  }
+
+   @media screen and (max-width: 640px) {
+    .menu-wrap .hamburger {
+      top: 2px;
     }
   }
 

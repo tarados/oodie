@@ -161,7 +161,7 @@
     letter-spacing: 0.1em;
     font-family: "montreal-serialbold",sans-serif;
     font-weight: 600;
-    font-size: 23px;
+    font-size: 1.4375em;
   }
 
   .row {
@@ -175,11 +175,9 @@
   }
 
   .item {
-    margin: 15px;
     padding-bottom: 20px;
-    padding-left: 30px;
-    flex-basis: 560px;
-    flex-grow: 1;
+    width: calc((100% / 12) * 6 - 30px);
+    margin: 0 15px;
   }
 
   .item img {
@@ -194,7 +192,9 @@
   }
 
   @media screen and (max-width: 750px) {
-
+    .item {
+      flex-basis: 600px;
+    }
   }
 
   @media screen and (max-width: 420px) {
