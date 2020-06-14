@@ -4,13 +4,14 @@
       <h2>which will you choose?</h2>
     </div>
     <div class="row">
-      <div v-for="item in items" :key="item.linkImage"
-           :class="{ item: large, item_sm: small}"
+      <router-link :to="{name: 'Product', params: item}"
+                   v-for="item in items" :key="item.linkImage"
+                   :class="{ item: large, item_sm: small}"
       >
         <img :src="item.linkImage">
         <h4>{{item.title}}</h4>
         <p>{{item.price}}</p>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -182,7 +183,7 @@
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 0.1em;
-    font-family: "montreal-serialbold",sans-serif;
+    font-family: "montreal-serialbold", sans-serif;
     font-weight: 600;
     font-size: 1.4375em;
   }
