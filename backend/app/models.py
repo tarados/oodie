@@ -8,7 +8,7 @@ class Category(models.Model):
 		verbose_name = u'категория'
 		verbose_name_plural = u'категории'
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 
@@ -19,17 +19,22 @@ class Product(models.Model):
 	old_price = models.IntegerField(verbose_name=u'старая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
 
-	def __unicode__(self):
+	class Meta:
+		verbose_name = u'коллекция'
+		verbose_name_plural = u'коллекции'
+
+	def __str__(self):
 		return self.title
 
 
 class ProductImage(models.Model):
-	product = models.ForeignKey(Product, related_name='additional_image', on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, related_name='additional_image', on_delete=models.CASCADE, verbose_name='Название')
 	image = models.ImageField(upload_to='images/', verbose_name=u'изображение')
 
 	class Meta:
 		verbose_name = u'изображение товара'
 		verbose_name_plural = u'изображения товара'
 
-	def __unicode__(self):
-		return ''
+	def __str__(self):
+		return self.product
+
