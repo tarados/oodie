@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class Category(models.Model):
@@ -20,8 +21,8 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
 
 	class Meta:
-		verbose_name = u'коллекция'
-		verbose_name_plural = u'коллекции'
+		verbose_name = u'товар'
+		verbose_name_plural = u'товары'
 
 	def __str__(self):
 		return self.title
@@ -36,5 +37,5 @@ class ProductImage(models.Model):
 		verbose_name_plural = u'изображения товара'
 
 	def __str__(self):
-		return self.product
+		return str(self.product)
 
