@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 
 class ProductImageAdmin(admin.ModelAdmin):
-	list_display = ('product', 'get_image')
+	list_display = ('id', 'product', 'get_image')
 
 	def get_image(self, obj):
 		return mark_safe(f'<img src="%s" width="150" height="150"' % (obj.image.url,))

@@ -4,7 +4,7 @@
     <div class="wrapper">
       <div class="row">
         <div class="item left">
-          <img :src="this.$route.params.linkImage" class="noZoomImg">
+          <img :src="this.$route.params.image" class="noZoomImg">
         </div>
         <div class="item right">
           <h1>{{this.$route.params.title}}</h1>

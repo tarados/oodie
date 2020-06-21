@@ -1,23 +1,19 @@
 from django.shortcuts import render
-from .form import ImageForm
-from .models import ProductImage
+from django.http import JsonResponse
+from .models import ProductImage, Product
 
 
-# def home_view(request):
-# 	context = {}
-# 	if request.method == "POST":
-# 		form = ImageForm(request.POST, request.FILES)
-# 		if form.is_valid():
-# 			name = form.cleaned_data.get("name")
-# 			img = form.cleaned_data.get("image_field")
-# 			print(name, img)
-# 			# obj = ProductImage(
-# 			# 	product=name,
-# 			# 	image=img
-# 			# )
-# 			# obj.save()
-# 			# print(obj)
-# 		else:
-# 			form = ImageForm()
-# 	context['form'] = form
-# 	return render(request, "home.html", context)
+def products(request):
+	products_list = []
+	products = Product.objects.all()
+	for product in products:
+		products_list.append(
+			{
+				'title': product.title,
+				'price': product.price,
+				'old_price': product.old_price,
+				'description': product.description,
+				'image': ProductImage.objects.get(product=product.id).image.url
+			}
+		)
+	return JsonResponse({'products': products_list})
