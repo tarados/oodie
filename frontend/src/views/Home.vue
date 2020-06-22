@@ -9,21 +9,21 @@
         <a href="#" class="btn">BUY NOW</a>
       </div>
     </header>
-    <Collections set-style="large"/>
+    <ProductsList thumbnail="large"/>
   </div>
 </template>
 
 <script>
     import Navbar from "../components/Navbar";
     import Hamburger from "../components/Hamburger"
-    import Collections from "../components/Collections";
+    import ProductsList from "../components/ProductsList";
 
     export default {
         name: 'Home',
         components: {
             Navbar,
             Hamburger,
-            Collections
+            ProductsList
         }
     }
 </script>
