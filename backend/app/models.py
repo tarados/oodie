@@ -36,6 +36,11 @@ class ProductImage(models.Model):
 		verbose_name = u'изображение товара'
 		verbose_name_plural = u'изображения товара'
 
+	def get_image(self):
+		return mark_safe(f'<img src="%s" width="150" height="150"' % (self.image.url,))
+
+	get_image.short_description = "Изображение"
+
 	def __str__(self):
 		return str(self.product)
 
