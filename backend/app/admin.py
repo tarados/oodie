@@ -17,7 +17,7 @@ from django.utils.safestring import mark_safe
 
 class ProductImageInline(admin.TabularInline):
 	model = ProductImage
-	extra = 3
+	extra = 0
 
 
 class ProductAdmin(admin.ModelAdmin):
