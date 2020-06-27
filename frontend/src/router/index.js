@@ -11,12 +11,12 @@ const routes = [
         component: Home
     },
     {
-        path: '/collections/products/',
+        path: '/products/',
         name: 'Products',
         component: () => import('../views/Products')
     },
     {
-        path: '/collections/products/product',
+        path: '/products/product',
         name: 'Product',
         component: () => import('../views/Product')
     }
@@ -24,6 +24,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 

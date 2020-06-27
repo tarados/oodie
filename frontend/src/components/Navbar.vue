@@ -36,12 +36,12 @@
       </div>
       <div class="item link">
         <div class="linkList">
-          <router-link to="/">Home</router-link>
+          <a href="/">Home</a>
           <router-link
               :to="{name: 'Products'}"
           >
             Sale Products</router-link>
-          <a href="#">Contact us</a>
+          <a href="/">Contact us</a>
         </div>
       </div>
       <div class="item bascket">

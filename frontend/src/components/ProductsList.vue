@@ -4,13 +4,14 @@
       <h2>which will you choose?</h2>
     </div>
     <div class="row">
-      <router-link :to="{name: 'Product', params: product}"
+      <router-link :to="{name: 'Product', params: {id: product.id} }"
                    v-for="product in allProducts" :key="product.title"
                    :class="{ product: large, item_sm: small}"
       >
         <img :src="product.image">
         <h4>{{product.title}}</h4>
         <p>{{product.price}}</p>
+        <p>{{product.id}}</p>
       </router-link>
     </div>
   </div>
@@ -48,7 +49,7 @@
             },
             async loadProducts() {
                 const response = await get('products');
-                this.$store.commit('addProduct', response.products);
+                this.$store.commit('addProducts', response.products);
             }
         },
         mounted() {

@@ -9,6 +9,7 @@ def products(request):
 	for prd in all_products:
 		products_list.append(
 			{
+				'id': prd.id,
 				'title': prd.title,
 				'price': prd.price,
 				'old_price': prd.old_price,
@@ -20,11 +21,12 @@ def products(request):
 
 def product(request, product_id):
 	prd = Product.objects.get(id=int(product_id))
+	images_url = []
+	for image in ProductImage.objects.filter(product=prd.id):
+		images_url.append(image.image.url)
 	product_case = {
-		'title': prd.title,
-		'price': prd.price,
-		'old_price': prd.old_price,
+		'id': prd.id,
 		'description': prd.description,
-		'image': ProductImage.objects.filter(product=prd.id)[0].image.url
+		'image_list': images_url
 	}
 	return JsonResponse({'product': product_case})
