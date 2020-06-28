@@ -2,15 +2,31 @@
   <div>
     <Navbar/>
     <div class="wrapper">
-      <div class="row">
+      <div class="row" v-if="this.currentProduct">
         <div class="item left">
-          <img :src="this.allProduct.image_list[0]" class="noZoomImg">
+          <div class="item-left">
+            <img :src="this.currentProduct.image_list[0]" class="noZoomImg">
+          </div>
+          <div class="item-left">
+          </div>
         </div>
         <div class="item right">
-          <h1>{{this.allProduct.title}}</h1>
-          <div class="price">{{this.allProduct.price}} Sale</div>
+          <div class="item-right">
+            <h1>{{this.currentProduct.title}}</h1>
+          </div>
+          <div class="item-right">
+            <div class="price">
+              ${{this.currentProduct.price}} Sale
+            </div>
+          </div>
+          <div class="item-right">
+            <div class="btn-prd">
+              <button class="btn">Купить</button>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="row" v-else>Loading...</div>
     </div>
   </div>
 </template>
@@ -18,7 +34,6 @@
 <script>
     import Navbar from "../components/Navbar";
     import {get} from "../js/send";
-    import {mapGetters} from 'vuex'
 
     export default {
         name: "Product",
@@ -26,13 +41,14 @@
             Navbar
         },
         computed: {
-            ...mapGetters(["allProduct"]),
-            ...mapGetters(["allProducts"])
+           currentProduct() {
+               return this.$store.state.productsStore.currentProduct
+           }
         },
         methods: {
             async loadProduct(id) {
                 const response = await get('products/product' + '/' + id);
-                this.$store.commit('addProduct', response.product);
+                this.$store.commit('setCurrentProduct', response.product);
             }
         },
         mounted() {
@@ -77,7 +93,42 @@
   }
 
   .price {
-    padding-left: 10px;
+    margin: 10px 0;
     color: #eb6f6e;
+  }
+
+  .right .left {
+    display: block;
+
+  }
+
+  .item-left {
+
+  }
+
+  .item-right {
+
+  }
+
+  .btn {
+    width: 80%;
+    font-family: "montreal-serialbold", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: normal;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ca492d;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: opacity 1s ease-in;
+  }
+
+  .btn-prd {
+    text-align: center;
   }
 </style>

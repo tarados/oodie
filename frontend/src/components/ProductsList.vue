@@ -10,8 +10,11 @@
       >
         <img :src="product.image">
         <h4>{{product.title}}</h4>
-        <p>{{product.price}}</p>
-        <p>{{product.id}}</p>
+        <div class="price-box">
+          <p v-if="product.old_price" class="no-current">${{product.price}}</p>
+          <p v-else>${{product.price}}</p>
+          <p class="old" v-show="product.old_price">${{product.old_price}}</p>
+        </div>
       </router-link>
     </div>
   </div>
@@ -89,18 +92,39 @@
 
   .product {
     padding-bottom: 20px;
+    text-decoration: none;
+    color: #3d4246;
     width: calc((100% / 12) * 6 - 30px);
     margin: 0 15px;
   }
 
   .item_sm {
     padding-bottom: 20px;
+    text-decoration: none;
+    color: #3d4246;
     width: calc((100% / 12) * 4 - 30px);
     margin: 0 15px;
   }
 
   .product img, .item_sm img {
     width: 100%;
+  }
+
+  .price-box {
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  p.old {
+    color: red;
+    flex-grow: 25;
+  }
+
+  .no-current {
+    text-decoration: line-through;
+    flex-grow: 1;
   }
 
   /*media queries*/

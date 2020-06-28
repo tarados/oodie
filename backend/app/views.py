@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import ProductImage, Product
+import os
 
 
 def products(request):
@@ -13,7 +14,7 @@ def products(request):
 				'title': prd.title,
 				'price': prd.price,
 				'old_price': prd.old_price,
-				'image': ProductImage.objects.filter(product=prd.id)[0].image.url
+				'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prd.id)[0].image.url
 			}
 		)
 	return JsonResponse({'products': products_list})
@@ -23,9 +24,12 @@ def product(request, product_id):
 	prd = Product.objects.get(id=int(product_id))
 	images_url = []
 	for image in ProductImage.objects.filter(product=prd.id):
-		images_url.append(image.image.url)
+		images_url.append(os.environ['SITE_URL'] + image.image.url)
 	product_case = {
 		'id': prd.id,
+		'title': prd.title,
+		'price': prd.price,
+		'old_price': prd.old_price,
 		'description': prd.description,
 		'image_list': images_url
 	}
