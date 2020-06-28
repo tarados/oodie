@@ -5,11 +5,11 @@
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
           <div class="item-left">
-            <img :src="this.currentProduct.image_list[0]" class="zoomImg">
+            <img :src="this.currentProduct.image_list[imageIndex]" class="zoomImg">
           </div>
           <div class="item-left-slider">
-            <div class="slider" v-for="image in currentProduct.image_list" :key="image">
-              <img :src="image">
+            <div class="slider" v-for="(image, index) in currentProduct.image_list" :key="image">
+              <img :src="image" @click="showImage(index)">
             </div>
           </div>
         </div>
@@ -50,6 +50,11 @@
 
     export default {
         name: "Product",
+        data() {
+          return {
+              imageIndex: 0
+          }
+        },
         components: {
             Navbar
         },
@@ -62,6 +67,9 @@
             async loadProduct(id) {
                 const response = await get('products/product' + '/' + id);
                 this.$store.commit('setCurrentProduct', response.product);
+            },
+            showImage(index) {
+                this.imageIndex = index;
             }
         },
         mounted() {
@@ -98,10 +106,12 @@
 
   .item img {
     width: 100%;
+    overflow: hidden;
   }
 
   .item img.zoomImg:hover {
-    /*transform: scale(1.5);*/
+    /*max-height: 50px;*/
+    transform: scale(1.2);
   }
 
   .item-left-slider {
