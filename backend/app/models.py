@@ -24,6 +24,12 @@ class Product(models.Model):
 		verbose_name = u'товар'
 		verbose_name_plural = u'товары'
 
+	def get_image(self):
+		obj = ProductImage.objects.filter(product=self.id)[0]
+		return mark_safe(f'<img src="%s" width="150" height="150"' % (obj.image.url,))
+
+	get_image.short_description = "Первое изображение"
+
 	def __str__(self):
 		return self.title
 
