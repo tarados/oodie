@@ -13,7 +13,7 @@ def products(request):
 				'id': prd.id,
 				'title': prd.title,
 				'price': prd.price,
-				'old_price': prd.old_price,
+				'new_price': prd.new_price,
 				'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prd.id)[0].image.url
 			}
 		)
@@ -29,7 +29,7 @@ def product(request, product_id):
 		'id': prd.id,
 		'title': prd.title,
 		'price': prd.price,
-		'old_price': prd.old_price,
+		'new_price': prd.new_price,
 		'description': prd.description,
 		'image_list': images_url
 	}

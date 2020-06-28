@@ -17,7 +17,7 @@ class Product(models.Model):
 	title = models.CharField(max_length=255, verbose_name=u'название')
 	description = models.TextField(verbose_name=u'описание')
 	price = models.IntegerField(verbose_name=u'цена')
-	old_price = models.IntegerField(verbose_name=u'старая цена', null=True, blank=True)
+	new_price = models.IntegerField(verbose_name=u'старая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
 
 	class Meta:

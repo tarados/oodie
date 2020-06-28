@@ -16,7 +16,12 @@
           </div>
           <div class="item-right">
             <div class="price">
-              ${{this.currentProduct.price}} Sale
+              <div class="current" v-show="!this.currentProduct.new_price">
+                ${{this.currentProduct.price}} Sale
+              </div>
+              <div :class="{ markdown: !currentProduct.new_price}">
+                ${{this.currentProduct.new_price}} Sale
+              </div>
             </div>
           </div>
           <div class="item-right">
@@ -100,6 +105,10 @@
   .right .left {
     display: block;
 
+  }
+
+  .markdown {
+    display: none;
   }
 
   .item-left {

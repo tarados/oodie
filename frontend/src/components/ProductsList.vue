@@ -11,9 +11,9 @@
         <img :src="product.image">
         <h4>{{product.title}}</h4>
         <div class="price-box">
-          <p v-if="product.old_price" class="no-current">${{product.price}}</p>
+          <p v-if="product.new_price" class="no-current">${{product.price}}</p>
           <p v-else>${{product.price}}</p>
-          <p class="old" v-show="product.old_price">${{product.old_price}}</p>
+          <p class="old" v-show="product.new_price">${{product.new_price}}</p>
         </div>
       </router-link>
     </div>
