@@ -5,9 +5,12 @@
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
           <div class="item-left">
-            <img :src="this.currentProduct.image_list[0]" class="noZoomImg">
+            <img :src="this.currentProduct.image_list[0]" class="zoomImg">
           </div>
-          <div class="item-left">
+          <div class="item-left-slider">
+            <div class="slider" v-for="image in currentProduct.image_list" :key="image">
+              <img :src="image">
+            </div>
           </div>
         </div>
         <div class="item right">
@@ -29,6 +32,11 @@
               <button class="btn">Купить</button>
             </div>
           </div>
+          <div class="item-right">
+            <div class="description">
+              {{this.currentProduct.description}}
+            </div>
+          </div>
         </div>
       </div>
       <div class="row" v-else>Loading...</div>
@@ -46,9 +54,9 @@
             Navbar
         },
         computed: {
-           currentProduct() {
-               return this.$store.state.productsStore.currentProduct
-           }
+            currentProduct() {
+                return this.$store.state.productsStore.currentProduct
+            }
         },
         methods: {
             async loadProduct(id) {
@@ -82,7 +90,7 @@
     font-size: 1.1em;
     font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
     color: rgb(61, 66, 70);
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: calc((100% / 12) * 6 - 30px);
     margin: 0 15px;
     overflow: hidden;
@@ -92,9 +100,24 @@
     width: 100%;
   }
 
-  .item img:hover {
-    transform: scale(1.5);
+  .item img.zoomImg:hover {
+    /*transform: scale(1.5);*/
+  }
 
+  .item-left-slider {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 3rem;
+  }
+
+  .slider {
+    width: calc((100% / 12) * 3 - 1rem);
+    margin: 0.5rem 0.5rem;
+  }
+
+  .slider img:hover {
+    border: 1px solid black;
   }
 
   .price {
@@ -102,9 +125,12 @@
     color: #eb6f6e;
   }
 
-  .right .left {
+  .right {
     display: block;
+  }
 
+  .description {
+    margin-top: 10rem;
   }
 
   .markdown {
@@ -112,10 +138,6 @@
   }
 
   .item-left {
-
-  }
-
-  .item-right {
 
   }
 
@@ -139,5 +161,6 @@
 
   .btn-prd {
     text-align: center;
+    margin-top: 3rem;
   }
 </style>
