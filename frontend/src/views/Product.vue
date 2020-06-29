@@ -7,6 +7,29 @@
           <div class="item-left">
             <img :src="this.currentProduct.image_list[imageIndex]" class="zoomImg">
           </div>
+          <div class="item-left viewer">
+            <vueper-slides
+                class="no-shadow"
+                :infinite="false"
+                :visible-slides="4"
+                slide-multiple
+                :gap="3"
+                :slide-ratio="1 / 4"
+                :dragging-distance="70"
+                :arrows-outside="false"
+                >
+              <vueper-slide
+                  class="slide-image"
+                  v-for="(slade, i) in slides"
+                  :key="i"
+                  :image="slade.image"
+                 >
+                <template v-slot:content>
+                  <div class="content" @click="showImage(i)"></div>
+                </template>
+              </vueper-slide>
+            </vueper-slides>
+          </div>
           <div class="item-left-slider">
             <div class="slider" v-for="(image, index) in currentProduct.image_list" :key="image">
               <img :src="image" @click="showImage(index)">
@@ -47,16 +70,26 @@
 <script>
     import Navbar from "../components/Navbar";
     import {get} from "../js/send";
+    import {VueperSlides, VueperSlide} from 'vueperslides';
+    import 'vueperslides/dist/vueperslides.css';
 
     export default {
         name: "Product",
         data() {
-          return {
-              imageIndex: 0
-          }
+            return {
+                imageIndex: 0,
+                slides: [],
+                breakpoints: {
+                    420: {
+                        disable: false
+                    }
+                }
+            }
         },
         components: {
-            Navbar
+            Navbar,
+            VueperSlide,
+            VueperSlides
         },
         computed: {
             currentProduct() {
@@ -66,10 +99,17 @@
         methods: {
             async loadProduct(id) {
                 const response = await get('products/product' + '/' + id);
+                const images = response.product.image_list;
+                images.forEach(image => {
+                    this.slides.push({
+                        'image': image
+                    });
+                })
                 this.$store.commit('setCurrentProduct', response.product);
             },
             showImage(index) {
                 this.imageIndex = index;
+                console.log(this.imageIndex);
             }
         },
         mounted() {
@@ -111,7 +151,12 @@
 
   .item img.zoomImg:hover {
     /*max-height: 50px;*/
-    transform: scale(1.2);
+    /*transform: scale(1.2);*/
+  }
+
+  .content {
+    width: 100%;
+    height: 100%;
   }
 
   .item-left-slider {
@@ -127,6 +172,10 @@
   }
 
   .slider img:hover {
+    border: 1px solid black;
+  }
+
+  .slide-image:hover {
     border: 1px solid black;
   }
 
@@ -173,4 +222,38 @@
     text-align: center;
     margin-top: 3rem;
   }
+  /*media queries**************************************************************************/
+  @media screen and (max-width: 2800px) {
+    .viewer {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+
+  }
+
+  @media screen and (max-width: 420px) {
+    .item {
+      width: calc(100% - 30px);
+    }
+
+    .item-left-slider {
+      display: none;
+    }
+
+    .viewer {
+      display: contents;
+    }
+
+  }
+
+  @media screen and (max-width: 375px) {
+
+  }
+
+  @media screen and (max-width: 360px) {
+
+  }
+
 </style>
