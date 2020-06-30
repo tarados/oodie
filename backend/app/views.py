@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import ProductImage, Product
+from .models import ProductImage, Product, Order, OrderItem
 import os
+import json
+import datetime
 
 
 def products(request):
@@ -34,3 +36,35 @@ def product(request, product_id):
 		'image_list': images_url
 	}
 	return JsonResponse({'product': product_case})
+
+
+def order(request):
+	order_str = request.body.decode()
+	order_content = json.loads(order_str)
+	order = Order(
+		date=datetime.datetime.now(),
+		customer_name=order_content["name"],
+		customer_surname=order_content["surname"],
+		customer_phone=order_content["phone"]
+	)
+	order.save()
+	order_total_sum = 0
+	for order_item in order_content["order"]:
+		product = Product.objects.get(id=int(order_item["productId"]))
+		current_price = product.price
+		if current_price >= order_item["price"]:
+			product_price = current_price
+		else:
+			product_price = order_item["price"]
+		order_item = OrderItem(
+			order=order,
+			product=product,
+			quantity=order_item["quantity"],
+			price=product_price,
+			cost_product=product_price * order_item["quantity"],
+		)
+		order_item.save()
+		order_total_sum = order_total_sum + order_item.cost_product
+	order.total_price = order_total_sum
+	order.save()
+	return JsonResponse({'success': True})

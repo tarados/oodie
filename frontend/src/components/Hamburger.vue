@@ -8,9 +8,13 @@
       <div>
         <div>
           <ul>
-            <li><a href="#">Home</a></li>
             <li>
-              <a href="#">Sale Products</a>
+              <router-link :to="{name: 'Home'}">
+                Home
+              </router-link>
+            </li>
+            <li>
+              <router-link :to="{name: 'Products'}">Sale Products</router-link>
             </li>
             <li>
               <a href="#">Contact us</a>
@@ -35,7 +39,7 @@
     }
 </script>
 
-<style>
+<style scoped>
   :root {
     --primary-color: rgba(13, 110, 139, 0.1);
     --overlay-color: rgba(24, 39, 51, 0.55);

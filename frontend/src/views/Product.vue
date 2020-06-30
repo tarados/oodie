@@ -52,7 +52,7 @@
           </div>
           <div class="item-right">
             <div class="btn-prd">
-              <button class="btn">Купить</button>
+              <button class="btn" @click="toCard">add to card</button>
             </div>
           </div>
           <div class="item-right">
@@ -109,7 +109,17 @@
             },
             showImage(index) {
                 this.imageIndex = index;
-                console.log(this.imageIndex);
+            },
+            toCard() {
+                const productToCard = {
+                    'id': this.currentProduct.id,
+                    'title': this.currentProduct.title,
+                    'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
+                    'quantity': 1,
+                    'image': this.currentProduct.image_list[this.imageIndex]
+                };
+                this.$store.commit("addProductFromCard", productToCard)
+                this.$router.push({name:'Card', params: productToCard});
             }
         },
         mounted() {
@@ -119,7 +129,7 @@
 </script>
 
 <style scoped>
-  .wrapper {
+   .wrapper {
     margin-top: 55px;
   }
 
@@ -227,10 +237,6 @@
     .viewer {
       display: none;
     }
-  }
-
-  @media screen and (max-width: 750px) {
-
   }
 
   @media screen and (max-width: 420px) {

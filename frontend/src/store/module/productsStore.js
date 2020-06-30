@@ -6,11 +6,16 @@ export default {
         },
         setCurrentProduct(state, product) {
             state.currentProduct = product;
+        },
+        addProductFromCard(state, product) {
+            state.cardProducts.push(product);
         }
     },
     state: {
         productsList: [],
-        currentProduct: null
+        currentProduct: null,
+        cardProducts: [],
+        totalPrice: 0
     },
     getters: {
         allProducts(state) {

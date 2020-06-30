@@ -71,6 +71,10 @@
     margin-bottom: 55px;
   }
 
+  h4 {
+    margin-bottom: 0;
+  }
+
   .header h2 {
     text-transform: uppercase;
     text-align: center;
