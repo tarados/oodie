@@ -69,7 +69,7 @@
 
 <script>
     import Navbar from "../components/Navbar";
-    import {get} from "../js/send";
+    import {get} from "../js/send"
     import {VueperSlides, VueperSlide} from 'vueperslides';
     import 'vueperslides/dist/vueperslides.css';
 
@@ -118,8 +118,10 @@
                     'quantity': 1,
                     'image': this.currentProduct.image_list[this.imageIndex]
                 };
-                this.$store.commit("addProductFromCard", productToCard)
-                this.$router.push({name:'Card', params: productToCard});
+                const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
+                productToCard.total = total;
+                this.$store.commit("addProduct", productToCard)
+                this.$router.push({name:'Card'});
             }
         },
         mounted() {

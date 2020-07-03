@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar/>
     <div class="wrapper">
       <div class="header">
         <h1>Your cart</h1>
@@ -16,21 +16,50 @@
           <img :src="product.image">
         </div>
         <div class="item product">{{product.title}}</div>
-        <div class="item price-val">{{product.price}}</div>
-        <div class="item quantity-val">{{product.quantity}}</div>
-        <div class="item total-val">sdf</div>
+        <div class="item price-val">${{product.price}}</div>
+        <div class="item quantity-val">
+          {{product.quantity}}
+          <div class="triangle">
+            <div class="triangle-up" @click="plusQuantity(index)"></div>
+            <div class="triangle-down" @click="minusQuantity(index)"></div>
+          </div>
+        </div>
+        <div class="item total-val">{{product.total}}</div>
+      </div>
+      <div class="grid-container second subtotal-box">
+        <div class="item subtotal-title">Subtotal</div>
+        <div class="item subtotal" v-text="getTotalPrice"></div>
+      </div>
+      <div class="grid-container submit-box">
+        <router-link :to="{name: 'Home'}" class="item continue-shopping">Continue shopping</router-link>
+        <router-link :to="{name: 'Checkout'}" class="item checkout">Check out</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Navbar from "../components/Navbar";
+    import Navbar from "../components/Navbar";
+    import {mapGetters} from 'vuex';
 
     export default {
         name: "Card",
         components: {
             Navbar
+        },
+        computed: {
+            ...mapGetters(["getTotalPrice"])
+        },
+        methods: {
+            deleteOrder(index) {
+                this.$store.commit('delProduct', index);
+            },
+            minusQuantity(index) {
+                this.$store.commit('decrement', index);
+            },
+            plusQuantity(index) {
+                this.$store.commit('increment', index);
+            }
         }
     }
 </script>
@@ -64,13 +93,17 @@
     grid-template-rows: 78px;
   }
 
+  .title, .price, .quantity, .total {
+    font-weight: 600;
+  }
+
   .second {
     grid-template-rows: 147px;
-    border-top: 1px solid grey;
+    border-top: 1px solid #e8e9eb;
   }
 
   .second:last-child {
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #e8e9eb;
   }
 
   /*Просто оформление*/
@@ -110,7 +143,15 @@
   }
 
   .quantity-val {
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    border: 1px solid #e8e9eb;
+    transition: all 0.7s ease;
+    width: 60px;
+    height: 41px;
+    margin-left: 25%;
     align-self: center;
   }
 
@@ -124,5 +165,106 @@
   .total-val {
     text-align: center;
     align-self: center;
+  }
+
+  .triangle {
+    opacity: 0;
+    margin-left: 8px;
+    margin-right: 6px;
+  }
+
+  .triangle:hover {
+    opacity: 1;
+    transition: all 0.7s ease;
+  }
+
+  .triangle-up {
+    width: 0;
+    height: 0;
+    margin-bottom: 3px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid black;
+  }
+
+  .triangle-up:hover, .triangle-down:hover {
+    background: rgba(150,21,100, 0.5);
+  }
+
+  .triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid black;
+  }
+
+  .subtotal-title {
+    grid-column: 1/5;
+    justify-self: flex-end;
+    align-self: center;
+    margin-right: 3%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d4246;;
+  }
+
+  .subtotal {
+    font-weight: 600;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .subtotal-box {
+    border-bottom: none;
+  }
+
+   .submit-box {
+     grid-template-rows: 38px;
+     border-top: none;
+     border-bottom: none;
+   }
+
+  .checkout {
+    grid-column: 5/5;
+    justify-self: center;
+    align-self: center;
+    width: 92%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #f87c56;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  .checkout:hover,
+  .continue-shopping:hover {
+    opacity: 0.5;
+    transition: opacity 0.7s ease;
+  }
+
+  .continue-shopping {
+    grid-column: 1/4;
+    justify-self: flex-end;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 21%;
+    height: 100%;
+    border: 1px solid #e8e9eb;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-decoration: none;
   }
 </style>
