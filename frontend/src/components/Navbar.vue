@@ -44,7 +44,7 @@
           <a href="/">Contact us</a>
         </div>
       </div>
-      <div class="item bascket">
+      <div class="item card">
         <router-link :to="{name: 'Card'}">
           <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart"
                viewBox="0 0 37 40">
@@ -53,6 +53,11 @@
           </svg>
         </router-link>
         <div class="hamburger">ssss</div>
+        <div class="circle"
+             v-show="this.$store.state.productsStore.cardProducts.length > 0"
+             v-text="this.$store.state.productsStore.cardProducts.length"
+        >
+        </div>
       </div>
     </div>
   </div>
@@ -109,7 +114,6 @@
     display: inline-block;
     width: 20px;
     height: 30px;
-    margin-right: 10px;
     vertical-align: middle;
     fill: currentColor;
   }
@@ -118,6 +122,31 @@
     display: none;
   }
 
+  .card {
+    display: flex;
+    width: 3%;
+  }
+
+  .circle {
+    width: 18px;
+    height: 18px;
+    background: red;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 23%;
+    margin-left: -3%;
+    align-items: center;
+    color: white;
+    position: relative;
+    font-size: 12px;
+  }
+
+  /*media queries*************************************************************************************/
 
   @media screen and (min-width: 1200px) {
     .logo svg {
