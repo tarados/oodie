@@ -51,7 +51,11 @@ export default {
                 valueTotal.push(item.total);
             });
             let totalPrice = eval(valueTotal.join('+'));
-            state.totalPrice = parseFloat(totalPrice).toFixed(0);
+            if (totalPrice) {
+                state.totalPrice = '$' + parseFloat(totalPrice).toFixed(0);
+            } else {
+                state.totalPrice = '$' + 0;
+            }
             return state.totalPrice;
         }
     }

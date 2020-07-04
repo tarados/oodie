@@ -15,7 +15,10 @@
         <div class="item image">
           <img :src="product.image">
         </div>
-        <div class="item product">{{product.title}}</div>
+        <div class="item product">
+          {{product.title}}
+          <div class="remove" @click="deleteOrder(index)">Remove</div>
+        </div>
         <div class="item price-val">${{product.price}}</div>
         <div class="item quantity-val">
           {{product.quantity}}
@@ -24,7 +27,7 @@
             <div class="triangle-down" @click="minusQuantity(index)"></div>
           </div>
         </div>
-        <div class="item total-val">{{product.total}}</div>
+        <div class="item total-val">${{product.total}}</div>
       </div>
       <div class="grid-container second subtotal-box">
         <div class="item subtotal-title">Subtotal</div>
@@ -123,6 +126,30 @@
 
   .product, .image {
     align-self: center;
+  }
+
+  .product {
+    display: block;
+  }
+
+  .remove {
+    margin-top: 10px;
+    width: 12%;
+    height: 1.65vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e8e9eb;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 12px;
+    color: rgb(31, 66, 70);
+    letter-spacing: 0.96px;
+  }
+
+  .remove:hover {
+    opacity: 0.6;
+    transition: all 0.7s ease;
   }
 
   .price {
