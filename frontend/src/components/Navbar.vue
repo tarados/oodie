@@ -60,14 +60,17 @@
         </div>
       </div>
     </div>
+    <Hamburger />
   </div>
 </template>
 
 <script>
-
+import Hamburger from "./Hamburger";
     export default {
         name: 'NavBar',
-        components: {},
+        components: {
+            Hamburger
+        },
         data() {
             return {
                 hamburger: false

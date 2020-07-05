@@ -1,12 +1,11 @@
 <template>
   <div>
     <Navbar/>
-    <Hamburger/>
     <header class="showcase">
       <div class="container showcase-inner">
         <h1>Winter Sale Now On!</h1>
         <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>
-        <a href="#" class="btn">BUY NOW</a>
+        <router-link :to="{name: 'Products'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
     <ProductsList thumbnail="large"/>
@@ -15,14 +14,12 @@
 
 <script>
     import Navbar from "../components/Navbar";
-    import Hamburger from "../components/Hamburger"
     import ProductsList from "../components/ProductsList";
 
     export default {
         name: 'Home',
         components: {
             Navbar,
-            Hamburger,
             ProductsList
         }
     }
