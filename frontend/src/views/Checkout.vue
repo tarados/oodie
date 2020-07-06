@@ -51,24 +51,64 @@
       <div class="item subtotal-title">Subtotal</div>
       <div class="item subtotal-val" v-text="getTotalPrice"></div>
     </div>
-    <h2>Contact information</h2>
     <div class="submit-form">
-      <div class="email"></div>
-      <div class="chackbox"></div>
-      <div class="message"></div>
-      <div class="username"></div>
-      <div class="address"></div>
-      <div class="apartment"></div>
-      <div class="city"></div>
-      <div class="country"></div>
-      <div class="phone"></div>
-      <div class="submit-box"></div>
+      <h2>Contact information</h2>
+      <div class="email">
+        <input placeholder="Email">
+      </div>
+      <div class="checkbox">
+        <input type="checkbox">
+        <div class="info">
+          I agree to receive recurring automated text messages at the phone number provided. Consent is not a condition
+          to purchase. Msg & data rates may apply. View our Terms of Service for details.
+        </div>
+      </div>
+      <div class="message">
+        <h2>Shipping address</h2>
+      </div>
+      <div class="username">
+        <input class="first-name" placeholder="First name">
+        <input class="last-name" placeholder="Last name">
+      </div>
+      <div class="address">
+        <input placeholder="Address">
+      </div>
+      <div class="apartment">
+        <input placeholder="Apartment">
+      </div>
+      <div class="city">
+        <input placeholder="City">
+      </div>
+      <div class="country-box">
+        <input class="country" placeholder="Country/Region">
+        <input class="state" placeholder="State/Territory">
+        <input class="postcode" placeholder="Postcode">
+      </div>
+      <div class="phone">
+        <input placeholder="Phone - exclusive offers (per checkbox above)">
+      </div>
+      <div class="submit-box">
+        <router-link :to="{name: 'Card'}" class="return-to-card">Return to card</router-link>
+        <router-link to="#" class="continue-shipping">Continue shipping</router-link>
+      </div>
+      <footer class="main__footer" role="contentinfo">
+        <div class="policy-list__item ">
+          <router-link to="#">Refund policy</router-link>
+        </div>
+        <div class="policy-list__item ">
+          <router-link to="#">Privacy policy</router-link>
+        </div>
+        <div class="policy-list__item ">
+          <router-link to="#">Terms of service</router-link>
+        </div>
+      </footer>
     </div>
   </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
+
     export default {
         name: "Checkout",
         computed: {
@@ -162,15 +202,142 @@
   }
 
   h2 {
-    text-align: center;
+    grid-column: 1/4;
+    align-self: center;
+    display: flex;
+    justify-content: flex-start;
     color: rgb(48, 48, 48);
     font-weight: 400;
   }
 
   .submit-form {
     display: grid;
+    grid-gap: 2%;
     max-width: 1200px;
     margin: 15px auto;
     grid-template-columns: 33% 34% 33%;
+    grid-template-rows: repeat(11, 46px);
+  }
+
+  .email {
+    grid-column: 1/4;
+    display: flex;
+  }
+
+  .email input {
+    border: 1px solid grey;
+    border-radius: 5px;
+    flex-grow: 1;
+  }
+
+  .checkbox {
+    grid-column: 1/4;
+    display: inline-flex;
+    align-self: end;
+    align-content: flex-start;
+  }
+
+  .info {
+    margin-left: 2%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .message {
+    grid-column: 1/4;
+  }
+
+  .username,
+  .country-box,
+  .submit-box {
+    grid-column: 1/4;
+    display: inline-flex;
+  }
+
+  .username input,
+  .country-box input,
+  .return-to-card {
+    border: 1px solid grey;
+    border-radius: 5px;
+  }
+
+  .first-name {
+    width: 60%;
+  }
+
+  .last-name {
+    width: 39%;
+    margin-left: 1%;
+  }
+
+  .address,
+  .apartment,
+  .city,
+  .phone {
+    grid-column: 1/4;
+    display: flex;
+  }
+
+  .address input,
+  .apartment input,
+  .city input,
+  .phone input {
+    border: 1px solid grey;
+    border-radius: 5px;
+    flex-grow: 1;
+  }
+
+  .country-box {
+    justify-content: space-between;
+  }
+
+  .country,
+  .state {
+    flex-grow: 2;
+    margin-right: 1%
+  }
+
+  .submit-box {
+    justify-content: space-between;
+  }
+
+  .return-to-card,
+  .continue-shipping {
+    text-decoration: none;
+    transition: opacity 1s ease-in;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1%;
+  }
+
+  .continue-shipping {
+    background-color: #f26c4f;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+  }
+
+  .return-to-card {
+    color: rgb(51, 51, 51);
+  }
+
+  footer {
+    grid-column: 1/4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-top: 1px solid grey;
+    margin-top: 3%;
+    padding: 1%;
+
+  }
+
+  .policy-list__item {
+    flex-grow: 1;
+  }
+
+  .policy-list__item a {
+    text-decoration: none;
+    color: rgb(51, 51, 51);
   }
 </style>
