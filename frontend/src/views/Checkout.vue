@@ -53,55 +53,31 @@
     </div>
     <div class="submit-form">
       <h2>Contact information</h2>
-      <div class="email">
-        <input placeholder="Email">
-      </div>
-      <div class="checkbox">
-        <input type="checkbox">
-        <div class="info">
-          I agree to receive recurring automated text messages at the phone number provided. Consent is not a condition
-          to purchase. Msg & data rates may apply. View our Terms of Service for details.
-        </div>
-      </div>
-      <div class="message">
-        <h2>Shipping address</h2>
-      </div>
       <div class="username">
         <input class="first-name" placeholder="First name">
         <input class="last-name" placeholder="Last name">
       </div>
-      <div class="address">
-        <input placeholder="Address">
-      </div>
-      <div class="apartment">
-        <input placeholder="Apartment">
-      </div>
-      <div class="city">
-        <input placeholder="City">
-      </div>
-      <div class="country-box">
-        <input class="country" placeholder="Country/Region">
-        <input class="state" placeholder="State/Territory">
-        <input class="postcode" placeholder="Postcode">
-      </div>
       <div class="phone">
-        <input placeholder="Phone - exclusive offers (per checkbox above)">
+        <input placeholder="Phone">
+      </div>
+      <div class="delivery">
+        <select v-model="selected">
+          <option value="">Select delivery method</option>
+          <option>Новая почта</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="nova-poshta" v-if="selected === 'Новая почта'">
+        <input class="city" placeholder="City">
+        <input class="post-office" placeholder="Post office">
+      </div>
+      <div class="others" v-if="selected === 'Другое'">
+        <textarea placeholder="Address"></textarea>
       </div>
       <div class="submit-box">
         <router-link :to="{name: 'Card'}" class="return-to-card">Return to card</router-link>
         <router-link to="#" class="continue-shipping">Continue shipping</router-link>
       </div>
-      <footer class="main__footer" role="contentinfo">
-        <div class="policy-list__item ">
-          <router-link to="#">Refund policy</router-link>
-        </div>
-        <div class="policy-list__item ">
-          <router-link to="#">Privacy policy</router-link>
-        </div>
-        <div class="policy-list__item ">
-          <router-link to="#">Terms of service</router-link>
-        </div>
-      </footer>
     </div>
   </div>
 </template>
@@ -113,6 +89,11 @@
         name: "Checkout",
         computed: {
             ...mapGetters(["getTotalPrice"])
+        },
+        data() {
+            return {
+                selected: ''
+            }
         }
     }
 </script>
@@ -219,43 +200,19 @@
     grid-template-rows: repeat(11, 46px);
   }
 
-  .email {
-    grid-column: 1/4;
-    display: flex;
-  }
-
-  .email input {
-    border: 1px solid grey;
-    border-radius: 5px;
-    flex-grow: 1;
-  }
-
-  .checkbox {
-    grid-column: 1/4;
-    display: inline-flex;
-    align-self: end;
-    align-content: flex-start;
-  }
-
-  .info {
-    margin-left: 2%;
-    width: 100%;
-    height: 100%;
-  }
-
-  .message {
-    grid-column: 1/4;
-  }
-
   .username,
-  .country-box,
   .submit-box {
     grid-column: 1/4;
     display: inline-flex;
   }
 
+  .delivery select,
   .username input,
+  .others textarea,
   .country-box input,
+  .city,
+  .post-office,
+  .phone input,
   .return-to-card {
     border: 1px solid grey;
     border-radius: 5px;
@@ -270,31 +227,28 @@
     margin-left: 1%;
   }
 
-  .address,
-  .apartment,
-  .city,
+  .nova-poshta,
+  .delivery,
+  .others,
   .phone {
     grid-column: 1/4;
     display: flex;
   }
 
-  .address input,
-  .apartment input,
-  .city input,
+  .city,
+  .post-office,
+  .others textarea,
   .phone input {
-    border: 1px solid grey;
-    border-radius: 5px;
     flex-grow: 1;
   }
 
-  .country-box {
-    justify-content: space-between;
+  .city {
+    margin-right: 1%;
   }
 
-  .country,
-  .state {
-    flex-grow: 2;
-    margin-right: 1%
+  select {
+    color: #767676;
+    background-color: white;
   }
 
   .submit-box {
@@ -318,26 +272,7 @@
   }
 
   .return-to-card {
-    color: rgb(51, 51, 51);
+    color:  rgb(128, 128, 128);
   }
 
-  footer {
-    grid-column: 1/4;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    border-top: 1px solid grey;
-    margin-top: 3%;
-    padding: 1%;
-
-  }
-
-  .policy-list__item {
-    flex-grow: 1;
-  }
-
-  .policy-list__item a {
-    text-decoration: none;
-    color: rgb(51, 51, 51);
-  }
-</style>
+ </style>
