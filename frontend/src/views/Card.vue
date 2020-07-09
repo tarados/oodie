@@ -233,7 +233,7 @@
     margin-right: 3%;
     font-size: 18px;
     font-weight: 600;
-    color: #3d4246;;
+    color: #3d4246;
   }
 
   .subtotal {

@@ -45,234 +45,309 @@
         <div class="circle" v-text="product.quantity"></div>
       </div>
       <div class="item title" v-text="product.title"></div>
-      <div class="item total">${{product.total}}</div>
+      <div class="item total">${{ product.total }}</div>
     </div>
     <div class="grid-container third">
       <div class="item subtotal-title">Subtotal</div>
       <div class="item subtotal-val" v-text="getTotalPrice"></div>
     </div>
-    <div class="submit-form">
-      <h2>Contact information</h2>
-      <div class="username">
-        <input class="first-name" placeholder="First name">
-        <input class="last-name" placeholder="Last name">
+    <form class="submit-box" @submit.prevent="submitHandler">
+      <div class="header-box">
+        <h2>Contact information</h2>
       </div>
-      <div class="phone">
-        <input placeholder="Phone">
+      <div class="input-wrapper first-name">
+        <input
+            id="firstName" required
+            :class="{invalid: invalidFirst}"
+        >
+        <label data-first="Enter your first name" data-second="First name"></label>
       </div>
-      <div class="delivery">
-        <select v-model="selected">
-          <option value="">Select delivery method</option>
-          <option>Новая почта</option>
-          <option>Другое</option>
-        </select>
+      <div class="input-wrapper last-name">
+        <input id="lastName" required>
+        <label data-first="Enter your last name" data-second="Last name"></label>
       </div>
-      <div class="nova-poshta" v-if="selected === 'Новая почта'">
-        <input class="city" placeholder="City">
-        <input class="post-office" placeholder="Post office">
+      <div class="input-wrapper phone">
+        <input id="phone" required>
+        <label data-first="Enter your phone" data-second="Phone"></label>
       </div>
-      <div class="others" v-if="selected === 'Другое'">
-        <textarea placeholder="Address"></textarea>
+      <div class="input-wrapper return-to-card">
+        <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
       </div>
-      <div class="submit-box">
-        <router-link :to="{name: 'Card'}" class="return-to-card">Return to card</router-link>
-        <router-link to="#" class="continue-shipping">Continue shipping</router-link>
+      <div class="input-wrapper continue-shipping">
+        <button type="submit">Continue shipping</button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
+import {required} from 'vuelidate/lib/validators'
 
-    export default {
-        name: "Checkout",
-        computed: {
-            ...mapGetters(["getTotalPrice"])
-        },
-        data() {
-            return {
-                selected: ''
-            }
-        }
+export default {
+  name: "Checkout",
+  computed: {
+    ...mapGetters(["getTotalPrice"])
+  },
+  data() {
+    return {
+      selected: '',
+      firstName: '',
+      lastName: '',
+      delivery: '',
+      address: '',
+      city: '',
+      postOffice: '',
+      phone: '',
+      invalidFirst: false,
+      invalidLast: false,
+      invalidPhone: false
     }
+  },
+  validations: {
+    firstName: {required},
+    lastName: {required},
+    phone: {required}
+  },
+  methods: {
+    submitHandler() {
+      this.invalidFirst = !this.$v.firstName.required
+      this.invalidLast = !this.$v.lastName.required
+      this.invalidPhone = !this.$v.phone.required
+      this.delivery = this.selected;
+      console.log(this.$v.firstName.required);
+      if (this.$v.invalid) {
+        this.$v.$touch()
+        return
+      }
+    }
+  },
+  mounted() {
+    console.log(this.$v.firstName.required)
+  }
+}
 </script>
 
 <style scoped>
-  .wrapper {
+.wrapper {
 
-  }
+}
 
-  .grid-container {
-    display: grid;
-    max-width: 450px;
-    grid-template-columns: 27% 58% 15%;
-  }
+.grid-container {
+  display: grid;
+  max-width: 1200px;
+  grid-template-columns: 27% 58% 15%;
+}
 
-  .first {
-    margin: 0 auto;
-  }
+.first {
+  margin: 0 auto;
+}
 
-  .header {
-    grid-column: 2/4;
-    text-align: center;
-  }
+.header {
+  grid-column: 2/4;
+  text-align: center;
+}
 
-  .second {
-    margin: 0 auto;
-  }
+.second {
+  margin: 0 auto;
+}
 
-  .third {
-    margin: 15px auto;
-  }
+.third {
+  margin: 15px auto;
+}
 
-  .subtotal-title {
-    grid-column: 1/3;
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-  }
+.subtotal-title {
+  grid-column: 1/3;
+  color: rgb(48, 48, 48);
+  font-weight: 600;
+}
 
-  .subtotal-val {
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-    font-size: 24px;
-  }
+.subtotal-val {
+  color: rgb(48, 48, 48);
+  font-weight: 600;
+  font-size: 24px;
+}
 
-  .item {
-    align-self: center;
-  }
+.item {
+  align-self: center;
+}
 
-  .image {
-    display: flex;
-  }
+.image {
+  display: flex;
+}
 
-  img {
-    margin: 5%;
-    width: 5vmax;
-    border-radius: 5px;
-  }
+img {
+  margin: 5%;
+  width: 5vmax;
+  border-radius: 5px;
+}
 
-  .circle {
-    width: 22px;
-    height: 22px;
-    background: green;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-    align-self: flex-start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 23%;
-    margin-left: -15%;
-    align-items: center;
-    color: white;
-    position: relative;
-    font-size: 14px;
-  }
+.circle {
+  width: 22px;
+  height: 22px;
+  background: green;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 23%;
+  margin-left: -15%;
+  align-items: center;
+  color: white;
+  position: relative;
+  font-size: 14px;
+}
 
-  .title {
-    margin-left: 5%;
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-  }
+.title {
+  margin-left: 5%;
+  color: rgb(48, 48, 48);
+  font-weight: 600;
+}
 
-  .total {
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-  }
+.total {
+  color: rgb(48, 48, 48);
+  font-weight: 600;
+}
 
-  h2 {
-    grid-column: 1/4;
-    align-self: center;
-    display: flex;
-    justify-content: flex-start;
-    color: rgb(48, 48, 48);
-    font-weight: 400;
-  }
+h2 {
+  grid-column: 1/4;
+  align-self: center;
+  display: flex;
+  justify-content: flex-start;
+  color: rgb(48, 48, 48);
+  font-weight: 400;
+}
 
-  .submit-form {
-    display: grid;
-    grid-gap: 2%;
-    max-width: 1200px;
-    margin: 15px auto;
-    grid-template-columns: 33% 34% 33%;
-    grid-template-rows: repeat(11, 46px);
-  }
+.submit-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .username,
-  .submit-box {
-    grid-column: 1/4;
-    display: inline-flex;
-  }
+.header-box {
+  width: 100%;
+}
 
-  .delivery select,
-  .username input,
-  .others textarea,
-  .country-box input,
-  .city,
-  .post-office,
-  .phone input,
-  .return-to-card {
-    border: 1px solid grey;
-    border-radius: 5px;
-  }
+.input-wrapper {
+  height: 2.5vmax;
+  position: relative;
+  display: inline-block;
+  verical-align: baseline;
+  line-height: 14px;
+}
 
-  .first-name {
-    width: 60%;
-  }
+#firstName,
+#lastName,
+#phone {
+  text-align: center;
+}
 
-  .last-name {
-    width: 39%;
-    margin-left: 1%;
-  }
+.first-name {
+  flex-grow: 1;
+}
 
-  .nova-poshta,
-  .delivery,
-  .others,
-  .phone {
-    grid-column: 1/4;
-    display: flex;
-  }
+.last-name {
+  flex-grow: 1;
+  margin-left: 2%;
+}
 
-  .city,
-  .post-office,
-  .others textarea,
-  .phone input {
-    flex-grow: 1;
-  }
+.phone {
+  width: 100%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
 
-  .city {
-    margin-right: 1%;
-  }
+label {
+  position: absolute;
+  top: 34%;
+  left: 5%;
+  padding: 0 2px;
+  color: #bbb;
+  font-size: 11px;
+  text-transform: uppercase;
+  z-index: 2;
+  pointer-events: none;
+  background: #fff;
+  transition: transform 200ms ease;
+  transform: translateY(-20px);
+}
 
-  select {
-    color: #767676;
-    background-color: white;
-  }
+label:before {
+  content: attr(data-first);
+  white-space: nowrap;
+}
 
-  .submit-box {
-    justify-content: space-between;
-  }
+input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  color: #555;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
 
-  .return-to-card,
-  .continue-shipping {
-    text-decoration: none;
-    transition: opacity 1s ease-in;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 1%;
-  }
+input:invalid + label {
+  transform: translateY(0);
+}
 
-  .continue-shipping {
-    background-color: #f26c4f;
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-  }
+input:focus + label {
+  transform: translateY(-20px);
+}
 
-  .return-to-card {
-    color:  rgb(128, 128, 128);
-  }
+input:focus + label:before {
+  content: attr(data-second);
+  border-color: #2b96f1;
+  color: #2b96f1;
+}
 
- </style>
+input:required:invalid + label[data-first][data-second]:before {
+  content: attr(data-first);
+}
+
+input:required:focus + label[data-first][data-second]:before {
+  content: attr(data-second);
+}
+
+input:required + label[data-second]:before {
+  content: attr(data-second);
+}
+
+.invalid {
+  display: none;
+}
+
+.continue-shopping {
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+  border: 1px solid #e8e9eb;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #3d4246;
+}
+
+button {
+  height: 93%;
+  border: none;
+  background-color: #2b8000;
+  border-radius: 5px;
+  color: white;
+  width: 105%;
+}
+
+</style>
