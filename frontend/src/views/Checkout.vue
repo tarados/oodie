@@ -77,10 +77,16 @@
         <input
             id="phone"
             v-model="phone"
-            :class="{invalid: invalidPhone}"
+            :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
         >
         <label data-first="Enter your phone" data-second="Phone"></label>
         <small v-show="invalidPhone"> Enter your phone!</small>
+        <small v-show="!$v.phone.numeric"> Enter only numeric!</small>
+        <small
+            v-show="!$v.phone.minLength || !$v.phone.maxLength"
+        >
+          The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{phone.length}}!
+        </small>
       </div>
       <div class="input-wrapper return-to-card">
         <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
@@ -94,7 +100,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {required} from 'vuelidate/lib/validators'
+import {required, numeric, minLength, maxLength} from 'vuelidate/lib/validators'
 
 export default {
   name: "Checkout",
@@ -119,7 +125,7 @@ export default {
   validations: {
     firstName: {required},
     lastName: {required},
-    phone: {required}
+    phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)}
   },
   methods: {
     submitHandler() {
@@ -132,9 +138,6 @@ export default {
         return
       }
     }
-  },
-  mounted() {
-
   }
 }
 </script>
