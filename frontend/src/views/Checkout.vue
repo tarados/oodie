@@ -57,18 +57,30 @@
       </div>
       <div class="input-wrapper first-name">
         <input
-            id="firstName" required
+            id="firstName"
+            v-model="firstName"
             :class="{invalid: invalidFirst}"
         >
         <label data-first="Enter your first name" data-second="First name"></label>
+        <small v-show="invalidFirst"> Enter your first name!</small>
       </div>
       <div class="input-wrapper last-name">
-        <input id="lastName" required>
+        <input
+            id="lastName"
+            v-model="lastName"
+            :class="{invalid: invalidLast}"
+        >
         <label data-first="Enter your last name" data-second="Last name"></label>
+        <small v-show="invalidLast"> Enter your last name!</small>
       </div>
       <div class="input-wrapper phone">
-        <input id="phone" required>
+        <input
+            id="phone"
+            v-model="phone"
+            :class="{invalid: invalidPhone}"
+        >
         <label data-first="Enter your phone" data-second="Phone"></label>
+        <small v-show="invalidPhone"> Enter your phone!</small>
       </div>
       <div class="input-wrapper return-to-card">
         <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
@@ -115,7 +127,6 @@ export default {
       this.invalidLast = !this.$v.lastName.required
       this.invalidPhone = !this.$v.phone.required
       this.delivery = this.selected;
-      console.log(this.$v.firstName.required);
       if (this.$v.invalid) {
         this.$v.$touch()
         return
@@ -123,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$v.firstName.required)
+
   }
 }
 </script>
@@ -311,7 +322,7 @@ input:required:invalid + label[data-first][data-second]:before {
   content: attr(data-first);
 }
 
-input:required:focus + label[data-first][data-second]:before {
+input:focus + label[data-first][data-second]:before {
   content: attr(data-second);
 }
 
@@ -320,7 +331,7 @@ input:required + label[data-second]:before {
 }
 
 .invalid {
-  display: none;
+  border-color: red;
 }
 
 .continue-shopping {
@@ -348,6 +359,11 @@ button {
   border-radius: 5px;
   color: white;
   width: 105%;
+}
+
+small {
+  color: red;
+  padding-left: 1%;
 }
 
 </style>
