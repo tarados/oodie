@@ -88,11 +88,35 @@
           The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{phone.length}}!
         </small>
       </div>
-      <div class="input-wrapper return-to-card">
-        <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
+      <div class="input-wrapper delivery">
+        <select v-model="selected">
+          <option disabled value="">Select delivery method</option>
+          <option>Новая почта</option>
+          <option>Другие</option>
+        </select>
       </div>
-      <div class="input-wrapper continue-shipping">
-        <button type="submit">Continue shipping</button>
+      <div class="input-wrapper new-post-city" v-show="selected === 'Новая почта'">
+        <input id="post-city">
+        <label data-first="Enter city name" data-second="City name"></label>
+      </div>
+      <div class="input-wrapper new-post-office" v-show="selected === 'Новая почта'">
+        <input id="post-office">
+        <label data-first="Enter post address" data-second="Post address"></label>
+      </div>
+      <div class="input-wrapper others" v-show="selected === 'Другие'">
+        <textarea
+            id="others"
+            v-model="address"
+        ></textarea>
+        <label data-first="Enter address" data-second="delivery address"></label>
+      </div>
+      <div class="input-wrapper button-block">
+        <div class="return-to-card">
+          <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
+        </div>
+        <div class="continue-shipping">
+          <button type="submit">Continue shipping</button>
+        </div>
       </div>
     </form>
   </div>
@@ -367,6 +391,78 @@ button {
 small {
   color: red;
   padding-left: 1%;
+}
+
+.delivery {
+  width: 100%;
+  height: 2.55vmax;
+  margin-bottom: 3%;
+}
+
+select {
+  height: 100%;
+  width: 15%;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  color: rgb(80, 80, 80);
+  background-color: white;
+  padding-left: 1%;
+}
+
+.new-post-city,
+.new-post-office {
+  flex-grow: 1;
+}
+
+.new-post-office {
+  margin-left: 2%;
+}
+
+.button-block {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 3%;
+}
+
+.others {
+  width: 100%;
+  margin-bottom: 3%;
+}
+
+textarea {
+  width: 100%;
+  height: 5vmax;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  color: rgb(80, 80, 80);
+}
+
+textarea:invalid + label {
+  transform: translateY(0);
+}
+
+textarea:focus + label {
+  transform: translateY(-20px);
+}
+
+textarea:focus + label:before {
+  content: attr(data-second);
+  border-color: #2b96f1;
+  color: #2b96f1;
+}
+
+textarea:required:invalid + label[data-first][data-second]:before {
+  content: attr(data-first);
+}
+
+textarea:focus + label[data-first][data-second]:before {
+  content: attr(data-second);
+}
+
+textarea:required + label[data-second]:before {
+  content: attr(data-second);
 }
 
 </style>
