@@ -127,4 +127,5 @@ MEDIA_ROOT = os.environ['MEDIA_ROOT']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-SITE_URL = os.environ['SITE_URL']
+
+# SITE_URL = os.environ['SITE_URL']
