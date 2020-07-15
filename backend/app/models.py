@@ -63,6 +63,10 @@ class Order(models.Model):
 	customer_name = models.CharField("Имя", max_length=12)
 	customer_surname = models.CharField("Фамилия", max_length=20)
 	customer_phone = models.CharField("Телефон", max_length=20)
+	delivery = models.CharField("Способ доставки", max_length=50, null=True, blank=True)
+	city = models.CharField("Город", max_length=20, null=True, blank=True)
+	post_office = models.CharField("Почтовое отделение", max_length=50, null=True, blank=True)
+	address = models.CharField("Адрес доставки", max_length=20, null=True, blank=True)
 	status = models.IntegerField("Статус", choices=STATUS_CHOICE, default=1)
 
 	class Meta:

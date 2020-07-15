@@ -88,8 +88,6 @@
     max-width: 1200px;
     margin: 15px auto;
     grid-template-columns: 10% 58% 10% 11% 11%;
-    /*grid-template-areas:*/
-    /*"header header"*/
   }
 
   .first {

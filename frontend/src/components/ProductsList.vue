@@ -11,9 +11,9 @@
         <img :src="product.image">
         <h4>{{product.title}}</h4>
         <div class="price-box">
-          <p v-if="product.new_price" class="no-current">${{product.price}}</p>
-          <p v-else>${{product.price}}</p>
-          <p class="old" v-show="product.new_price">${{product.new_price}}</p>
+          <span v-if="product.new_price" class="no-current">${{product.price}}</span>
+          <span v-else>${{product.price}}</span>
+          <span class="old" v-show="product.new_price">${{product.new_price}}</span>
         </div>
       </router-link>
     </div>
@@ -72,6 +72,7 @@
   }
 
   h4 {
+    margin-top: 1%;
     margin-bottom: 0;
   }
 
@@ -79,7 +80,7 @@
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 0.1em;
-    font-family: "montreal-serialbold", sans-serif;
+    /*font-family: "montreal-serialbold", sans-serif;*/
     font-weight: 600;
     font-size: 1.4375em;
   }
@@ -95,11 +96,15 @@
   }
 
   .product {
-    padding-bottom: 20px;
     text-decoration: none;
     color: #3d4246;
     width: calc((100% / 12) * 6 - 30px);
     margin: 0 15px;
+  }
+
+  .price-box span {
+    margin-top: 1%;
+    margin-bottom: 1%;
   }
 
   .item_sm {
@@ -121,7 +126,7 @@
     justify-content: space-between;
   }
 
-  p.old {
+  span.old {
     color: red;
     flex-grow: 25;
   }
