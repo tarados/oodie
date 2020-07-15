@@ -148,7 +148,7 @@
   .item {
     text-align: left;
     font-size: 1.1em;
-    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    /*font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;*/
     color: rgb(61, 66, 70);
     /*border: 1px solid black;*/
     width: calc((100% / 12) * 6 - 30px);
@@ -214,7 +214,7 @@
 
   .btn {
     width: 80%;
-    font-family: "montreal-serialbold", sans-serif;
+    /*font-family: "montreal-serialbold", sans-serif;*/
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;

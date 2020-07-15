@@ -39,5 +39,5 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Category)
-admin.site.site_title = "Oodie"
-admin.site.site_header = "Oodie"
+admin.site.site_title = "HOODIYALKO"
+admin.site.site_header = "HOODIYALKO"

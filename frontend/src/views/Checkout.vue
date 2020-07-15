@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="grid-container first">
       <div class="item logo">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="115px" style="margin:0 5px"
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.0"
              viewBox="0 0 3465.000000 1424.000000" preserveAspectRatio="xMidYMid meet">
           <devs>
             <g id="logosvg" transform="translate(0.000000,1424.000000) scale(0.100000,-0.100000)"
@@ -96,11 +96,17 @@
         </select>
       </div>
       <div class="input-wrapper new-post-city" v-show="selected === 'Новая почта'">
-        <input id="post-city">
+        <input
+            id="post-city"
+            v-model="city"
+        >
         <label data-first="Enter city name" data-second="City name"></label>
       </div>
       <div class="input-wrapper new-post-office" v-show="selected === 'Новая почта'">
-        <input id="post-office">
+        <input
+            id="post-office"
+            v-model="postOffice"
+        >
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
       <div class="input-wrapper others" v-show="selected === 'Другие'">
@@ -125,6 +131,7 @@
 <script>
 import {mapGetters} from 'vuex';
 import {required, numeric, minLength, maxLength} from 'vuelidate/lib/validators'
+import {post} from '../js/send'
 
 export default {
   name: "Checkout",
@@ -136,7 +143,6 @@ export default {
       selected: '',
       firstName: '',
       lastName: '',
-      delivery: '',
       address: '',
       city: '',
       postOffice: '',
@@ -152,7 +158,29 @@ export default {
     phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)}
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
+      const productsList = [];
+      this.$store.state.productsStore.cardProducts.forEach(product => {
+        productsList.push({
+          'id': product.id,
+          'price': product.price,
+          'quantity': product.quantity
+        });
+      });
+      let order = {
+        'products': productsList,
+        'username': this.firstName,
+        'usersurname': this.lastName,
+        'phone': this.phone,
+        'delivery': this.selected,
+        'city': this.city,
+        'post-office': this.postOffice,
+        'others': this.address
+      };
+      const response = await post("order", order);
+      if (response) {
+        this.$router.push({name:'Successful'});
+      }
       this.invalidFirst = !this.$v.firstName.required
       this.invalidLast = !this.$v.lastName.required
       this.invalidPhone = !this.$v.phone.required
@@ -179,6 +207,11 @@ export default {
 
 .first {
   margin: 0 auto;
+}
+
+.logo svg {
+  width: 115px;
+  margin:0 5px
 }
 
 .header {
@@ -232,7 +265,7 @@ img {
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 23%;
-  margin-left: -15%;
+  margin-left: -8%;
   align-items: center;
   color: white;
   position: relative;
@@ -463,6 +496,48 @@ textarea:focus + label[data-first][data-second]:before {
 
 textarea:required + label[data-second]:before {
   content: attr(data-second);
+}
+/*media queries*****************************************************************************/
+@media (max-width: 620px) {
+  .header h1 {
+    font-size: calc( 3.125vw + 10px );
+  }
+
+  .logo svg {
+    width: calc( 3.125vw + 80px);
+  }
+
+  .second .title,
+  .second .total {
+    font-size: calc( 3.125vw + 3px );
+  }
+
+  .second .circle {
+    width: calc( 3.125vw + 5px);
+    height: calc( 3.125vw + 5px);
+    font-size: calc( 3.125vw + 1px);
+  }
+
+  .second .image img {
+    width: calc( 3.125vw + 50px);
+  }
+
+  .third .subtotal-title,
+  .third .subtotal-val {
+    font-size: calc( 3.125vw + 5px);
+  }
+
+  .header-box h2 {
+    font-size: calc( 3.125vw + 5px );
+  }
+
+  .submit-box label {
+    font-size: calc( 1.5vw + 1px );
+  }
+}
+
+@media (min-width: 960px) {
+  .header h1 { font-size: 40px; }
 }
 
 </style>

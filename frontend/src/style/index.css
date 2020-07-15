@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'montreal-serialbold';
+    src: url('../assets/fonts/Imontreal-Bold.eot');
+    src: local('☺'), url('../assets/fonts/Imontreal-Bold.woff') format('woff'), url('../assets/fonts/Imontreal-Bold.ttf') format('truetype'), url('../assets/fonts/Imontreal-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'montreal-serialbold', sans-serif;
+}

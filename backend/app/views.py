@@ -41,16 +41,17 @@ def product(request, product_id):
 def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
+	print(order_content)
 	order = Order(
 		date=datetime.datetime.now(),
-		customer_name=order_content["name"],
-		customer_surname=order_content["surname"],
+		customer_name=order_content["username"],
+		customer_surname=order_content["usersurname"],
 		customer_phone=order_content["phone"]
 	)
 	order.save()
 	order_total_sum = 0
-	for order_item in order_content["order"]:
-		product = Product.objects.get(id=int(order_item["productId"]))
+	for order_item in order_content["products"]:
+		product = Product.objects.get(id=int(order_item["id"]))
 		current_price = product.price
 		if current_price >= order_item["price"]:
 			product_price = current_price

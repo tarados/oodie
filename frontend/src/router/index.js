@@ -25,6 +25,11 @@ const routes = [
         name: 'Checkout',
         component: () => import('../views/Checkout')
     },
+    {
+        path: '/products/checkout/successful',
+        name: 'Successful',
+        component: () => import('../views/Successful')
+    },
 
     {
         path: '/products/:id',
