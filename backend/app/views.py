@@ -45,8 +45,11 @@ def order(request):
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],
-		customer_surname=order_content["usersurname"],
-		customer_phone=order_content["phone"]
+		customer_phone=order_content["phone"],
+		delivery=order_content["delivery"],
+		city=order_content["city"],
+		post_office=order_content["post-office"],
+		address=order_content["others"]
 	)
 	order.save()
 	order_total_sum = 0
@@ -62,7 +65,7 @@ def order(request):
 			product=product,
 			quantity=order_item["quantity"],
 			price=product_price,
-			cost_product=product_price * order_item["quantity"],
+			cost_product=product_price * order_item["quantity"]
 		)
 		order_item.save()
 		order_total_sum = order_total_sum + order_item.cost_product

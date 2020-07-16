@@ -6,6 +6,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'montreal-seriamedium';
+    src: url('../assets/fonts/Imontreal-Medium.eot');
+    src: local('☺'), url('../assets/fonts/Imontreal-Medium.woff') format('woff'), url('../assets/fonts/Imontreal-Medium.ttf') format('truetype'), url('../assets/fonts/Imontreal-Medium.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
+    font-family: 'montreal-serialmedium', sans-serif;
+}
+
+h1, h3, h4, h5, h6 {
     font-family: 'montreal-serialbold', sans-serif;
 }

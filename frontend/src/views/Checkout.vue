@@ -55,76 +55,65 @@
       <div class="header-box">
         <h2>Contact information</h2>
       </div>
-      <div class="input-wrapper first-name">
-        <input
-            id="firstName"
-            v-model="firstName"
-            :class="{invalid: invalidFirst}"
-        >
-        <label data-first="Enter your first name" data-second="First name"></label>
-        <small v-show="invalidFirst"> Enter your first name!</small>
+      <div class="title-name">
+        Enter your name and family:
       </div>
-      <div class="input-wrapper last-name">
+      <div class="user-name">
         <input
-            id="lastName"
-            v-model="lastName"
-            :class="{invalid: invalidLast}"
+            v-model="userName"
+            :class="{invalid: invalidName}"
         >
-        <label data-first="Enter your last name" data-second="Last name"></label>
-        <small v-show="invalidLast"> Enter your last name!</small>
+        <small v-show="invalidName"> Enter your name!</small>
       </div>
-      <div class="input-wrapper phone">
+      <div class="title-phone">
+        Enter your phone:
+      </div>
+      <div class="phone">
         <input
-            id="phone"
             v-model="phone"
-            :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
+            :class="{invalid: isActive}"
         >
-        <label data-first="Enter your phone" data-second="Phone"></label>
-        <small v-show="invalidPhone"> Enter your phone!</small>
-        <small v-show="!$v.phone.numeric"> Enter only numeric!</small>
+        <small v-if="!$v.phone.numeric"> Enter only numeric!</small>
         <small
-            v-show="!$v.phone.minLength || !$v.phone.maxLength"
+            v-else-if="!$v.phone.minLength || !$v.phone.maxLength"
         >
-          The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{phone.length}}!
+          The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
         </small>
+        <small v-show="isActive"> Enter your phone!</small>
       </div>
-      <div class="input-wrapper delivery">
+      <div class="delivery">
         <select v-model="selected">
           <option disabled value="">Select delivery method</option>
           <option>Новая почта</option>
           <option>Другие</option>
         </select>
       </div>
-      <div class="input-wrapper new-post-city" v-show="selected === 'Новая почта'">
-        <input
-            id="post-city"
-            v-model="city"
-        >
-        <label data-first="Enter city name" data-second="City name"></label>
+      <div class="title-city" v-show="selected === 'Новая почта'">Enter city name:</div>
+      <div class="new-post-city" v-show="selected === 'Новая почта'">
+        <input v-model="city">
       </div>
-      <div class="input-wrapper new-post-office" v-show="selected === 'Новая почта'">
+      <div class="title-office" v-show="selected === 'Новая почта'">Enter office number:</div>
+      <div class="new-post-office" v-show="selected === 'Новая почта'">
         <input
             id="post-office"
             v-model="postOffice"
         >
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="input-wrapper others" v-show="selected === 'Другие'">
+      <div class="title-others" v-show="selected === 'Другие'">Enter address:</div>
+      <div class="others" v-show="selected === 'Другие'">
         <textarea
             id="others"
             v-model="address"
         ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
       </div>
-      <div class="input-wrapper button-block">
-        <div class="return-to-card">
-          <router-link :to="{name: 'Card'}" class="continue-shopping">Return to card</router-link>
-        </div>
-        <div class="continue-shipping">
-          <button type="submit">Continue shipping</button>
-        </div>
+      <div class="button-block">
+        <button @click="toCard" class="continue-shopping">Return to card</button>
+        <button type="submit" class="continue-shipping">Continue shipping</button>
       </div>
     </form>
+    <div class="footer"></div>
   </div>
 </template>
 
@@ -135,27 +124,31 @@ import {post} from '../js/send'
 
 export default {
   name: "Checkout",
-  computed: {
-    ...mapGetters(["getTotalPrice"])
-  },
   data() {
     return {
       selected: '',
-      firstName: '',
-      lastName: '',
+      userName: '',
       address: '',
       city: '',
       postOffice: '',
       phone: '',
-      invalidFirst: false,
-      invalidLast: false,
+      invalidName: false,
       invalidPhone: false
     }
   },
   validations: {
-    firstName: {required},
-    lastName: {required},
+    userName: {required},
     phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)}
+  },
+  computed: {
+    ...mapGetters(["getTotalPrice"]),
+    isActive() {
+      if (this.$v.phone.required) {
+        return true
+      } else {
+        return this.invalidPhone
+      }
+    }
   },
   methods: {
     async submitHandler() {
@@ -169,8 +162,7 @@ export default {
       });
       let order = {
         'products': productsList,
-        'username': this.firstName,
-        'usersurname': this.lastName,
+        'username': this.userName,
         'phone': this.phone,
         'delivery': this.selected,
         'city': this.city,
@@ -178,17 +170,19 @@ export default {
         'others': this.address
       };
       const response = await post("order", order);
-      if (response) {
-        this.$router.push({name:'Successful'});
-      }
-      this.invalidFirst = !this.$v.firstName.required
-      this.invalidLast = !this.$v.lastName.required
-      this.invalidPhone = !this.$v.phone.required
+      this.invalidName = !this.$v.userName.required;
+      this.invalidPhone = !this.$v.phone.required;
       this.delivery = this.selected;
+      if (response && !this.$v.$invalid) {
+        await this.$router.push({name: 'Successful'});
+      }
       if (this.$v.invalid) {
-        this.$v.$touch()
+        this.$v.$touch();
         return
       }
+    },
+    toCard() {
+      this.$router.push({name: "Card"})
     }
   }
 }
@@ -201,7 +195,7 @@ export default {
 
 .grid-container {
   display: grid;
-  max-width: 1200px;
+  max-width: 600px;
   grid-template-columns: 27% 58% 15%;
 }
 
@@ -211,7 +205,7 @@ export default {
 
 .logo svg {
   width: 115px;
-  margin:0 5px
+  margin: 0 5px
 }
 
 .header {
@@ -236,7 +230,7 @@ export default {
 .subtotal-val {
   color: rgb(48, 48, 48);
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .item {
@@ -289,74 +283,45 @@ h2 {
   display: flex;
   justify-content: flex-start;
   color: rgb(48, 48, 48);
-  font-weight: 400;
 }
 
+/*Contact information*************************************************************************/
 .submit-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1200px;
+  display: grid;
+  max-width: 600px;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: repeat(6, 2rem);
+  grid-row-gap: 5%;
   margin: 0 auto;
 }
 
 .header-box {
-  width: 100%;
+  grid-column: 1/3;
+  align-self: center;
+  border-top: 1px solid grey;
 }
 
-.input-wrapper {
-  height: 2.5vmax;
-  position: relative;
-  display: inline-block;
-  verical-align: baseline;
-  line-height: 14px;
+.title-name,
+.title-phone,
+.title-city,
+.title-office,
+.title-others {
+  align-self: center;
 }
 
-#firstName,
-#lastName,
-#phone {
-  text-align: center;
-}
-
-.first-name {
-  flex-grow: 1;
-}
-
-.last-name {
-  flex-grow: 1;
-  margin-left: 2%;
-}
-
-.phone {
-  width: 100%;
-  margin-top: 3%;
-  margin-bottom: 3%;
-}
-
-label {
-  position: absolute;
-  top: 34%;
-  left: 5%;
-  padding: 0 2px;
-  color: #bbb;
-  font-size: 11px;
-  text-transform: uppercase;
-  z-index: 2;
-  pointer-events: none;
-  background: #fff;
-  transition: transform 200ms ease;
-  transform: translateY(-20px);
-}
-
-label:before {
-  content: attr(data-first);
-  white-space: nowrap;
+.user-name,
+.phone,
+.new-post-city,
+.new-post-office {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 input {
-  position: relative;
+  align-self: center;
   width: 100%;
-  height: 100%;
+  height: 70%;
   font-size: 13px;
   color: #555;
   outline: none;
@@ -364,46 +329,13 @@ input {
   border-radius: 5px;
 }
 
-input:invalid + label {
-  transform: translateY(0);
-}
-
-input:focus + label {
-  transform: translateY(-20px);
-}
-
-input:focus + label:before {
-  content: attr(data-second);
-  border-color: #2b96f1;
-  color: #2b96f1;
-}
-
-input:required:invalid + label[data-first][data-second]:before {
-  content: attr(data-first);
-}
-
-input:focus + label[data-first][data-second]:before {
-  content: attr(data-second);
-}
-
-input:required + label[data-second]:before {
-  content: attr(data-second);
-}
-
 .invalid {
   border-color: red;
 }
 
 .continue-shopping {
-  justify-self: center;
-  align-self: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 90%;
-  border: 1px solid #e8e9eb;
+  border: 1px solid #3d4246;
+  background-color: white;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
@@ -413,12 +345,13 @@ input:required + label[data-second]:before {
 }
 
 button {
-  height: 93%;
   border: none;
-  background-color: #2b8000;
   border-radius: 5px;
   color: white;
-  width: 105%;
+}
+
+.continue-shipping {
+  background-color: #2b8000;
 }
 
 small {
@@ -427,14 +360,14 @@ small {
 }
 
 .delivery {
-  width: 100%;
-  height: 2.55vmax;
-  margin-bottom: 3%;
+  grid-column: 1/3;
+  align-self: center;
+  height: 100%;
 }
 
 select {
   height: 100%;
-  width: 15%;
+  width: 30%;
   border: 1px solid #bbb;
   border-radius: 5px;
   color: rgb(80, 80, 80);
@@ -442,26 +375,19 @@ select {
   padding-left: 1%;
 }
 
-.new-post-city,
-.new-post-office {
-  flex-grow: 1;
-}
-
-.new-post-office {
-  margin-left: 2%;
-}
-
 .button-block {
-  width: 100%;
+  grid-column: 1/3;
+  grid-row: 7/7;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 3%;
+  height: 100%;
 }
 
 .others {
-  width: 100%;
-  margin-bottom: 3%;
+  grid-column: 2/3;
+  grid-row: 5/6;
 }
 
 textarea {
@@ -472,72 +398,54 @@ textarea {
   color: rgb(80, 80, 80);
 }
 
-textarea:invalid + label {
-  transform: translateY(0);
+.footer {
+  height: 30px;
+  margin-bottom: 5%;
 }
 
-textarea:focus + label {
-  transform: translateY(-20px);
-}
-
-textarea:focus + label:before {
-  content: attr(data-second);
-  border-color: #2b96f1;
-  color: #2b96f1;
-}
-
-textarea:required:invalid + label[data-first][data-second]:before {
-  content: attr(data-first);
-}
-
-textarea:focus + label[data-first][data-second]:before {
-  content: attr(data-second);
-}
-
-textarea:required + label[data-second]:before {
-  content: attr(data-second);
-}
 /*media queries*****************************************************************************/
 @media (max-width: 620px) {
   .header h1 {
-    font-size: calc( 3.125vw + 10px );
+    font-size: calc(3.125vw + 10px);
   }
 
   .logo svg {
-    width: calc( 3.125vw + 80px);
+    width: calc(3.125vw + 80px);
   }
 
   .second .title,
   .second .total {
-    font-size: calc( 3.125vw + 3px );
+    font-size: calc(3.125vw + 3px);
   }
 
   .second .circle {
-    width: calc( 3.125vw + 5px);
-    height: calc( 3.125vw + 5px);
-    font-size: calc( 3.125vw + 1px);
+    width: calc(3.125vw + 5px);
+    height: calc(3.125vw + 5px);
+    font-size: calc(3.125vw + 1px);
   }
 
   .second .image img {
-    width: calc( 3.125vw + 50px);
+    width: calc(3.125vw + 50px);
   }
 
   .third .subtotal-title,
   .third .subtotal-val {
-    font-size: calc( 3.125vw + 5px);
+    font-size: calc(3.125vw + 5px);
   }
 
   .header-box h2 {
-    font-size: calc( 3.125vw + 5px );
+    font-size: calc(3.125vw + 5px);
   }
 
   .submit-box label {
-    font-size: calc( 1.5vw + 1px );
+    font-size: calc(1.5vw + 1px);
   }
 }
 
 @media (min-width: 960px) {
-  .header h1 { font-size: 40px; }
+  .header h1 {
+    font-size: 40px;
+  }
 }
 
 </style>
