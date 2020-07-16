@@ -5,13 +5,13 @@ import router from './router'
 import store from './store'
 import './style/index.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(Vuelidate)
+Vue.use(Vuelidate);
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
-store.dispatch('loadFromCard')
+}).$mount('#app');
+store.dispatch('loadFromCard');

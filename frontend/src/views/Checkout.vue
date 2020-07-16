@@ -190,7 +190,7 @@ export default {
 
 <style scoped>
 .wrapper {
-
+  margin: 0 15px;
 }
 
 .grid-container {
@@ -367,7 +367,7 @@ small {
 
 select {
   height: 100%;
-  width: 30%;
+  width: 45%;
   border: 1px solid #bbb;
   border-radius: 5px;
   color: rgb(80, 80, 80);
@@ -414,23 +414,35 @@ textarea {
   }
 
   .second .title,
-  .second .total {
-    font-size: calc(3.125vw + 3px);
+  .second .total,
+  .title-name,
+  .title-phone,
+  select,
+  .title-city,
+  .title-office,
+  .title-others,
+  .continue-shipping,
+  .continue-shopping {
+    font-size: 3vw;
+  }
+
+  textarea {
+    height: 10vmax;
   }
 
   .second .circle {
-    width: calc(3.125vw + 5px);
-    height: calc(3.125vw + 5px);
-    font-size: calc(3.125vw + 1px);
+    width: calc(3.125vw + 4px);
+    height: calc(3.125vw + 4px);
+    font-size: 3.125vw;
   }
 
   .second .image img {
-    width: calc(3.125vw + 50px);
+    width: calc(3.125vw + 40px);
   }
 
   .third .subtotal-title,
   .third .subtotal-val {
-    font-size: calc(3.125vw + 5px);
+    font-size: calc(3.125vw + 4px);
   }
 
   .header-box h2 {
