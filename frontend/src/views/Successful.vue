@@ -4,18 +4,26 @@
       <p>Ваша заявка принята! Спасибо за покупку!</p>
       <button @click="backToMain">Вернуться на главную страницу</button>
     </div>
-    <Logo />
+    <div>
+      <span class="red">Red</span>
+    </div>
+    <div>
+      <span class="green">Green</span>
+    </div>
+    <div>
+      <span class="blue">Blue</span>
+    </div>
   </div>
 
 </template>
 
 <script>
-    import Logo from '../components/Logo'
+    // import Logo from '../components/Logo'
 
     export default {
         name: "Successful",
         components: {
-            Logo
+            // Logo
         },
         methods: {
             backToMain() {
@@ -39,19 +47,21 @@
   p {
     font-size: 25px;
     font-weight: 600;
-    /*font-style: italic;*/
   }
 
-  .current-font {
-    font-family: "Roboto", fantasy;
-    color: blue;
-    font-size: 25px;
-    /*font-weight: 600;*/
+  .red, .green, .blue {
+    position: absolute;
+    width: 50px;
+    height: 50px;
   }
-
-  .current-font2 {
-    font-family: "montreal-serialbold", sans-serif;
-    font-size: 25px;
-    /*font-weight: 600;*/
+  .red {
+    background: red;
+    z-index: 1;
+  }
+  .green {
+    background: green;
+  }
+  .blue {
+    background: blue;
   }
 </style>

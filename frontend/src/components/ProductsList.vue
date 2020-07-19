@@ -141,7 +141,19 @@
     .product {
       padding-left: 0;
     }
+
   }
+
+  @media screen and (max-width: 960px) {
+    h4,
+    .price-box {
+      font-size: 2.5vw;
+    }
+    .header h2 {
+      font-size: calc(3.125vw + 10px);
+    }
+  }
+
 
   @media screen and (max-width: 750px) {
     .product {

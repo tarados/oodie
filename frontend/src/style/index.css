@@ -14,14 +14,17 @@
     font-style: normal;
 }
 
-@font-face {
-	font-family: 'Roboto';
-	src: url('../assets/fonts/Roboto-Black.eot');
-	src: local('☺'), url('../assets/fonts/Roboto-Black.woff') format('woff'), url('../assets/fonts/Roboto-Black.ttf') format('truetype'), url('../assets/fonts/Roboto-Black.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
+:root {
+    --primary-color: rgba(13, 110, 139, 0.1);
+    --overlay-color: rgba(24, 39, 51, 0.55);
+    --menu-speed: 0.75s;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'montreal-serialmedium', sans-serif;
@@ -30,3 +33,7 @@ body {
 h1, h3, h4, h5, h6 {
     font-family: 'montreal-serialbold', sans-serif;
 }
+
+
+
+
