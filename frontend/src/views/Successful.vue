@@ -4,15 +4,6 @@
       <p>Ваша заявка принята! Спасибо за покупку!</p>
       <button @click="backToMain">Вернуться на главную страницу</button>
     </div>
-    <div>
-      <span class="red">Red</span>
-    </div>
-    <div>
-      <span class="green">Green</span>
-    </div>
-    <div>
-      <span class="blue">Blue</span>
-    </div>
   </div>
 
 </template>
@@ -49,19 +40,4 @@
     font-weight: 600;
   }
 
-  .red, .green, .blue {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-  }
-  .red {
-    background: red;
-    z-index: 1;
-  }
-  .green {
-    background: green;
-  }
-  .blue {
-    background: blue;
-  }
 </style>
