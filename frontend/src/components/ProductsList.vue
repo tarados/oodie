@@ -149,6 +149,7 @@
     .price-box {
       font-size: 2.5vw;
     }
+
     .header h2 {
       font-size: calc(3.125vw + 10px);
     }
@@ -159,10 +160,17 @@
     .product {
       flex-basis: 600px;
     }
+
+    .item_sm {
+      width: calc((100% / 12) * 6 - 30px);
+    }
+
   }
 
   @media screen and (max-width: 420px) {
-
+    .item_sm {
+      width: calc((100% / 12) * 12 - 30px);
+    }
   }
 
   @media screen and (max-width: 375px) {

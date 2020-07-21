@@ -138,7 +138,8 @@ h1 {
 }
 
 .mobile,
-.subtotal-mobile-box {
+.subtotal-mobile-box,
+.submit-mobile-box {
   display: none;
 }
 

@@ -15,7 +15,7 @@
           <a href="/">Contact us</a>
         </div>
       </div>
-      <div class="card">
+      <div class="card" v-show="visibleCard">
         <router-link :to="{name: 'Card'}">
           <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart"
                viewBox="0 0 37 40">
@@ -36,150 +36,153 @@
 </template>
 
 <script>
-import Hamburger from "./Hamburger";
-import Logo from "./Logo"
+    import Hamburger from "./Hamburger";
+    import Logo from "./Logo"
 
-export default {
-  name: 'NavBar',
-  components: {
-    Hamburger,
-    Logo
-  },
-  data() {
-    return {
-      hamburger: false
+    export default {
+        name: 'NavBar',
+        props: {
+          visibleCard: Boolean
+        },
+        components: {
+            Hamburger,
+            Logo
+        },
+        data() {
+            return {
+                hamburger: false
+            }
+        },
+        methods: {},
+        mounted() {
+
+        }
     }
-  },
-  methods: {},
-  mounted() {
-
-  }
-}
 </script>
 
 <style scoped>
-.navbar {
-  border-bottom: 1px solid grey;
-}
-
-.container-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item {
-  flex-grow: 1;
-}
-
-.link {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.link a {
-  margin: 25px;
-  color: #3d4246;
-  text-decoration: none;
-}
-
-.icon {
-  display: inline-block;
-  width: 20px;
-  height: 30px;
-  vertical-align: middle;
-  fill: currentColor;
-}
-
-.hamburger {
-  display: none;
-}
-
-.card {
-  display: flex;
-  margin-right: 2%;
-}
-
-.card svg {
-  color: #7b786e;
-}
-
-.circle {
-  width: 18px;
-  height: 18px;
-  background: red;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-self: center;
-  margin-bottom: 23%;
-  margin-left: -5%;
-  align-items: center;
-  color: white;
-  position: relative;
-  font-size: 12px;
-}
-
-/*media queries*************************************************************************************/
-@media screen and (max-width: 750px) {
-  .hamburger {
-    display: inline;
-    width: 15px;
-    height: 50px;
-    opacity: 0;
-    margin-left: 1vw;
+  .navbar {
+    border-bottom: 1px solid grey;
   }
 
-  .linkList {
+  .container-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .item {
+    flex-grow: 1;
+  }
+
+  .link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .link a {
+    margin: 25px;
+    color: #3d4246;
+    text-decoration: none;
+  }
+
+  .icon {
+    display: inline-block;
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+    fill: currentColor;
+  }
+
+  .hamburger {
     display: none;
   }
 
   .card {
-    margin-right: 0;
-    margin-left: 50%;
-  }
-}
-
-@media screen and (max-width: 640px) {
-
-}
-
-@media screen and (max-width: 450px) {
-  .logo img {
-    width: 10vmax;
+    display: flex;
+    margin-right: 2%;
   }
 
-  .card {
-    margin-left: 40%;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .card {
-    margin-left: 35%;
-  }
-}
-
-
-@media screen and (max-width: 360px) {
-  .card {
-    margin-left: 30%;
-  }
-}
-
-@media screen and (max-width: 325px) {
-  img {
-    width: 10vmax;
+  .card svg {
+    color: #7b786e;
   }
 
-  .card {
-    margin-left: 25%;
+  .circle {
+    width: 18px;
+    height: 18px;
+    background: red;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 23%;
+    margin-left: -5%;
+    align-items: center;
+    color: white;
+    position: relative;
+    font-size: 12px;
   }
-}
+
+  /*media queries*************************************************************************************/
+  @media screen and (max-width: 750px) {
+    .hamburger {
+      display: inline;
+      width: 15px;
+      height: 50px;
+      opacity: 0;
+      margin-left: 1vw;
+    }
+
+    .linkList {
+      display: none;
+    }
+
+    .card {
+      margin-right: 0;
+      margin-left: 50%;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+
+  }
+
+  @media screen and (max-width: 450px) {
+    .logo img {
+      width: 10vmax;
+    }
+
+    .card {
+      margin-left: 40%;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .card {
+      margin-left: 35%;
+    }
+  }
+
+
+  @media screen and (max-width: 360px) {
+    .card {
+      margin-left: 30%;
+    }
+  }
+
+  @media screen and (max-width: 325px) {
+    img {
+      width: 10vmax;
+    }
+
+    .card {
+      margin-left: 25%;
+    }
+  }
 
 </style>

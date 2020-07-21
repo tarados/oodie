@@ -1,12 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="grid-container first">
-      <div class="item logo">
-       <Logo />
-      </div>
-      <div class="item header">
-        <h1>Your checkout</h1>
-      </div>
+    <Navbar/>
+    <div class="header">
+      <h1>Your checkout</h1>
     </div>
     <div class="grid-container second" v-for="(product, index) in this.$store.state.productsStore.cardProducts"
          :key="index">
@@ -26,7 +22,7 @@
         <h2>Contact information</h2>
       </div>
       <div class="title-name">
-        Enter your name and family:
+        Name:
       </div>
       <div class="user-name">
         <input
@@ -36,12 +32,12 @@
         <small v-show="invalidName"> Enter your name!</small>
       </div>
       <div class="title-phone">
-        Enter your phone:
+        Phone:
       </div>
       <div class="phone">
         <input
             v-model="phone"
-            :class="{invalid: invalidPhone}"
+            :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
         >
         <small v-if="!$v.phone.numeric"> Enter only numeric!</small>
         <small
@@ -49,7 +45,8 @@
         >
           The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
         </small>
-        <small v-show="invalidPhone"> Enter your phone!</small>
+        <small v-show="invalidPhone && !$v.phone.numeric && !$v.phone.minLength && !$v.phone.maxLength"> Enter your
+          phone!</small>
       </div>
       <div class="delivery">
         <select v-model="selected">
@@ -58,11 +55,11 @@
           <option>Другие</option>
         </select>
       </div>
-      <div class="title-city" v-show="selected === 'Новая почта'">Enter city name:</div>
+      <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
         <input v-model="city">
       </div>
-      <div class="title-office" v-show="selected === 'Новая почта'">Enter office number:</div>
+      <div class="title-office" v-show="selected === 'Новая почта'">Office number:</div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
         <input
             id="post-office"
@@ -70,7 +67,7 @@
         >
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="title-others" v-show="selected === 'Другие'">Enter address:</div>
+      <div class="title-others" v-show="selected === 'Другие'">Address:</div>
       <div class="others" v-show="selected === 'Другие'">
         <textarea
             id="others"
@@ -78,7 +75,11 @@
         ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
       </div>
-      <div class="button-block">
+      <div class="button-block" v-if="selected !== 'Другие'">
+        <button @click="toCard" class="continue-shopping">Return to card</button>
+        <button type="submit" class="continue-shipping">Continue shipping</button>
+      </div>
+      <div class="button-block-others" v-else>
         <button @click="toCard" class="continue-shopping">Return to card</button>
         <button type="submit" class="continue-shipping">Continue shipping</button>
       </div>
@@ -91,12 +92,12 @@
     import {mapGetters} from 'vuex';
     import {required, numeric, minLength, maxLength} from 'vuelidate/lib/validators'
     import {post} from '../js/send'
-    import Logo from "../components/Logo";
+    import Navbar from "../components/Navbar";
 
     export default {
         name: "Checkout",
         components: {
-            Logo
+            Navbar
         },
         data() {
             return {
@@ -155,6 +156,13 @@
         watch: {
             userName: function () {
                 this.invalidName = this.$v.userName.$invalid;
+            },
+            phone: function () {
+                if (this.$v.phone.$invalid) {
+                    this.invalidPhone = this.$v.phone.required;
+                } else {
+                    this.invalidPhone = !this.$v.phone.required;
+                }
             }
         }
     }
@@ -262,7 +270,7 @@
     display: grid;
     max-width: 600px;
     grid-template-columns: 40% 60%;
-    grid-template-rows: repeat(6, 2rem);
+    grid-template-rows: 3rem repeat(5, 2.5rem);
     grid-row-gap: 5%;
     margin: 0 auto;
   }
@@ -271,6 +279,10 @@
     grid-column: 1/3;
     align-self: center;
     border-top: 1px solid grey;
+  }
+
+  .header-box h2 {
+    margin-top: 3%;
   }
 
   .title-name,
@@ -305,29 +317,6 @@
     border-color: red;
   }
 
-  .continue-shopping {
-    border: 1px solid #3d4246;
-    background-color: white;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 3px;
-    text-decoration: none;
-    color: #3d4246;
-    padding: 1%;
-  }
-
-  button {
-    border: none;
-    border-radius: 5px;
-    color: white;
-  }
-
-  .continue-shipping {
-    padding: 1%;
-    background-color: #2b8000;
-  }
-
   small {
     color: red;
     padding-left: 1%;
@@ -349,14 +338,33 @@
     padding-left: 1%;
   }
 
-  .button-block {
+  .button-block,
+  .button-block-others {
     grid-column: 1/3;
-    grid-row: 7/7;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 3%;
     height: 100%;
+  }
+
+  .button-block-others {
+    grid-row: 7/7;
+  }
+
+  .continue-shopping {
+    width: 40%;
+    background-color: white;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+  }
+
+  .continue-shipping {
+    width: 40%;
+    background-color: green;
+    border: 0;
+    border-radius: 5px;
+    color: white;
   }
 
   .others {
@@ -427,12 +435,6 @@
       font-size: calc(1.5vw + 1px);
     }
 
-  }
-
-  @media (min-width: 960px) {
-    .header h1 {
-      font-size: 40px;
-    }
   }
 
 </style>
