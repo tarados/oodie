@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar visible-card="visibleCard"/>
+    <Navbar visible-card="visible-card" />
     <ProductsList thumbnail="small"/>
   </div>
 

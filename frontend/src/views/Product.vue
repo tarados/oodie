@@ -249,7 +249,7 @@
     }
   }
 
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 450px) {
     .item {
       width: calc(100% - 30px);
     }

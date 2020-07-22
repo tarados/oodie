@@ -41,7 +41,6 @@ def product(request, product_id):
 def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
-	print(order_content)
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],

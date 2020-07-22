@@ -42,7 +42,7 @@
     export default {
         name: 'NavBar',
         props: {
-          visibleCard: Boolean
+            visibleCard: Boolean
         },
         components: {
             Hamburger,

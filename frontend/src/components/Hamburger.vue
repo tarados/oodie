@@ -212,7 +212,7 @@ body {
 
 @media screen and (max-width: 380px) {
   .menu-wrap .hamburger {
-    top: 1.2%;
+    top: 0.95%;
   }
 
   .menu-wrap .menu {

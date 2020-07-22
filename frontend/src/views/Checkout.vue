@@ -45,7 +45,7 @@
         >
           The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
         </small>
-        <small v-show="invalidPhone && !$v.phone.numeric && !$v.phone.minLength && !$v.phone.maxLength"> Enter your
+        <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength"> Enter your
           phone!</small>
       </div>
       <div class="delivery">
@@ -164,6 +164,9 @@
                     this.invalidPhone = !this.$v.phone.required;
                 }
             }
+        },
+        mounted() {
+            console.log(this.$v.phone.required);
         }
     }
 </script>

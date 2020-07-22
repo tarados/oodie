@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar/>
+    <Navbar />
     <div class="wrapper">
       <div class="header">
         <h1>Your cart</h1>
@@ -11,8 +11,8 @@
         <div class="item quantity">Quantity</div>
         <div class="item total">Total</div>
       </div>
-      <div class="grid-container second" v-for="(product, index) in this.$store.state.productsStore.cardProducts"
-           :key="index">
+      <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
+        <div class="grid-container second">
         <div class="item image">
           <img :src="product.image">
         </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="item total-val">${{ product.total }}</div>
       </div>
-      <div class="mobile" v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
+        <div class="mobile">
         <div class="mobile-content">
           <div class="image">
             <img :src="product.image">
@@ -42,7 +42,7 @@
         </div>
         <div class="mobile-edit">
           <div class="remove-mobile" @click="deleteOrder(index)">Remove</div>
-          <div class="quantity-mobile">Quantity</div>
+<!--          <div class="quantity-mobile">Quantity</div>-->
           <div class="item quantity-val-mobile">
             <div class="triangle-mobile-up" @click="plusQuantity(index)"></div>
             {{ product.quantity }}
@@ -50,6 +50,7 @@
           </div>
           <div></div>
         </div>
+      </div>
       </div>
       <div class="subtotal-mobile-box">
         <div class="subtotal-mobile-title">Subtotal</div>
@@ -423,8 +424,8 @@ img {
     flex-wrap: wrap;
     justify-content: space-between;
     align-self: center;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 25%;
+    margin-right: 25%;
   }
 
 

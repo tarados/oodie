@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar visible-card="visibleCard"/>
+    <Navbar visible-card/>
     <header class="showcase">
       <div class="container showcase-inner">
         <h1>Winter Sale Now On!</h1>
