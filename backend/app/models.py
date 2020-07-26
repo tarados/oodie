@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -25,8 +26,12 @@ class Product(models.Model):
 		verbose_name_plural = u'товары'
 
 	def get_image(self):
-		obj = ProductImage.objects.filter(product=self.id)[0]
-		return mark_safe(f'<img src="%s" width="150" height="150"' % (obj.image.url,))
+		try:
+			obj = ProductImage.objects.filter(product=self.id)[0]
+			return mark_safe(f'<img src="%s" width="150" height="150"' % (obj.image.url,))
+		except IndexError:
+			image_url = settings.SITE_URL + settings.STATIC_URL + 'no-img.jpg'
+			return mark_safe(f'<img src="%s" width="150" height="150"' % image_url)
 
 	get_image.short_description = "Первое изображение"
 
