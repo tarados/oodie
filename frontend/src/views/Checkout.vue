@@ -197,6 +197,7 @@
   }
 
   .header h1 {
+    color: rgb(61, 66, 70);
     margin-top: 1%;
     margin-bottom: 1%;
   }
