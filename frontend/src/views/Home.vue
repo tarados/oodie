@@ -8,7 +8,7 @@
         <router-link :to="{name: 'Products'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
-    <ProductsList thumbnail="large"/>
+    <ProductsList thumbnail="large" category="oodie"/>
   </div>
 </template>
 

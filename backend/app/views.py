@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import ProductImage, Product, Order, OrderItem
+from .models import ProductImage, Product, Order, OrderItem, Category
 import os
 import json
 import datetime
@@ -9,16 +9,21 @@ import datetime
 def products(request):
 	products_list = []
 	all_products = Product.objects.all()
+	categories = Category.objects.all()
 	for prd in all_products:
+		category = prd.category
 		products_list.append(
 			{
 				'id': prd.id,
 				'title': prd.title,
+				'category': category.name,
 				'price': prd.price,
 				'new_price': prd.new_price,
 				'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prd.id)[0].image.url
 			}
 		)
+	for p in products_list:
+		print(p)
 	return JsonResponse({'products': products_list})
 
 
