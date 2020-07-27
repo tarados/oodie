@@ -43,7 +43,7 @@
           <div class="item-right">
             <div class="price">
               <div class="current" v-show="!this.currentProduct.new_price">
-                ${{ this.currentProduct.price }} Sale
+                ${{ this.currentProduct.price }}
               </div>
               <div :class="{ markdown: !currentProduct.new_price}">
                 ${{ this.currentProduct.new_price }} Sale
@@ -149,9 +149,7 @@
   .item {
     text-align: left;
     font-size: 1.1em;
-    /*font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;*/
     color: rgb(61, 66, 70);
-    /*border: 1px solid black;*/
     width: calc((100% / 12) * 6 - 30px);
     margin: 0 15px;
     overflow: hidden;
@@ -159,6 +157,7 @@
 
   .item img {
     width: 100%;
+    max-height: 36rem;
     overflow: hidden;
   }
 
@@ -202,7 +201,7 @@
   }
 
   .description {
-    margin-top: 10rem;
+    margin-top: 3rem;
   }
 
   .markdown {
@@ -215,7 +214,6 @@
 
   .btn {
     width: 80%;
-    /*font-family: "montreal-serialbold", sans-serif;*/
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;

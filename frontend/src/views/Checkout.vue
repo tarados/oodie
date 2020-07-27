@@ -196,6 +196,11 @@
     text-align: center;
   }
 
+  .header h1 {
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+
   .second {
     margin: 0 auto;
   }
