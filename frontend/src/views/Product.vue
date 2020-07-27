@@ -45,7 +45,7 @@
               <div class="current" v-show="!this.currentProduct.new_price">
                 ${{ this.currentProduct.price }}
               </div>
-              <div :class="{ markdown: !currentProduct.new_price}">
+              <div :class="{ markdown: !currentProduct.new_price}" class="red">
                 ${{ this.currentProduct.new_price }} Sale
               </div>
             </div>
@@ -193,6 +193,9 @@
 
   .price {
     margin: 10px 0;
+  }
+
+  .red {
     color: #eb6f6e;
   }
 

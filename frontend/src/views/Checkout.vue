@@ -231,6 +231,7 @@
   }
 
   img {
+    max-height: 6rem;
     margin: 5%;
     width: 5vmax;
     border-radius: 5px;
