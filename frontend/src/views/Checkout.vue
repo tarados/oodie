@@ -233,7 +233,7 @@
   img {
     max-height: 6rem;
     margin: 5%;
-    width: 5vmax;
+    width: auto;
     border-radius: 5px;
   }
 
