@@ -1,8 +1,5 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <h2>Top Selling Products</h2>
-    </div>
     <div class="row">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
                    v-for="product in prodList" :key="product.title"
@@ -46,7 +43,7 @@ export default {
       if (this.category) {
         return this.allProducts.filter(product => product.category === this.category);
       } else {
-        return this.allProducts;
+        return this.allProducts.filter(product => product.category !== 'oodie');
       }
     }
   },
@@ -74,24 +71,12 @@ export default {
 
 <style scoped>
 .wrapper {
-  margin-top: 55px;
-}
-
-.header {
-  margin-bottom: 55px;
+  margin-top: 3rem;
 }
 
 h4 {
   margin-top: 1%;
   margin-bottom: 0;
-}
-
-.header h2 {
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  font-size: 1.4375em;
 }
 
 .row {

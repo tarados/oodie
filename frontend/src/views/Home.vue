@@ -8,6 +8,9 @@
         <router-link :to="{name: 'Products'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
+    <div class="header">
+      <h2>Top Selling Products</h2>
+    </div>
     <ProductsList thumbnail="large" category="oodie"/>
   </div>
 </template>
@@ -70,7 +73,6 @@
 
   .btn {
     display: inline-block;
-    /*font-family: "montreal-serialbold", sans-serif;*/
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -88,6 +90,18 @@
 
   .btn:hover {
     opacity: 0.7;
+  }
+
+  .header {
+    margin-top: 2rem;
+  }
+
+  .header h2 {
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    font-size: 1.4375em;
   }
 
   /*section two -  collections oodie******************************************************************/
@@ -121,8 +135,10 @@
 
   /*media queries********************************************************************************************/
 
-  @media screen and (min-width: 1200px) {
-
+  @media screen and (max-width: 960px) {
+    .header h2 {
+      font-size: calc(3.125vw + 10px);
+    }
   }
 
   @media screen and (max-width: 750px) {

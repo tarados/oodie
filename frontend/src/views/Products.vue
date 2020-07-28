@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar visible-card="visible-card" />
+    <Category />
     <ProductsList thumbnail="small"/>
   </div>
 
@@ -9,6 +10,7 @@
 <script>
     import Navbar from "../components/Navbar";
     import ProductsList from "../components/ProductsList";
+    import Category from "../components/Category";
 
     export default {
         name: "Products",
@@ -19,7 +21,8 @@
         },
         components: {
             Navbar,
-            ProductsList
+            ProductsList,
+            Category
         }
     }
 </script>
