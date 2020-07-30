@@ -61,6 +61,7 @@
                 const response = await get('products');
                 this.$store.commit('addProducts', response.products);
                 this.$emit('productsList', response.products);
+                console.log(response.products)
             }
         },
         mounted() {

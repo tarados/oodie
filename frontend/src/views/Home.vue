@@ -12,12 +12,14 @@
       <h2>Top Selling Products</h2>
     </div>
     <ProductsList thumbnail="large" category="oodie"/>
+    <Footer />
   </div>
 </template>
 
 <script>
     import Navbar from "../components/Navbar";
     import ProductsList from "../components/ProductsList";
+    import Footer from "../components/Footer";
 
     export default {
         name: 'Home',
@@ -28,7 +30,8 @@
         },
         components: {
             Navbar,
-            ProductsList
+            ProductsList,
+            Footer
         }
     }
 </script>

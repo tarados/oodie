@@ -6,13 +6,14 @@
       </div>
       <div class="item link">
         <div class="linkList">
-          <a href="/">Home</a>
+          <a href="/">
+            <span>Худиялки</span>
+          </a>
           <router-link
               :to="{name: 'Products'}"
           >
-            Sale Products
+            <span>Дружественные бренды</span>
           </router-link>
-          <a href="/">Contact us</a>
         </div>
       </div>
       <div class="card" v-show="visibleCard">
@@ -70,6 +71,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+  }
+
+  span {
+    text-transform: uppercase;
+    /*letter-spacing: 0.1em;*/
   }
 
   .item {
