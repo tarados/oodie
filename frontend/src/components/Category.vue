@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper-category">
     <div class="container-flex">
       <div class="header">
         {{defaultHeader}}
@@ -57,7 +57,7 @@
 </script>
 
 <style scoped>
-  .wrapper {
+  .wrapper-category {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1%;
