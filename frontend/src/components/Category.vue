@@ -9,7 +9,7 @@
             ref="category"
             v-show="category !== 'oodie'"
             class="category-item"
-            data-color="#ffcdd2"
+            :class="{active: index === currentIndex}"
             v-for="(category, index) in categories" :key="index"
             @click="onChoice(index)"
         >
@@ -42,12 +42,10 @@
                     this.defaultHeader = "Дружеские бренды";
                     this.currentIndex = null;
                     this.isBackground = false;
-                    this.$refs.category[index].classList.remove("target");
                 } else {
                     this.defaultHeader = this.categories[index];
                     this.currentIndex = index;
                     this.isBackground = !this.isBackground;
-                    this.$refs.category[this.currentIndex].classList.add("target");
                 }
                 this.$emit('onChoice', index);
             }
@@ -100,7 +98,8 @@
     outline: none;
   }
 
-  .category-item:hover {
+  .category-item:hover,
+  .category-item.active {
     background: #e8bd67;
     border-radius: 3rem;
   }
