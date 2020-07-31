@@ -47,7 +47,8 @@ export default {
 
 <style scoped>
 .wrapper-footer {
-  margin: 0;
+  margin-top: 5%;
+  /*margin: 0;*/
   background-color: rgb(134, 168, 213);
 }
 
