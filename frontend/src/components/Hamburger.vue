@@ -10,14 +10,11 @@
           <ul>
             <li>
               <router-link :to="{name: 'Home'}">
-                Home
+                Худиялки
               </router-link>
             </li>
             <li>
-              <router-link :to="{name: 'Products'}">Sale Products</router-link>
-            </li>
-            <li>
-              <a href="#">Contact us</a>
+              <router-link :to="{name: 'Products'}">Дружеские бренды</router-link>
             </li>
           </ul>
         </div>

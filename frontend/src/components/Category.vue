@@ -119,7 +119,7 @@
     }
 
     .category-item {
-      font-size: calc((100vw - 30rem) / 50 * 0.5 + 1rem);
+      font-size: calc((100vw - 30rem) / 50 + 1rem);
     }
   }
 

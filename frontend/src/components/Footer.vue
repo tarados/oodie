@@ -47,8 +47,7 @@ export default {
 
 <style scoped>
 .wrapper-footer {
-  margin-top: 5%;
-  /*margin: 0;*/
+  margin: 4vh 0 0;
   background-color: rgb(134, 168, 213);
 }
 
@@ -83,7 +82,6 @@ export default {
 .social-icon {
   display: flex;
   flex-wrap: wrap;
-  justify-content: end;
 }
 
 .circl {
@@ -143,7 +141,7 @@ img {
   }
 
   .circl {
-    margin: 5%;
+    margin: 4%;
     width: 2rem;
     height: 2rem;
   }

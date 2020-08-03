@@ -1,5 +1,5 @@
 <template>
-  <div class="cadr">
+  <div ref="card" class="card">
     <Navbar/>
     <div class="wrapper-card">
       <div class="header">
@@ -102,13 +102,20 @@ export default {
     plusQuantity(index) {
       this.$store.commit('increment', index);
     }
+  },
+  mounted() {
+    // this.$refs.card.style.height = '100%';
+    console.log(this.$refs.card.style.clientHeight);
   }
 }
 </script>
 
 <style scoped>
+.card {
+  height: 100px;
+}
 .wrapper-card {
-  margin: 3vh;
+  /*margin: 3vh;*/
 }
 
 .header {
@@ -172,6 +179,7 @@ img {
 
 .product {
   display: block;
+  text-align: center;
 }
 
 .remove {
@@ -340,7 +348,7 @@ img {
 /*media queries*************************************************************************************/
 @media screen and (max-width: 960px) {
   .wrapper-card {
-    margin: 3vw;
+    margin: 5vw;
   }
 
   h1 {
