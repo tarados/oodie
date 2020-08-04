@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar visible-card/>
     <header class="showcase">
       <div class="container showcase-inner">
         <h1>Winter Sale Now On!</h1>
@@ -12,14 +11,11 @@
       <h2>Top Selling Products</h2>
     </div>
     <ProductsList thumbnail="large" category="oodie"/>
-    <Footer />
   </div>
 </template>
 
 <script>
-    import Navbar from "../components/Navbar";
     import ProductsList from "../components/ProductsList";
-    import Footer from "../components/Footer";
 
     export default {
         name: 'Home',
@@ -29,9 +25,7 @@
             }
         },
         components: {
-            Navbar,
-            ProductsList,
-            Footer
+            ProductsList
         }
     }
 </script>

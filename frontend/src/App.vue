@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <router-view/>
+    <component :is="layout">
+       <router-view/>
+    </component>
   </div>
 </template>
 
 <script>
-
+import MainLayout from "./layouts/MainLayout";
 export default {
+    computed: {
+        layout() {
+            return (this.$route.meta.layout || 'main') + '-layout'
+        }
+    },
+    components: {
+        MainLayout
+    }
 
 }
 

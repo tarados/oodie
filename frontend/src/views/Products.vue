@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar visible-card="visible-card"/>
     <Category
         :categories="categories"
         @onChoice="onChoice"
@@ -10,15 +9,12 @@
         @productsList="productsList"
         :category="category"
     />
-    <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from "../components/Navbar";
 import ProductsList from "../components/ProductsList";
 import Category from "../components/Category";
-import Footer from "@/components/Footer";
 
 export default {
   name: "Products",
@@ -30,10 +26,8 @@ export default {
     }
   },
   components: {
-    Navbar,
     ProductsList,
-    Category,
-    Footer
+    Category
   },
   methods: {
     productsList(val) {

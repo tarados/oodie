@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar visible-card="visible-card"/>
     <div class="wrapper-product">
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
@@ -64,13 +63,10 @@
       </div>
       <div class="row" v-else>Loading...</div>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Navbar from "../components/Navbar";
-import Footer from "@/components/Footer";
 import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
@@ -90,10 +86,8 @@ export default {
     }
   },
   components: {
-    Navbar,
     VueperSlide,
-    VueperSlides,
-    Footer
+    VueperSlides
   },
   computed: {
     currentProduct() {
