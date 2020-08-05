@@ -15,12 +15,16 @@
           <img :src="product.image">
         </div>
         <div class="item product">
-          {{ product.title }}
           <div class="remove" @click="deleteOrder(index)">Remove</div>
+          <div class="name">
+            {{ product.title }}
+          </div>
         </div>
         <div class="item price-val">${{ product.price }}</div>
         <div class="item quantity-val">
-          {{ product.quantity }}
+          <div>
+            {{ product.quantity }}
+          </div>
           <div class="triangle">
             <div class="triangle-up" @click="plusQuantity(index)"></div>
             <div class="triangle-down" @click="minusQuantity(index)"></div>
@@ -91,7 +95,13 @@
             },
             plusQuantity(index) {
                 this.$store.commit('increment', index);
+            },
+            visibleCard() {
+                this.$emit('visible', "false");
             }
+        },
+        mounted() {
+            this.visibleCard();
         }
     }
 </script>
@@ -162,12 +172,18 @@
   }
 
   .product {
-    display: block;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .product .name {
+    flex-grow: 2;
+    margin-left: 25%;
   }
 
   .remove {
-    margin-top: 10px;
     width: 12%;
     height: 1.65vmax;
     display: flex;
@@ -175,7 +191,7 @@
     align-items: center;
     border: 1px solid #e8e9eb;
     text-transform: uppercase;
-    text-decoration: none;
+    cursor: pointer;
     font-size: 12px;
     color: rgb(31, 66, 70);
     letter-spacing: 0.96px;
@@ -214,6 +230,12 @@
     height: 41px;
     margin-left: 25%;
     align-self: center;
+  }
+
+  .quantity-val > div {
+    margin-top: 2%;
+    padding-top: 5%;
+    padding-right: 5%;
   }
 
   .total {

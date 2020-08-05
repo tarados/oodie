@@ -4,11 +4,11 @@
     <div class="hamburger">
       <div></div>
     </div>
-    <div class="menu">
+    <div class="menu" v-bind:style="style">
       <div>
         <div>
           <ul>
-            <li>
+            <li @click="menuClose">
               <router-link :to="{name: 'Home'}">
                 Худиялки
               </router-link>
@@ -30,8 +30,15 @@ export default {
   components: {},
   data() {
     return {
-      show: true
+      show: true,
+      style: {}
     }
+  },
+  methods: {
+      menuClose() {
+          console.log('ef');
+          this.style["visibility"] = 'collapse';
+      }
   }
 }
 </script>
@@ -177,6 +184,11 @@ body {
   text-decoration: none;
   transition: color 0.4s ease;
 }
+
+.close {
+  display: none;
+}
+
 
 /*media queries******************************************************************************************/
 

@@ -157,5 +157,9 @@ img {
   .contact-phone {
     font-size: calc((100vw - 30rem) / 51 + 1rem);
   }
+
+  .circl {
+    margin: 3%;
+  }
 }
 </style>
