@@ -8,10 +8,10 @@
         <div class="item subtotal-title">Subtotal</div>
         <div class="item subtotal-val" v-text="getTotalPrice"></div>
       </div>
+      <div class="header-box">
+        <h2>Contact information</h2>
+      </div>
       <form class="submit-box" @submit.prevent="submitHandler">
-        <div class="header-box">
-          <h2>Contact information</h2>
-        </div>
         <div class="title-name">
           Name:
         </div>
@@ -38,6 +38,19 @@
           </small>
           <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength"> Enter your
             phone!</small>
+        </div>
+        <div class="title-mail">
+          E-mail:
+        </div>
+        <div class="mail">
+          <input
+              v-model="mail"
+              :class="{invalid: invalidMail}"
+          >
+          <small v-show="invalidMail">Enter E-mail!</small>
+        </div>
+        <div class="title-delivery">
+          Delivery method:
         </div>
         <div class="delivery">
           <select v-model="selected">
@@ -94,13 +107,16 @@
                 city: '',
                 postOffice: '',
                 phone: '',
+                mail: '',
                 invalidName: false,
+                invalidMail: false,
                 invalidPhone: false
             }
         },
         validations: {
             userName: {required},
-            phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)}
+            phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
+            mail: {required}
         },
         computed: {
             ...mapGetters(["getTotalPrice"])
@@ -127,6 +143,7 @@
                 const response = await post("order", order);
                 this.invalidName = !this.$v.userName.required;
                 this.invalidPhone = !this.$v.phone.required;
+                this.invalidMail = !this.$v.mail.required;
                 this.delivery = this.selected;
                 if (response && !this.$v.$invalid) {
                     await this.$router.push({name: 'Successful'});
@@ -169,10 +186,6 @@
     grid-template-columns: 27% 58% 15%;
   }
 
-  .first {
-    margin: 0 auto;
-  }
-
   .logo svg {
     width: 115px;
     margin: 0 5px
@@ -187,10 +200,6 @@
     color: rgb(61, 66, 70);
     margin-top: 1%;
     margin-bottom: 1%;
-  }
-
-  .second {
-    margin: 0 auto;
   }
 
   .third {
@@ -213,77 +222,30 @@
     align-self: center;
   }
 
-  .image {
-    display: flex;
-  }
-
-  img {
-    max-height: 10vh;
-    margin: 5%;
-    width: auto;
-    border-radius: 5px;
-  }
-
-  .circle {
-    width: 22px;
-    height: 22px;
-    background: green;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-    align-self: flex-start;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 23%;
-    margin-left: -8%;
-    align-items: center;
-    color: white;
-    position: relative;
-    font-size: 14px;
-  }
-
-  .title {
-    margin-left: 5%;
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-  }
-
-  .total {
-    color: rgb(48, 48, 48);
-    font-weight: 600;
-  }
-
-  h2 {
-    grid-column: 1/4;
-    align-self: center;
-    display: flex;
-    justify-content: flex-start;
-    color: rgb(48, 48, 48);
-  }
-
   /*Contact information*************************************************************************/
   .submit-box {
+    max-width: 600px;
     display: grid;
     max-width: 600px;
     grid-template-columns: 40% 60%;
-    grid-template-rows: repeat(7, 7vh);
-    grid-row-gap: 1%;
+    grid-template-rows: repeat(7, 38px);
+    grid-gap: 1vw;
     margin: 0 auto 15vh;
   }
 
   .header-box {
-    grid-column: 1/3;
-    align-self: center;
-    border-top: 1px solid grey;
+    width: 600px;
+    margin: 1% auto;
   }
 
-  .header-box h2 {
-    margin-top: 3%;
+  h2 {
+    text-align: left;
   }
 
   .title-name,
+  .title-delivery,
   .title-phone,
+  .title-mail,
   .title-city,
   .title-office,
   .title-others {
@@ -292,6 +254,7 @@
 
   .user-name,
   .phone,
+  .mail,
   .new-post-city,
   .new-post-office {
     display: flex;
@@ -302,7 +265,7 @@
   input {
     align-self: center;
     width: 100%;
-    height: 70%;
+    height: 100%;
     font-size: 13px;
     color: #555;
     outline: none;
@@ -320,8 +283,6 @@
   }
 
   .delivery {
-    grid-column: 1/3;
-    align-self: center;
     height: 100%;
   }
 
@@ -338,36 +299,40 @@
   .button-block,
   .button-block-others {
     grid-column: 1/3;
-    grid-row: 7/7;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-self: flex-end;
-    height: 73%;
+  }
+
+  .button-block-others {
+    grid-row: 7/7;
   }
 
   .continue-shopping {
-    width: 33%;
+    width: 32%;
     background-color: white;
     border: 1px solid #bbbbbb;
     border-radius: 5px;
     text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
     text-decoration: none;
   }
 
   .continue-shipping {
-    width: 33%;
+    width: 32%;
     background-color: green;
     border: 0;
     border-radius: 5px;
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
   }
 
   .others {
-    grid-column: 2/3;
-    grid-row: 5/6;
+
   }
 
   textarea {
@@ -377,7 +342,6 @@
     border-radius: 5px;
     color: rgb(80, 80, 80);
   }
-
 
   /*media queries*****************************************************************************/
   @media (max-width: 620px) {
@@ -389,8 +353,6 @@
       width: calc(3.125vw + 80px);
     }
 
-    .second .title,
-    .second .total,
     .title-name,
     .title-phone,
     select,
@@ -404,16 +366,6 @@
 
     textarea {
       height: 10vmax;
-    }
-
-    .second .circle {
-      width: calc(3.125vw + 4px);
-      height: calc(3.125vw + 4px);
-      font-size: 3.125vw;
-    }
-
-    .second .image img {
-      width: calc(3.125vw + 40px);
     }
 
     .third .subtotal-title,
@@ -433,7 +385,6 @@
     .submit-box label {
       font-size: calc(1.5vw + 1px);
     }
-
   }
 
 </style>

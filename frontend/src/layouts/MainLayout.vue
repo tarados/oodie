@@ -9,9 +9,6 @@
       <router-view/>
     </div>
     <div class="item-footer" ref="footer">
-      <div class="vidget">
-        <iframe src="https://averin.pro/widget.php?l=hoodiyalko&style=1&width=250&gallery=1&s=80&icc=3&icr=1&t=1&tt=Мы в Инстаграм&h=1&ttcolor=FFFFFF&th=c3c3c3&bw=f9f9f9&bscolor=FFFFFF&bs=FF0000&ts=Подписаться&ch=utf8" allowtransparency="true" frameborder="0" scrolling="no" style="border:none;overflow:hidden;width:350px; height: 490px" ></iframe>
-      </div>
       <Footer/>
     </div>
   </div>

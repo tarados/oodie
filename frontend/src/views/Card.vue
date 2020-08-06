@@ -71,7 +71,7 @@
       <div class="item subtotal-title">Subtotal</div>
       <div class="item subtotal" v-text="getTotalPrice"></div>
     </div>
-    <div class="grid-container submit-box">
+    <div class="submit-box">
       <router-link :to="{name: 'Home'}" class="item continue-shopping">Continue shopping</router-link>
       <router-link :to="{name: 'Checkout'}" class="item checkout">Check out</router-link>
     </div>
@@ -303,16 +303,19 @@
   }
 
   .submit-box {
+    display: grid;
+    max-width: 1200px;
+    margin: 15px auto;
+    grid-template-columns: 60% 40%;
     grid-template-rows: 38px;
     border-top: none;
     border-bottom: none;
   }
 
   .checkout {
-    grid-column: 5/5;
-    justify-self: center;
+    justify-self: flex-end;
     align-self: center;
-    width: 92%;
+    width: 41.08%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -334,14 +337,13 @@
   }
 
   .continue-shopping {
-    grid-column: 1/4;
     justify-self: flex-end;
     align-self: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 21%;
+    width: 27.38%;
     height: 100%;
     border: 1px solid #e8e9eb;
     text-transform: uppercase;
