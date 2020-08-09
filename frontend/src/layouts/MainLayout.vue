@@ -42,7 +42,9 @@
                 let heightNavbar = this.$refs.header.clientHeight;
                 let heightFooter = this.$refs.footer.clientHeight;
                 let layoutBlock = heightNavbar + heightFooter;
+                console.log(layoutBlock);
                 let totalHeight = document.documentElement.clientHeight;
+                console.log(totalHeight);
                 if (totalHeight === 568) {
                     this.styleContent["min-height"] = (totalHeight - layoutBlock - 39) + 'px';
                 } else if (totalHeight === 640) {

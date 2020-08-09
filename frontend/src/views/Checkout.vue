@@ -48,7 +48,7 @@
               :class="{invalid: this.$v.email.$dirty || !this.$v.email.email || invalidEmail}"
           >
           <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
-<!--          <small v-else-if="!$v.email.required">Enter E-mail!</small>-->
+          <!--          <small v-else-if="!$v.email.required">Enter E-mail!</small>-->
         </div>
         <div class="title-delivery">
           Delivery method:
@@ -349,47 +349,62 @@ textarea {
 }
 
 /*media queries*****************************************************************************/
-@media (max-width: 620px) {
-  .header h1 {
+@media screen and (max-width: 960px) {
+  h1 {
     font-size: calc(3.125vw + 10px);
   }
 
-  .logo svg {
-    width: calc(3.125vw + 80px);
+  h2 {
+    font-size: calc(3.125vw + 10px);
   }
 
-  .title-name,
-  .title-phone,
-  select,
-  .title-city,
-  .title-office,
-  .title-others,
-  .continue-shipping,
-  .continue-shopping {
-    font-size: 2.7vw;
-  }
-
-  textarea {
-    height: 10vmax;
-  }
-
-  .third .subtotal-title,
-  .third .subtotal-val {
-    font-size: calc(3.125vw + 4px);
-  }
-
-  .header-box h2 {
-    font-size: calc(3.125vw + 5px);
-  }
-
-  .submit-box {
-    margin-top: 10%;
-    margin-bottom: 20%;
-  }
-
-  .submit-box label {
-    font-size: calc(1.5vw + 1px);
+  .subtotal-title,
+  .subtotal-val {
+    font-size: calc(3.125vw + 2px);
   }
 }
+
+/*@media (max-width: 620px) {*/
+/*  .header h1 {*/
+/*    font-size: calc(3.125vw + 10px);*/
+/*  }*/
+
+/*  .logo svg {*/
+/*    width: calc(3.125vw + 80px);*/
+/*  }*/
+
+/*  .title-name,*/
+/*  .title-phone,*/
+/*  select,*/
+/*  .title-city,*/
+/*  .title-office,*/
+/*  .title-others,*/
+/*  .continue-shipping,*/
+/*  .continue-shopping {*/
+/*    font-size: 2.7vw;*/
+/*  }*/
+
+/*  textarea {*/
+/*    height: 10vmax;*/
+/*  }*/
+
+/*  .third .subtotal-title,*/
+/*  .third .subtotal-val {*/
+/*    font-size: calc(3.125vw + 4px);*/
+/*  }*/
+
+/*  .header-box h2 {*/
+/*    font-size: calc(3.125vw + 5px);*/
+/*  }*/
+
+/*  .submit-box {*/
+/*    margin-top: 10%;*/
+/*    margin-bottom: 20%;*/
+/*  }*/
+
+/*  .submit-box label {*/
+/*    font-size: calc(1.5vw + 1px);*/
+/*  }*/
+/*}*/
 
 </style>

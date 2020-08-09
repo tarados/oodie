@@ -8,7 +8,7 @@
       <div>
         <div>
           <ul>
-            <li @click="menuClose">
+            <li>
               <router-link :to="{name: 'Home'}">
                 Худиялки
               </router-link>
@@ -36,7 +36,6 @@ export default {
   },
   methods: {
       menuClose() {
-          console.log('ef');
           this.style["visibility"] = 'collapse';
       }
   }
