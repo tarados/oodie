@@ -1,95 +1,93 @@
 <template>
   <div>
-    <div class="wrapper-checkout">
-      <div class="header">
-        <h1>Your checkout</h1>
+    <div class="header">
+      <h1>Your checkout</h1>
+    </div>
+    <div class="grid-container third">
+      <div class="item subtotal-title">Subtotal</div>
+      <div class="item subtotal-val" v-text="getTotalPrice"></div>
+    </div>
+    <div class="header-box">
+      <h2>Contact information</h2>
+    </div>
+    <form class="submit-box" @submit.prevent="submitHandler">
+      <div class="title-name">
+        Name:
       </div>
-      <div class="grid-container third">
-        <div class="item subtotal-title">Subtotal</div>
-        <div class="item subtotal-val" v-text="getTotalPrice"></div>
+      <div class="user-name">
+        <input
+            v-model="userName"
+            :class="{invalid: invalidName}"
+        >
+        <small v-show="invalidName"> Enter your name!</small>
       </div>
-      <div class="header-box">
-        <h2>Contact information</h2>
+      <div class="title-phone">
+        Phone:
       </div>
-      <form class="submit-box" @submit.prevent="submitHandler">
-        <div class="title-name">
-          Name:
-        </div>
-        <div class="user-name">
-          <input
-              v-model="userName"
-              :class="{invalid: invalidName}"
-          >
-          <small v-show="invalidName"> Enter your name!</small>
-        </div>
-        <div class="title-phone">
-          Phone:
-        </div>
-        <div class="phone">
-          <input
-              v-model="phone"
-              :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
-          >
-          <small v-if="!$v.phone.numeric"> Enter only numeric!</small>
-          <small
-              v-else-if="!$v.phone.minLength || !$v.phone.maxLength"
-          >
-            The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
-          </small>
-          <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength"> Enter your
-            phone!</small>
-        </div>
-        <div class="title-mail">
-          E-mail:
-        </div>
-        <div class="mail">
-          <input
-              v-model="email"
-              :class="{invalid: this.$v.email.$dirty || !this.$v.email.email || invalidEmail}"
-          >
-          <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
-          <!--          <small v-else-if="!$v.email.required">Enter E-mail!</small>-->
-        </div>
-        <div class="title-delivery">
-          Delivery method:
-        </div>
-        <div class="delivery">
-          <select v-model="selected">
-            <option disabled value="">Select delivery method</option>
-            <option>Новая почта</option>
-            <option>Другие</option>
-          </select>
-        </div>
-        <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
-        <div class="new-post-city" v-show="selected === 'Новая почта'">
-          <input v-model="city">
-        </div>
-        <div class="title-office" v-show="selected === 'Новая почта'">Office number:</div>
-        <div class="new-post-office" v-show="selected === 'Новая почта'">
-          <input
-              id="post-office"
-              v-model="postOffice"
-          >
-          <label data-first="Enter post address" data-second="Post address"></label>
-        </div>
-        <div class="title-others" v-show="selected === 'Другие'">Address:</div>
-        <div class="others" v-show="selected === 'Другие'">
+      <div class="phone">
+        <input
+            v-model="phone"
+            :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
+        >
+        <small v-if="!$v.phone.numeric"> Enter only numeric!</small>
+        <small
+            v-else-if="!$v.phone.minLength || !$v.phone.maxLength"
+        >
+          The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
+        </small>
+        <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength"> Enter your
+          phone!</small>
+      </div>
+      <div class="title-mail">
+        E-mail:
+      </div>
+      <div class="mail">
+        <input
+            v-model="email"
+            :class="{invalid: this.$v.email.$dirty || !this.$v.email.email || invalidEmail}"
+        >
+        <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
+        <!--          <small v-else-if="!$v.email.required">Enter E-mail!</small>-->
+      </div>
+      <div class="title-delivery">
+        Delivery method:
+      </div>
+      <div class="delivery">
+        <select v-model="selected">
+          <option disabled value="">Select delivery method</option>
+          <option>Новая почта</option>
+          <option>Другие</option>
+        </select>
+      </div>
+      <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
+      <div class="new-post-city" v-show="selected === 'Новая почта'">
+        <input v-model="city">
+      </div>
+      <div class="title-office" v-show="selected === 'Новая почта'">Office number:</div>
+      <div class="new-post-office" v-show="selected === 'Новая почта'">
+        <input
+            id="post-office"
+            v-model="postOffice"
+        >
+        <label data-first="Enter post address" data-second="Post address"></label>
+      </div>
+      <div class="title-others" v-show="selected === 'Другие'">Address:</div>
+      <div class="others" v-show="selected === 'Другие'">
         <textarea
             id="others"
             v-model="address"
         ></textarea>
-          <label data-first="Enter address" data-second="delivery address"></label>
-        </div>
-        <div class="button-block" v-if="selected !== 'Другие'">
-          <button @click="toCard" class="continue-shopping">Return to card</button>
-          <button type="submit" class="continue-shipping">Continue shipping</button>
-        </div>
-        <div class="button-block-others" v-else>
-          <button @click="toCard" class="continue-shopping">Return to card</button>
-          <button type="submit" class="continue-shipping">Continue shipping</button>
-        </div>
-      </form>
-    </div>
+        <label data-first="Enter address" data-second="delivery address"></label>
+      </div>
+      <div class="button-block" v-if="selected !== 'Другие'">
+        <button @click="toCard" class="continue-shopping">Return to card</button>
+        <button type="submit" class="continue-shipping">Continue shipping</button>
+      </div>
+      <div class="button-block-others" v-else>
+        <button @click="toCard" class="continue-shopping">Return to card</button>
+        <button type="submit" class="continue-shipping">Continue shipping</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -179,24 +177,21 @@ export default {
     }
   },
   mounted() {
-      console.log(fontSize(100, 12, 14, 960, 320))
+    console.log(fontSize(100, 19, 32, 960, 320))
   }
 }
 </script>
 
 <style scoped>
-.wrapper-checkout {
-  margin: 0 15px;
-}
 
 .grid-container {
   display: grid;
-  max-width: 600px;
+  max-width: 37rem;
   grid-template-columns: 27% 58% 15%;
 }
 
 .logo svg {
-  width: 115px;
+  width: 7.19rem;
   margin: 0 5px
 }
 
@@ -209,6 +204,7 @@ export default {
   color: rgb(61, 66, 70);
   margin-top: 1%;
   margin-bottom: 1%;
+  font-size: 2rem;
 }
 
 .third {
@@ -219,12 +215,13 @@ export default {
   grid-column: 1/3;
   color: rgb(48, 48, 48);
   font-weight: 600;
+  font-size: 1.25rem;
 }
 
 .subtotal-val {
   color: rgb(48, 48, 48);
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .item {
@@ -233,17 +230,16 @@ export default {
 
 /*Contact information*************************************************************************/
 .submit-box {
-  max-width: 600px;
+  max-width: 37rem;
   display: grid;
-  max-width: 600px;
   grid-template-columns: 40% 60%;
-  grid-template-rows: repeat(7, 38px);
+  grid-template-rows: repeat(7, 2.36rem);
   grid-gap: 1vw;
   margin: 0 auto 15vh;
 }
 
 .header-box {
-  width: 600px;
+  width: 37rem;
   margin: 1% auto;
 }
 
@@ -275,7 +271,7 @@ input {
   align-self: center;
   width: 100%;
   height: 100%;
-  font-size: 13px;
+  font-size: 0.81rem;
   color: #555;
   outline: none;
   border: 1px solid #bbb;
@@ -323,7 +319,7 @@ select {
   border: 1px solid #bbbbbb;
   border-radius: 5px;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -336,7 +332,7 @@ select {
   color: white;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 }
 
@@ -355,22 +351,33 @@ textarea {
 /*media queries*****************************************************************************/
 @media screen and (max-width: 960px) {
   h1 {
-    font-size: calc(3.125vw + 10px);
+    font-size: 2rem;
   }
 
   h2 {
-    font-size: calc(3.125vw + 10px);
+
   }
 
   .subtotal-title,
   .subtotal-val {
-    font-size: calc(3.125vw + 2px);
+
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 320px) {
   .header h1 {
-    font-size: calc(3.125vw + 10px);
+    font-size: 1.25rem;
+    margin-top: 5%;
+    margin-bottom: 5%
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .subtotal-title,
+  .subtotal-val {
+    font-size: 0.78rem;
   }
 
   .logo svg {
@@ -392,11 +399,6 @@ textarea {
 
   textarea {
     height: 10vmax;
-  }
-
-  .third .subtotal-title,
-  .third .subtotal-val {
-    font-size: calc(3.125vw + 4px);
   }
 
   .header-box h2 {

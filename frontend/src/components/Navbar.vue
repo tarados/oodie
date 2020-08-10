@@ -16,7 +16,7 @@
           </router-link>
         </div>
       </div>
-      <div class="card" v-show="visibleCard">
+      <div class="card">
         <router-link :to="{name: 'Card'}">
           <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart"
                viewBox="0 0 37 40">

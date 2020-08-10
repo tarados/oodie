@@ -117,7 +117,7 @@
   }
 
   h1 {
-    font-size: 2.5em;
+    font-size: 2rem;
     color: rgb(61, 66, 70);;
     text-transform: none;
     letter-spacing: 0;

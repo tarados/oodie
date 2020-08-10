@@ -4,17 +4,23 @@
     <div class="hamburger">
       <div></div>
     </div>
-    <div class="menu" v-bind:style="style">
+    <div class="menu">
       <div>
         <div>
           <ul>
             <li>
-              <router-link :to="{name: 'Home'}">
+              <router-link
+                  :to="{name: 'Home'}"
+              >
                 Худиялки
               </router-link>
             </li>
             <li>
-              <router-link :to="{name: 'Products'}">Дружеские бренды</router-link>
+              <router-link
+                  :to="{name: 'Products'}"
+              >
+                Дружеские бренды
+              </router-link>
             </li>
           </ul>
         </div>
@@ -27,27 +33,17 @@
 
 export default {
   name: "Hamburger",
-  components: {},
   data() {
     return {
-      show: true,
-      style: {}
     }
   },
   methods: {
-      menuClose() {
-          this.style["visibility"] = 'collapse';
-      }
+
   }
 }
 </script>
 
 <style scoped>
-body {
-  line-height: 1.4;
-  margin: 0;
-}
-
 .menu-wrap {
   display: none;
   position: fixed;
@@ -227,6 +223,7 @@ body {
     top: 7.2vmax;
   }
 }
+
 @media screen and (max-width: 360px) {
   .menu-wrap .menu {
     top: 8.5%;
