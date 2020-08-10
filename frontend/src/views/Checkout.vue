@@ -97,6 +97,7 @@
 import {mapGetters} from 'vuex';
 import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators'
 import {post} from '../js/send'
+import {fontSize} from "../js/font";
 
 export default {
   name: "Checkout",
@@ -176,6 +177,9 @@ export default {
         this.invalidEmail = !this.$v.email.required;
       }
     }
+  },
+  mounted() {
+      console.log(fontSize(100, 12, 14, 960, 320))
   }
 }
 </script>
@@ -364,47 +368,49 @@ textarea {
   }
 }
 
-/*@media (max-width: 620px) {*/
-/*  .header h1 {*/
-/*    font-size: calc(3.125vw + 10px);*/
-/*  }*/
+@media (max-width: 420px) {
+  .header h1 {
+    font-size: calc(3.125vw + 10px);
+  }
 
-/*  .logo svg {*/
-/*    width: calc(3.125vw + 80px);*/
-/*  }*/
+  .logo svg {
+    width: calc(3.125vw + 80px);
+  }
 
-/*  .title-name,*/
-/*  .title-phone,*/
-/*  select,*/
-/*  .title-city,*/
-/*  .title-office,*/
-/*  .title-others,*/
-/*  .continue-shipping,*/
-/*  .continue-shopping {*/
-/*    font-size: 2.7vw;*/
-/*  }*/
+  .title-name,
+  .title-phone,
+  select,
+  .title-city,
+  .title-office,
+  .title-others,
+  .title-delivery,
+  .title-mail,
+  .continue-shipping,
+  .continue-shopping {
+    font-size: 0.71rem;
+  }
 
-/*  textarea {*/
-/*    height: 10vmax;*/
-/*  }*/
+  textarea {
+    height: 10vmax;
+  }
 
-/*  .third .subtotal-title,*/
-/*  .third .subtotal-val {*/
-/*    font-size: calc(3.125vw + 4px);*/
-/*  }*/
+  .third .subtotal-title,
+  .third .subtotal-val {
+    font-size: calc(3.125vw + 4px);
+  }
 
-/*  .header-box h2 {*/
-/*    font-size: calc(3.125vw + 5px);*/
-/*  }*/
+  .header-box h2 {
+    font-size: calc(3.125vw + 5px);
+  }
 
-/*  .submit-box {*/
-/*    margin-top: 10%;*/
-/*    margin-bottom: 20%;*/
-/*  }*/
+  .submit-box {
+    margin-top: 10%;
+    margin-bottom: 20%;
+  }
 
-/*  .submit-box label {*/
-/*    font-size: calc(1.5vw + 1px);*/
-/*  }*/
-/*}*/
+  .submit-box label {
+    font-size: calc(1.5vw + 1px);
+  }
+}
 
 </style>
