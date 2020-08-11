@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="wrapper-checkout">
     <div class="header">
       <h1>Your checkout</h1>
     </div>
-    <div class="grid-container third">
-      <div class="item subtotal-title">Subtotal</div>
-      <div class="item subtotal-val" v-text="getTotalPrice"></div>
-    </div>
-    <div class="header-box">
-      <h2>Contact information</h2>
+    <div class="subtotal">
+      <div class="subtotal-title">Subtotal</div>
+      <div class="subtotal-val" v-text="getTotalPrice"></div>
+      <div class="header-box">
+        <h2>Contact information</h2>
+      </div>
     </div>
     <form class="submit-box" @submit.prevent="submitHandler">
       <div class="title-name">
@@ -73,10 +73,10 @@
       </div>
       <div class="title-others" v-show="selected === 'Другие'">Address:</div>
       <div class="others" v-show="selected === 'Другие'">
-        <textarea
-            id="others"
-            v-model="address"
-        ></textarea>
+                  <textarea
+                      id="others"
+                      v-model="address"
+                  ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
       </div>
       <div class="button-block" v-if="selected !== 'Другие'">
@@ -92,327 +92,338 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators'
-import {post} from '../js/send'
-import {fontSize} from "../js/font";
+    import {mapGetters} from 'vuex';
+    import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators'
+    import {post} from '../js/send'
 
-export default {
-  name: "Checkout",
-  data() {
-    return {
-      selected: '',
-      userName: '',
-      address: '',
-      city: '',
-      postOffice: '',
-      phone: '',
-      email: '',
-      invalidName: false,
-      invalidEmail: false,
-      invalidPhone: false
+    export default {
+        name: "Checkout",
+        data() {
+            return {
+                selected: '',
+                userName: '',
+                address: '',
+                city: '',
+                postOffice: '',
+                phone: '',
+                email: '',
+                invalidName: false,
+                invalidEmail: false,
+                invalidPhone: false
+            }
+        },
+        validations: {
+            userName: {required},
+            phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
+            email: {email, required}
+        },
+        computed: {
+            ...mapGetters(["getTotalPrice"])
+        },
+        methods: {
+            async submitHandler() {
+                const productsList = [];
+                this.$store.state.productsStore.cardProducts.forEach(product => {
+                    productsList.push({
+                        'id': product.id,
+                        'price': product.price,
+                        'quantity': product.quantity
+                    });
+                });
+                let order = {
+                    'products': productsList,
+                    'username': this.userName,
+                    'phone': this.phone,
+                    'delivery': this.selected,
+                    'city': this.city,
+                    'post-office': this.postOffice,
+                    'others': this.address
+                };
+                const response = await post("order", order);
+                this.invalidName = !this.$v.userName.required;
+                this.invalidPhone = !this.$v.phone.required;
+                this.invalidEmail = !this.$v.email.required;
+                this.delivery = this.selected;
+                if (response && !this.$v.$invalid) {
+                    await this.$router.push({name: 'Successful'});
+                }
+                if (this.$v.invalid) {
+                    this.$v.$touch();
+                    return
+                }
+            },
+            toCard() {
+                this.$router.push({name: "Card"})
+            },
+            cardVisible() {
+                this.$emit('cardVisible', false);
+            }
+        },
+        watch: {
+            userName: function () {
+                this.invalidName = this.$v.userName.$invalid;
+            },
+            phone: function () {
+                if (this.$v.phone.$invalid) {
+                    this.invalidPhone = this.$v.phone.required;
+                } else {
+                    this.invalidPhone = !this.$v.phone.required;
+                }
+            },
+            email: function () {
+                if (this.$v.email.$invalid) {
+                    this.invalidEmail = this.$v.email.required;
+                } else {
+                    this.invalidEmail = !this.$v.email.required;
+                }
+            }
+        },
+        mounted() {
+            this.cardVisible();
+        }
     }
-  },
-  validations: {
-    userName: {required},
-    phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
-    email: {email, required}
-  },
-  computed: {
-    ...mapGetters(["getTotalPrice"])
-  },
-  methods: {
-    async submitHandler() {
-      const productsList = [];
-      this.$store.state.productsStore.cardProducts.forEach(product => {
-        productsList.push({
-          'id': product.id,
-          'price': product.price,
-          'quantity': product.quantity
-        });
-      });
-      let order = {
-        'products': productsList,
-        'username': this.userName,
-        'phone': this.phone,
-        'delivery': this.selected,
-        'city': this.city,
-        'post-office': this.postOffice,
-        'others': this.address
-      };
-      const response = await post("order", order);
-      this.invalidName = !this.$v.userName.required;
-      this.invalidPhone = !this.$v.phone.required;
-      this.invalidEmail = !this.$v.email.required;
-      this.delivery = this.selected;
-      if (response && !this.$v.$invalid) {
-        await this.$router.push({name: 'Successful'});
-      }
-      if (this.$v.invalid) {
-        this.$v.$touch();
-        return
-      }
-    },
-    toCard() {
-      this.$router.push({name: "Card"})
-    }
-  },
-  watch: {
-    userName: function () {
-      this.invalidName = this.$v.userName.$invalid;
-    },
-    phone: function () {
-      if (this.$v.phone.$invalid) {
-        this.invalidPhone = this.$v.phone.required;
-      } else {
-        this.invalidPhone = !this.$v.phone.required;
-      }
-    },
-    email: function () {
-      if (this.$v.email.$invalid) {
-        this.invalidEmail = this.$v.email.required;
-      } else {
-        this.invalidEmail = !this.$v.email.required;
-      }
-    }
-  },
-  mounted() {
-    console.log(fontSize(100, 19, 32, 960, 320))
-  }
-}
 </script>
 
 <style scoped>
+  .wrapper-checkout {
+    margin: 0 1rem;
+  }
 
-.grid-container {
-  display: grid;
-  max-width: 37rem;
-  grid-template-columns: 27% 58% 15%;
-}
+  .subtotal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 37rem;
+    margin: 3% auto;
 
-.logo svg {
-  width: 7.19rem;
-  margin: 0 5px
-}
+  }
 
-.header {
-  grid-column: 2/4;
-  text-align: center;
-}
+  .header {
+    text-align: center;
+  }
 
-.header h1 {
-  color: rgb(61, 66, 70);
-  margin-top: 1%;
-  margin-bottom: 1%;
-  font-size: 2rem;
-}
-
-.third {
-  margin: 2vw auto;
-}
-
-.subtotal-title {
-  grid-column: 1/3;
-  color: rgb(48, 48, 48);
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.subtotal-val {
-  color: rgb(48, 48, 48);
-  font-weight: 600;
-  font-size: 1.25rem;
-}
-
-.item {
-  align-self: center;
-}
-
-/*Contact information*************************************************************************/
-.submit-box {
-  max-width: 37rem;
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: repeat(7, 2.36rem);
-  grid-gap: 1vw;
-  margin: 0 auto 15vh;
-}
-
-.header-box {
-  width: 37rem;
-  margin: 1% auto;
-}
-
-h2 {
-  text-align: left;
-}
-
-.title-name,
-.title-delivery,
-.title-phone,
-.title-mail,
-.title-city,
-.title-office,
-.title-others {
-  align-self: center;
-}
-
-.user-name,
-.phone,
-.mail,
-.new-post-city,
-.new-post-office {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-input {
-  align-self: center;
-  width: 100%;
-  height: 100%;
-  font-size: 0.81rem;
-  color: #555;
-  outline: none;
-  border: 1px solid #bbb;
-  border-radius: 5px;
-}
-
-.invalid {
-  border-color: red;
-}
-
-small {
-  color: red;
-  padding-left: 1%;
-}
-
-.delivery {
-  height: 100%;
-}
-
-select {
-  height: 100%;
-  width: 45%;
-  border: 1px solid #bbb;
-  border-radius: 5px;
-  color: rgb(80, 80, 80);
-  background-color: white;
-  padding-left: 1%;
-}
-
-.button-block,
-.button-block-others {
-  grid-column: 1/3;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.button-block-others {
-  grid-row: 7/7;
-}
-
-.continue-shopping {
-  width: 32%;
-  background-color: white;
-  border: 1px solid #bbbbbb;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.continue-shipping {
-  width: 32%;
-  background-color: green;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.others {
-
-}
-
-textarea {
-  width: 100%;
-  height: 5vmax;
-  border: 1px solid #bbb;
-  border-radius: 5px;
-  color: rgb(80, 80, 80);
-}
-
-/*media queries*****************************************************************************/
-@media screen and (max-width: 960px) {
-  h1 {
+  .header h1 {
+    color: rgb(61, 66, 70);
+    margin-top: 1%;
+    margin-bottom: 1%;
     font-size: 2rem;
   }
 
-  h2 {
-
-  }
-
-  .subtotal-title,
-  .subtotal-val {
-
-  }
-}
-
-@media (max-width: 320px) {
-  .header h1 {
+  .subtotal-title {
+    color: rgb(48, 48, 48);
+    font-weight: 600;
     font-size: 1.25rem;
-    margin-top: 5%;
-    margin-bottom: 5%
+  }
+
+  .subtotal-val {
+    color: rgb(48, 48, 48);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  /*Contact information*************************************************************************/
+  .submit-box {
+    max-width: 37rem;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: repeat(7, 2.36rem);
+    grid-gap: 1vw;
+    margin: 0 auto 15vh;
+  }
+
+  .header-box {
+    width: 37rem;
+    margin: 1% auto;
   }
 
   h2 {
-    font-size: 1.1rem;
-  }
-
-  .subtotal-title,
-  .subtotal-val {
-    font-size: 0.78rem;
-  }
-
-  .logo svg {
-    width: calc(3.125vw + 80px);
+    text-align: left;
   }
 
   .title-name,
+  .title-delivery,
   .title-phone,
-  select,
+  .title-mail,
   .title-city,
   .title-office,
-  .title-others,
-  .title-delivery,
-  .title-mail,
-  .continue-shipping,
+  .title-others {
+    align-self: center;
+  }
+
+  .user-name,
+  .phone,
+  .mail,
+  .new-post-city,
+  .new-post-office {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  input {
+    align-self: center;
+    width: 100%;
+    height: 100%;
+    font-size: 0.81rem;
+    color: #555;
+    outline: none;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+  }
+
+  .invalid {
+    border-color: red;
+  }
+
+  small {
+    color: red;
+    padding-left: 1%;
+  }
+
+  .delivery {
+    height: 100%;
+  }
+
+  select {
+    height: 100%;
+    width: 45%;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    color: rgb(80, 80, 80);
+    background-color: white;
+    padding-left: 1%;
+  }
+
+  .button-block,
+  .button-block-others {
+    grid-column: 1/3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .button-block-others {
+    grid-row: 7/7;
+  }
+
   .continue-shopping {
-    font-size: 0.71rem;
+    width: 32%;
+    background-color: white;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .continue-shipping {
+    width: 32%;
+    background-color: green;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
   }
 
   textarea {
-    height: 10vmax;
+    width: 100%;
+    height: 5vmax;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    color: rgb(80, 80, 80);
   }
 
-  .header-box h2 {
-    font-size: calc(3.125vw + 5px);
+  .logo svg {
+    width: 7.19rem;
+    margin: 0 5px
   }
 
-  .submit-box {
-    margin-top: 10%;
-    margin-bottom: 20%;
+  /*media queries*****************************************************************************/
+  @media screen and (max-width: 960px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .subtotal {
+      max-width: 20rem;
+    }
+
+    .subtotal-title,
+    .subtotal-val {
+      font-size: 0.78rem;
+    }
+
+    .header-box {
+      margin-top: 5%;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    .submit-box {
+      grid-template-rows: repeat(7, 2rem);
+      grid-gap: 1rem;
+      margin-top: 10%;
+    }
+
+    select {
+      width: 100%;
+    }
+
+    .continue-shipping {
+      width: 43.95%;
+    }
+
+    .continue-shopping {
+      width: 42%;
+    }
+
+    small {
+      font-size: 0.75rem;
+    }
+
+    .logo svg {
+      width: 3.6rem;
+    }
+
+    .title-name,
+    .title-phone,
+    select,
+    .title-city,
+    .title-office,
+    .title-others,
+    .title-delivery,
+    .title-mail,
+    .continue-shipping,
+    .continue-shopping {
+      font-size: 0.71rem;
+    }
+
+    textarea {
+      height: 10vmax;
+    }
+
   }
 
-  .submit-box label {
-    font-size: calc(1.5vw + 1px);
+  @media (max-width: 450px) {
+    .wrapper-checkout {
+      margin: 0 1.7rem
+    }
+
+    .header h1 {
+      font-size: 1.25rem;
+      margin-top: 5%;
+      margin-bottom: 5%
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
   }
-}
 
 </style>

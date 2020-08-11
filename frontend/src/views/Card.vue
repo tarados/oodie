@@ -96,12 +96,12 @@
             plusQuantity(index) {
                 this.$store.commit('increment', index);
             },
-            visibleCard() {
-                this.$emit('visible', "false");
+            cardVisible() {
+                this.$emit('cardVisible', false);
             }
         },
         mounted() {
-            this.visibleCard();
+            this.cardVisible();
         }
     }
 </script>
@@ -113,6 +113,7 @@
   }
 
   .header {
+    margin: 2% auto;
     text-align: center;
   }
 
