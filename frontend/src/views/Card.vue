@@ -108,10 +108,6 @@
 
 <style scoped>
 
-  .wrapper-card {
-    /*margin: 3vh;*/
-  }
-
   .header {
     margin: 2% auto;
     text-align: center;

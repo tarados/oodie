@@ -1,8 +1,10 @@
 <template>
-  <div class="wrapper">
-    <Navbar class="nav" :visible-card="visible"/>
-    <router-view class="content" @cardVisible="cardVisible"/>
-    <Footer class="footer"/>
+  <div id="root">
+    <div class="wrapper">
+      <Navbar class="nav" :visible-card="visible"/>
+      <router-view class="content" @cardVisible="cardVisible"/>
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -27,11 +29,30 @@
             }
         },
         mounted() {
+
         }
     }
 </script>
 
-<style scoped>
+<style>
+  #root {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+  }
+
+  .content {
+    flex: 1;
+  }
 
 
 </style>
