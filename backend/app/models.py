@@ -5,6 +5,7 @@ from django.conf import settings
 
 class Category(models.Model):
 	name = models.CharField(max_length=255, verbose_name=u'название')
+	slug = models.SlugField(null=True)
 
 	class Meta:
 		verbose_name = u'категория'

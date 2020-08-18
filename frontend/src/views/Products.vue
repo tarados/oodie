@@ -48,7 +48,13 @@ export default {
       } else {
         this.category = this.categories[index];
       }
+      console.log(this.category);
     }
+  },
+  watch: {
+      categories: function () {
+          console.log(this.categories);
+      }
   }
 }
 </script>

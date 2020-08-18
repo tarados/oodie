@@ -1,20 +1,15 @@
 <template>
   <div class="wrapper-category">
     <div class="container-flex">
-      <div class="header">
-        {{defaultHeader}}
-      </div>
-      <div class="categories">
-        <div
-            ref="category"
-            v-show="category !== 'oodie'"
-            class="category-item"
-            :class="{active: index === currentIndex}"
-            v-for="(category, index) in categories" :key="index"
-            @click="onChoice(index)"
-        >
-          {{ category }}
-        </div>
+      <div
+          ref="category"
+          v-show="category !== 'oodie'"
+          class="category-item"
+          :class="{active: index === currentIndex}"
+          v-for="(category, index) in categories" :key="index"
+          @click="onChoice(index)"
+      >
+        {{ category }}
       </div>
     </div>
   </div>

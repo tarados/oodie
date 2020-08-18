@@ -128,3 +128,5 @@ MEDIA_ROOT = os.environ['MEDIA_ROOT']
 CORS_ORIGIN_ALLOW_ALL = True
 
 SITE_URL = os.environ['SITE_URL']
+
+NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'

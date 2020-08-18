@@ -11,7 +11,13 @@ const routes = [
         component: () => import('../views/Home')
     },
     {
-        path: '/products/',
+        path: '/brands/',
+        name: 'Products',
+        meta: {layout: 'main'},
+        component: () => import('../views/Products')
+    },
+    {
+        path: '/brands/',
         name: 'Products',
         meta: {layout: 'main'},
         component: () => import('../views/Products')
@@ -34,7 +40,6 @@ const routes = [
         meta: {layout: 'main'},
         component: () => import('../views/Successful')
     },
-
     {
         path: '/products/:id',
         name: 'Product',

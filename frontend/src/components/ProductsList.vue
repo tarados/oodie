@@ -8,9 +8,9 @@
         <img :src="product.image">
         <h4>{{ product.title }}</h4>
         <div class="price-box">
-          <span v-if="product.new_price" class="no-current">${{ product.price }}</span>
-          <span v-else>${{ product.price }}</span>
-          <span class="old" v-show="product.new_price">${{ product.new_price }}</span>
+          <span v-if="product.new_price" class="no-current">{{ product.price }} грн.</span>
+          <span v-else>{{ product.price }} грн.</span>
+          <span class="old" v-show="product.new_price">{{ product.new_price }} грн.</span>
         </div>
       </router-link>
     </div>
@@ -85,7 +85,7 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     align-content: center;
   }

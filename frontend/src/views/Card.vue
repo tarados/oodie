@@ -20,7 +20,7 @@
             {{ product.title }}
           </div>
         </div>
-        <div class="item price-val">${{ product.price }}</div>
+        <div class="item price-val">{{ product.price }} грн.</div>
         <div class="item quantity-val">
           <div>
             {{ product.quantity }}
@@ -30,7 +30,7 @@
             <div class="triangle-down" @click="minusQuantity(index)"></div>
           </div>
         </div>
-        <div class="item total-val">${{ product.total }}</div>
+        <div class="item total-val">{{ product.total }} грн.</div>
       </div>
       <div class="mobile">
         <div class="mobile-content">
@@ -40,7 +40,7 @@
           <div class="product">
             {{ product.title }}
           </div>
-          <div class="total-val">${{ product.total }}</div>
+          <div class="total-val">{{ product.total }} грн.</div>
         </div>
         <div class="mobile-edit">
           <div class="remove-mobile" @click="deleteOrder(index)">Remove</div>

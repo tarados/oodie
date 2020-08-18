@@ -9,7 +9,6 @@ import datetime
 def products(request):
 	products_list = []
 	all_products = Product.objects.all()
-	categories = Category.objects.all()
 	for prd in all_products:
 		category = prd.category
 		products_list.append(
@@ -22,8 +21,6 @@ def products(request):
 				'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prd.id)[0].image.url
 			}
 		)
-	for p in products_list:
-		print(p)
 	return JsonResponse({'products': products_list})
 
 
