@@ -10,7 +10,7 @@
             <span>Худиялки</span>
           </a>
           <router-link
-              :to="{name: 'Products'}"
+              :to="{name: 'Brands'}"
           >
             <span>Дружественные бренды</span>
           </router-link>

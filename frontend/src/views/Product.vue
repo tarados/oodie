@@ -102,7 +102,7 @@ export default {
         this.slides.push({
           'image': image
         });
-      })
+      });
       this.$store.commit('setCurrentProduct', response.product);
     },
     showImage(index) {
@@ -118,7 +118,7 @@ export default {
       };
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
-      this.$store.commit("addProduct", productToCard)
+      this.$store.commit("addProduct", productToCard);
       this.$router.push({name: 'Card'});
     }
   },

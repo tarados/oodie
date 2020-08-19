@@ -12,13 +12,13 @@ const routes = [
     },
     {
         path: '/brands/',
-        name: 'Products',
+        name: 'Brands',
         meta: {layout: 'main'},
         component: () => import('../views/Products')
     },
     {
-        path: '/brands/',
-        name: 'Products',
+        path: '/brands/:slug',
+        name: 'Brand',
         meta: {layout: 'main'},
         component: () => import('../views/Products')
     },

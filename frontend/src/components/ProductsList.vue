@@ -41,9 +41,9 @@
             ...mapGetters(["allProducts"]),
             prodList() {
                 if (this.category) {
-                    return this.allProducts.filter(product => product.category === this.category);
+                    return this.allProducts.filter(product => product.category[0] === this.category);
                 } else {
-                    return this.allProducts.filter(product => product.category !== 'oodie');
+                    return this.allProducts.filter(product => product.category[0] !== 'oodie');
                 }
             }
         },

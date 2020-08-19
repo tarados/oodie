@@ -4,7 +4,7 @@
       <div class="container showcase-inner">
         <h1>Winter Sale Now On!</h1>
         <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>
-        <router-link :to="{name: 'Products'}" class="btn">BUY NOW</router-link>
+        <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
     <div class="header">

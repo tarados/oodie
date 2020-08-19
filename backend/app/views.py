@@ -15,7 +15,7 @@ def products(request):
 			{
 				'id': prd.id,
 				'title': prd.title,
-				'category': category.name,
+				'category': (category.name, category.slug),
 				'price': prd.price,
 				'new_price': prd.new_price,
 				'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prd.id)[0].image.url

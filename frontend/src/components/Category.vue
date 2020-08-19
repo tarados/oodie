@@ -22,13 +22,17 @@
         props: {
             categories: {
                 type: Array
+            },
+            slugs: {
+                type: Array
             }
         },
         data() {
             return {
                 defaultHeader: "Дружеские бренды",
                 isBackground: false,
-                currentIndex: null
+                currentIndex: null,
+                slug: ''
             }
         },
         methods: {
@@ -37,16 +41,20 @@
                     this.defaultHeader = "Дружеские бренды";
                     this.currentIndex = null;
                     this.isBackground = false;
+                    this.$router.go(-1);
                 } else {
                     this.defaultHeader = this.categories[index];
                     this.currentIndex = index;
                     this.isBackground = !this.isBackground;
+                    this.$router.push({path: '/brands/' + this.slugs[index]});
                 }
                 this.$emit('onChoice', index);
+                this.$router.push({path: '/brands/' + this.slugs[index]});
+                console.log(this.slugs[index]);
             }
         },
         mounted() {
-
+            console.log(this.slugs);
         }
     }
 </script>
