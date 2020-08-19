@@ -47,7 +47,6 @@
             :class="{invalid: this.$v.email.$dirty || !this.$v.email.email || invalidEmail}"
         >
         <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
-        <!--          <small v-else-if="!$v.email.required">Enter E-mail!</small>-->
       </div>
       <div class="title-delivery">
         Delivery method:
