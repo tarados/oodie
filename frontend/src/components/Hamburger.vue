@@ -17,7 +17,7 @@
             </li>
             <li  @click="closeHamburger">
               <router-link
-                  :to="{name: 'Products'}"
+                  :to="{name: 'Brands'}"
               >
                 Дружеские бренды
               </router-link>
