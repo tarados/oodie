@@ -52,7 +52,7 @@ export default {
             });
             let totalPrice = eval(valueTotal.join('+'));
             if (totalPrice) {
-                state.totalPrice = parseFloat(totalPrice).toFixed(0) + ' грн.';
+                state.totalPrice = parseFloat(totalPrice).toFixed(0) + ' грн';
             } else {
                 state.totalPrice = '$' + 0;
             }

@@ -1,5 +1,19 @@
 from django.contrib import admin
 from .models import Category, Product, ProductImage, Order, OrderItem
+from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
+
+
+@register.inclusion_tag('admin/submit_line.html', takes_context=True)
+def submit_row(context):
+	''' submit buttons context change '''
+	ctx = original_submit_row(context)
+	ctx.update({
+		'show_save_and_add_another': context.get('show_save_and_add_another', ctx['show_save_and_add_another']),
+		'show_save_and_continue': context.get('show_save_and_continue', ctx['show_save_and_continue']),
+		'show_save': context.get('show_save', ctx['show_save']),
+		'show_delete_link': context.get('show_delete_link', ctx['show_delete_link'])
+	})
+	return ctx
 
 
 class ProductImageInline(admin.TabularInline):
@@ -8,10 +22,23 @@ class ProductImageInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ('title', 'price', 'category', 'get_image', 'description', )
+	list_display = ('title', 'price', 'category', 'get_image', 'description', 'hidden')
+	list_filter = ['category']
+	list_editable = ['hidden']
 	inlines = [
 		ProductImageInline,
 	]
+
+	def has_add_permission(cls, request):
+		''' remove add and save and add another button '''
+		return False
+
+	def change_view(self, request, object_id, extra_context=None):
+		''' customize add/edit form '''
+		extra_context = extra_context or {}
+		extra_context['show_save_and_continue'] = False
+		extra_context['show_save'] = True
+		return super(ProductAdmin, self).change_view(request, object_id, extra_context=extra_context)
 
 
 class OrderItemInline(admin.TabularInline):

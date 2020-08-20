@@ -16,6 +16,7 @@
 <script>
     import ProductsList from "../components/ProductsList";
     import Category from "../components/Category";
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "Products",
@@ -31,6 +32,9 @@
         components: {
             ProductsList,
             Category
+        },
+        computed: {
+            ...mapGetters(["allProducts"])
         },
         methods: {
             productsList(val) {
@@ -48,6 +52,9 @@
                     this.slugList.push(key.split(',')[1]);
                 }
             },
+            loadProductsList() {
+                console.log(this.allProducts);
+            },
             onChoice(index) {
                 if (this.category === this.categories[index]) {
                     this.category = '';
@@ -57,10 +64,8 @@
                 }
             }
         },
-        watch: {
-            categories: function () {
-                // console.log(this.categories);
-            }
+        mounted() {
+            this.loadProductsList();
         }
     }
 </script>

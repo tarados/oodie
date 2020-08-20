@@ -45,7 +45,7 @@
                 ${{ this.currentProduct.price }}
               </div>
               <div :class="{ markdown: !currentProduct.new_price}" class="red">
-                {{ this.currentProduct.new_price }} грн. Sale
+                {{ this.currentProduct.new_price }} грн Sale
               </div>
             </div>
           </div>

@@ -21,6 +21,7 @@ class Product(models.Model):
 	price = models.IntegerField(verbose_name=u'цена')
 	new_price = models.IntegerField(verbose_name=u'новая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
+	hidden = models.BooleanField(verbose_name='снять с продажи', null=True)
 
 	class Meta:
 		verbose_name = u'товар'
