@@ -60,11 +60,9 @@
             async loadProducts() {
                 const response = await get('products');
                 this.$store.commit('addProducts', response.products);
-                this.$emit('productsList', response.products);
             }
         },
         mounted() {
-            console.log(this.allProducts);
             this.loadProducts();
             this.setItem();
         }

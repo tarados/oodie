@@ -7,7 +7,6 @@
     />
     <ProductsList
         thumbnail="small"
-        @productsList="productsList"
         :category="category"
     />
   </div>
@@ -26,7 +25,7 @@
                 categories: [],
                 slugList: [],
                 category: '',
-                slug: ''
+                slugIndex: '0'
             }
         },
         components: {
@@ -37,7 +36,7 @@
             ...mapGetters(["allProducts"])
         },
         methods: {
-            productsList(val) {
+            productsList() {
                 const groupBy = (array, key) => {
                     return array.reduce((result, currentValue) => {
                         (result[currentValue[key]] = result[currentValue[key]] || []).push(
@@ -46,16 +45,14 @@
                         return result;
                     }, {});
                 };
-                const productsGroupedByCategory = groupBy(val, 'category');
+                const productsGroupedByCategory = groupBy(this.allProducts, 'category');
                 for (let key in productsGroupedByCategory) {
                     this.categories.push(key.split(',')[0]);
                     this.slugList.push(key.split(',')[1]);
                 }
             },
-            loadProductsList() {
-                console.log(this.allProducts);
-            },
             onChoice(index) {
+                this.slugIndex = index;
                 if (this.category === this.categories[index]) {
                     this.category = '';
                 } else {
@@ -65,7 +62,8 @@
             }
         },
         mounted() {
-            this.loadProductsList();
+            this.productsList();
+            // this.onChoice(this.slugIndex);
         }
     }
 </script>
