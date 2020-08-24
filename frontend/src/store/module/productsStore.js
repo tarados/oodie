@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import * as card from '../../js/card'
+import {get} from "@/js/send";
 
 export default {
     actions: {
+        async loadProducts(context) {
+            const response = await get('products');
+            context.commit('addProducts', response.products);
+        },
         loadFromCard({commit}) {
             commit('addProductFromCard');
         }
@@ -54,7 +59,7 @@ export default {
             if (totalPrice) {
                 state.totalPrice = parseFloat(totalPrice).toFixed(0) + ' грн';
             } else {
-                state.totalPrice = '$' + 0;
+                state.totalPrice = 0 + ' грн';
             }
             return state.totalPrice;
         }
@@ -67,4 +72,14 @@ function changeQuantity(array, index, number) {
     item.total = parseFloat((item.price * item.quantity).toFixed(1));
     Vue.set(array.cardProducts, index, item);
 }
+
+// function groupBy(array, key) {
+//     return array.reduce((result, currentValue) => {
+//         (result[currentValue[key]] = result[currentValue[key]] || []).push(
+//             currentValue
+//         );
+//         return result;
+//     }, {});
+// }
+
 

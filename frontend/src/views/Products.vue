@@ -1,8 +1,6 @@
 <template>
   <div>
     <Category
-        :categories="categories"
-        :slugs="slugList"
         @onChoice="onChoice"
     />
     <ProductsList
@@ -13,59 +11,55 @@
 </template>
 
 <script>
-    import ProductsList from "../components/ProductsList";
-    import Category from "../components/Category";
-    import {mapGetters} from 'vuex'
+import ProductsList from "../components/ProductsList";
+import Category from "../components/Category";
+import {mapGetters} from 'vuex'
 
-    export default {
-        name: "Products",
-        data() {
-            return {
-                visibleCard: true,
-                categories: [],
-                slugList: [],
-                category: '',
-                slugIndex: '0'
-            }
-        },
-        components: {
-            ProductsList,
-            Category
-        },
-        computed: {
-            ...mapGetters(["allProducts"])
-        },
-        methods: {
-            productsList() {
-                const groupBy = (array, key) => {
-                    return array.reduce((result, currentValue) => {
-                        (result[currentValue[key]] = result[currentValue[key]] || []).push(
-                            currentValue
-                        );
-                        return result;
-                    }, {});
-                };
-                const productsGroupedByCategory = groupBy(this.allProducts, 'category');
-                for (let key in productsGroupedByCategory) {
-                    this.categories.push(key.split(',')[0]);
-                    this.slugList.push(key.split(',')[1]);
-                }
-            },
-            onChoice(index) {
-                this.slugIndex = index;
-                if (this.category === this.categories[index]) {
-                    this.category = '';
-                } else {
-                    this.category = this.categories[index];
-                    this.slug = this.slugList[index];
-                }
-            }
-        },
-        mounted() {
-            this.productsList();
-            // this.onChoice(this.slugIndex);
-        }
+export default {
+  name: "Products",
+  data() {
+    return {
+      visibleCard: true,
+      category: '',
+      slug: '',
+      routPath: ''
     }
+  },
+  components: {
+    ProductsList,
+    Category
+  },
+  computed: {
+    ...mapGetters(["getCategoryList"]),
+    ...mapGetters(["getSlugList"])
+  },
+  methods: {
+    onChoice(index) {
+      if (this.category === this.getCategoryList[index]) {
+        this.category = '';
+        this.$router.push({path: '/brands'}).catch(() => {
+        });
+      } else {
+        this.category = this.getCategoryList[index];
+        this.slug = this.getSlugList[index]
+        this.$router.push({path: '/brands/' + this.slug}).catch(() => {
+        });
+      }
+    },
+    currentState() {
+      const currentSlug = this.$route.path.split('/');
+      if (currentSlug.length === 3) {
+        let slug = this.$route.params.slug;
+        console.log(slug);
+      }
+
+    }
+  },
+  mounted() {
+    this.currentState();
+    console.log(this.$route.params.slug);
+  }
+}
 </script>
 
 <style scoped>
