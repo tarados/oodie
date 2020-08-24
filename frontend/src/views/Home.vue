@@ -10,7 +10,7 @@
     <div class="header">
       <h2>Top Selling Products</h2>
     </div>
-    <ProductsList thumbnail="large" category="oodie"/>
+    <ProductsList thumbnail="large" :category-id="categoryId" />
   </div>
 </template>
 
@@ -26,6 +26,11 @@
         },
         components: {
             ProductsList
+        },
+        computed: {
+            categoryId() {
+                return 1
+            }
         }
     }
 </script>

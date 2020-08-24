@@ -7,6 +7,7 @@ export default {
         async loadProducts(context) {
             const response = await get('products');
             context.commit('addProducts', response.products);
+            context.commit('addCategories', response.categories);
         },
         loadFromCard({commit}) {
             commit('addProductFromCard');
@@ -15,6 +16,9 @@ export default {
     mutations: {
         addProducts(state, products) {
             state.productsList = products;
+        },
+        addCategories(state, categories) {
+            state.categoriesList = categories;
         },
         increment(state, index) {
             changeQuantity(state, index, 1);
@@ -42,6 +46,7 @@ export default {
     },
     state: {
         productsList: [],
+        categoriesList: [],
         currentProduct: null,
         cardProducts: [],
         totalPrice: 0
@@ -49,6 +54,9 @@ export default {
     getters: {
         allProducts(state) {
             return state.productsList;
+        },
+        allCategories(state) {
+            return state.categoriesList;
         },
         getTotalPrice(state) {
             let valueTotal = [];

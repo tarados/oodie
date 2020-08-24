@@ -12,7 +12,7 @@ class Category(models.Model):
 		verbose_name_plural = u'категории'
 
 	def __str__(self):
-		return str(self.id)
+		return self.name
 
 
 class Product(models.Model):

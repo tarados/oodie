@@ -18,7 +18,6 @@ def products(request):
 			'slug': category.slug
 		})
 	for prod in all_products:
-		print(prod.category)
 		if prod.hidden:
 			pass
 		else:
@@ -26,14 +25,13 @@ def products(request):
 				{
 					'id': prod.id,
 					'title': prod.title,
-					'category': str(prod.category),
+					'category': prod.category_id,
 					'price': prod.price,
 					'new_price': prod.new_price,
 					'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prod.id)[0].image.url
 				}
 			)
-	products_list.append({'categories': categories_list})
-	return JsonResponse({'products': products_list})
+	return JsonResponse({'products': products_list, 'categories': categories_list})
 
 
 def product(request, product_id):
