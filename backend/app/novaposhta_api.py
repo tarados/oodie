@@ -32,4 +32,33 @@ def get_city(name=None):
 
     return result
 
-print(len(get_city()))
+def get_warehouses(city_id, name):
+    data = {
+        'modelName': 'Address',
+        'calledMethod': 'getWarehouses',
+        'apiKey': NOVAPOSHTA_API_KEY,
+        'methodProperties': {
+            'CityRef': city_id,
+        }
+    }
+    if name is not None:
+        data['methodProperties']['FindByString'] = name
+
+    result = []
+
+    try:
+        response = requests.post(API_URL, json=data)
+        response_data = response.json()
+
+        if response_data['success']:
+            for warehouse in response_data['data']:
+                result.append(warehouse['DescriptionRu'])
+    except requests.exceptions.HTTPError:
+        pass
+
+    return result
+
+
+# for city in get_city():
+#     print(city)
+
