@@ -39,7 +39,6 @@ export default {
   computed: {
     ...mapGetters(["allProducts"]),
     prodList() {
-      console.log(this.categoryId);
       if (this.categoryId) {
         return this.allProducts.filter(product => product.category === this.categoryId);
       } else {

@@ -3,11 +3,11 @@
     <div class="container-flex">
       <div
           ref="category"
-          v-show="category.title !== 'oodie'"
+          v-show="category.id !== 1"
           class="category-item"
-          :class="{active: index === currentIndex}"
-          v-for="(category, index) in categories" :key="index"
-          @click="onChoice(index)"
+          :class="{active: selectedCategoryId === category.id}"
+          v-for="category in categories" :key="category.id"
+          @click="onChoice(category)"
       >
         {{ category.title }}
       </div>
@@ -21,35 +21,21 @@
         props: {
             categories: {
                 type: Array
+            },
+            selectedCategoryId: {
+                type: Number
             }
-        },
-        data() {
-            return {
-                defaultHeader: "",
-                isBackground: false,
-                currentIndex: null,
-                currentSlug: ''
-            }
-        },
-        computed: {
-
         },
         methods: {
-            onChoice(index) {
-                if (this.defaultHeader === this.categories[index]) {
-                  this.defaultHeader = "";
-                  this.currentIndex = null;
-                  this.isBackground = false;
+            onChoice(category) {
+                if (this.selectedCategoryId === category.id) {
+                 this.$router.push({path: '/brands'}).catch(() => {
+                    });
                 } else {
-                  this.defaultHeader = this.categories[index];
-                  this.currentIndex = index;
-                  this.isBackground = !this.isBackground;
+                  this.$router.push({path: '/brands/' + category.slug}).catch(() => {
+                    });
                 }
-                this.$emit('onChoice', index);
             }
-        },
-        mounted() {
-
         }
     }
 </script>
