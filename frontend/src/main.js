@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Vuelidate from "vuelidate"
-import AutocompleteVue from 'autocomplete-vue'
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+import '@trevoreyre/autocomplete-vue/dist/style.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import './style/index.css'
 
 Vue.config.productionTip = false;
-Vue.component('autocomplete-vue', AutocompleteVue);
+
 Vue.use(Vuelidate);
+Vue.use(Autocomplete)
 
 new Vue({
   router,

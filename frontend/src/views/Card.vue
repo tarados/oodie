@@ -61,7 +61,7 @@
     </div>
     <div class="subtotal-mobile-box">
       <div class="subtotal-mobile-title">Subtotal</div>
-      <div class="item subtotal-mobile" v-text="getTotalPrice"></div>
+      <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="submit-mobile-box">
       <router-link :to="{name: 'Home'}" class="continue-mobile-shopping">Continue shopping</router-link>
@@ -69,7 +69,7 @@
     </div>
     <div class="grid-container second subtotal-box">
       <div class="item subtotal-title">Subtotal</div>
-      <div class="item subtotal" v-text="getTotalPrice"></div>
+      <div class="item subtotal" v-text="totalPrice"></div>
     </div>
     <div class="submit-box">
       <router-link :to="{name: 'Home'}" class="item continue-shopping">Continue shopping</router-link>
@@ -84,7 +84,7 @@
     export default {
         name: "Card",
         computed: {
-            ...mapGetters(["getTotalPrice"])
+            ...mapGetters(["totalPrice"])
         },
         methods: {
             deleteOrder(index) {

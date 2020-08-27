@@ -64,7 +64,6 @@ export default {
         categoriesList: [],
         currentProduct: null,
         cardProducts: [],
-        totalPrice: 0,
         citiesList: [],
         warehouseList: []
     },
@@ -81,18 +80,12 @@ export default {
         allWarehouses(state) {
             return state.warehouseList;
         },
-        getTotalPrice(state) {
-            let valueTotal = [];
+        totalPrice(state) {
+            let sum = 0;
             state.cardProducts.forEach(function (item) {
-                valueTotal.push(item.total);
+                sum += item.total;
             });
-            let totalPrice = eval(valueTotal.join('+'));
-            if (totalPrice) {
-                state.totalPrice = parseFloat(totalPrice).toFixed(0) + ' грн';
-            } else {
-                state.totalPrice = 0 + ' грн';
-            }
-            return state.totalPrice;
+            return sum + ' грн';
         }
     }
 }
