@@ -9,6 +9,15 @@ export default {
             context.commit('addProducts', response.products);
             context.commit('addCategories', response.categories);
         },
+        async loadCities(context) {
+            const response = await get('cities');
+            context.commit('loadCities', response);
+        },
+        async loadWarehouses(context, cityId) {
+            const endpoint = 'warehouse' + '?city_id=' + cityId;
+            const response = await get(endpoint);
+            context.commit('loadWarehouses', response);
+        },
         loadFromCard({commit}) {
             commit('addProductFromCard');
         }
@@ -42,6 +51,12 @@ export default {
         },
         addProductFromCard(state) {
             state.cardProducts = card.getItems();
+        },
+        loadCities(state, response) {
+            state.citiesList = response
+        },
+        loadWarehouses(state, response) {
+            state.warehouseList = response
         }
     },
     state: {
@@ -49,7 +64,9 @@ export default {
         categoriesList: [],
         currentProduct: null,
         cardProducts: [],
-        totalPrice: 0
+        totalPrice: 0,
+        citiesList: [],
+        warehouseList: []
     },
     getters: {
         allProducts(state) {
@@ -57,6 +74,12 @@ export default {
         },
         allCategories(state) {
             return state.categoriesList;
+        },
+        allCities(state) {
+            return state.citiesList;
+        },
+        allWarehouses(state) {
+            return state.warehouseList;
         },
         getTotalPrice(state) {
             let valueTotal = [];
@@ -81,13 +104,5 @@ function changeQuantity(array, index, number) {
     Vue.set(array.cardProducts, index, item);
 }
 
-// function groupBy(array, key) {
-//     return array.reduce((result, currentValue) => {
-//         (result[currentValue[key]] = result[currentValue[key]] || []).push(
-//             currentValue
-//         );
-//         return result;
-//     }, {});
-// }
 
 

@@ -60,7 +60,13 @@
       </div>
       <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
-        <input v-model="city">
+        <autocomplete-vue
+            v-on:selected="setCity"
+            :list="[{name: 'item1'}, {name: 'item2'}, {name: 'item3'}]"
+            @input="city"
+        >
+        </autocomplete-vue>
+<!--        <input v-model="city">-->
       </div>
       <div class="title-office" v-show="selected === 'Новая почта'">Office number:</div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
@@ -103,6 +109,7 @@
                 userName: '',
                 address: '',
                 city: '',
+                cities: [],
                 postOffice: '',
                 phone: '',
                 email: '',
@@ -156,6 +163,14 @@
             },
             cardVisible() {
                 this.$emit('cardVisible', false);
+            },
+            deliveryState() {
+                this.$store.dispatch('loadCities');
+                // this.cities = this.$store.getters.allCities;
+                this.cities = [{name: 'item1'}, {name: 'item2'}, {name: 'item3'}];
+            },
+            setCity(city) {
+                this.city = city;
             }
         },
         watch: {
@@ -179,6 +194,7 @@
         },
         mounted() {
             this.cardVisible();
+            this.deliveryState();
         }
     }
 </script>

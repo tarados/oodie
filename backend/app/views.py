@@ -55,13 +55,14 @@ def product(request, product_id):
 def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
+	print(order_content)
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],
 		customer_phone=order_content["phone"],
 		delivery=order_content["delivery"],
 		city=order_content["city"],
-		post_office=order_content["post-office"],
+		post_office=order_content["warehouse"],
 		address=order_content["others"]
 	)
 	order.save()

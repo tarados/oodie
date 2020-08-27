@@ -7,6 +7,7 @@ API_URL = 'https://api.novaposhta.ua/v2.0/json/'
 
 NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
 
+
 def get_city(name=None):
     data = {
         'modelName': 'Address',
@@ -31,6 +32,7 @@ def get_city(name=None):
         pass
 
     return result
+
 
 def get_warehouses(city_id, name):
     data = {
@@ -59,6 +61,5 @@ def get_warehouses(city_id, name):
     return result
 
 
-# for city in get_city():
-#     print(city)
+
 
