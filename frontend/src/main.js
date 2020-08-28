@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from "vuelidate"
 import Autocomplete from '@trevoreyre/autocomplete-vue'
-import '@trevoreyre/autocomplete-vue/dist/style.css'
+// import '@trevoreyre/autocomplete-vue/dist/style.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
