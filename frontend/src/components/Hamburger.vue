@@ -210,9 +210,15 @@
     }
   }
 
+  @media screen and (max-width: 450px) {
+    .menu-wrap .hamburger {
+      top: 3.67%;
+    }
+  }
+
   @media screen and (max-width: 420px) {
     .menu-wrap .hamburger {
-      top: 1.45%;
+      top: 2.8%;
     }
 
     .menu-wrap .menu {
@@ -223,7 +229,7 @@
 
   @media screen and (max-width: 380px) {
     .menu-wrap .hamburger {
-      top: 0.95%;
+      top: 2.45%;
     }
 
     .menu-wrap .menu {
@@ -239,7 +245,7 @@
 
   @media screen and (max-width: 325px) {
     .menu-wrap .hamburger {
-      top: 0.9%;
+      top: 3.55%;
     }
 
     .menu-wrap .menu {
@@ -248,6 +254,10 @@
   }
 
   @media screen and (max-width: 285px) {
+    .menu-wrap .hamburger {
+      top: 3.35%;
+    }
+
     .menu-wrap .menu {
       top: 18vw;
     }

@@ -15,6 +15,17 @@ class Category(models.Model):
 		return self.name
 
 
+class Size(models.Model):
+	name = models.CharField(max_length=255, verbose_name=u'размер')
+
+	class Meta:
+		verbose_name = u'размер'
+		verbose_name_plural = u'размеры'
+
+	def __str__(self):
+		return self.name
+
+
 class Product(models.Model):
 	title = models.CharField(max_length=255, verbose_name=u'название')
 	description = models.TextField(verbose_name=u'описание')
@@ -39,6 +50,20 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+class ProductAvailability(models.Model):
+	size = models.ForeignKey(Size, verbose_name=u'размер', null=True, on_delete=models.CASCADE)
+	productName = models.ForeignKey(Product, verbose_name=u'название модели', null=True, on_delete=models.CASCADE)
+	quantity = models.CharField(max_length=10, verbose_name='Количество', null=True)
+
+	class Meta:
+		verbose_name = u'наличие товара'
+		verbose_name_plural = u'наличие товаров'
+
+	def __str__(self):
+		product = Product(id=self.productName).title
+		return product
 
 
 class ProductImage(models.Model):

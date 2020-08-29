@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, ProductImage, Order, OrderItem
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 
 
@@ -63,8 +63,15 @@ class OrderAdmin(admin.ModelAdmin):
 		obj.save()
 
 
+class ProductAvailabilityAdmin(admin.ModelAdmin):
+	list_display = ("productName", "quantity", "size")
+	list_filter = ("productName",)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Category)
+admin.site.register(Size)
+admin.site.register(ProductAvailability, ProductAvailabilityAdmin)
 admin.site.site_title = "HOODIYALKO"
 admin.site.site_header = "HOODIYALKO"
