@@ -71,8 +71,9 @@ class Order(models.Model):
 	customer_phone = models.CharField("Телефон", max_length=20)
 	delivery = models.CharField("Способ доставки", max_length=50, null=True, blank=True)
 	city = models.CharField("Город", max_length=20, null=True, blank=True)
-	post_office = models.CharField("Почтовое отделение", max_length=50, null=True, blank=True)
-	address = models.CharField("Адрес доставки", max_length=20, null=True, blank=True)
+	post_office = models.CharField("Почтовое отделение", max_length=250, null=True, blank=True)
+	address = models.CharField("Адрес доставки", max_length=250, null=True, blank=True)
+	comment = models.CharField("Комментарий", max_length=250, null=True, blank=True)
 	status = models.IntegerField("Статус", choices=STATUS_CHOICE, default=1)
 
 	class Meta:

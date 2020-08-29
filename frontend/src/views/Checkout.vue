@@ -61,7 +61,6 @@
       <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
         <autocomplete
-            class="autocomplete"
             :search="search"
             @submit="setCity"
         ></autocomplete>
@@ -85,7 +84,7 @@
       </div>
       <div class="description-title">Комментарии</div>
       <div class="description-content">
-        <input v-model="descriptions">
+        <input v-model="comment">
       </div>
       <div class="button-block" v-if="selected !== 'Другие'">
         <button @click="toCard" class="continue-shopping">Return to card</button>
@@ -119,7 +118,7 @@
                 postOffice: '',
                 phone: '',
                 email: '',
-                descriptions: '',
+                comment: '',
                 invalidName: false,
                 invalidEmail: false,
                 invalidPhone: false
@@ -151,7 +150,7 @@
                     'city': this.city,
                     'post-office': this.postOffice,
                     'others': this.address,
-                    'descriptions': this.descriptions
+                    'comment': this.comment
                 };
                 const response = await post("order", order);
                 this.invalidName = !this.$v.userName.required;
@@ -299,8 +298,7 @@
   }
 
   input,
-  .warehouse,
-  .autocomplete {
+  .warehouse {
     align-self: center;
     width: 100%;
     height: 100%;
@@ -309,6 +307,15 @@
     outline: none;
     border: 1px solid #bbb;
     border-radius: 5px;
+  }
+
+  .description-content input {
+    padding-left: 10px;
+  }
+
+  textarea {
+    padding-left: 10px;
+    padding-top: 10px;
   }
 
   .invalid {
@@ -332,6 +339,22 @@
     color: rgb(80, 80, 80);
     background-color: white;
     padding-left: 1%;
+  }
+
+  input,
+  select,
+  textarea {
+    background-repeat:no-repeat;
+    background-position:12px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color:rgba(0,0,0,.12);
+    background-color:#fff;
+    outline:none;
+    box-shadow:0 2px 2px rgba(0,0,0,.16);
   }
 
   .description {
@@ -388,6 +411,10 @@
     margin: 0 5px
   }
 
+  /*autocomplete*****************************************************************************/
+.new-post-city div {
+  width: 100%;
+}
   /*media queries*****************************************************************************/
   @media screen and (max-width: 960px) {
     h1 {

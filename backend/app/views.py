@@ -2,10 +2,9 @@ import os
 import json
 import datetime
 from django.shortcuts import render
-from app import novaposhta_api
+from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from .models import ProductImage, Product, Order, OrderItem, Category
-
 
 
 def products(request):
@@ -62,8 +61,9 @@ def order(request):
 		customer_phone=order_content["phone"],
 		delivery=order_content["delivery"],
 		city=order_content["city"],
-		post_office=order_content["warehouse"],
-		address=order_content["others"]
+		post_office=order_content["post-office"],
+		address=order_content["others"],
+		comment=order_content["comment"]
 	)
 	order.save()
 	order_total_sum = 0
@@ -89,16 +89,16 @@ def order(request):
 
 
 def novaposhta_api_city(request):
-    name = request.GET.get('name', '')
-    result = novaposhta_api.get_city(name)
-    return HttpResponse(json.dumps(result), content_type='application/json')
+	name = request.GET.get('name', '')
+	result = get_city(name)
+	return HttpResponse(json.dumps(result), content_type='application/json')
 
 
 def novaposhta_api_warehouse(request):
-    city_id = request.GET.get('city_id', None)
-    if city_id is None:
-        result = []
-    else:
-        name = request.GET.get('name', '')
-        result = novaposhta_api.get_warehouses(city_id, name)
-    return HttpResponse(json.dumps(result), content_type='application/json')
+	city_id = request.GET.get('city_id', None)
+	if city_id is None:
+		result = []
+	else:
+		name = request.GET.get('name', '')
+		result = get_warehouses(city_id, name)
+	return HttpResponse(json.dumps(result), content_type='application/json')
