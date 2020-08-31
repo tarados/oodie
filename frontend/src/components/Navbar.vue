@@ -1,10 +1,10 @@
 <template>
   <div class="navbar">
-    <div class="container-nav ">
+    <div class="container-nav">
       <div class="nav-header">
         <div class="contact-info">
           <div class="contact-phone">
-            <img src="../assets/phone.jpg">
+            <img src="../assets/phone.jpg" />
             <p>+380507204066</p>
           </div>
           <div class="contact-email">
@@ -14,80 +14,77 @@
         <div class="card-hamburger">
           <div class="card" v-show="visibleCard">
             <router-link :to="{name: 'Card'}">
-              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart"
-                   viewBox="0 0 37 40">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                role="presentation"
+                class="icon icon-cart"
+                viewBox="0 0 37 40"
+              >
                 <path
-                    d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path>
+                  d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"
+                />
               </svg>
             </router-link>
-            <div class="circle"
-                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
-                 v-text="this.$store.state.productsStore.cardProducts.length"
-            >
-            </div>
+            <div
+              class="circle"
+              v-show="this.$store.state.productsStore.cardProducts.length > 0"
+              v-text="this.$store.state.productsStore.cardProducts.length"
+            ></div>
           </div>
           <div class="item hamburger"></div>
-          <Hamburger/>
+          <Hamburger />
         </div>
       </div>
       <div class="logo">
-        <Logo/>
+        <Logo />
       </div>
       <div class="link">
         <div class="linkList">
-          <a href="/">
+          <a class="hoodiyalko" href="/">
             <span>главная</span>
           </a>
-          <router-link
-              :to="{name: 'Brands'}"
-          >
+          <router-link :to="{name: 'Brands'}">
             <span>о нас</span>
           </router-link>
           <select v-model="selected">
-            <option disabled value="">
+            <option disabled value>
               <span>бренды друзья</span>
             </option>
-            <option v-for="(option, index) in options" :key="index">
-              {{option}}
-            </option>
+            <option v-for="(option, index) in options" :key="index">{{option}}</option>
           </select>
-          <router-link
-              :to="{name: 'Brands'}"
-          >
+          <router-link :to="{name: 'Brands'}">
             <span>контакты</span>
           </router-link>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import Hamburger from "./Hamburger";
-import Logo from "./Logo"
+import Logo from "./Logo";
 
 export default {
-  name: 'NavBar',
+  name: "NavBar",
   props: {
-    visibleCard: Boolean
+    visibleCard: Boolean,
   },
   components: {
     Hamburger,
-    Logo
+    Logo,
   },
   data() {
     return {
-      selected: '',
-      options: ['a', 's', 'd'],
-      hamburger: false
-    }
+      selected: "",
+      options: ["a", "s", "d"],
+      hamburger: false,
+    };
   },
   methods: {},
-  mounted() {
-
-  }
-}
+  mounted() {},
+};
 </script>
 
 <style scoped>
@@ -96,7 +93,7 @@ export default {
 }
 
 .container-nav {
-  height: 33rem;
+  height: 24.57rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -109,12 +106,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 5rem;
+  height: 3.66rem;
   background-color: #c7d9d8;
 }
 
 .contact-info {
-  margin: 1%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -153,12 +149,18 @@ span {
 }
 
 .link {
-  height: 15%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   flex: auto;
+}
+
+.linkList {
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .link a {
@@ -174,7 +176,7 @@ select {
   border: none;
   background-color: white;
   text-transform: uppercase;
-  font-size: 1.1875rem;
+  font-size: 1rem;
   color: rgb(61, 66, 70);
 }
 
@@ -219,7 +221,22 @@ select {
 }
 
 /*media queries*************************************************************************************/
+
+@media screen and (max-width: 1024px) {
+  .linkList {
+    width: auto;
+  }
+
+  .container-nav {
+    height: 13.7rem;
+  }
+}
+
 @media screen and (max-width: 750px) {
+  .container-nav {
+    height: 23.3rem;
+  }
+
   .contact-info {
     flex-flow: column;
   }
@@ -243,11 +260,6 @@ select {
   .linkList {
     display: none;
   }
-
-  .card {
-    margin-right: 0;
-    margin-left: 50%;
-  }
 }
 
 @media screen and (max-width: 450px) {
@@ -255,22 +267,19 @@ select {
     width: 10vmax;
   }
 
-  .card {
-    margin-left: 40%;
+  .container-nav {
+    height: 11rem;
+  }
+
+  .nav-header {
+    justify-content: flex-start;
   }
 }
 
 @media screen and (max-width: 375px) {
-  .card {
-    margin-left: 35%;
-  }
 }
 
-
 @media screen and (max-width: 360px) {
-  .card {
-    margin-left: 30%;
-  }
 }
 
 @media screen and (max-width: 325px) {
@@ -282,11 +291,22 @@ select {
     width: 10vmax;
   }
 
-  @media screen and (max-width: 280px) {
-    .card {
-      margin-left: 20%;
-    }
+  .container-nav {
+    height: 10rem;
   }
 }
 
+@media screen and (max-width: 280px) {
+  .nav-header {
+    justify-content: flex-start;
+  }
+
+  .card-hamburger {
+    justify-content: space-around;
+  }
+
+  .card {
+    margin-left: 2rem;
+  }
+}
 </style>
