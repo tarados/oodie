@@ -7,10 +7,8 @@
         <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
-    <div class="header">
-      <h2>Top Selling Products</h2>
-    </div>
-    <ProductsList thumbnail="large" :category-id="categoryId" />
+    <div class="header"></div>
+    <ProductsList thumbnail="large" :category-id="categoryId"/>
   </div>
 </template>
 
@@ -95,16 +93,12 @@
   }
 
   .header {
+    height: 6rem;
     margin-top: 2rem;
+    background-image: url("../assets/info.jpg");
+    background-repeat: no-repeat;
   }
 
-  .header h2 {
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    font-size: 1.4375em;
-  }
 
   /*section two -  collections oodie******************************************************************/
   .collections {
@@ -137,9 +131,11 @@
 
   /*media queries********************************************************************************************/
 
-  @media screen and (max-width: 960px) {
-    .header h2 {
-      font-size: calc(3.125vw + 10px);
+  @media screen and (max-width: 1024px) {
+    .header {
+      background-size: contain;
+      height: 4rem;
+      margin: 2%;
     }
   }
 
@@ -150,7 +146,11 @@
   }
 
   @media screen and (max-width: 420px) {
-
+    .header {
+      background-size: contain;
+      height: 2rem;
+      margin: 2%;
+    }
   }
 
   @media screen and (max-width: 375px) {

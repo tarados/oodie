@@ -48,10 +48,22 @@ class Product(models.Model):
 
 	get_image.short_description = "Первое изображение"
 
+
 	def __str__(self):
 		return self.title
 
+	def availability_info(self):
+		availabilities = ProductAvailability.objects.filter(productName=self)
+		availability_size_list = []
+		for availability in availabilities:
+			availability_size_list.append(
+				'%s - %s' % (availability.size.name, availability.quantity)
+			)
+		return '\n'.join(availability_size_list)
 
+	availability_info.short_description = "Размеры в наличии"
+
+# todo productName change
 class ProductAvailability(models.Model):
 	size = models.ForeignKey(Size, verbose_name=u'размер', null=True, on_delete=models.CASCADE)
 	productName = models.ForeignKey(Product, verbose_name=u'название модели', null=True, on_delete=models.CASCADE)

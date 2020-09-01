@@ -3,7 +3,7 @@
     <div class="wrapper">
       <Navbar class="nav" :visible-card="visible"/>
       <router-view class="content" @cardVisible="cardVisible"/>
-      <Footer />
+      <Footer/>
     </div>
   </div>
 </template>
@@ -45,6 +45,9 @@
   }
 
   .wrapper {
+    /*min-height: 100%;*/
+    /*display: grid;*/
+    /*grid-template: minmax(100px, auto) 1fr minmax(70px, auto) / 1fr;*/
     display: flex;
     flex-flow: column;
     flex: 1;

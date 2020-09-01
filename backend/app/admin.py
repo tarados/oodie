@@ -21,12 +21,18 @@ class ProductImageInline(admin.TabularInline):
 	extra = 0
 
 
+class ProductAvailabilityInline(admin.TabularInline):
+	model = ProductAvailability
+	extra = 0
+
+
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ('title', 'price', 'category', 'get_image', 'description', 'hidden')
+	list_display = ('title', 'price', 'category', 'get_image', 'description', 'hidden', 'availability_info')
 	list_filter = ['category']
 	list_editable = ['hidden']
 	inlines = [
 		ProductImageInline,
+		ProductAvailabilityInline
 	]
 
 	def has_add_permission(cls, request):
