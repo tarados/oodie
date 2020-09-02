@@ -14,6 +14,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Conv_Engravers Gothic BT';
+    src: url('../assets/fonts/Engravers Gothic BT.eot');
+    src: local('☺'), url('../assets/fonts/Engravers Gothic BT.woff') format('woff'), url('../assets/fonts/Engravers Gothic BT.ttf') format('truetype'), url('../assets/fonts/Engravers Gothic BT.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --primary-color: rgba(13, 110, 139, 0.1);
     --overlay-color: rgba(24, 39, 51, 0.55);
@@ -27,7 +35,7 @@
 }
 
 body {
-    font-family: 'montreal-serialmedium', sans-serif;
+    font-family: 'Conv_Engravers Gothic BT', sans-serif;
 }
 
 h1, h3, h4, h5, h6, span {
