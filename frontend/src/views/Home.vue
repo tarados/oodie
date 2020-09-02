@@ -97,6 +97,7 @@
     margin-top: 2rem;
     background-image: url("../assets/info.jpg");
     background-repeat: no-repeat;
+    background-size: cover;
   }
 
 
