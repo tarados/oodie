@@ -4,7 +4,7 @@ import datetime
 from django.shortcuts import render
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
-from .models import ProductImage, Product, Order, OrderItem, Category
+from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
 
 
 def products(request):
@@ -44,6 +44,8 @@ def product(request, product_id):
 		'id': prod.id,
 		'title': prod.title,
 		'price': prod.price,
+		'category': prod.category_id,
+		'availability': prod.availability_dict(),
 		'new_price': prod.new_price,
 		'description': prod.description,
 		'image_list': images_url

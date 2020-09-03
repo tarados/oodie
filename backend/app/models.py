@@ -48,25 +48,34 @@ class Product(models.Model):
 
 	get_image.short_description = "Первое изображение"
 
-
 	def __str__(self):
 		return self.title
 
+	def availability_dict(self):
+		availabilities = ProductAvailability.objects.filter(product=self)
+		availability_list = []
+		for availability in availabilities:
+			availability_list.append({
+				'size': availability.size.name,
+				'quantity': availability.quantity
+			})
+		return availability_list
+
 	def availability_info(self):
-		availabilities = ProductAvailability.objects.filter(productName=self)
+		availabilities = ProductAvailability.objects.filter(product=self)
 		availability_size_list = []
 		for availability in availabilities:
 			availability_size_list.append(
 				'%s - %s' % (availability.size.name, availability.quantity)
 			)
-		return '\n'.join(availability_size_list)
+		return ', '.join(availability_size_list)
 
 	availability_info.short_description = "Размеры в наличии"
 
-# todo productName change
+
 class ProductAvailability(models.Model):
 	size = models.ForeignKey(Size, verbose_name=u'размер', null=True, on_delete=models.CASCADE)
-	productName = models.ForeignKey(Product, verbose_name=u'название модели', null=True, on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, verbose_name=u'название модели', null=True, on_delete=models.CASCADE)
 	quantity = models.CharField(max_length=10, verbose_name='Количество', null=True)
 
 	class Meta:
@@ -74,7 +83,7 @@ class ProductAvailability(models.Model):
 		verbose_name_plural = u'наличие товаров'
 
 	def __str__(self):
-		product = Product(id=self.productName).title
+		product = Product(id=self.product).title
 		return product
 
 

@@ -44,7 +44,24 @@
         <div class="linkList-item">
           <router-link :to="{name: 'Brands'}">о нас</router-link>
         </div>
-        <Dropdown title="Бренды друзья" :items="options"/>
+        <div class="linkList-item">
+          <router-link :to="{name: 'Brands'}">бренды друзья</router-link>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+               stroke-linecap="round" stroke-linejoin="round" @click="isOpen = !isOpen">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <path d="M9 14l3 3l3 -3"/>
+          </svg>
+          <transition name="fade" appear>
+            <div class="sub-menu" v-if="isOpen">
+              <div
+                  class="menu-item"
+                  v-for="(item, index) in options" :key="index"
+              >
+                <a :href="item.link">{{ item.title }}</a>
+              </div>
+            </div>
+          </transition>
+        </div>
         <div class="linkList-item">
           <router-link :to="{name: 'Brands'}">контакты</router-link>
         </div>
@@ -56,7 +73,6 @@
 <script>
 import Hamburger from "./Hamburger";
 import Logo from "./Logo";
-import Dropdown from "@/components/Dropdown";
 
 export default {
   name: "NavBar",
@@ -65,36 +81,31 @@ export default {
   },
   components: {
     Hamburger,
-    Logo,
-    Dropdown
+    Logo
   },
   data() {
     return {
       selected: "",
-      options: [
-        {
-          "title": "a",
-          "link": "#"
-        },
-        {
-          "title": "b",
-          "link": "#"
-        },
-        {
-          "title": "c",
-          "link": "#"
-        }
-      ],
+      isOpen: false,
+      options: [],
       hamburger: false,
     };
   },
-  methods: {},
+  computed: {},
+  methods: {
+    categories() {
+      this.$store.getters.allCategories.forEach(item => {
+        this.options.push(item);
+      });
+    }
+  },
   mounted() {
+    this.categories();
   },
 };
 </script>
 
-<style>
+<style scoped>
 .navbar {
   border-bottom: 1px solid grey;
 }
@@ -163,7 +174,6 @@ span {
 }
 
 .linkList .linkList-item {
-  color: #3d4246;
   padding: 10px 20px;
   position: relative;
   text-align: center;
@@ -178,9 +188,49 @@ span {
 }
 
 .linkList .linkList-item a {
+  color: #3d4246;
   text-transform: uppercase;
   text-decoration: none;
 }
+
+.linkList .linkList-item svg {
+  width: 18px;
+  margin-left: 10px;
+}
+
+.linkList-item svg:hover {
+  fill: #c7d9d8;
+}
+
+.linkList-item .sub-menu {
+  position: absolute;
+  background-color: #c7d9d8;
+  top: calc(100% + 0.5rem);
+  /*transform: translateX(-50%);*/
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  padding: 3%;
+}
+
+.linkList-item .sub-menu .menu-item {
+  margin: 3%;
+}
+
+.linkList-item .sub-menu .menu-item a {
+  color: white;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .5s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0.5;
+}
+
 
 .icon {
   display: inline-block;

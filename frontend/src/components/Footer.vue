@@ -136,21 +136,23 @@ p {
 }
 
 @media screen and (max-width: 450px) {
+  p,
   h2 {
-    font-size: calc((100vw - 30rem) / 50 * 0.5 + 1rem);
+    font-size: 0.55rem;
+    margin-bottom: 5%;
+  }
+
+  .footer-item {
+    justify-content: center;
   }
 
   .circl {
-    margin: 4%;
-    width: 2rem;
-    height: 2rem;
+    margin: 3%;
   }
 
-  img {
-    width: 1rem;
-    margin-top: 25%;
+  .hello-instagram {
+    height: 4.15rem;
   }
-
 }
 
 @media screen and (max-width: 320px) {

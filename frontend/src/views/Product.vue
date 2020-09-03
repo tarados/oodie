@@ -36,10 +36,10 @@
           </div>
         </div>
         <div class="item right">
-          <div class="item-right">
+          <div class="product-title">
             <h1>{{ this.currentProduct.title }}</h1>
           </div>
-          <div class="item-right">
+          <div class="product-price">
             <div class="price">
               <div class="current" v-show="!this.currentProduct.new_price">
                 ${{ this.currentProduct.price }}
@@ -49,12 +49,23 @@
               </div>
             </div>
           </div>
-          <div class="item-right">
+          <div class="size-block">
+            <div
+                class="square"
+                v-for="(availability, index) in availabilities" :key="index"
+            >
+              {{ availability.size }}
+            </div>
+          </div>
+          <div class="size-table">
+            <router-link :to="{name: 'Brands'}">Таблица размеров</router-link>
+          </div>
+          <div class="button-block">
             <div class="btn-prd">
               <button class="btn" @click="toCard">add to card</button>
             </div>
           </div>
-          <div class="item-right">
+          <div class="product-description">
             <div class="description">
               {{ this.currentProduct.description }}
             </div>
@@ -76,6 +87,7 @@ export default {
   data() {
     return {
       imageIndex: 0,
+      availabilities: [],
       visibleCard: true,
       slides: [],
       breakpoints: {
@@ -103,6 +115,7 @@ export default {
           'image': image
         });
       });
+      this.availabilities = response.product.availability;
       this.$store.commit('setCurrentProduct', response.product);
     },
     showImage(index) {
@@ -197,7 +210,9 @@ export default {
 }
 
 .right {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .description {
@@ -232,6 +247,45 @@ export default {
 .btn-prd {
   text-align: center;
   margin-top: 3rem;
+}
+
+.size-block {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 4rem;
+  margin-top: 5%;
+}
+
+.size-block .square {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid grey;
+  margin: 1% 2.5% 1% 1%;
+}
+
+.size-table {
+  height: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.size-table a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.product-price {
+
 }
 
 /*media queries**************************************************************************/

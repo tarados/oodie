@@ -37,7 +37,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 	def has_add_permission(cls, request):
 		''' remove add and save and add another button '''
-		return False
+		return True
 
 	def change_view(self, request, object_id, extra_context=None):
 		''' customize add/edit form '''
@@ -70,8 +70,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class ProductAvailabilityAdmin(admin.ModelAdmin):
-	list_display = ("productName", "quantity", "size")
-	list_filter = ("productName",)
+	list_display = ("product", "quantity", "size")
+	list_filter = ("product",)
 
 
 admin.site.register(Product, ProductAdmin)
