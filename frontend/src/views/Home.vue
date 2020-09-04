@@ -7,7 +7,17 @@
         <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>
       </div>
     </header>
-    <div class="header"></div>
+    <div class="info">
+      <div class="icon-size">
+        <img src="../assets/size.png">
+      </div>
+      <div class="icon-cat">
+        <img src="../assets/cat.png">
+      </div>
+      <div class="icon-delivery">
+        <img src="../assets/delivery.png">
+      </div>
+    </div>
     <ProductsList thumbnail="large" :category-id="categoryId"/>
   </div>
 </template>
@@ -128,6 +138,18 @@
   .item_collections_image {
     max-width: 436px;
     max-height: 545px;
+  }
+
+  .info {
+    height: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .info div img {
+    width: 2rem;
   }
 
   /*media queries********************************************************************************************/
