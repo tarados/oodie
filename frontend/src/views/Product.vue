@@ -36,6 +36,11 @@
           </div>
         </div>
         <div class="item right">
+          <div
+              class="product-category"
+          >
+            бренд: {{category}}
+          </div>
           <div class="product-title">
             <h1>{{ this.currentProduct.title }}</h1>
           </div>
@@ -87,6 +92,7 @@ export default {
   data() {
     return {
       imageIndex: 0,
+      category: '',
       availabilities: [],
       visibleCard: true,
       slides: [],
@@ -133,10 +139,14 @@ export default {
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
       this.$router.push({name: 'Card'});
+    },
+    currentCategory() {
+      this.category = this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
     }
   },
   mounted() {
     this.loadProduct(this.$route.params.id);
+    this.currentCategory();
   }
 }
 </script>
@@ -284,9 +294,15 @@ export default {
   cursor: pointer;
 }
 
-.product-price {
-
+.product-category {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
+
+/*.product-category span {*/
+/*  font-size: 1.1rem;*/
+/*}*/
 
 /*media queries**************************************************************************/
 @media screen and (max-width: 2800px) {
