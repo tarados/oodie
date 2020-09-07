@@ -1,5 +1,9 @@
 <template>
   <div>
+    <Breadcrumbs
+        :categories="this.$store.getters.allCategories"
+        :selected-category-id="activeCategoryId"
+    />
     <div class="wrapper-product">
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
@@ -36,23 +40,28 @@
           </div>
         </div>
         <div class="item right">
-          <div
-              class="product-category"
-          >
-            бренд: {{ category }}
-          </div>
-          <div class="product-title">
-            <h1>{{ this.currentProduct.title }}</h1>
+          <div class="product-category">
+            <span>бренд: </span>
+            <div>{{ this.currentCategory }}</div>
           </div>
           <div class="product-price">
             <div class="price">
-              <div class="current" v-show="!this.currentProduct.new_price">
+              <div class="current" v-if="this.currentProduct.new_price">
                 ${{ this.currentProduct.price }}
               </div>
-              <div :class="{ markdown: !currentProduct.new_price}" class="red">
-                {{ this.currentProduct.new_price }} грн Sale
+              <div v-else>
+                ${{ this.currentProduct.price }}
+              </div>
+              <div
+                  :class="{ markdown: !currentProduct.new_price}"
+                  class="red"
+              >
+                {{ this.currentProduct.new_price }} грн
               </div>
             </div>
+          </div>
+          <div class="product-title">
+            <h1>{{ this.currentProduct.title }}</h1>
           </div>
           <div class="size-block">
             <div
@@ -63,12 +72,15 @@
             </div>
           </div>
           <div class="size-table">
-            <router-link :to="{name: 'Brands'}">Таблица размеров</router-link>
+            <router-link
+                :to="{name: 'Table'}"
+            >
+              <small>Таблица размеров</small>
+            </router-link>
           </div>
           <div class="button-block">
-            <div class="btn-prd">
-              <button class="btn" @click="toCard">add to card</button>
-            </div>
+            <div class="btn" @click="toCard">в корзину</div>
+            <button class="btn" @click="toCard">купить в один клик</button>
           </div>
           <div class="product-description">
             <div class="description">
@@ -86,6 +98,7 @@
 import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default {
   name: "Product",
@@ -105,11 +118,25 @@ export default {
   },
   components: {
     VueperSlide,
-    VueperSlides
+    VueperSlides,
+    Breadcrumbs
   },
   computed: {
     currentProduct() {
       return this.$store.state.productsStore.currentProduct
+    },
+    currentCategory() {
+      return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
+    },
+    activeCategoryId() {
+      let a = 0;
+      const b = this.slug;
+      this.$store.getters.allCategories.forEach(function (item) {
+        if (item.slug === b) {
+          a = item.id
+        }
+      });
+      return a
     }
   },
   methods: {
@@ -139,9 +166,6 @@ export default {
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
       this.$router.push({name: 'Card'});
-    },
-    currentCategory() {
-      this.category = this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
     }
   },
   mounted() {
@@ -238,25 +262,19 @@ export default {
 }
 
 .btn {
-  width: 80%;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: normal;
-  font-size: 14px;
+  font-size: 1rem;
   border: none;
-  border-radius: 3px;
-  background-color: #ca492d;
+  border-radius: 0;
+  background-color: black;
   color: white;
   padding: 0.75rem 1.5rem;
   margin-top: 1rem;
   text-decoration: none;
   transition: opacity 1s ease-in;
-}
-
-.btn-prd {
-  text-align: center;
-  margin-top: 3rem;
 }
 
 .size-block {
@@ -290,19 +308,42 @@ export default {
 }
 
 .size-table a {
-  text-decoration: none;
   cursor: pointer;
+  color: #908383;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .product-category {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: start;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+
 }
 
-/*.product-category span {*/
-/*  font-size: 1.1rem;*/
-/*}*/
+.product-category span {
+  font-size: 1rem;
+  color: #d3d3d3;
+}
+
+.product-category div {
+  font-size: 1.5rem;
+  margin-left: 1%;
+}
+
+.current {
+  text-decoration: line-through;
+}
+
+.button-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
 
 /*media queries**************************************************************************/
 @media screen and (max-width: 2800px) {

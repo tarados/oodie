@@ -45,6 +45,12 @@ const routes = [
         name: 'Product',
         meta: {layout: 'main'},
         component: () => import('../views/Product')
+    },
+    {
+        path: '/products/:id/table-size',
+        name: 'Table',
+        meta: {layout: 'empty'},
+        component: () => import('../views/Table')
     }
 
 ];

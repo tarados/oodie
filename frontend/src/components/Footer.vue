@@ -13,13 +13,19 @@
           <div class="social-icon">
           <p>Подписывайтесь на нас:</p>
           <div class="circl">
-            <img src="../assets/facebook.png">
+            <a href="https://www.facebook.com/hoodiyalko/">
+              <img src="../assets/facebook.png">
+            </a>
           </div>
           <div class="circl">
-            <img src="../assets/instagram.png">
+            <a href="https://www.instagram.com/hoodiyalko/">
+              <img src="../assets/instagram.png">
+            </a>
           </div>
           <div class="circl">
-            <img src="../assets/tik-tok.png">
+            <a href="https://www.tiktok.com/hoodiyalko/">
+              <img src="../assets/tik-tok.png">
+            </a>
           </div>
           </div>
         </div>

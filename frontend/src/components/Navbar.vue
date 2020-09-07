@@ -71,6 +71,7 @@
               <div
                   class="menu-item"
                   v-for="(item, index) in this.$store.getters.allCategories" :key="index"
+                  v-show="item.slug !== 'oodie'"
               >
                 <router-link :to="{name: 'Brand', params: {slug: item.slug}}">{{ item.title }}</router-link>
               </div>
@@ -217,7 +218,7 @@ span {
 
 .linkList-item svg:hover {
   fill: #c7d9d8;
-  /*transition: all .5s ease-out;*/
+  transition: all .5s ease-out;
 }
 
 .linkList-item .sub-menu {
