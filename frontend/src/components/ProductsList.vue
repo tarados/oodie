@@ -2,15 +2,18 @@
   <div class="wrapper">
     <div class="row">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
-                   v-for="product in prodList" :key="product.title"
+                   v-for="(product, index) in prodList" :key="index"
                    :class="{ product: large, item_sm: small}"
       >
         <img :src="product.image">
-        <h4>{{ product.title }}</h4>
-        <div class="price-box">
+        <h4 v-show="large">{{ product.title }}</h4>
+        <div class="price-box" v-show="large">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
           <span v-else>{{ product.price }} грн</span>
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
+        </div>
+        <div class="category-title" v-show="small">
+          {{ product.categoryTitle }}
         </div>
       </router-link>
     </div>
@@ -32,13 +35,17 @@ export default {
   },
   data() {
     return {
+      category: '',
       large: true,
       small: false
     }
   },
   computed: {
-    ...mapGetters(["allProducts"]),
+    ...mapGetters(["allProducts", "allCategories"]),
     prodList() {
+      this.allProducts.forEach(item => {
+        item.categoryTitle = this.allCategories.find(category => category.id === item.category).title;
+      });
       if (this.categoryId) {
         return this.allProducts.filter(product => product.category === this.categoryId);
       } else {
@@ -70,12 +77,12 @@ export default {
 }
 
 h4 {
-  margin-top: 1%;
-  margin-bottom: 0;
+  margin: 2%;
+  text-align: center;
 }
 
 .row {
-  max-width: 1200px;
+  max-width: 1580px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -113,18 +120,29 @@ h4 {
   width: 100%;
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 span.old {
   color: red;
-  flex-grow: 25;
 }
 
 .no-current {
   text-decoration: line-through;
-  flex-grow: 1;
+  margin: 3%;
 }
+
+.category-title {
+  width: 80%;
+  height: 3.5vmax;
+  display: block;
+  position: relative;
+  margin-top: -15%;
+  margin-left: 10%;
+  background-color: #c7d9d8;
+  color: white;
+}
+
 
 /*media queries*/
 @media screen and (max-width: 1200px) {
