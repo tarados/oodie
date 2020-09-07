@@ -39,7 +39,7 @@
           <div
               class="product-category"
           >
-            бренд: {{category}}
+            бренд: {{ category }}
           </div>
           <div class="product-title">
             <h1>{{ this.currentProduct.title }}</h1>

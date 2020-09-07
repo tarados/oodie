@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     closeHamburger() {
-      console.log(this.checked);
       this.checked = false;
     },
   },

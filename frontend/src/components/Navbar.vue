@@ -40,14 +40,29 @@
         <Logo/>
       </div>
       <div class="linkList">
-        <div class="linkList-item"><a href="/">главная</a></div>
         <div class="linkList-item">
-          <router-link :to="{name: 'Brands'}">о нас</router-link>
+          <router-link :to="{name: 'Home'}"
+          >
+            главная
+          </router-link>
         </div>
         <div class="linkList-item">
-          <router-link :to="{name: 'Brands'}">бренды друзья</router-link>
+          <router-link :to="{name: 'Brands'}"
+          >
+            о нас
+          </router-link>
+        </div>
+        <div class="linkList-item"
+             @mouseover="mouseover"
+             @mouseleave="mouseleave"
+        >
+          <router-link
+              :to="{name: 'Brands'}"
+          >
+            бренды друзья
+          </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-               stroke-linecap="round" stroke-linejoin="round" @click="isOpen = !isOpen">
+               stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z"/>
             <path d="M9 14l3 3l3 -3"/>
           </svg>
@@ -55,9 +70,9 @@
             <div class="sub-menu" v-if="isOpen">
               <div
                   class="menu-item"
-                  v-for="(item, index) in options" :key="index"
+                  v-for="(item, index) in this.$store.getters.allCategories" :key="index"
               >
-                <a :href="item.link">{{ item.title }}</a>
+                <router-link :to="{name: 'Brand', params: {slug: item.slug}}">{{ item.title }}</router-link>
               </div>
             </div>
           </transition>
@@ -93,16 +108,18 @@ export default {
   },
   computed: {},
   methods: {
-    categories() {
-      this.$store.getters.allCategories.forEach(item => {
-        this.options.push(item);
-      });
+    mouseover: function () {
+      this.isOpen = true
+    },
+    mouseleave: function () {
+      this.isOpen = false
     }
   },
   mounted() {
-    this.categories();
-  },
-};
+
+  }
+}
+
 </script>
 
 <style scoped>
@@ -200,6 +217,7 @@ span {
 
 .linkList-item svg:hover {
   fill: #c7d9d8;
+  /*transition: all .5s ease-out;*/
 }
 
 .linkList-item .sub-menu {
@@ -207,7 +225,7 @@ span {
   background-color: #c7d9d8;
   top: calc(100% + 0.5rem);
   /*transform: translateX(-50%);*/
-  width: max-content;
+  width: 80%;
   display: flex;
   flex-direction: column;
   padding: 3%;
@@ -217,18 +235,22 @@ span {
   margin: 3%;
 }
 
+.linkList-item .sub-menu .menu-item:hover {
+  opacity: 0.5;
+}
+
 .linkList-item .sub-menu .menu-item a {
   color: white;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all .5s ease-out;
+  transition: all .2s ease-out;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 
@@ -336,7 +358,7 @@ span {
 
 @media screen and (max-width: 325px) {
   p {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
   }
 
   img {
