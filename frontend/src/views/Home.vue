@@ -114,14 +114,6 @@ export default {
   opacity: 0.7;
 }
 
-.header {
-  height: 6rem;
-  margin-top: 2rem;
-  background-image: url("../assets/info.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 
 /*section two -  collections oodie******************************************************************/
 .collections {

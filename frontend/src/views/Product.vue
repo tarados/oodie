@@ -127,7 +127,12 @@ export default {
       return this.$store.state.productsStore.currentProduct
     },
     currentCategory() {
-      return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
+      try {
+        return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
+      } catch (TypeError) {
+        return ''
+      }
+
     }
   },
   methods: {
