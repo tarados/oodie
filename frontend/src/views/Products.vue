@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       visibleCard: true,
-      category: '',
       categoryId: null,
       slug: ''
     }

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuelidate from "vuelidate"
 import Autocomplete from '@trevoreyre/autocomplete-vue'
-import VueBreadcrumbs from 'vue-2-breadcrumbs'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -11,7 +10,6 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(Autocomplete);
-Vue.use(VueBreadcrumbs);
 
 new Vue({
   router,

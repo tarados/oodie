@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs />
+    <Breadcrumbs :current-category="this.currentCategory" :current-product="this.currentProduct.title" />
     <div class="wrapper-product">
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
@@ -63,7 +63,9 @@
           <div class="size-block">
             <div
                 class="square"
+                :class="{selected: sizeSelected}"
                 v-for="(availability, index) in availabilities" :key="index"
+                @click="select(index)"
             >
               {{ availability.size }}
             </div>
@@ -95,20 +97,17 @@
 import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default {
   name: "Product",
   data() {
     return {
-      breadcrumbs: [
-        { name:'Black Book', url:'/' },
-        { name:'Property Research', url:'/property-research' },
-        { name:'Properties', url:'/property-research/properties' },
-        { name:'Jefferson Apartments', url:'/property-research/properties/jefferson-apartments' }
-      ],
       imageIndex: 0,
       category: '',
       availabilities: [],
+      availability: {},
+      sizeSelected: false,
       visibleCard: true,
       slides: [],
       breakpoints: {
@@ -120,7 +119,8 @@ export default {
   },
   components: {
     VueperSlide,
-    VueperSlides
+    VueperSlides,
+    Breadcrumbs
   },
   computed: {
     currentProduct() {
@@ -128,16 +128,6 @@ export default {
     },
     currentCategory() {
       return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
-    },
-    activeCategoryId() {
-      let a = 0;
-      const b = this.slug;
-      this.$store.getters.allCategories.forEach(function (item) {
-        if (item.slug === b) {
-          a = item.id
-        }
-      });
-      return a
     }
   },
   methods: {
@@ -161,17 +151,22 @@ export default {
         'title': this.currentProduct.title,
         'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         'quantity': 1,
+        'size': this.availability.size,
+        'availability': this.availability.quantity,
         'image': this.currentProduct.image_list[this.imageIndex]
       };
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
       this.$router.push({name: 'Card'});
+    },
+    select(index) {
+      this.availability = this.availabilities[index];
+      this.sizeSelected =!this.sizeSelected;
     }
   },
   mounted() {
     this.loadProduct(this.$route.params.id);
-    this.currentCategory();
   }
 }
 </script>
@@ -298,6 +293,14 @@ export default {
   height: 3rem;
   border: 1px solid grey;
   margin: 1% 2.5% 1% 1%;
+}
+
+.size-block .square:hover {
+  background-color: #7ec699;
+}
+
+.selected {
+  background-color: #7ec699;
 }
 
 .size-table {
