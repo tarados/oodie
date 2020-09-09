@@ -13,7 +13,7 @@
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
         <div class="category-title" v-show="small">
-          {{ product.categoryTitle }}
+          <span>{{ product.categoryTitle }}</span>
         </div>
       </router-link>
     </div>
@@ -136,6 +136,7 @@ span.old {
   width: 80%;
   height: 3.5vmax;
   display: block;
+  text-align: center;
   position: relative;
   margin-top: -15%;
   margin-left: 10%;
@@ -143,6 +144,9 @@ span.old {
   color: white;
 }
 
+.category-title span {
+  font-size: 3rem;
+}
 
 /*media queries*/
 @media screen and (max-width: 1200px) {

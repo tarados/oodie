@@ -43,7 +43,7 @@ const routes = [
     {
         path: '/products/:id',
         name: 'Product',
-        meta: {layout: 'main'},
+        meta: {layout: 'main', breadcrumb: 'fhsrtyhr'},
         component: () => import('../views/Product')
     },
     {

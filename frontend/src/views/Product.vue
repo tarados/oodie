@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs
-        :categories="this.$store.getters.allCategories"
-        :selected-category-id="activeCategoryId"
-    />
+    <Breadcrumbs />
     <div class="wrapper-product">
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
@@ -98,12 +95,17 @@
 import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default {
   name: "Product",
   data() {
     return {
+      breadcrumbs: [
+        { name:'Black Book', url:'/' },
+        { name:'Property Research', url:'/property-research' },
+        { name:'Properties', url:'/property-research/properties' },
+        { name:'Jefferson Apartments', url:'/property-research/properties/jefferson-apartments' }
+      ],
       imageIndex: 0,
       category: '',
       availabilities: [],
@@ -118,8 +120,7 @@ export default {
   },
   components: {
     VueperSlide,
-    VueperSlides,
-    Breadcrumbs
+    VueperSlides
   },
   computed: {
     currentProduct() {
