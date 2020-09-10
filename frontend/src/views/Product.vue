@@ -63,7 +63,6 @@
           <div class="size-block">
             <div
                 class="square"
-                :class="{selected: sizeSelected}"
                 v-for="(availability, index) in availabilities" :key="index"
                 @click="select(index)"
             >
@@ -98,13 +97,14 @@ import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
 import Breadcrumbs from "@/components/Breadcrumbs";
+import {required} from 'vuelidate/lib/validators';
 
 export default {
   name: "Product",
   data() {
     return {
       imageIndex: 0,
-      category: '',
+      size: '',
       availabilities: [],
       availability: {},
       sizeSelected: false,
@@ -116,6 +116,9 @@ export default {
         }
       }
     }
+  },
+  validations: {
+    size: {required}
   },
   components: {
     VueperSlide,
@@ -168,6 +171,18 @@ export default {
     select(index) {
       this.availability = this.availabilities[index];
       this.sizeSelected =!this.sizeSelected;
+      if (this.sizeSelected && this.$v.size.$invalid) {
+        console.log(this.$v.size.$invalid);
+        document.querySelectorAll(".square")[index].style.background = "#3CA11A";
+        this.size = this.availability.size;
+        this.sizeSelected =!this.sizeSelected;
+      } else {
+        console.log(this.$v.size.$invalid);
+        document.querySelectorAll(".square")[index].style.background = "#ffffff";
+        this.size = '';
+        this.sizeSelected = false;
+      }
+      console.log(this.sizeSelected);
     }
   },
   mounted() {
@@ -302,10 +317,7 @@ export default {
 
 .size-block .square:hover {
   background-color: #7ec699;
-}
-
-.selected {
-  background-color: #7ec699;
+  cursor: pointer;
 }
 
 .size-table {
