@@ -63,7 +63,9 @@
           <div class="size-block">
             <div
                 class="square"
-                v-for="(availability, index) in availabilities" :key="index"
+                v-for="(availability, index) in availabilities"
+                :class="{selected: index === size}"
+                :key="index"
                 @click="select(index)"
             >
               {{ availability.size }}
@@ -104,10 +106,8 @@ export default {
   data() {
     return {
       imageIndex: 0,
-      size: '',
+      size: 0,
       availabilities: [],
-      availability: {},
-      sizeSelected: false,
       visibleCard: true,
       slides: [],
       breakpoints: {
@@ -154,13 +154,14 @@ export default {
       this.imageIndex = index;
     },
     toCard() {
+      const availability = this.availabilities[this.size];
       const productToCard = {
         'id': this.currentProduct.id,
         'title': this.currentProduct.title,
         'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         'quantity': 1,
-        'size': this.availability.size,
-        'availability': this.availability.quantity,
+        'size': availability.size,
+        'availability': availability.quantity,
         'image': this.currentProduct.image_list[this.imageIndex]
       };
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
@@ -169,20 +170,7 @@ export default {
       this.$router.push({name: 'Card'});
     },
     select(index) {
-      this.availability = this.availabilities[index];
-      this.sizeSelected =!this.sizeSelected;
-      if (this.sizeSelected && this.$v.size.$invalid) {
-        console.log(this.$v.size.$invalid);
-        document.querySelectorAll(".square")[index].style.background = "#3CA11A";
-        this.size = this.availability.size;
-        this.sizeSelected =!this.sizeSelected;
-      } else {
-        console.log(this.$v.size.$invalid);
-        document.querySelectorAll(".square")[index].style.background = "#ffffff";
-        this.size = '';
-        this.sizeSelected = false;
-      }
-      console.log(this.sizeSelected);
+      this.size = index;
     }
   },
   mounted() {
@@ -364,6 +352,10 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+}
+
+.selected {
+  background-color: #5b80b2;
 }
 
 /*media queries**************************************************************************/

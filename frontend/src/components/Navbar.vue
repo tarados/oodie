@@ -13,24 +13,14 @@
         </div>
         <div class="card-hamburger">
           <div class="card" v-show="visibleCard">
-            <router-link :to="{name: 'Card'}">
-              <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  role="presentation"
-                  class="icon icon-cart"
-                  viewBox="0 0 37 40"
-              >
-                <path
-                    d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"
-                />
-              </svg>
-            </router-link>
-            <div
-                class="circle"
+            <span
+                class="item-basket"
                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
-                v-text="this.$store.state.productsStore.cardProducts.length"
-            ></div>
+            >{{this.$store.state.productsStore.cardProducts.length}}
+            </span>
+            <router-link :to="{name: 'Card'}">
+              <img src="../assets/basket.png">
+            </router-link>
           </div>
           <div class="item hamburger"></div>
           <Hamburger/>
@@ -171,7 +161,6 @@ export default {
 .card-hamburger {
   display: flex;
   flex-wrap: wrap;
-  width: 45%;
   align-items: center;
   justify-content: flex-end;
 }
@@ -269,31 +258,18 @@ span {
 
 .card {
   display: flex;
-  margin-right: 2%;
+  margin-right: 45%;
+  align-items: center;
 }
 
-.card svg {
+.card span {
+  font-size: 2rem;
+}
+
+.card img {
   color: #7b786e;
 }
 
-.circle {
-  width: 18px;
-  height: 18px;
-  background: red;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-self: center;
-  margin-bottom: 23%;
-  margin-left: -5%;
-  align-items: center;
-  color: white;
-  position: relative;
-  font-size: 12px;
-}
 
 /*media queries*************************************************************************************/
 
@@ -358,7 +334,8 @@ span {
 }
 
 @media screen and (max-width: 325px) {
-  p {
+  p,
+  .card span {
     font-size: 0.55rem;
   }
 
@@ -368,6 +345,18 @@ span {
 
   .container-nav {
     height: 10rem;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 1.5rem;
+  }
+
+  .card-hamburger {
+    margin-left: 25%;
   }
 }
 
@@ -381,7 +370,7 @@ span {
   }
 
   .card {
-    margin-left: 2rem;
+   margin-right: 0;
   }
 }
 </style>

@@ -46,6 +46,7 @@ export default {
       this.allProducts.forEach(item => {
         item.categoryTitle = this.allCategories.find(category => category.id === item.category).title;
       });
+      console.log(this.allProducts)
       if (this.categoryId) {
         return this.allProducts.filter(product => product.category === this.categoryId);
       } else {
