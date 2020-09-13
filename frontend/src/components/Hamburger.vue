@@ -197,6 +197,12 @@ export default {
   }
 }
 
+@media screen and (max-width: 540px) {
+  .menu-wrap .hamburger {
+    top: 9px;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .menu-wrap .hamburger {
     top: 9px;

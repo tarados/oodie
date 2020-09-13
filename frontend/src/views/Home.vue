@@ -145,6 +145,8 @@ export default {
 }
 
 .info {
+  width: 1580px;
+  margin: 0 auto;
   height: 10rem;
   display: flex;
   flex-wrap: wrap;

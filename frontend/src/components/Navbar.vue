@@ -16,7 +16,7 @@
             <span
                 class="item-basket"
                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
-            >{{this.$store.state.productsStore.cardProducts.length}}
+            >{{ this.$store.state.productsStore.cardProducts.length }}
             </span>
             <router-link :to="{name: 'Card'}">
               <img src="../assets/basket.png">
@@ -26,9 +26,7 @@
           <Hamburger/>
         </div>
       </div>
-      <div class="logo">
-        <Logo/>
-      </div>
+      <Logo/>
       <div class="linkList">
         <div class="linkList-item">
           <router-link :to="{name: 'Home'}"
@@ -37,10 +35,7 @@
           </router-link>
         </div>
         <div class="linkList-item">
-          <router-link :to="{name: 'Brands'}"
-          >
-            о нас
-          </router-link>
+          <a href="#">о нас</a>
         </div>
         <div class="linkList-item"
              @mouseover="mouseover"
@@ -69,7 +64,7 @@
           </transition>
         </div>
         <div class="linkList-item">
-          <router-link :to="{name: 'Brands'}">контакты</router-link>
+          <a href="#">контакты</a>
         </div>
       </div>
     </div>
@@ -119,9 +114,9 @@ export default {
 }
 
 .container-nav {
-  height: 24.57rem;
+  height: 25.19rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 }
@@ -132,7 +127,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3.66rem;
+  height: 3.82rem;
   background-color: #c7d9d8;
 }
 
@@ -174,6 +169,7 @@ span {
 }
 
 .linkList {
+  margin-bottom: 2.5rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -181,7 +177,7 @@ span {
 }
 
 .linkList .linkList-item {
-  padding: 10px 20px;
+  padding: 10px 75px;
   position: relative;
   text-align: center;
   border-bottom: 3px solid transparent;
@@ -263,21 +259,18 @@ span {
 }
 
 .card span {
-  font-size: 2rem;
+  font-size: 1.45rem;
+  margin-top: 3px;
 }
 
-.card img {
-  color: #7b786e;
+.card a img {
+  width: 2.75rem;
 }
 
 
 /*media queries*************************************************************************************/
 
 @media screen and (max-width: 1024px) {
-  .linkList {
-    width: auto;
-  }
-
   .container-nav {
     height: 13.7rem;
   }
@@ -313,24 +306,120 @@ span {
   }
 }
 
-@media screen and (max-width: 450px) {
-  .logo img {
+@media screen and (max-width: 540px) {
+  .nav-header {
+    justify-content: normal;
+  }
+
+  p,
+  .card span {
+    font-size: 0.55rem;
+  }
+
+  img {
     width: 10vmax;
   }
 
   .container-nav {
-    height: 11rem;
+    height: 10rem;
   }
 
+  .card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 1.5rem;
+  }
+
+  .card-hamburger {
+    margin-left: 55%;
+  }
+}
+
+@media screen and (max-width: 450px) {
   .nav-header {
-    justify-content: flex-start;
+    justify-content: normal;
+  }
+
+  p,
+  .card span {
+    font-size: 0.55rem;
+  }
+
+  img {
+    width: 10vmax;
+  }
+
+  .container-nav {
+    height: 10rem;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 1.5rem;
+  }
+
+  .card-hamburger {
+    margin-left: 42%;
   }
 }
 
 @media screen and (max-width: 375px) {
+  p,
+  .card span {
+    font-size: 0.55rem;
+  }
+
+  img {
+    width: 10vmax;
+  }
+
+  .container-nav {
+    height: 10rem;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 1.5rem;
+  }
+
+  .card-hamburger {
+    margin-left: 35%;
+  }
 }
 
 @media screen and (max-width: 360px) {
+  p,
+  .card span {
+    font-size: 0.55rem;
+  }
+
+  img {
+    width: 10vmax;
+  }
+
+  .container-nav {
+    height: 10rem;
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 1.5rem;
+  }
+
+  .card-hamburger {
+    margin-left: 34%;
+  }
 }
 
 @media screen and (max-width: 325px) {
@@ -366,11 +455,11 @@ span {
   }
 
   .card-hamburger {
-    justify-content: space-around;
+    margin-left: 20%;
   }
 
   .card {
-   margin-right: 0;
+    margin-right: 0;
   }
 }
 </style>

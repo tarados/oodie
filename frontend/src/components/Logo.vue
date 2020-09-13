@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <img src="../assets/logo.jpg" />
+  <div class="wrapper-logo">
+    <img src="../assets/logo.jpg">
   </div>
 </template>
 
@@ -11,49 +11,85 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.wrapper-logo {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 img {
-  width: 40rem;
-  padding: 1%;
+  width: 41.495rem;
   margin: 0 auto;
 }
 
+
 /*media queries*************************************************************************************/
 @media screen and (max-width: 1024px) {
-  .logo img {
-    width: 25rem;
+  .wrapper-logo {
+    margin-bottom: 1.7rem;
+  }
+
+  img {
+    width: 45vmax;
   }
 }
 
 @media screen and (max-width: 640px) {
-  .logo img {
-    width: 20rem;
+  .wrapper-logo {
+    margin-bottom: 1.7rem;
+  }
+
+  img {
+    width: 45vmax;
   }
 }
 
 @media screen and (max-width: 420px) {
-  .logo img {
-    width: 18rem;
+  .wrapper-logo {
+    margin-bottom: 1.7rem;
+  }
+
+  img {
+    width: 45vmax;
   }
 }
 
 @media screen and (max-width: 375px) {
+  .wrapper-logo {
+    margin-bottom: 1.6rem;
+  }
+
+  img {
+    width: 45vmax;
+  }
 }
 
 @media screen and (max-width: 360px) {
+  .wrapper-logo {
+    margin-bottom: 1.7rem;
+  }
+
+  img {
+    width: 45vmax;
+  }
 }
 
 @media screen and (max-width: 325px) {
-  .logo img {
-    width: 16rem;
+  .wrapper-logo {
+    margin-bottom: 1.7rem;
+  }
+
+  img {
+    width: 45vmax;
   }
 }
 
 @media screen and (max-width: 280px) {
-  .logo img {
-    width: 14rem;
+  img {
+    width: 40vmax;
   }
 }
 </style>

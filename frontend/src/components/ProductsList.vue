@@ -93,16 +93,12 @@ h4 {
 }
 
 .product {
+  text-align: center;
   padding-bottom: 1rem;
   text-decoration: none;
   color: #3d4246;
   width: calc((100% / 12) * 6 - 30px);
   margin: 0 15px;
-}
-
-.price-box span {
-  margin-top: 1%;
-  margin-bottom: 1%;
 }
 
 .item_sm {
@@ -118,10 +114,11 @@ h4 {
 }
 
 .price-box {
-  width: 100%;
+  width: 20%;
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 span.old {
@@ -130,7 +127,6 @@ span.old {
 
 .no-current {
   text-decoration: line-through;
-  margin: 3%;
 }
 
 .category-title {
