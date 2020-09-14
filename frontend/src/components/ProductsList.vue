@@ -12,9 +12,6 @@
           <span v-else>{{ product.price }} грн</span>
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
-        <div class="category-title" v-show="small">
-          <span>{{ product.categoryTitle }}</span>
-        </div>
       </router-link>
     </div>
   </div>
@@ -43,14 +40,10 @@ export default {
   computed: {
     ...mapGetters(["allProducts", "allCategories"]),
     prodList() {
-      this.allProducts.forEach(item => {
-        item.categoryTitle = this.allCategories.find(category => category.id === item.category).title;
-      });
-      console.log(this.allProducts)
       if (this.categoryId) {
         return this.allProducts.filter(product => product.category === this.categoryId);
       } else {
-        return this.allProducts.filter(product => product.category !== 1);
+        return this.allProducts;
       }
     }
   },

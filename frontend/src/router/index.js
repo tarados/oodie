@@ -14,13 +14,13 @@ const routes = [
         path: '/brands/:slug',
         name: 'Brand',
         meta: {layout: 'main'},
-        component: () => import('../views/Products')
+        component: () => import('../views/Brand')
     },
     {
         path: '/brands',
         name: 'Brands',
         meta: {layout: 'main'},
-        component: () => import('../views/Products')
+        component: () => import('../views/Brands')
     },
     {
         path: '/products/card',
