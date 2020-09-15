@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper-checkout">
     <div class="header">
-      <h1>Your checkout</h1>
+      <h1>К оплате:</h1>
     </div>
     <div class="subtotal">
-      <div class="subtotal-title">Subtotal</div>
+      <div class="subtotal-title">Всего</div>
       <div class="subtotal-val" v-text="totalPrice"></div>
       <div class="header-box">
-        <h2>Contact information</h2>
+        <h2>Контактная информация</h2>
       </div>
     </div>
     <form class="submit-box" @submit.prevent="submitHandler">
       <div class="title-name">
-        Name:
+        Имя:
       </div>
       <div class="user-name">
         <input
@@ -22,7 +22,7 @@
         <small v-show="invalidName"> Enter your name!</small>
       </div>
       <div class="title-phone">
-        Phone:
+        Телефон:
       </div>
       <div class="phone">
         <input
@@ -49,11 +49,11 @@
         <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
       </div>
       <div class="title-delivery">
-        Delivery method:
+        Способ доставки:
       </div>
       <div class="delivery">
         <select v-model="selected">
-          <option disabled value="">Select delivery method</option>
+          <option disabled value="">Выберите способ доставки</option>
           <option>Новая почта</option>
           <option>Другие</option>
         </select>
@@ -87,8 +87,8 @@
         <input v-model="comment">
       </div>
       <div class="button-block" v-if="selected !== 'Другие'">
-        <button @click="toCard" class="continue-shopping">Return to card</button>
-        <button type="submit" class="continue-shipping">Continue shipping</button>
+        <button @click="toCard" class="continue-shopping">Вернуться в корзину</button>
+        <button type="submit" class="continue-shipping">Продолжить</button>
       </div>
       <div class="button-block-others" v-else>
         <button @click="toCard" class="continue-shopping">Return to card</button>
@@ -243,18 +243,24 @@ export default {
   margin-top: 1%;
   margin-bottom: 1%;
   font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .subtotal-title {
   color: rgb(48, 48, 48);
   font-weight: 600;
   font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .subtotal-val {
   color: rgb(48, 48, 48);
   font-weight: 600;
   font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 /*Contact information*************************************************************************/
@@ -274,6 +280,9 @@ export default {
 
 h2 {
   text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 1rem;
 }
 
 .title-name,
