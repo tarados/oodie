@@ -4,10 +4,10 @@
       <h1>Your cart</h1>
     </div>
     <div class="grid-container first">
-      <div class="item title">Product</div>
-      <div class="item price">Price</div>
-      <div class="item quantity">Quantity</div>
-      <div class="item total">Total</div>
+      <div class="item title">Название</div>
+      <div class="item price">Цена</div>
+      <div class="item quantity">Количество</div>
+      <div class="item total">Сумма</div>
     </div>
     <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
       <div class="grid-container second">
@@ -15,12 +15,12 @@
           <img :src="product.image">
         </div>
         <div class="item product">
-          <div class="remove" @click="deleteOrder(index)">Remove</div>
+          <div class="remove" @click="deleteOrder(index)">удалить</div>
           <div class="name">
             {{ product.title }}
           </div>
           <div class="size">
-            Size - {{ product.size }} - {{ product.availability }}
+            Size - {{ product.size }}
           </div>
         </div>
         <div class="item price-val">{{ product.price }} грн</div>
@@ -67,16 +67,16 @@
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="submit-mobile-box">
-      <router-link :to="{name: 'Home'}" class="continue-mobile-shopping">Continue shopping</router-link>
+      <router-link :to="{name: 'Home'}" class="continue-mobile-shopping">Продолжить покупки</router-link>
       <router-link :to="{name: 'Checkout'}" class="checkout-mobile">Check out</router-link>
     </div>
     <div class="grid-container second subtotal-box">
-      <div class="item subtotal-title">Subtotal</div>
+      <div class="item subtotal-title">Итого:</div>
       <div class="item subtotal" v-text="totalPrice"></div>
     </div>
     <div class="submit-box">
-      <router-link :to="{name: 'Home'}" class="item continue-shopping">Continue shopping</router-link>
-      <router-link :to="{name: 'Checkout'}" class="item checkout">Check out</router-link>
+      <router-link :to="{name: 'Home'}" class="item continue-shopping">Продолжить покупки</router-link>
+      <router-link :to="{name: 'Checkout'}" class="item checkout">Купить</router-link>
     </div>
   </div>
 </template>
@@ -177,6 +177,8 @@ h1 {
 
 .item {
   color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 img {
