@@ -110,7 +110,7 @@ export default {
 
 <style scoped>
 .navbar {
-  border-bottom: 1px solid grey;
+  border-bottom: 2px solid #9a9a9a;
 }
 
 .container-nav {

@@ -44,7 +44,7 @@
           <div class="product-price">
             <div class="price">
               <div class="current" v-if="this.currentProduct.new_price">
-                ${{ this.currentProduct.price }}
+                {{ this.currentProduct.price }} грн
               </div>
               <div v-else>
                 ${{ this.currentProduct.price }}
@@ -58,9 +58,9 @@
             </div>
           </div>
           <div class="product-title">
-            <h1>{{ this.currentProduct.title }}</h1>
+            <div>{{ this.currentProduct.title }}</div>
           </div>
-          <div class="size-block">
+          <div class="size-block" v-show="this.currentProduct.category !== 1">
             <div
                 class="square"
                 v-for="(availability, index) in availabilities"
@@ -71,7 +71,7 @@
               {{ availability.size }}
             </div>
           </div>
-          <div class="size-table">
+          <div class="size-table" v-show="this.currentProduct.category !== 1">
             <router-link
                 :to="{name: 'Table'}"
             >
@@ -240,7 +240,10 @@ export default {
 }
 
 .price {
-  margin: 10px 0;
+  margin: 15px 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .red {
@@ -335,7 +338,7 @@ export default {
 
 .product-category span {
   font-size: 1rem;
-  color: #d3d3d3;
+  color: #9b9b9b;
 }
 
 .product-category div {
@@ -343,8 +346,23 @@ export default {
   margin-left: 1%;
 }
 
+.product-title {
+  border-bottom: 2px solid #9a9a9a;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-title div {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
 .current {
   text-decoration: line-through;
+  margin-bottom: 1rem;
+  color: #9b9b9b;
 }
 
 .button-block {
