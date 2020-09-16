@@ -58,14 +58,14 @@
           <option>Другие</option>
         </select>
       </div>
-      <div class="title-city" v-show="selected === 'Новая почта'">City:</div>
+      <div class="title-city" v-show="selected === 'Новая почта'">Город:</div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
         <autocomplete
             :search="search"
             @submit="setCity"
         ></autocomplete>
       </div>
-      <div class="title-office" v-show="selected === 'Новая почта'">Office number:</div>
+      <div class="title-office" v-show="selected === 'Новая почта'">Номер отделения:</div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
         <select class="warehouse" v-model="postOffice">
           <option v-for="(option, index) in this.$store.getters.allWarehouses" :key="index" v-bind:value="option">
@@ -74,7 +74,7 @@
         </select>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="title-others" v-show="selected === 'Другие'">Address:</div>
+      <div class="title-others" v-show="selected === 'Другие'">Адрес:</div>
       <div class="others" v-show="selected === 'Другие'">
                   <textarea
                       id="others"
@@ -88,7 +88,7 @@
       </div>
       <div class="button-block" v-if="selected !== 'Другие'">
         <button @click="toCard" class="continue-shopping">Вернуться в корзину</button>
-        <button type="submit" class="continue-shipping">Продолжить</button>
+        <button type="submit" class="continue-shipping">Купить</button>
       </div>
       <div class="button-block-others" v-else>
         <button @click="toCard" class="continue-shopping">Return to card</button>
