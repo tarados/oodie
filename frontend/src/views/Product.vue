@@ -154,16 +154,18 @@ export default {
       this.imageIndex = index;
     },
     toCard() {
-      const availability = this.availabilities[this.size];
+      const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {'size': '', 'quantity': ''};
       const productToCard = {
         'id': this.currentProduct.id,
         'title': this.currentProduct.title,
         'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         'quantity': 1,
         'size': availability.size,
-        'availability': availability.quantity,
         'image': this.currentProduct.image_list[this.imageIndex]
       };
+      if (productToCard.size === '') {
+        delete productToCard.size;
+      }
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);

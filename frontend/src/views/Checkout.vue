@@ -67,11 +67,16 @@
       </div>
       <div class="title-office" v-show="selected === 'Новая почта'">Номер отделения:</div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
-        <select class="warehouse" v-model="postOffice">
-          <option v-for="(option, index) in this.$store.getters.allWarehouses" :key="index" v-bind:value="option">
-            {{ option }}
-          </option>
-        </select>
+        <autocomplete
+            class="autocomplete"
+            :search="searchWarehouse"
+            @submit="setWarehouse"
+        ></autocomplete>
+<!--        <select class="warehouse" v-model="postOffice">-->
+<!--          <option v-for="(option, index) in this.$store.getters.allWarehouses" :key="index" v-bind:value="option">-->
+<!--            {{ option }}-->
+<!--          </option>-->
+<!--        </select>-->
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
       <div class="title-others" v-show="selected === 'Другие'">Адрес:</div>
@@ -186,8 +191,29 @@ export default {
             .startsWith(input.toLowerCase())
       });
     },
+    searchWarehouse(input) {
+      let warehouseList = this.allWarehouses.map(warehouse => {
+        return warehouse
+      });
+      if (input.length < 1) {
+        return []
+      }
+      return warehouseList.filter(warehouse => {
+        // try {
+        //   console.log(warehouse.toLowerCase()
+        //       .match(input.toLowerCase()).input.split(',')[0].split(' ')[3]);
+        // } catch (TypeError) {
+        //   console.log('qq');
+        // }
+        return warehouse.toLowerCase()
+            .match(input.toLowerCase())
+      });
+    },
     setCity(city) {
       this.city = city;
+    },
+    setWarehouse(warehouse) {
+      this.postOffice = warehouse;
     }
   },
   watch: {
@@ -316,6 +342,10 @@ input,
   outline: none;
   border: 1px solid #bbb;
   border-radius: 5px;
+}
+
+.autocomplete {
+  width: 100%;
 }
 
 .description-content input {

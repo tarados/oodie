@@ -19,7 +19,7 @@
           <div class="name">
             {{ product.title }}
           </div>
-          <div class="size">
+          <div class="size" v-if="product.size">
             Size - {{ product.size }}
           </div>
         </div>
@@ -40,8 +40,11 @@
           <div class="image">
             <img :src="product.image">
           </div>
-          <div class="product">
-            {{ product.title }} Size - {{ product.size }}
+          <div class="product" v-if="product.size">
+            {{ product.title }} Size -ss {{ product.size }}
+          </div>
+          <div class="product" v-else>
+            {{ product.title }}
           </div>
           <div class="total-val">{{ product.total }} грн</div>
         </div>
