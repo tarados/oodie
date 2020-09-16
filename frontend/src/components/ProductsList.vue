@@ -107,7 +107,8 @@ h4 {
 }
 
 .price-box {
-  width: 20%;
+  width: 15%;
+  margin-bottom: 10px;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-between;
