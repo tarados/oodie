@@ -265,6 +265,7 @@ export default {
 
 .description {
   margin-top: 3rem;
+  line-height: 1.6rem;
 }
 
 .markdown {
