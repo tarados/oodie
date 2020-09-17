@@ -384,7 +384,7 @@ export default {
 }
 
 .selected {
-  background-color: #5b80b2;
+  background-color: #c7d9d8;
 }
 
 /*media queries**************************************************************************/
