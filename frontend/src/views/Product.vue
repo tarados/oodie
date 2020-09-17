@@ -47,7 +47,7 @@
                 {{ this.currentProduct.price }} грн
               </div>
               <div v-else>
-                ${{ this.currentProduct.price }}
+                {{ this.currentProduct.price }} грн
               </div>
               <div
                   :class="{ markdown: !currentProduct.new_price}"
