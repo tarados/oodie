@@ -315,6 +315,7 @@ export default {
   width: 3rem;
   height: 3rem;
   border: 1px solid grey;
+  padding-top: 2px;
   margin: 1% 2.5% 1% 1%;
 }
 
