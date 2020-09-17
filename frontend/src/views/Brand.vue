@@ -1,11 +1,13 @@
 <template>
   <div>
+    <Breadcrumbs :current-category="activeCategoryTitle"/>
     <ProductsList thumbnail="large" :category-id="activeCategoryId"/>
   </div>
 </template>
 
 <script>
 import ProductsList from "@/components/ProductsList";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default {
   name: "Brand",
@@ -16,7 +18,8 @@ export default {
     }
   },
   components: {
-    ProductsList
+    ProductsList,
+    Breadcrumbs
   },
   computed: {
     activeCategoryId() {
@@ -28,6 +31,14 @@ export default {
         }
       });
       return a
+    },
+    activeCategoryTitle() {
+      try {
+        return this.$store.getters.allCategories.find(item => item.id === this.activeCategoryId).title
+      } catch (TypeError) {
+        return ''
+      }
+
     }
   },
   methods: {},

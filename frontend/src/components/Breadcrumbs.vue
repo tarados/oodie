@@ -30,7 +30,12 @@ export default {
   },
   computed: {
     slug() {
-      return this.$store.getters.allCategories.find(item => item.title === this.currentCategory).slug;
+      try {
+        return this.$store.getters.allCategories.find(item => item.title === this.currentCategory).slug;
+      } catch (TypeError) {
+        return ''
+      }
+
     }
   }
 }
