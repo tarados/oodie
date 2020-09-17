@@ -65,7 +65,7 @@
             @submit="setCity"
         ></autocomplete>
       </div>
-      <div class="title-office" v-show="selected === 'Новая почта'">Номер отделения:</div>
+      <div class="title-office" v-show="selected === 'Новая почта'">Выберите отделение:</div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
         <autocomplete
             class="autocomplete"
