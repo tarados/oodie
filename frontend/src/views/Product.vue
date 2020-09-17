@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs :current-category="this.currentCategory" :current-product="this.currentProduct.title" />
+    <Breadcrumbs :current-category="this.currentCategory" :current-product="this.currentProduct.title"/>
     <div class="wrapper-product">
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
@@ -78,10 +78,7 @@
               <small>Таблица размеров</small>
             </router-link>
           </div>
-          <div class="button-block">
-            <div class="btn" @click="toCard">в корзину</div>
-            <button class="btn" @click="toCard">купить в один клик</button>
-          </div>
+          <div class="btn" @click="toCard">в корзину</div>
           <div class="product-description">
             <div class="description">
               {{ this.currentProduct.description }}
@@ -127,7 +124,12 @@ export default {
   },
   computed: {
     currentProduct() {
-      return this.$store.state.productsStore.currentProduct
+      try {
+        return this.$store.state.productsStore.currentProduct
+      } catch (TypeError) {
+        return {}
+      }
+
     },
     currentCategory() {
       try {
@@ -154,7 +156,10 @@ export default {
       this.imageIndex = index;
     },
     toCard() {
-      const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {'size': '', 'quantity': ''};
+      const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
+        'size': '',
+        'quantity': ''
+      };
       const productToCard = {
         'id': this.currentProduct.id,
         'title': this.currentProduct.title,
@@ -271,6 +276,9 @@ export default {
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
+  width: 30%;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -284,6 +292,7 @@ export default {
   margin-top: 1rem;
   text-decoration: none;
   transition: opacity 1s ease-in;
+  cursor: pointer;
 }
 
 .size-block {
