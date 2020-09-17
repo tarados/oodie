@@ -1,8 +1,8 @@
 <template>
   <div id="root">
     <div class="wrapper">
-      <Navbar class="nav" :visible-card="visible"/>
-      <router-view class="content" @cardVisible="cardVisible"/>
+      <Navbar class="nav"/>
+      <router-view class="content"/>
       <Footer/>
     </div>
   </div>
@@ -17,19 +17,6 @@
         components: {
             Navbar,
             Footer
-        },
-        data() {
-            return {
-                visible: true
-            }
-        },
-        methods: {
-            cardVisible() {
-                this.visible = false;
-            }
-        },
-        mounted() {
-
         }
     }
 </script>

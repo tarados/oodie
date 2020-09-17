@@ -199,12 +199,6 @@ export default {
         return []
       }
       return warehouseList.filter(warehouse => {
-        // try {
-        //   console.log(warehouse.toLowerCase()
-        //       .match(input.toLowerCase()).input.split(',')[0].split(' ')[3]);
-        // } catch (TypeError) {
-        //   console.log('qq');
-        // }
         return warehouse.toLowerCase()
             .match(input.toLowerCase())
       });

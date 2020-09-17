@@ -20,6 +20,9 @@ export default {
         },
         loadFromCard({commit}) {
             commit('addProductFromCard');
+        },
+        changeVisibleBasket({commit}) {
+            commit('isVisible');
         }
     },
     mutations: {
@@ -57,6 +60,9 @@ export default {
         },
         loadWarehouses(state, response) {
             state.warehouseList = response
+        },
+        isVisible(state) {
+            state.basketVisible = !state.basketVisible;
         }
     },
     state: {
@@ -64,6 +70,7 @@ export default {
         categoriesList: [],
         currentProduct: null,
         cardProducts: [],
+        basketVisible: true,
         citiesList: [],
         warehouseList: []
     },

@@ -41,7 +41,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      visibleCard: true
+      // visibleCard: true
     }
   },
   components: {
@@ -51,15 +51,20 @@ export default {
     categoryId() {
       return 1
     }
+  },
+  methods: {
+    basketVisible() {
+      if (this.$store.state.productsStore.basketVisible);
+       else (this.$store.dispatch('changeVisibleBasket'));
+      }
+  },
+  mounted() {
+    this.basketVisible();
   }
 }
 </script>
 
 <style>
-/*body {*/
-/*  margin: 0;*/
-/*}*/
-
 /*section one - header*****************************************************************************/
 .container {
   max-width: 960px;
@@ -145,7 +150,7 @@ export default {
 }
 
 .info {
-  max-width: 85%;
+  width: 85%;
   margin: 0 auto;
   height: 10rem;
   display: flex;

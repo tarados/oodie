@@ -123,13 +123,10 @@ export default {
       } else {
         alert("В наличии только " + this.maxValue);
       }
-    },
-    cardVisible() {
-      this.$emit('cardVisible', false);
     }
   },
   mounted() {
-    this.cardVisible();
+    this.$store.dispatch('changeVisibleBasket');
   }
 }
 </script>

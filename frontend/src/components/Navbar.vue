@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="card-hamburger">
-          <div class="card" v-show="visibleCard">
+          <div class="card" v-show="this.$store.state.productsStore.basketVisible">
             <span
                 class="item-basket"
                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
@@ -77,9 +77,6 @@ import Logo from "./Logo";
 
 export default {
   name: "NavBar",
-  props: {
-    visibleCard: Boolean,
-  },
   components: {
     Hamburger,
     Logo
@@ -102,7 +99,8 @@ export default {
     }
   },
   mounted() {
-
+    this.$store.dispatch('changeVisibleBasket');
+    console.log(this.$store.state.productsStore.basketVisible);
   }
 }
 
