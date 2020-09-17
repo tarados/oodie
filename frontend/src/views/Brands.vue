@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 .content-text {
-  width: 1580px;
+  width: 85%;
   margin: 0 auto;
   padding: 20px;
   text-align: justify;

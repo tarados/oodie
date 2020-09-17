@@ -230,12 +230,12 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 3rem;
+  margin-top: 0.25rem;
 }
 
 .slider {
   width: calc((100% / 12) * 3 - 1rem);
-  margin: 0.5rem 0.5rem;
+  margin: 0.25rem 0.25rem;
 }
 
 .slider img:hover {
