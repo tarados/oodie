@@ -145,7 +145,7 @@ export default {
 }
 
 .info {
-  width: 1580px;
+  max-width: 85%;
   margin: 0 auto;
   height: 10rem;
   display: flex;
