@@ -333,7 +333,7 @@ img {
 .submit-box {
   display: grid;
   max-width: 1200px;
-  margin: 15px auto;
+  margin: 20px auto;
   grid-template-columns: 60% 40%;
   grid-template-rows: 38px;
   border-top: none;

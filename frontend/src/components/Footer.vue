@@ -102,6 +102,7 @@ img {
 }
 
 h2 {
+  margin-top: 20px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.08em;
