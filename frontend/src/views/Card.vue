@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1>Your cart</h1>
+      <h1>Ваша корзина:</h1>
     </div>
     <div class="grid-container first">
       <div class="item title">Название</div>
@@ -49,7 +49,7 @@
           <div class="total-val">{{ product.total }} грн</div>
         </div>
         <div class="mobile-edit">
-          <div class="remove-mobile" @click="deleteOrder(index)">Remove</div>
+          <div class="remove-mobile" @click="deleteOrder(index)">Удалить</div>
           <div class="quantity-val-mobile">
             <div class="up">
               <div class="triangle-mobile-up" @click="plusQuantity(index)"></div>
@@ -66,12 +66,12 @@
       </div>
     </div>
     <div class="subtotal-mobile-box">
-      <div class="subtotal-mobile-title">Subtotal</div>
+      <div class="subtotal-mobile-title">Итого:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="submit-mobile-box">
       <router-link :to="{name: 'Home'}" class="continue-mobile-shopping">Продолжить покупки</router-link>
-      <router-link :to="{name: 'Checkout'}" class="checkout-mobile">Check out</router-link>
+      <router-link :to="{name: 'Checkout'}" class="checkout-mobile">Оплатить</router-link>
     </div>
     <div class="grid-container second subtotal-box">
       <div class="item subtotal-title">Итого:</div>
@@ -79,7 +79,7 @@
     </div>
     <div class="submit-box">
       <router-link :to="{name: 'Home'}" class="item continue-shopping">Продолжить покупки</router-link>
-      <router-link :to="{name: 'Checkout'}" class="item checkout">Купить</router-link>
+      <router-link :to="{name: 'Checkout'}" class="item checkout">Оплатить</router-link>
     </div>
   </div>
 </template>
@@ -141,7 +141,7 @@ export default {
 h1 {
   font-size: 2rem;
   color: rgb(61, 66, 70);;
-  text-transform: none;
+  text-transform: uppercase;
   letter-spacing: 0;
 }
 
@@ -388,7 +388,7 @@ img {
   }
 
   h1 {
-    font-size: calc(3.125vw + 10px);
+    font-size: calc(2.5vw + 10px);
   }
 
   .title,
