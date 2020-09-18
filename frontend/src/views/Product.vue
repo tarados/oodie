@@ -415,6 +415,11 @@ export default {
     display: contents;
   }
 
+  .btn,
+  .size-block {
+    width: auto;
+  }
+
 }
 
 @media screen and (max-width: 375px) {
@@ -422,6 +427,10 @@ export default {
 }
 
 @media screen and (max-width: 360px) {
+
+}
+
+@media screen and (max-width: 320px) {
 
 }
 
