@@ -412,7 +412,6 @@ textarea:focus {
   width: 32%;
   background-color: white;
   border: 1px solid #bbbbbb;
-  border-radius: 5px;
   text-transform: uppercase;
   font-size: 0.875rem;
   font-weight: 600;
@@ -423,7 +422,6 @@ textarea:focus {
   width: 32%;
   background-color: green;
   border: 0;
-  border-radius: 5px;
   color: white;
   text-transform: uppercase;
   text-decoration: none;

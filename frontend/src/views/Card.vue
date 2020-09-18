@@ -354,7 +354,6 @@ img {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 400;
-  border-radius: 3px;
   text-decoration: none;
 }
 
@@ -377,7 +376,6 @@ img {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
-  border-radius: 3px;
   text-decoration: none;
 }
 
@@ -530,7 +528,6 @@ img {
   .continue-mobile-shopping {
     text-transform: uppercase;
     font-weight: 400;
-    border-radius: 3px;
     text-decoration: none;
     color: #939393;
     border: 1px solid grey;
@@ -543,7 +540,6 @@ img {
     color: white;
     text-transform: uppercase;
     font-weight: 400;
-    border-radius: 3px;
     text-decoration: none;
     height: 9.5vw;
     flex-grow: 1;
