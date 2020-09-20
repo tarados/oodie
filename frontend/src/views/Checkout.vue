@@ -294,6 +294,7 @@ export default {
 }
 
 .header-box {
+  display: none;
   width: 37rem;
   margin: 1% auto;
 }
@@ -326,8 +327,8 @@ h2 {
   justify-content: flex-end;
 }
 
-input,
-.warehouse {
+input {
+  padding: 0 2%;
   align-self: center;
   width: 100%;
   height: 100%;
@@ -335,8 +336,9 @@ input,
   color: #555;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 5px;
 }
+
+
 
 .autocomplete {
   width: 100%;
@@ -368,7 +370,6 @@ select {
   height: 100%;
   width: 100%;
   border: 1px solid #bbb;
-  border-radius: 5px;
   color: rgb(80, 80, 80);
   background-color: white;
   padding-left: 1%;
@@ -384,10 +385,10 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: rgba(0, 0, 0, .12);
+  border-color: #c7d9d8;
   background-color: #fff;
   outline: none;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, .16);
+  box-shadow: 0 2px 2px #c7d9d8;
 }
 
 .description {

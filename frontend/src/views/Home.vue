@@ -64,7 +64,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /*section one - header*****************************************************************************/
 .container {
   max-width: 960px;
