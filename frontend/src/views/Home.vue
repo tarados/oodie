@@ -31,11 +31,13 @@
       </div>
     </div>
     <ProductsList thumbnail="large" :category-id="categoryId"/>
+    <Instagram/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
+import Instagram from "@/components/Instagram";
 
 export default {
   name: 'Home',
@@ -45,7 +47,8 @@ export default {
     }
   },
   components: {
-    ProductsList
+    ProductsList,
+    Instagram
   },
   computed: {
     categoryId() {

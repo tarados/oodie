@@ -1,7 +1,5 @@
 <template>
   <div class="wrapper">
-    <h2> ты с нами в instagram?</h2>
-    <div class="hello-instagram"></div>
     <div class="wrapper-footer">
       <div class="footer">
         <div class="footer-item">
@@ -114,22 +112,6 @@ export default {
 img {
   width: 0.9rem;
   margin-top: 25%;
-}
-
-h2 {
-  margin-top: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 100;
-}
-
-.hello-instagram {
-  height: 14rem;
-  margin-bottom: 1%;
-  background-image: url("../assets/insta.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 p.contacts {
