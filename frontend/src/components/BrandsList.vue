@@ -64,27 +64,27 @@ h4 {
 }
 
 .brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-bottom: 2rem;
+  position: relative;
+  max-height: 31rem;
+  overflow: hidden;
   text-decoration: none;
   color: #3d4246;
   width: calc((100% / 12) * 4 - 30px);
-  margin: 0 15px;
+  margin: 10px 10px;
 }
 
 .brand-title {
+  position: absolute;
   background-color: #c7d9d8;
   width: 72%;
-  margin-top: -5rem;
   height: 4.65rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 2rem;
+  left: 14%;
+  top: 83%;
 }
 
 .brand img {
@@ -92,13 +92,14 @@ h4 {
 }
 
 /*media queries******************************************************************************************************/
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .brand {
-    width: auto;
+    width: calc((100% / 12) * 6- 30px);
+    max-height: 19rem;
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 82%;
     height: 2.72rem;
     font-size: 1rem;
   }
@@ -106,24 +107,24 @@ h4 {
 
 @media screen and (max-width: 960px) {
   .brand {
-    width: auto;
+    width: calc((100% / 12) * 6- 30px);
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 89%;
     height: 2.72rem;
     font-size: 1.9rem;
   }
 }
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 770px) {
   .brand {
-    width: auto;
+    width: calc((100% / 12) * 6 - 30px);
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 85%;
     height: 2.72rem;
     font-size: 1.8rem;
   }
@@ -135,7 +136,7 @@ h4 {
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 86%;
     height: 2.72rem;
     font-size: 1.6rem;
   }
@@ -147,7 +148,7 @@ h4 {
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 85%;
     height: 2.72rem;
     font-size: 1.4rem;
   }
@@ -159,7 +160,7 @@ h4 {
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 84%;
     height: 2.72rem;
     font-size: 1.3rem;
   }
@@ -171,7 +172,7 @@ h4 {
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 82%;
     height: 2.72rem;
     font-size: 1.2rem;
   }
@@ -183,7 +184,7 @@ h4 {
   }
 
   .brand-title {
-    margin-top: -3rem;
+    top: 79%;
     height: 2.72rem;
     font-size: 1rem;
   }
