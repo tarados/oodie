@@ -205,11 +205,13 @@ export default {
 
 .info-content h4 {
   margin-top: 8%;
-  font-size: 0.9vmax;
+  font-size: 1vmax;
+  font-weight: 500;
 }
 
 .info-content span {
-  font-size: 1vmax;
+  font-size: 0.83vmax;
+  color: #b0b0b0;
 }
 
 .info-content span,
