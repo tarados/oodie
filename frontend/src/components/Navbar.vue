@@ -35,7 +35,7 @@
           </router-link>
         </div>
         <div class="linkList-item">
-          <a href="#">о нас</a>
+          <router-link :to="{name: 'About'}">о нас</router-link>
         </div>
         <div class="linkList-item"
              @mouseover="mouseover"
@@ -64,7 +64,7 @@
           </transition>
         </div>
         <div class="linkList-item">
-          <a href="#">контакты</a>
+          <router-link :to="{name: 'Contacts'}">контакты</router-link>
         </div>
       </div>
     </div>

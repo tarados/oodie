@@ -12,7 +12,13 @@
               <router-link :to="{name: 'Home'}">Худиялки</router-link>
             </li>
             <li @click="closeHamburger">
+              <router-link :to="{name: 'About'}">О нас</router-link>
+            </li>
+            <li @click="closeHamburger">
               <router-link :to="{name: 'Brands'}">Дружеские бренды</router-link>
+            </li>
+            <li @click="closeHamburger">
+              <router-link :to="{name: 'Contacts'}">Контакты</router-link>
             </li>
           </ul>
         </div>
