@@ -5,28 +5,36 @@
     <div class="wrapper-footer">
       <div class="footer">
         <div class="footer-item">
-          <p>Контакты:</p>
+          <p class="contacts">Контакты:</p>
           <p>+380 50 720 40 66</p>
           <p>hoodiyalko@gmail.com</p>
         </div>
         <div class="footer-item">
           <div class="social-icon">
-          <p>Подписывайтесь на нас:</p>
-          <div class="circl">
-            <a href="https://www.facebook.com/hoodiyalko/">
-              <img src="../assets/facebook.png">
-            </a>
-          </div>
-          <div class="circl">
-            <a href="https://www.instagram.com/hoodiyalko/">
-              <img src="../assets/instagram.png">
-            </a>
-          </div>
-          <div class="circl">
-            <a href="https://www.tiktok.com/hoodiyalko/">
-              <img src="../assets/tik-tok.png">
-            </a>
-          </div>
+            <div class="social-content">
+              <div class="circl">
+                <img src="../assets/facebook.png">
+              </div>
+              <a href="https://www.facebook.com/hoodiyalko/">
+                <p>facebook.com/hoodiyalko/</p>
+              </a>
+            </div>
+            <div class="social-content">
+              <div class="circl">
+                <img src="../assets/instagram.png">
+              </div>
+              <a href="https://www.instagram.com/hoodiyalko/">
+                <p>instagram.com/hoodiyalko/</p>
+              </a>
+            </div>
+            <div class="social-content">
+              <div class="circl">
+                <img src="../assets/tik-tok.png">
+              </div>
+              <a href="https://www.tiktok.com/hoodiyalko/">
+                <p>tiktok.com/hoodiyalko/</p>
+              </a>
+            </div>
           </div>
         </div>
         <div class="footer-item">
@@ -34,8 +42,8 @@
           <p>Сотрудничество</p>
           <p>Обмен и возврат</p>
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -74,7 +82,7 @@ export default {
 .footer-item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 1rem;
   padding: 1%;
   width: calc((100% / 12) * 4 - 2rem);
@@ -87,8 +95,15 @@ export default {
   flex-direction: column;
 }
 
+.social-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .circl {
-  margin: 1% 1% 1% 20%;
+  margin: 2% 5% 1% 0;
   width: 1.8rem;
   height: 1.8rem;
   text-align: center;
@@ -117,8 +132,8 @@ h2 {
   background-size: cover;
 }
 
-p {
-  font-weight: bold;
+p.contacts {
+  text-transform: uppercase;
 }
 
 /*media queries*****************************************/
