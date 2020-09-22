@@ -24,7 +24,7 @@ export default {
     brands() {
       let brandsList = [];
       this.allCategories.forEach(item => {
-        if (item.title !== 'oodie') {
+        if (item.title !== 'hoodiyalko') {
           const brand = {
             'title': item.title,
             'images': this.allProducts.find(product => product.category === item.id).image,

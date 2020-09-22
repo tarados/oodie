@@ -6,9 +6,6 @@
     <div class="subtotal">
       <div class="subtotal-title">Всего</div>
       <div class="subtotal-val" v-text="totalPrice"></div>
-      <div class="header-box">
-        <h2>Контактная информация</h2>
-      </div>
     </div>
     <form class="submit-box" @submit.prevent="submitHandler">
       <div class="title-name">
@@ -44,9 +41,9 @@
       <div class="mail">
         <input
             v-model="email"
-            :class="{invalid: this.$v.email.$dirty || !this.$v.email.email || invalidEmail}"
+            :class="{invalid: !this.$v.email.email}"
         >
-        <small v-if="$v.email.$dirty || !$v.email.email || invalidEmail">Enter E-mail!</small>
+        <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
       <div class="title-delivery">
         Способ доставки:
@@ -72,11 +69,6 @@
             :search="searchWarehouse"
             @submit="setWarehouse"
         ></autocomplete>
-<!--        <select class="warehouse" v-model="postOffice">-->
-<!--          <option v-for="(option, index) in this.$store.getters.allWarehouses" :key="index" v-bind:value="option">-->
-<!--            {{ option }}-->
-<!--          </option>-->
-<!--        </select>-->
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
       <div class="title-others" v-show="selected === 'Другие'">Адрес:</div>
@@ -89,15 +81,11 @@
       </div>
       <div class="description-title">Комментарии</div>
       <div class="description-content">
-        <input v-model="comment">
+        <textarea v-model="comment"></textarea>
       </div>
-      <div class="button-block" v-if="selected !== 'Другие'">
+      <div class="button-block">
         <button @click="toCard" class="continue-shopping">Вернуться в корзину</button>
         <button type="submit" class="continue-shipping">Купить</button>
-      </div>
-      <div class="button-block-others" v-else>
-        <button @click="toCard" class="continue-shopping">Return to card</button>
-        <button type="submit" class="continue-shipping">Continue shipping</button>
       </div>
     </form>
   </div>
@@ -132,7 +120,7 @@ export default {
   validations: {
     userName: {required},
     phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
-    email: {email, required}
+    email: {email}
   },
   computed: {
     ...mapGetters(["totalPrice", "allCities", "allWarehouses"])
@@ -222,6 +210,7 @@ export default {
       }
     },
     email: function () {
+      console.log(this.$v.email);
       if (this.$v.email.$invalid) {
         this.invalidEmail = this.$v.email.required;
       } else {
@@ -288,15 +277,9 @@ export default {
   max-width: 37rem;
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: repeat(8, 2.36rem);
+  grid-template-rows: repeat(9, 2.36rem);
   grid-gap: 1vw;
   margin: 0 auto 15vh;
-}
-
-.header-box {
-  display: none;
-  width: 37rem;
-  margin: 1% auto;
 }
 
 h2 {
@@ -338,11 +321,20 @@ input {
   border: 1px solid #bbb;
 }
 
-
-
 .autocomplete {
   width: 100%;
 }
+
+.title-others,
+.others {
+  grid-row: 5 / 7;
+}
+
+.description-title,
+.description-content {
+  grid-row: 7/7;
+}
+
 
 .description-content input {
   padding-left: 10px;
@@ -391,22 +383,12 @@ textarea:focus {
   box-shadow: 0 2px 2px #c7d9d8;
 }
 
-.description {
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
-}
-
-.button-block,
-.button-block-others {
+.button-block {
   grid-column: 1/3;
+  grid-row: 9/9;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.button-block-others {
-  grid-row: 7/7;
 }
 
 .continue-shopping {
