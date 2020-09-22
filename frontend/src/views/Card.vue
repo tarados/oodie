@@ -286,12 +286,12 @@ img {
 }
 
 .triangle {
-  opacity: 0;
+  opacity: 0.2;
   margin-left: 8px;
   margin-right: 6px;
 }
 
-.triangle:hover {
+.quantity-val:hover > .triangle {
   opacity: 1;
   transition: all 0.7s ease;
 }
@@ -305,9 +305,9 @@ img {
   border-bottom: 10px solid black;
 }
 
-.triangle-up:hover, .triangle-down:hover {
-  background: rgba(150, 21, 100, 0.5);
-}
+/*.triangle-up:hover, .triangle-down:hover {*/
+/*  background: rgba(150, 21, 100, 0.5);*/
+/*}*/
 
 .triangle-down {
   width: 0;
