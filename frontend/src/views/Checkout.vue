@@ -506,11 +506,6 @@ textarea {
     font-size: 1rem;
   }
 
-  .button-block {
-    grid-row: 10 / 10;
-    /*grid-auto-rows: 2.36rem;*/
-  }
-
   .continue-shipping,
   .continue-shopping {
     font-size: 0.6rem;
@@ -520,6 +515,12 @@ textarea {
 @media (max-width: 375px) {
   .wrapper-checkout {
     width: 43vmax;
+  }
+}
+
+@media (max-width: 360px) {
+  .wrapper-checkout {
+    width: 50vmax;
   }
 }
 
@@ -536,10 +537,6 @@ textarea {
 
   h2 {
     font-size: 1rem;
-  }
-
-  .button-block {
-    grid-row: 10 / 10;
   }
 
   .continue-shipping,
