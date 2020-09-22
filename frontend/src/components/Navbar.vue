@@ -56,7 +56,7 @@
               <div
                   class="menu-item"
                   v-for="(item, index) in this.$store.getters.allCategories" :key="index"
-                  v-show="item.slug !== 'oodie'"
+                  v-show="item.slug !== 'hoodiyalko'"
               >
                 <router-link :to="{name: 'Brand', params: {slug: item.slug}}">{{ item.title }}</router-link>
               </div>

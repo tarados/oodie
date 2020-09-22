@@ -112,13 +112,20 @@ export default {
       this.$store.commit('delProduct', index);
     },
     minusQuantity(index) {
-      this.quantity -= 1;
-      this.$store.commit('decrement', index);
+      if (this.quantity > 2) {
+        this.quantity -= 1;
+        this.$store.commit('decrement', index);
+      }
     },
     plusQuantity(index) {
       if (!this.$v.$invalid) {
         this.quantity = this.$store.state.productsStore.cardProducts[index].quantity +2;
-        this.maxValue = this.$store.state.productsStore.cardProducts[index].availability;
+        const availability = this.$store.state.productsStore.cardProducts[index].availability;
+        if (availability === '0') {
+          this.maxValue = 200;
+        } else {
+          this.maxValue = availability;
+        }
         this.$store.commit('increment', index);
       } else {
         alert("В наличии только " + this.maxValue);

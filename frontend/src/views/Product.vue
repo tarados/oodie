@@ -158,13 +158,14 @@ export default {
     toCard() {
       const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
         'size': '',
-        'quantity': ''
+        'quantity': '0'
       };
       const productToCard = {
         'id': this.currentProduct.id,
         'title': this.currentProduct.title,
         'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         'quantity': 1,
+        'availability': availability.quantity,
         'size': availability.size,
         'image': this.currentProduct.image_list[this.imageIndex]
       };
