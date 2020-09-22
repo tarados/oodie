@@ -21,7 +21,7 @@ export default {
 }
 
 img {
-  width: 41.495rem;
+  width: 37vmax;
   margin: 0 auto;
 }
 

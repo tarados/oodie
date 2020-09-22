@@ -238,9 +238,11 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 3% 0;
 }
 
 .header {
+  margin: 3% 0;
   text-align: center;
 }
 
@@ -275,7 +277,7 @@ export default {
   grid-template-columns: 1fr 2fr;
   grid-template-rows: repeat(10, 2.36rem);
   grid-gap: 1vw;
-  margin: 0 auto 15vh;
+  margin-top: 5%;
 }
 
 h2 {
