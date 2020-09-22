@@ -434,6 +434,11 @@ textarea {
     width: 50vmax;
   }
 
+  .mail,
+  .title-mail {
+    display: none;
+  }
+
   h1 {
     font-size: 2rem;
   }
@@ -452,10 +457,20 @@ textarea {
   }
 
   .submit-box {
-    grid-template-rows: repeat(10, 2rem);
+    grid-template-rows: repeat(9, 2rem);
     grid-gap: 0.6rem;
     margin-top: 10%;
   }
+
+  .button-block {
+    grid-row: 8/8;
+  }
+
+  .description-title,
+  .description-content {
+    grid-row: 6/6;
+  }
+
 
   select {
     width: 100%;
