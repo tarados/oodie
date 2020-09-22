@@ -31,6 +31,7 @@ h1, h3, h4, h5, h6, span {
 /*************/
 .autocomplete-input {
     border:1px solid #bbb;
+    height: 100%;
     width:100%;
     padding:12px 12px 12px 10px;
     box-sizing:border-box;
@@ -100,3 +101,10 @@ h1, h3, h4, h5, h6, span {
     background-color:rgba(0,0,0,.06);
 }
 @keyframes rotate {0%{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(359deg)}}
+
+/*media query**********************************************************************************************/
+@media screen and (max-width: 960px) {
+  .autocomplete-input {
+      padding: 7px 7px 7px 5px;
+  }
+}

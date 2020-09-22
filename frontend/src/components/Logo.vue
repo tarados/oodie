@@ -63,7 +63,7 @@ img {
   }
 
   img {
-    width: 45vmax;
+    width: 43vmax;
   }
 }
 
@@ -73,7 +73,7 @@ img {
   }
 
   img {
-    width: 45vmax;
+    width: 50vmax;
   }
 }
 
@@ -83,13 +83,13 @@ img {
   }
 
   img {
-    width: 45vmax;
+    width: 50vmax;
   }
 }
 
 @media screen and (max-width: 280px) {
   img {
-    width: 40vmax;
+    width: 38vmax;
   }
 }
 </style>

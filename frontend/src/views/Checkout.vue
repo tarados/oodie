@@ -210,7 +210,6 @@ export default {
       }
     },
     email: function () {
-      console.log(this.$v.email);
       if (this.$v.email.$invalid) {
         this.invalidEmail = this.$v.email.required;
       } else {
@@ -231,16 +230,14 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
-  margin: 0 1rem;
+  width: 37vmax;
+  margin: 0 auto;
 }
 
 .subtotal {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 37rem;
-  margin: 3% auto;
-
 }
 
 .header {
@@ -274,10 +271,9 @@ export default {
 
 /*Contact information*************************************************************************/
 .submit-box {
-  max-width: 37rem;
   display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: repeat(9, 2.36rem);
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: repeat(10, 2.36rem);
   grid-gap: 1vw;
   margin: 0 auto 15vh;
 }
@@ -432,6 +428,10 @@ textarea {
 
 /*media queries*****************************************************************************/
 @media screen and (max-width: 960px) {
+  .wrapper-checkout {
+    width: 50vmax;
+  }
+
   h1 {
     font-size: 2rem;
   }
@@ -445,17 +445,13 @@ textarea {
     font-size: 0.78rem;
   }
 
-  .header-box {
-    margin-top: 5%;
-  }
-
   h2 {
     font-size: 1.1rem;
   }
 
   .submit-box {
-    grid-template-rows: repeat(7, 2rem);
-    grid-gap: 1rem;
+    grid-template-rows: repeat(10, 2rem);
+    grid-gap: 0.6rem;
     margin-top: 10%;
   }
 
@@ -491,16 +487,11 @@ textarea {
   .continue-shopping {
     font-size: 0.71rem;
   }
-
-  textarea {
-    height: 10vmax;
-  }
-
 }
 
 @media (max-width: 450px) {
   .wrapper-checkout {
-    margin: 0 1.7rem
+    width: 45vmax;
   }
 
   .header h1 {
@@ -511,6 +502,53 @@ textarea {
 
   h2 {
     font-size: 1rem;
+  }
+
+  .button-block {
+    grid-row: 10 / 10;
+    /*grid-auto-rows: 2.36rem;*/
+  }
+
+  .continue-shipping,
+  .continue-shopping {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .wrapper-checkout {
+    width: 43vmax;
+  }
+}
+
+@media (max-width: 320px) {
+  .wrapper-checkout {
+    width: 50vmax;
+  }
+
+  .header h1 {
+    font-size: 1.25rem;
+    margin-top: 5%;
+    margin-bottom: 5%
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .button-block {
+    grid-row: 10 / 10;
+  }
+
+  .continue-shipping,
+  .continue-shopping {
+    font-size: 0.45rem;
+  }
+}
+
+@media (max-width: 280px) {
+  .wrapper-checkout {
+    width: 38vmax;
   }
 }
 
