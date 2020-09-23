@@ -41,7 +41,7 @@
             <img :src="product.image">
           </div>
           <div class="product" v-if="product.size">
-            {{ product.title }} Size -ss {{ product.size }}
+            {{ product.title }} Size - {{ product.size }}
           </div>
           <div class="product" v-else>
             {{ product.title }}
@@ -497,9 +497,6 @@ img {
     border-bottom: 10px solid black;
   }
 
-  .triangle-mobile-up:hover, .triangle-mobile-down:hover {
-    background: rgba(150, 21, 100, 0.5);
-  }
 
   .triangle-mobile-down {
     width: 0;
