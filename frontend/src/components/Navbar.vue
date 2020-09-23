@@ -13,14 +13,14 @@
         </div>
         <div class="card-hamburger">
           <div class="card" v-show="this.$store.state.productsStore.basketVisible">
+            <router-link :to="{name: 'Card'}">
+              <img src="../assets/basket.png">
+            </router-link>
             <span
                 class="item-basket"
                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
             >{{ this.$store.state.productsStore.cardProducts.length }}
             </span>
-            <router-link :to="{name: 'Card'}">
-              <img src="../assets/basket.png">
-            </router-link>
           </div>
           <div class="item hamburger"></div>
           <Hamburger/>
@@ -302,6 +302,15 @@ span {
   .linkList {
     display: none;
   }
+
+  .card-hamburger {
+    margin-left: 20%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -331,7 +340,12 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 55%;
+    margin-left: 53%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 
@@ -362,7 +376,12 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 42%;
+    margin-left: 39%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 
@@ -389,7 +408,12 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 35%;
+    margin-left: 33%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 
@@ -416,7 +440,12 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 34%;
+    margin-left: 30%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 
@@ -443,7 +472,12 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 25%;
+    margin-left: 20%;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 
@@ -453,11 +487,16 @@ span {
   }
 
   .card-hamburger {
-    margin-left: 20%;
+    margin-left: 12%;
   }
 
   .card {
     margin-right: 0;
+  }
+
+  .card-hamburger span {
+    font-size: 1.7rem;
+    margin: 0;
   }
 }
 </style>

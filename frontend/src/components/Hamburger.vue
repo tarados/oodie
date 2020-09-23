@@ -205,7 +205,7 @@ export default {
 
 @media screen and (max-width: 540px) {
   .menu-wrap .hamburger {
-    top: 9px;
+    top: 5px;
   }
 }
 
@@ -229,8 +229,8 @@ export default {
 
 @media screen and (max-width: 375px) {
   .menu-wrap .hamburger {
-    top: 5px;
-    right: 6px;;
+    top: 0.6vmax;
+    right: 6px;
   }
 
   .menu-wrap .menu {
