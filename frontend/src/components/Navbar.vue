@@ -257,7 +257,7 @@ span {
 }
 
 .card span {
-  font-size: 1.45rem;
+  font-size: 1rem;
   margin-top: 3px;
 }
 
