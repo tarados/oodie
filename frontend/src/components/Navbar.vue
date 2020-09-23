@@ -4,17 +4,14 @@
       <div class="nav-header">
         <div class="contact-info">
           <router-link to="#" class="contact-phone">
-            <img src="../assets/phone.jpg"/>
+            <img src="../assets/phone-receiver.svg"/>
             <p>+380507204066</p>
           </router-link>
-          <div class="contact-email">
-            <p>hoodiyalko@gmail.com</p>
-          </div>
         </div>
         <div class="card-hamburger">
           <div class="card" v-show="this.$store.state.productsStore.basketVisible">
             <router-link :to="{name: 'Card'}">
-              <img src="../assets/basket.png">
+              <img src="../assets/cart.svg">
             </router-link>
             <span
                 class="item-basket"
@@ -125,19 +122,16 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3.82rem;
+  height: 7.5vmin;
   background-color: #c7d9d8;
 }
 
 .contact-info {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+ margin-left: 2vmin;
 }
 
 .contact-info img {
-  width: 2rem;
+  width: 3vmin;
 }
 
 .contact-phone {
@@ -150,10 +144,12 @@ export default {
 }
 
 .contact-phone p {
-  margin: 0 0.35rem;
+  color: black;
+  margin: 1vmin;
 }
 
 .card-hamburger {
+  margin-right: 4vmin;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -254,17 +250,16 @@ span {
 
 .card {
   display: flex;
-  margin-right: 45%;
   align-items: center;
 }
 
 .card span {
-  font-size: 1rem;
-  margin-top: 3px;
+  font-size: 1.1em;
+  margin-left: 2vmin;
 }
 
 .card a img {
-  width: 2.75rem;
+  width: 4.5vmin;
 }
 
 
