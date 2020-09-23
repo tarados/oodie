@@ -255,7 +255,7 @@ export default {
 }
 
 .red {
-  color: #eb6f6e;
+  /*color: #eb6f6e;*/
 }
 
 .right {

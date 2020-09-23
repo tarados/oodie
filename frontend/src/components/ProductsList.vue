@@ -107,16 +107,23 @@ h4 {
 }
 
 .price-box {
-  width: 15%;
+  width: 100%;
   margin-bottom: 10px;
   display: inline-flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
+.price-box span {
+  margin: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 span.old {
-  color: red;
+  /*color: red;*/
 }
 
 .no-current {
