@@ -27,7 +27,7 @@ class ProductAvailabilityInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ('title', 'price', 'category', 'get_image', 'description', 'hidden', 'availability_info')
+	list_display = ('title', 'get_price', 'category', 'get_image', 'description', 'hidden', 'availability_info')
 	list_filter = ['category']
 	list_editable = ['hidden']
 	inlines = [

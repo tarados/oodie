@@ -38,6 +38,17 @@ class Product(models.Model):
 		verbose_name = u'товар'
 		verbose_name_plural = u'товары'
 
+	def get_price(self):
+		try:
+			if self.new_price:
+				return self.new_price
+			else:
+				return self.price
+		except IndexError:
+			return self.price
+
+	get_price.short_description = "Цена"
+
 	def get_image(self):
 		try:
 			obj = ProductImage.objects.filter(product=self.id)[0]
