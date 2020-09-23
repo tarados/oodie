@@ -48,7 +48,7 @@ export default {
 .menu-wrap {
   display: none;
   position: fixed;
-  top: 4.4vw;
+  top: 0;
   left: 0;
   z-index: 1;
 }
@@ -135,7 +135,6 @@ export default {
 
 .menu-wrap .menu {
   position: fixed;
-  top: 13%;
   left: 0;
   width: 100%;
   height: 164px;
@@ -217,10 +216,6 @@ export default {
 }
 
 @media screen and (max-width: 420px) {
-  .menu-wrap .menu {
-    top: 8.2%;
-  }
-
   .menu-wrap .hamburger {
     top: 5px;
     right: 6px;;
@@ -233,15 +228,10 @@ export default {
     right: 6px;
   }
 
-  .menu-wrap .menu {
-    top: 7.2vmax;
-  }
 }
 
 @media screen and (max-width: 360px) {
-  .menu-wrap .menu {
-    top: 8.5%;
-  }
+
 }
 
 @media screen and (max-width: 325px) {
@@ -250,14 +240,9 @@ export default {
     right: 6px;;
   }
 
-  .menu-wrap .menu {
-    top: 8.8%;
-  }
 }
 
 @media screen and (max-width: 285px) {
-  .menu-wrap .menu {
-    top: 18vw;
-  }
+
 }
 </style>

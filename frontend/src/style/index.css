@@ -9,8 +9,8 @@
 
 
 :root {
-    --primary-color: rgba(13, 110, 139, 0.1);
-    --overlay-color: rgba(24, 39, 51, 0.55);
+    --primary-color: rgba(13, 110, 139, 0.5);
+    --overlay-color: #c7d9d8;
     --menu-speed: 0.75s;
 }
 
