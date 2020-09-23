@@ -3,10 +3,10 @@
     <div class="container-nav">
       <div class="nav-header">
         <div class="contact-info">
-          <div class="contact-phone">
+          <router-link to="#" class="contact-phone">
             <img src="../assets/phone.jpg"/>
             <p>+380507204066</p>
-          </div>
+          </router-link>
           <div class="contact-email">
             <p>hoodiyalko@gmail.com</p>
           </div>
@@ -141,6 +141,8 @@ export default {
 }
 
 .contact-phone {
+  text-decoration: none;
+  cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
