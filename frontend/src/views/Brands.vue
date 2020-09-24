@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-brands">
-    <h3>ТУТ БУДЕТ ТЕКСТ ПРО ОТБОР БРЕНДОВ ДРУЗЕЙ, КАКИЕ ОРИГИНАЛЬНЫЕ ТУТ ТОВАРЫ И КАК ОНИ ХОРОШИ НА ПОДАРОК
-      ТЕКСТ ПРИМЕРНО НА 500 ЗНАКОВ, О ТВОРЧЕСТВЕ НЕБОЛЬШИХ КОМПАНИЙ И УНИКАЛЬНОСТИ, И ПРО ДОСТАВКУ В ОДНОЙ ПОСЫЛКЕ</h3>
+    <div class="brands-info">ТУТ БУДЕТ ТЕКСТ ПРО ОТБОР БРЕНДОВ ДРУЗЕЙ, КАКИЕ ОРИГИНАЛЬНЫЕ ТУТ ТОВАРЫ И КАК ОНИ ХОРОШИ НА ПОДАРОК
+      ТЕКСТ ПРИМЕРНО НА 500 ЗНАКОВ, О ТВОРЧЕСТВЕ НЕБОЛЬШИХ КОМПАНИЙ И УНИКАЛЬНОСТИ, И ПРО ДОСТАВКУ В ОДНОЙ ПОСЫЛКЕ</div>
     <BrandsList/>
   </div>
 </template>
@@ -46,6 +46,16 @@ export default {
 </script>
 
 <style scoped>
+.wrapper-brands {
+  max-width: 1580px;
+  margin: 0 auto;
+  padding: 0 3%;
+}
+
+.brands-info {
+  font-size: calc(16px + 7 * (100vw / 1580));
+  font-family: 'Arial', sans-serif;
+}
 
 /*media queries******************************************************************************************************/
 @media screen and (max-width: 1200px) {
@@ -58,7 +68,10 @@ export default {
 
 
 @media screen and (max-width: 750px) {
-
+  .brands-info {
+    font-size: calc(16px + (7 + 7 * 0.7) * (100vw / 1580));
+    font-family: 'Arial', sans-serif;
+  }
 }
 
 @media screen and (max-width: 420px) {

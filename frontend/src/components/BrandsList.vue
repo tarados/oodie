@@ -47,10 +47,6 @@ export default {
   margin: 0 auto;
 }
 
-h4 {
-
-}
-
 .row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -79,10 +75,6 @@ h4 {
   font-family: 'Arial', sans-serif;
   bottom: 3vmin;
   left: 14%;
-}
-
-.brand-image {
-
 }
 
 img {
