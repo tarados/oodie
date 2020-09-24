@@ -16,7 +16,7 @@
             v-model="userName"
             :class="{invalid: invalidName}"
         >
-        <small v-show="invalidName"> Enter your name!</small>
+        <small v-show="invalidName"> Введите Ваше имя!</small>
       </div>
       <div class="title-phone">
         Телефон:
@@ -26,14 +26,15 @@
             v-model="phone"
             :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
         >
-        <small v-if="!$v.phone.numeric"> Enter only numeric!</small>
+        <small v-if="!$v.phone.numeric"> Вводите только числа!</small>
         <small
             v-else-if="!$v.phone.minLength || !$v.phone.maxLength"
         >
-          The length of the number should be {{ $v.phone.$params.maxLength.max }}. Now it {{ phone.length }}!
+          В номере должно быть {{ $v.phone.$params.maxLength.max }} чисел. Сейчас их {{ phone.length }}!
         </small>
-        <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength"> Enter your
-          phone!</small>
+        <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength">
+          Введите номер телефона!
+        </small>
       </div>
       <div class="title-mail">
         E-mail:
