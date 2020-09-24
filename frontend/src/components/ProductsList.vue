@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       category: '',
-      large: true,
-      small: false
+      large: null,
+      small: null
     }
   },
   computed: {

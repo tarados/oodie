@@ -24,6 +24,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 100;
+  font-size: 5vmin;
 }
 
 img {
