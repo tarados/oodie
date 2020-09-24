@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .breadcrumbs {
-  padding: 10px;
+  padding: 15px;
 }
 
 .breadcrumbs__item {

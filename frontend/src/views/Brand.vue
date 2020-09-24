@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper-brand">
     <Breadcrumbs :current-category="activeCategoryTitle"/>
     <ProductsList thumbnail="small" :category-id="activeCategoryId"/>
   </div>
@@ -54,7 +54,11 @@ export default {
 </script>
 
 <style scoped>
-
+.wrapper-brand {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
 
 /*media queries******************************************************************************************************/
 @media screen and (max-width: 1200px) {
