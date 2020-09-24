@@ -59,7 +59,11 @@
                   v-for="(item, index) in this.$store.getters.allCategories" :key="index"
                   v-show="item.slug !== 'hoodiyalko'"
               >
-                <router-link :to="{name: 'Brand', params: {slug: item.slug}}">{{ item.title }}</router-link>
+                <router-link
+                    :to="{name: 'Brand', params: {slug: item.slug}}"
+                >
+                  <p>{{ item.title }}</p>
+                </router-link>
               </div>
             </div>
           </transition>
@@ -213,9 +217,9 @@ span {
   position: absolute;
   background-color: #c7d9d8;
   top: calc(100% + 0.5rem);
-  /*transform: translateX(-50%);*/
   width: 80%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   padding: 3%;
 }
