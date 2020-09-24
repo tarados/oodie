@@ -32,9 +32,6 @@
   }
 
   .wrapper {
-    /*min-height: 100%;*/
-    /*display: grid;*/
-    /*grid-template: minmax(100px, auto) 1fr minmax(70px, auto) / 1fr;*/
     display: flex;
     flex-flow: column;
     flex: 1;

@@ -6,8 +6,8 @@
                    :class="{ product: large, item_sm: small}"
       >
         <img :src="product.image">
-        <h4 v-show="large">{{ product.title }}</h4>
-        <div class="price-box" v-show="large">
+        <h4>{{ product.title }}</h4>
+        <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
           <span v-else>{{ product.price }} грн</span>
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
@@ -148,39 +148,24 @@ span.old {
 
 /*media queries*/
 @media screen and (max-width: 1200px) {
-  .product {
-    padding-left: 0;
-  }
 
 }
 
 @media screen and (max-width: 960px) {
-  h4,
-  .price-box {
-    font-size: 2.5vw;
-  }
-
-  .header h2 {
-    font-size: calc(3.125vw + 10px);
-  }
-}
-
-
-@media screen and (max-width: 750px) {
-  .product {
-    flex-basis: 600px;
-  }
-
   .item_sm {
     width: calc((100% / 12) * 6 - 30px);
   }
-
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 750px) {
+  .product,
   .item_sm {
     width: calc((100% / 12) * 12 - 30px);
   }
+}
+
+@media screen and (max-width: 420px) {
+
 }
 
 @media screen and (max-width: 375px) {
@@ -188,6 +173,14 @@ span.old {
 }
 
 @media screen and (max-width: 360px) {
+
+}
+
+@media screen and (max-width: 320px) {
+
+}
+
+@media screen and (max-width: 280px) {
 
 }
 
