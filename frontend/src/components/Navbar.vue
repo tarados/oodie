@@ -121,7 +121,7 @@ export default {
 }
 
 .container-nav {
-  height: 20.58vmax;
+  height: calc(370px + 12 * (100vw / 1580));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -134,7 +134,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 7.5vmin;
+  height: calc(39px + 10 * (100vw / 1580));
   background-color: #c7d9d8;
 }
 
@@ -277,14 +277,16 @@ span {
 /*media queries*************************************************************************************/
 
 @media screen and (max-width: 1024px) {
-  .container-nav {
-    height: 13.7rem;
-  }
+
 }
 
 @media screen and (max-width: 750px) {
   .container-nav {
-    height: 23.3rem;
+    height: calc(168px + (12 + 12 * 0.7) * (100vw / 1580));
+  }
+
+  .nav-header {
+    height: calc(59px + 7 * (100vw / 1580));
   }
 
   .contact-info {
@@ -335,9 +337,6 @@ span {
     width: 10vmax;
   }
 
-  .container-nav {
-    height: 10rem;
-  }
 
   .card {
     margin: 0;
@@ -371,10 +370,6 @@ span {
     width: 10vmax;
   }
 
-  .container-nav {
-    height: 10rem;
-  }
-
   .card {
     margin: 0;
   }
@@ -401,10 +396,6 @@ span {
 
   img {
     width: 10vmax;
-  }
-
-  .container-nav {
-    height: 10rem;
   }
 
   .card {
@@ -435,9 +426,6 @@ span {
     width: 10vmax;
   }
 
-  .container-nav {
-    height: 10rem;
-  }
 
   .card {
     margin: 0;
@@ -465,10 +453,6 @@ span {
 
   img {
     width: 10vmax;
-  }
-
-  .container-nav {
-    height: 10rem;
   }
 
   .card {
