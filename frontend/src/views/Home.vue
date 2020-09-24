@@ -8,22 +8,21 @@
       </div>
     </header>
     <div class="info">
-      <div class="service-icon icon1"></div>
-      <div class="info-content size">
+      <div class="info-content">
         <img src="../assets/size.png">
         <div class="info-title">
           <h4>Один размер</h4>
           <span>Подходит для всех</span>
         </div>
       </div>
-      <div class="info-content cat">
+      <div class="info-content">
         <img src="../assets/cat.png">
         <div class="info-title">
           <h4>теплое и очень мягкое</h4>
           <span>как котик</span>
         </div>
       </div>
-      <div class="info-content delivery">
+      <div class="info-content">
         <img src="../assets/delivery.png">
         <div class="info-title">
           <h4>бесплатная доставка</h4>
@@ -58,9 +57,9 @@ export default {
   },
   methods: {
     basketVisible() {
-      if (this.$store.state.productsStore.basketVisible);
-       else (this.$store.dispatch('changeVisibleBasket'));
-      }
+      if (this.$store.state.productsStore.basketVisible) ;
+      else (this.$store.dispatch('changeVisibleBasket'));
+    }
   },
   mounted() {
     this.basketVisible();
@@ -69,7 +68,6 @@ export default {
 </script>
 
 <style scoped>
-/*section one - header*****************************************************************************/
 .container {
   max-width: 960px;
   margin: auto;
@@ -81,7 +79,8 @@ export default {
   content: '';
   background: url("../assets/tile.jpg") no-repeat center center/cover;
   width: 100%;
-  height: 650px;
+  height: 35vmax;
+  margin-bottom: 5vmin;
 }
 
 .showcase .showcase-inner {
@@ -123,99 +122,49 @@ export default {
   opacity: 0.7;
 }
 
-
-/*section two -  collections oodie******************************************************************/
-.collections {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.wrapper_collections {
-  padding: 55px;
-}
-
-.item_collections {
-  flex: 0 1 50%;
-}
-
-.item_collections_image_wrapper {
-  max-width: 436px;
-  max-height: 545px;
-  margin: 0 auto 19px;
-  position: relative;
-  width: 100%;
-}
-
-.item_collections_image {
-  max-width: 436px;
-  max-height: 545px;
-}
-
 .info {
-  width: 85%;
-  margin: 0 auto;
-  height: 10rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
 }
 
-.info .info-content img {
-  width: 4vmax;
-  margin-right: 2%;
-}
-
-.info .delivery img {
-  margin-top: 4%;
-}
 
 .info-content {
-  height: 5vmax;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: center;
 }
 
-.size {
-  width: 25%;
+.info-content:last-child {
+  margin-right: 5vmin;
+  border-left: 1px solid grey;
 }
 
-.cat {
-  width: 35%
-}
-
-.delivery {
-  width: 25%;
-}
-
-.cat,
-.size {
+.info-content:first-child {
   border-right: 1px solid grey;
 }
 
-.info-title {
-  height: 4.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.info-content .info-title {
+  margin: 0 2vmin;
 }
 
-.info-content h4 {
-  margin-top: 8%;
-  font-size: 1vmax;
+.info-content img {
+  width: 6.5vmin;
+}
+
+.info-content .info-title h4 {
+  padding: 1.1vmin 0;
+  font-size: 2.4vmin;
   font-weight: 500;
 }
 
-.info-content span {
-  font-size: 0.83vmax;
+.info-content .info-title span {
+  font-size: 2vmin;
   color: #b0b0b0;
 }
 
-.info-content span,
+.info-content .info-title span,
 h4 {
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -226,35 +175,20 @@ h4 {
 
 @media screen and (max-width: 1024px) {
 
-  .delivery {
-    width: 28%;
-  }
-
-  .info-content h4 {
-    margin-top: 11%;
-    font-size: 0.8vmax;
-  }
-
-  .info-content span {
-    font-size: 0.7vmax;
-  }
-
-  .info-title {
-    height: 4vmax;
-    justify-content: space-around;
-  }
 }
 
 @media screen and (max-width: 750px) {
+  .info {
+    display: none;
+  }
+
   .showcase {
     height: 490px;
   }
 }
 
 @media screen and (max-width: 420px) {
-  .info {
-    display: none;
-  }
+
 }
 
 @media screen and (max-width: 375px) {
@@ -270,22 +204,7 @@ h4 {
 }
 
 @media screen and (max-width: 320px) {
-  .info .info-content img {
-    width: 1.2rem;
-  }
 
-  .info-content h4,
-  h5 {
-    font-size: 0.3rem;
-  }
-
-  .info-title {
-    justify-content: space-around;
-  }
-
-  .info-content {
-    width: auto;
-  }
 }
 
 
