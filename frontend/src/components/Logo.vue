@@ -20,7 +20,7 @@ export default {
 }
 
 img {
-  width: 36vmax;
+  width: 35.88vmax;
   margin: 0 auto;
 }
 

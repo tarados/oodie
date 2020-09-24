@@ -117,7 +117,7 @@ export default {
 }
 
 .container-nav {
-  height: 25.19rem;
+  height: 20.58vmax;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,17 +173,16 @@ span {
 }
 
 .linkList {
-  margin-bottom: 2.5rem;
-  width: 100%;
+  margin-bottom: 7vmin;
+  align-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .linkList .linkList-item {
-  padding: 10px 75px;
+  padding: 0 10.1vmin;
   position: relative;
-  text-align: center;
   border-bottom: 3px solid transparent;
   display: flex;
   transition: 0.4s;
