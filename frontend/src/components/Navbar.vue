@@ -28,11 +28,15 @@
         <div class="linkList-item">
           <router-link :to="{name: 'Home'}"
           >
-            главная
+            <p>главная</p>
           </router-link>
         </div>
         <div class="linkList-item">
-          <router-link :to="{name: 'About'}">о нас</router-link>
+          <router-link
+              :to="{name: 'About'}"
+          >
+            <p>о нас</p>
+          </router-link>
         </div>
         <div class="linkList-item"
              @mouseover="mouseover"
@@ -41,7 +45,7 @@
           <router-link
               :to="{name: 'Brands'}"
           >
-            бренды друзья
+            <p>бренды друзья</p>
           </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -61,7 +65,11 @@
           </transition>
         </div>
         <div class="linkList-item">
-          <router-link :to="{name: 'Contacts'}">контакты</router-link>
+          <router-link
+              :to="{name: 'Contacts'}"
+          >
+            <p>контакты</p>
+          </router-link>
         </div>
       </div>
     </div>

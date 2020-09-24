@@ -12,16 +12,15 @@ export default {
 
 <style scoped>
 .wrapper-logo {
-  margin-top: 2rem;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
 
 }
 
 img {
-  width: 37vmax;
+  width: 36vmax;
   margin: 0 auto;
 }
 
