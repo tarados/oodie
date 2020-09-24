@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h2> ты с нами в instagram?</h2>
-    <div class="hello-instagram"></div>
+    <h1> ты с нами в instagram?</h1>
+    <div class="hello-instagram">
+      <img src="../assets/insta.jpg">
+    </div>
   </div>
 </template>
 
@@ -13,18 +15,18 @@ export default {
 
 <style scoped>
 .hello-instagram {
-  height: 14rem;
-  margin-bottom: 5%;
-  background-image: url("../assets/insta.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+  margin-bottom: 5vmin;
+ }
 
-h2 {
-  margin-top: 20px;
+h1 {
+  margin: 2vmin 0;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 100;
+}
+
+img {
+  width: 100%;
 }
 </style>

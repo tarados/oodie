@@ -8,6 +8,7 @@
       </div>
     </header>
     <div class="info">
+      <div class="service-icon icon1"></div>
       <div class="info-content size">
         <img src="../assets/size.png">
         <div class="info-title">
