@@ -20,75 +20,55 @@ export default {
 }
 
 img {
-  width: 35.88vmax;
+  width: calc(35vw + 16 * (100vw / 1835));
   margin: 0 auto;
 }
 
 
 /*media queries*************************************************************************************/
 @media screen and (max-width: 1024px) {
-  .wrapper-logo {
-    margin-bottom: 1.7rem;
-  }
+  /*.wrapper-logo {*/
+  /*  margin-bottom: 1.7rem;*/
+  /*}*/
 
-  img {
-    width: 45vmax;
-  }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 750px) {
   .wrapper-logo {
-    margin-bottom: 1.7rem;
+    margin-bottom: calc(1vw + 16 * (100vw / 750));
   }
 
-  img {
-    width: 45vmax;
-  }
 }
 
 @media screen and (max-width: 420px) {
-  .wrapper-logo {
-    margin-bottom: 1.7rem;
-  }
+  /*.wrapper-logo {*/
+  /*  margin-bottom: 1.7rem;*/
+  /*}*/
 
-  img {
-    width: 45vmax;
-  }
 }
 
 @media screen and (max-width: 375px) {
-  .wrapper-logo {
-    margin-bottom: 1.6rem;
-  }
+  /*.wrapper-logo {*/
+  /*  margin-bottom: 1.6rem;*/
+  /*}*/
 
-  img {
-    width: 43vmax;
-  }
 }
 
 @media screen and (max-width: 360px) {
-  .wrapper-logo {
-    margin-bottom: 1.7rem;
-  }
+  /*.wrapper-logo {*/
+  /*  margin-bottom: 1.7rem;*/
+  /*}*/
 
-  img {
-    width: 50vmax;
-  }
 }
 
 @media screen and (max-width: 325px) {
-  .wrapper-logo {
-    margin-bottom: 1.7rem;
-  }
+  /*.wrapper-logo {*/
+  /*  margin-bottom: 1.7rem;*/
+  /*}*/
 
-  img {
-    width: 50vmax;
-  }
 }
 
 @media screen and (max-width: 280px) {
-  img {
-    width: 38vmax;
-  }
+
 }
 </style>

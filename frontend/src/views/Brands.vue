@@ -53,8 +53,9 @@ export default {
 }
 
 .brands-info {
-  font-size: calc(16px + 7 * (100vw / 1580));
+  font-size: calc(1vw + 8 * (100vw / 1838));
   font-family: 'Arial', sans-serif;
+  margin: 1% 0;
 }
 
 /*media queries******************************************************************************************************/
@@ -69,7 +70,7 @@ export default {
 
 @media screen and (max-width: 750px) {
   .brands-info {
-    font-size: calc(16px + (7 + 7 * 0.7) * (100vw / 1580));
+    font-size: calc(1vw + 10 * (100vw / 750));
     font-family: 'Arial', sans-serif;
   }
 }

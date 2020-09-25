@@ -2,25 +2,23 @@
   <div class="navbar">
     <div class="container-nav">
       <div class="nav-header">
-        <div class="contact-info">
-          <router-link to="#" class="contact-phone">
+        <div class="hamburg">
+          <Hamburger/>
+        </div>
+        <div class="phone">
+          <router-link to="#">
             <img src="../assets/phone-receiver.svg"/>
             <p>+380507204066</p>
           </router-link>
         </div>
-        <div class="card-hamburger">
-          <div class="card" v-show="this.$store.state.productsStore.basketVisible">
-            <router-link :to="{name: 'Card'}">
-              <img src="../assets/cart.svg">
-            </router-link>
+        <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
+          <router-link :to="{name: 'Card'}">
+            <img src="../assets/cart.svg">
             <span
-                class="item-basket"
                 v-show="this.$store.state.productsStore.cardProducts.length > 0"
             >{{ this.$store.state.productsStore.cardProducts.length }}
             </span>
-          </div>
-          <div class="item hamburger"></div>
-          <Hamburger/>
+          </router-link>
         </div>
       </div>
       <Logo/>
@@ -118,10 +116,11 @@ export default {
 <style scoped>
 .navbar {
   border-bottom: 2px solid #9a9a9a;
+
 }
 
 .container-nav {
-  height: calc(370px + 12 * (100vw / 1580));
+  height: calc(20vw + 29 * (100vw / 1838));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -129,47 +128,53 @@ export default {
 }
 
 .nav-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: calc(3vw + 4 * (100vw / 1838));
+  grid-template-areas: "phone basket";
+  background-color: #c7d9d8;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+}
+
+.hamburg {
+  grid-area: hamburg;
+}
+
+.phone {
+  grid-area: phone;
+  justify-self: flex-start;
+  margin: 0 2vmin;
+}
+
+.basket {
+  grid-area: basket;
+  justify-self: flex-end;
+  margin: 0 5vmin;
+}
+
+.phone a,
+.basket a {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  width: 100%;
-  height: calc(39px + 10 * (100vw / 1580));
-  background-color: #c7d9d8;
-}
-
-.contact-info {
- margin-left: 2vmin;
-}
-
-.contact-info img {
-  width: 3vmin;
-}
-
-.contact-phone {
   text-decoration: none;
   cursor: pointer;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0 1rem;
-}
-
-.contact-phone p {
   color: black;
-  margin: 1vmin;
 }
 
-.card-hamburger {
-  margin-right: 4vmin;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
+.phone a img,
+.basket a img {
+  width: 3vmin;
+  margin: 0 1.5vmin;
 }
 
-.logo {
-  width: 100%;
+.phone a p,
+.basket a span {
+  font-size: calc(11px + 8 * (100vw / 1580));
 }
 
 span {
@@ -180,14 +185,15 @@ span {
   margin-bottom: 7vmin;
   align-self: center;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
 .linkList .linkList-item {
-  padding: 0 10.1vmin;
+  padding: 0 calc(3vw + 12 * (100vw / 1838));
   position: relative;
-  border-bottom: 3px solid transparent;
+  /*border-bottom: 3px solid transparent;*/
   display: flex;
   transition: 0.4s;
 }
@@ -236,65 +242,28 @@ span {
   color: white;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all .2s ease-out;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0.8;
-}
-
-
-.icon {
-  display: inline-block;
-  width: 20px;
-  height: 30px;
-  vertical-align: middle;
-  fill: currentColor;
-}
-
-.hamburger {
-  display: none;
-}
-
-.card {
-  display: flex;
-  align-items: center;
-}
-
-.card span {
-  font-size: 1.1em;
-  margin-left: 2vmin;
-}
-
-.card a img {
-  width: 4.5vmin;
-}
-
-
 /*media queries*************************************************************************************/
+@media screen and (max-width: 1600px) {
+  .container-nav {
+    height: calc(20vw + 22 * (100vw / 1600));
+  }
+}
 
-@media screen and (max-width: 1024px) {
-
+@media screen and (max-width: 1200px) {
+  .linkList .linkList-item {
+    padding: 0 calc(1vw + 12 * (100vw / 1200));
+  }
 }
 
 @media screen and (max-width: 750px) {
-  .container-nav {
-    height: calc(168px + (12 + 12 * 0.7) * (100vw / 1580));
+  .nav-header {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "hamburg phone basket";
+    justify-items: center;
   }
 
   .nav-header {
     height: calc(59px + 7 * (100vw / 1580));
-  }
-
-  .contact-info {
-    flex-flow: column;
-  }
-
-  .contact-info img {
-    width: 0.9rem;
   }
 
   p {
@@ -313,182 +282,13 @@ span {
     display: none;
   }
 
-  .card-hamburger {
-    margin-left: 20%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .nav-header {
-    justify-content: normal;
-  }
-
-  p,
-  .card span {
-    font-size: 0.55rem;
-  }
-
-  img {
-    width: 10vmax;
-  }
-
-
-  .card {
-    margin: 0;
-  }
-
-  .card img {
-    width: 1.5rem;
-  }
-
-  .card-hamburger {
-    margin-left: 53%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .nav-header {
-    justify-content: normal;
-  }
-
-  p,
-  .card span {
-    font-size: 0.55rem;
-  }
-
-  img {
-    width: 10vmax;
-  }
-
-  .card {
-    margin: 0;
-  }
-
-  .card img {
-    width: 1.5rem;
-  }
-
-  .card-hamburger {
-    margin-left: 39%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  p,
-  .card span {
-    font-size: 0.55rem;
-  }
-
-  img {
-    width: 10vmax;
-  }
-
-  .card {
-    margin: 0;
-  }
-
-  .card img {
-    width: 1.5rem;
-  }
-
-  .card-hamburger {
-    margin-left: 33%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  p,
-  .card span {
-    font-size: 0.55rem;
-  }
-
-  img {
-    width: 10vmax;
-  }
-
-
-  .card {
-    margin: 0;
-  }
-
-  .card img {
-    width: 1.5rem;
-  }
-
-  .card-hamburger {
-    margin-left: 30%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
 }
 
 @media screen and (max-width: 325px) {
-  p,
-  .card span {
-    font-size: 0.55rem;
-  }
-
-  img {
-    width: 10vmax;
-  }
-
-  .card {
-    margin: 0;
-  }
-
-  .card img {
-    width: 1.5rem;
-  }
-
-  .card-hamburger {
-    margin-left: 20%;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
+  .phone a p,
+  .basket a span {
+    font-size: calc(14px + 6 * (100vw / 1580));
   }
 }
 
-@media screen and (max-width: 280px) {
-  .nav-header {
-    justify-content: flex-start;
-  }
-
-  .card-hamburger {
-    margin-left: 12%;
-  }
-
-  .card {
-    margin-right: 0;
-  }
-
-  .card-hamburger span {
-    font-size: 1.7rem;
-    margin: 0;
-  }
-}
 </style>

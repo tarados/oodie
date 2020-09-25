@@ -1,6 +1,6 @@
 <template>
   <div class="menu-wrap">
-    <input type="checkbox" class="toggler" v-model="checked" />
+    <input type="checkbox" class="toggler" v-model="checked"/>
     <div class="hamburger">
       <div></div>
     </div>
@@ -40,7 +40,8 @@ export default {
       this.checked = false;
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 
@@ -56,7 +57,7 @@ export default {
 .menu-wrap .toggler {
   position: fixed;
   top: 1.55vw;
-  right: 1vw;
+  left: 1vw;
   z-index: 2;
   cursor: pointer;
   width: 50px;
@@ -67,12 +68,12 @@ export default {
 .menu-wrap .hamburger {
   position: fixed;
   top: 1.55vw;
-  right: 1vw;
+  left: 1vw;
   z-index: 1;
   width: 50px;
   height: 40px;
   padding: 1.2rem 1rem 1rem 1rem;
-  background-color: white;
+  background-color: #c7d9d8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,42 +192,25 @@ export default {
     display: inline;
   }
 
-  .menu-wrap .hamburger {
-    top: 5px;
-  }
 }
 
 @media screen and (max-width: 640px) {
-  .menu-wrap .hamburger {
-    top: 3.67%;
-  }
+
 }
 
 @media screen and (max-width: 540px) {
-  .menu-wrap .hamburger {
-    top: 5px;
-  }
+
 }
 
 @media screen and (max-width: 450px) {
-  .menu-wrap .hamburger {
-    top: 6px;
-    right: 6px;;
-  }
+
 }
 
 @media screen and (max-width: 420px) {
-  .menu-wrap .hamburger {
-    top: 5px;
-    right: 6px;;
-  }
+
 }
 
 @media screen and (max-width: 375px) {
-  .menu-wrap .hamburger {
-    top: 0.6vmax;
-    right: 6px;
-  }
 
 }
 
@@ -235,10 +219,7 @@ export default {
 }
 
 @media screen and (max-width: 325px) {
-  .menu-wrap .hamburger {
-    top: 9px;
-    right: 6px;;
-  }
+
 
 }
 
