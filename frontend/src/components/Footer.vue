@@ -2,40 +2,50 @@
   <div class="wrapper">
     <div class="wrapper-footer">
       <div class="footer">
-        <div class="footer-item">
-          <p class="contacts">Контакты:</p>
-          <p>+380 50 720 40 66</p>
-          <p>hoodiyalko@gmail.com</p>
+        <div class="contacts">
+          <div class="contacts-item">
+            <span>Контакты:</span>
+          </div>
+          <div class="contacts-item">
+            <img src="../assets/phone-receiver.svg"/>
+            <router-link to="#">
+              <p>+380507204066</p>
+            </router-link>
+          </div>
+          <div class="contacts-item">
+            <img src="../assets/email.svg">
+            <p>hoodiyalko@gmail.com</p>
+          </div>
         </div>
-        <div class="footer-item">
+        <div class="social">
           <div class="social-icon">
             <div class="social-content">
-              <div class="circl">
-                <img src="../assets/facebook.png">
-              </div>
+<!--              <div class="circl">-->
+<!--                <img src="../assets/facebook.png">-->
+<!--              </div>-->
               <a href="https://www.facebook.com/hoodiyalko/">
                 <p>facebook.com/hoodiyalko/</p>
               </a>
             </div>
             <div class="social-content">
-              <div class="circl">
-                <img src="../assets/instagram.png">
-              </div>
+<!--              <div class="circl">-->
+<!--                <img src="../assets/instagram.png">-->
+<!--              </div>-->
               <a href="https://www.instagram.com/hoodiyalko/">
                 <p>instagram.com/hoodiyalko/</p>
               </a>
             </div>
             <div class="social-content">
-              <div class="circl">
-                <img src="../assets/tik-tok.png">
-              </div>
+<!--              <div class="circl">-->
+<!--                <img src="../assets/tik-tok.png">-->
+<!--              </div>-->
               <a href="https://www.tiktok.com/hoodiyalko/">
                 <p>tiktok.com/hoodiyalko/</p>
               </a>
             </div>
           </div>
         </div>
-        <div class="footer-item">
+        <div class="delivery">
           <p>Доставка и оплата</p>
           <p>Сотрудничество</p>
           <p>Обмен и возврат</p>
@@ -68,23 +78,50 @@ export default {
 }
 
 .footer {
-  width: 1200px;
-  margin: 0 auto;
-  height: 9rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 9em;
+  grid-template-areas: "contacts delivery social";
+  align-items: center;
+  justify-items: center;
 }
 
-.footer-item {
+.contacts {
+  grid-area: contacts;
+}
+
+.contacts-item {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.contacts-item a,
+.contacts-item p {
+  margin: 0 1.2vmin;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.contacts-item img {
+  width: 3vmin;
+}
+
+.delivery {
+  grid-area: delivery;
+}
+
+.contacts,
+.delivery {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 0 1rem;
-  padding: 1%;
-  width: calc((100% / 12) * 4 - 2rem);
-  height: 100%;
-  color: black;
+}
+
+.social {
+  grid-area: social;
 }
 
 .social-icon {
@@ -108,12 +145,9 @@ export default {
   border-radius: 50%;
 }
 
-img {
-  width: 0.9rem;
-  margin-top: 25%;
-}
 
-p.contacts {
+
+.contacts span {
   text-transform: uppercase;
 }
 
