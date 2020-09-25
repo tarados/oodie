@@ -41,34 +41,35 @@ img {
 }
 
 @media screen and (max-width: 420px) {
-  /*.wrapper-logo {*/
-  /*  margin-bottom: 1.7rem;*/
-  /*}*/
+  .wrapper-logo {
+    margin-bottom: calc(6vw + 12 * (100vw / 420));
+  }
 
 }
 
 @media screen and (max-width: 375px) {
-  /*.wrapper-logo {*/
-  /*  margin-bottom: 1.6rem;*/
-  /*}*/
+  .wrapper-logo {
+    margin-bottom: calc(6vw + 12 * (100vw / 375));
+  }
 
 }
 
 @media screen and (max-width: 360px) {
-  /*.wrapper-logo {*/
-  /*  margin-bottom: 1.7rem;*/
-  /*}*/
-
+  .wrapper-logo {
+    margin-bottom: calc(6vw + 12 * (100vw / 360));
+  }
 }
 
 @media screen and (max-width: 325px) {
-  /*.wrapper-logo {*/
-  /*  margin-bottom: 1.7rem;*/
-  /*}*/
+  .wrapper-logo {
+    margin-bottom: calc(6vw + 12 * (100vw / 325));
+  }
 
 }
 
 @media screen and (max-width: 280px) {
-
+.wrapper-logo {
+  margin-bottom: calc(6vw + 12 * (100vw / 280));
+}
 }
 </style>

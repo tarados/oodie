@@ -260,10 +260,7 @@ span {
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: "hamburg phone basket";
     justify-items: center;
-  }
-
-  .nav-header {
-    height: calc(59px + 7 * (100vw / 1580));
+    height: calc(7vw + 5 * (100vw / 750));
   }
 
   p {
@@ -281,14 +278,57 @@ span {
   .linkList {
     display: none;
   }
-
 }
 
-@media screen and (max-width: 325px) {
-  .phone a p,
-  .basket a span {
-    font-size: calc(14px + 6 * (100vw / 1580));
+@media screen and (max-width: 525px) {
+  .container-nav {
+    height: calc(20vw + 22 * (100vw / 525));
+  }
+
+  .nav-header {
+    height: calc(8vw + 5 * (100vw / 525));
   }
 }
+
+@media screen and (max-width: 475px) {
+  .phone a p,
+  .basket a span {
+    font-size: calc(10px + 6 * (100vw / 475));
+  }
+
+  .container-nav {
+    height: calc(34vw + 23 * (100vw / 475));
+  }
+
+  .nav-header {
+    height: calc(12vw + 9 * (100vw / 475));
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .phone a p,
+  .basket a span {
+    font-size: calc(10px + 6 * (100vw / 325));
+  }
+
+  .container-nav {
+    height: calc(34vw + 23 * (100vw / 325));
+  }
+
+  .nav-header {
+    height: calc(12vw + 9 * (100vw / 325));
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .container-nav {
+    height: calc(34vw + 23 * (100vw / 280));
+  }
+
+  .nav-header {
+    height: calc(12vw + 9 * (100vw / 280));
+  }
+}
+
 
 </style>

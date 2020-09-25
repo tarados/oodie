@@ -67,7 +67,7 @@ export default {
 
 .menu-wrap .hamburger {
   position: fixed;
-  top: 1.55vw;
+  /*top: 1.55vw;*/
   left: 1vw;
   z-index: 1;
   width: 50px;
