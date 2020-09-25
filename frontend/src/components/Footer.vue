@@ -18,30 +18,30 @@
           </div>
         </div>
         <div class="social">
-          <div class="social-icon">
+          <div class="social-title">
+            <span>Мы в соцсетях:</span>
+          </div>
+          <div class="social-icons">
             <div class="social-content">
-<!--              <div class="circl">-->
-<!--                <img src="../assets/facebook.png">-->
-<!--              </div>-->
-              <a href="https://www.facebook.com/hoodiyalko/">
-                <p>facebook.com/hoodiyalko/</p>
-              </a>
+              <div class="circl">
+                <a href="https://www.facebook.com/hoodiyalko/">
+                  <img src="../assets/facebook.png">
+                </a>
+              </div>
             </div>
             <div class="social-content">
-<!--              <div class="circl">-->
-<!--                <img src="../assets/instagram.png">-->
-<!--              </div>-->
-              <a href="https://www.instagram.com/hoodiyalko/">
-                <p>instagram.com/hoodiyalko/</p>
-              </a>
+              <div class="circl">
+                <a href="https://www.instagram.com/hoodiyalko/">
+                  <img src="../assets/instagram.png">
+                </a>
+              </div>
             </div>
             <div class="social-content">
-<!--              <div class="circl">-->
-<!--                <img src="../assets/tik-tok.png">-->
-<!--              </div>-->
-              <a href="https://www.tiktok.com/hoodiyalko/">
-                <p>tiktok.com/hoodiyalko/</p>
-              </a>
+              <div class="circl">
+                <a href="https://www.tiktok.com/hoodiyalko/">
+                  <img src="../assets/tik-tok.png">
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default {
 .footer {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  grid-template-rows: 9em;
+  grid-template-rows: calc(15vmin + 15 * (100vw / 1838));
   grid-template-areas: "contacts delivery social";
   align-items: center;
   justify-items: center;
@@ -104,8 +104,13 @@ export default {
   color: black;
 }
 
-.contacts-item img {
-  width: 3vmin;
+.contacts-item img,
+.circl img {
+  width: calc(2vmin + 8 * (100vw / 1838));
+}
+
+.circl img {
+  margin-top: calc(1vmin + 1 * (100vw / 1838));
 }
 
 .delivery {
@@ -113,7 +118,8 @@ export default {
 }
 
 .contacts,
-.delivery {
+.delivery,
+.social {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -122,11 +128,13 @@ export default {
 
 .social {
   grid-area: social;
+  width: calc(15vmin + 15 * (100vw / 1838));
 }
 
-.social-icon {
+.social-icons {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .social-content {
@@ -138,14 +146,17 @@ export default {
 
 .circl {
   margin: 2% 5% 1% 0;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: calc(3vmin + 14 * (100vw / 1838));
+  height: calc(3vmin + 14 * (100vw / 1838));
   text-align: center;
   background: white;
   border-radius: 50%;
 }
 
-
+span,
+p {
+  font-size: calc(1vmin + 12 * (100vw / 1838));
+}
 
 .contacts span {
   text-transform: uppercase;
@@ -153,62 +164,44 @@ export default {
 
 /*media queries*****************************************/
 @media screen and (max-width: 1200px) {
-  .footer {
-    width: auto;
-  }
 
-  h2 {
-    font-size: calc((100vw - 30rem) / 50 * 0.5 + 1rem);
-  }
 }
 
 @media screen and (max-width: 750px) {
-  h2 {
-    font-size: calc((100vw - 30rem) / 50 * 0.5 + 1rem);
+  .footer {
+    grid-template-rows: calc(15vmin + 15 * (100vw / 750));
   }
 
-  .hello-instagram {
-    height: 4.15rem;
+  span,
+  p {
+    font-size: calc(1vmin + 6 * (100vw / 750));
+  }
+
+  .social {
+    width: calc(15vmin + 15 * (100vw / 750));
+  }
+
+  .contacts-item img,
+  .circl img {
+    width: 3vmin;
+  }
+
+  .circl img {
+    margin-top: calc(1vmin + 1 * (100vw / 750));
+  }
+
+  .circl {
+    width: calc(3vmin + 14 * (100vw / 750));
+    height: calc(3vmin + 14 * (100vw / 750));
   }
 }
 
 @media screen and (max-width: 450px) {
-  p,
-  h2 {
-    font-size: 0.55rem;
-    margin-bottom: 5%;
-  }
 
-  .footer-item {
-    justify-content: center;
-  }
-
-  .circl {
-    margin: 3%;
-  }
-
-  .hello-instagram {
-    height: 4.15rem;
-  }
 }
 
 @media screen and (max-width: 320px) {
-  p,
-  h2 {
-    font-size: 0.55rem;
-    margin-bottom: 5%;
-  }
 
-  .footer-item {
-    justify-content: center;
-  }
-
-  .circl {
-    margin: 3%;
-  }
-
-  .hello-instagram {
-    height: 4.15rem;
-  }
 }
+
 </style>
