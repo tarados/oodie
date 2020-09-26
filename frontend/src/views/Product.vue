@@ -213,7 +213,6 @@ export default {
 
 .item img {
   width: 100%;
-  max-height: 36rem;
   overflow: hidden;
 }
 
