@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <ProductsList thumbnail="large" :category-id="categoryId"/>
+    <ProductsList :category-id="categoryId"/>
     <Instagram/>
   </div>
 </template>

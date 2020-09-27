@@ -3,7 +3,7 @@
     <div class="row">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
                    v-for="(product, index) in prodList" :key="index"
-                   :class="{ product: large, item_sm: small}"
+                   class="product"
       >
         <div class="image-container"
             :style="{'background': 'url(' + product.image + ') center no-repeat', 'background-size': 'cover'}"></div>
@@ -24,9 +24,6 @@ import {mapGetters} from 'vuex'
 export default {
   name: "Collections",
   props: {
-    thumbnail: {
-      type: String
-    },
     categoryId: {
       type: Number
     }
@@ -49,19 +46,10 @@ export default {
     }
   },
   methods: {
-    setItem() {
-      if (this.thumbnail === 'large') {
-        this.large = true;
-        this.small = false;
-      } else if (this.thumbnail === 'small') {
-        this.large = false;
-        this.small = true;
-      }
-    }
+
   },
   mounted() {
     this.$store.dispatch('loadProducts');
-    this.setItem();
   }
 }
 </script>
@@ -97,13 +85,6 @@ h4 {
   padding-bottom: 1rem;
   text-decoration: none;
   color: #3d4246;
-}
-
-.item_sm {
-  padding-bottom: 1rem;
-  text-decoration: none;
-  color: #3d4246;
-  margin: 0 15px;
 }
 
 .product img, .item_sm img {

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-brand">
     <Breadcrumbs :current-category="activeCategoryTitle"/>
-    <ProductsList thumbnail="small" :category-id="activeCategoryId"/>
+    <ProductsList :category-id="activeCategoryId"/>
   </div>
 </template>
 
