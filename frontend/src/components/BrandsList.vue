@@ -47,7 +47,7 @@ export default {
 }
 
 .row {
-  margin: 0 0 2% 0;;
+  margin: 0 0 2% 0;
   display: grid;
   grid-template: 400px / repeat(3, 400px);
   grid-auto-rows: 400px;
