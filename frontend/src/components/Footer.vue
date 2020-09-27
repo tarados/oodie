@@ -1,55 +1,53 @@
 <template>
-  <div class="wrapper">
-    <div class="wrapper-footer">
-      <div class="footer">
-        <div class="contacts">
-          <div class="contacts-item">
-            <span>Контакты:</span>
-          </div>
-          <div class="contacts-item">
-            <img src="../assets/phone-receiver.svg"/>
-            <router-link to="#">
-              <p>+380507204066</p>
-            </router-link>
-          </div>
-          <div class="contacts-item">
-            <img src="../assets/email.svg">
-            <p>hoodiyalko@gmail.com</p>
-          </div>
+  <div class="wrapper-footer">
+    <div class="footer">
+      <div class="contacts">
+        <div class="contacts-item">
+          <span>Контакты:</span>
         </div>
-        <div class="social">
-          <div class="social-title">
-            <span>Мы в соцсетях:</span>
+        <div class="contacts-item">
+          <img src="../assets/phone-receiver.svg"/>
+          <router-link to="#">
+            <p>+380507204066</p>
+          </router-link>
+        </div>
+        <div class="contacts-item">
+          <img src="../assets/email.svg">
+          <p>hoodiyalko@gmail.com</p>
+        </div>
+      </div>
+      <div class="social">
+        <div class="social-title">
+          <span>Мы в соцсетях:</span>
+        </div>
+        <div class="social-icons">
+          <div class="social-content">
+            <div class="circl">
+              <a href="https://www.facebook.com/hoodiyalko/">
+                <img src="../assets/facebook.png">
+              </a>
+            </div>
           </div>
-          <div class="social-icons">
-            <div class="social-content">
-              <div class="circl">
-                <a href="https://www.facebook.com/hoodiyalko/">
-                  <img src="../assets/facebook.png">
-                </a>
-              </div>
+          <div class="social-content">
+            <div class="circl">
+              <a href="https://www.instagram.com/hoodiyalko/">
+                <img src="../assets/instagram.png">
+              </a>
             </div>
-            <div class="social-content">
-              <div class="circl">
-                <a href="https://www.instagram.com/hoodiyalko/">
-                  <img src="../assets/instagram.png">
-                </a>
-              </div>
-            </div>
-            <div class="social-content">
-              <div class="circl">
-                <a href="https://www.tiktok.com/hoodiyalko/">
-                  <img src="../assets/tik-tok.png">
-                </a>
-              </div>
+          </div>
+          <div class="social-content">
+            <div class="circl">
+              <a href="https://www.tiktok.com/hoodiyalko/">
+                <img src="../assets/tik-tok.png">
+              </a>
             </div>
           </div>
         </div>
-        <div class="delivery">
-          <p>Доставка и оплата</p>
-          <p>Сотрудничество</p>
-          <p>Обмен и возврат</p>
-        </div>
+      </div>
+      <div class="delivery">
+        <p>Доставка и оплата</p>
+        <p>Сотрудничество</p>
+        <p>Обмен и возврат</p>
       </div>
     </div>
   </div>
@@ -197,7 +195,13 @@ p {
 }
 
 @media screen and (max-width: 450px) {
-
+  .footer {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "delivery social";
+  }
+  .contacts {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 320px) {

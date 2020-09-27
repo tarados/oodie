@@ -47,15 +47,15 @@ export default {
 
 <style scoped>
 .wrapper-brands {
-  max-width: 1580px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 0 3%;
 }
 
 .brands-info {
-  font-size: calc(1vw + 8 * (100vw / 1838));
+  font-size: calc(1vw + 2 * (100vw / 1338));
   font-family: 'Arial', sans-serif;
-  margin: 1% 0;
+  margin: 2% 5%;
+  padding: 6px;
 }
 
 /*media queries******************************************************************************************************/

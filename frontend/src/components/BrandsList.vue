@@ -3,9 +3,9 @@
     <div class="row">
       <router-link :to="{name: 'Brand', params: {slug: brand.slug} }"
                    v-for="(brand, index) in brands" :key="index"
+                   :style="{'background': 'url(' + brand.images + ') center no-repeat', 'background-size': 'cover'}"
                    class="brand"
       >
-        <img :src="brand.images">
         <div class="brand-title">{{ brand.title }}</div>
       </router-link>
     </div>
@@ -43,15 +43,17 @@ export default {
 
 <style scoped>
 .wrapper-brandlist {
-  max-width: 1580px;
   margin: 0 auto;
 }
 
 .row {
+  margin: 0 0 2% 0;;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template: 400px / repeat(3, 400px);
+  grid-auto-rows: 400px;
   grid-gap: 1em;
   grid-auto-flow: row;
+  justify-content: center;
 }
 
 .brand {
@@ -82,12 +84,21 @@ img {
 }
 
 /*media queries******************************************************************************************************/
+@media screen and (max-width: 1260px) {
+  .row {
+    grid-template: 400px / repeat(2, 400px);
+  }
+}
+
 @media screen and (max-width: 1024px) {
 
 }
 
-@media screen and (max-width: 960px) {
 
+@media screen and (max-width: 860px) {
+  .row {
+    grid-template: 400px / 400px;
+  }
 }
 
 
@@ -96,15 +107,12 @@ img {
     height: calc(5vmin + 10 * (100vw / 767));
     font-size: calc(3.5vmin + 3 * (100vw / 767));
   }
-
-  .row {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media screen and (max-width: 420px) {
   .row {
-    grid-template-columns: 1fr;
+    grid-template: 360px / 360px;
+    grid-auto-rows: 360px;
   }
 
   .brand-title {
@@ -115,18 +123,31 @@ img {
 }
 
 @media screen and (max-width: 375px) {
-
+  .row {
+    grid-template: 320px / 320px;
+    grid-auto-rows: 320px;
+  }
 }
 
 @media screen and (max-width: 360px) {
-
+  .row {
+    grid-template: 300px / 300px;
+    grid-auto-rows: 300px;
+  }
 }
 
 @media screen and (max-width: 320px) {
+  .row {
+    grid-template: 260px / 260px;
+    grid-auto-rows: 260px;
+  }
 }
 
 @media screen and (max-width: 280px) {
-
+  .row {
+    grid-template: 220px / 220px;
+    grid-auto-rows: 220px;
+  }
 }
 
 
