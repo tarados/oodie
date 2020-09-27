@@ -235,7 +235,7 @@ export default {
 
 .slider {
   width: calc((100% / 12) * 3 - 1rem);
-  margin: 0 2% 0 0;
+  margin: 0 2% 1% 0;
 }
 
 .slider img:hover {
