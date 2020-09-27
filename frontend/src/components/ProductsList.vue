@@ -5,7 +5,8 @@
                    v-for="(product, index) in prodList" :key="index"
                    :class="{ product: large, item_sm: small}"
       >
-        <img :src="product.image">
+        <div class="image-container"
+            :style="{'background': 'url(' + product.image + ') center no-repeat', 'background-size': 'cover'}"></div>
         <h4>{{ product.title }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
@@ -67,7 +68,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  margin-top: 3rem;
+  margin: 2% auto;
 }
 
 h4 {
@@ -76,13 +77,19 @@ h4 {
 }
 
 .row {
-  max-width: 1580px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  align-content: center;
+  margin: 0 0 5% 0;
+  display: grid;
+  grid-template: 600px / repeat(2, 600px);
+  grid-auto-rows: 600px;
+  grid-row-gap: 4em;
+  grid-column-gap: 1em;
+  grid-auto-flow: row;
+  justify-content: center;
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
 }
 
 .product {
@@ -90,15 +97,12 @@ h4 {
   padding-bottom: 1rem;
   text-decoration: none;
   color: #3d4246;
-  width: calc((100% / 12) * 6 - 30px);
-  margin: 0 15px;
 }
 
 .item_sm {
   padding-bottom: 1rem;
   text-decoration: none;
   color: #3d4246;
-  width: calc((100% / 12) * 4 - 30px);
   margin: 0 15px;
 }
 
@@ -147,21 +151,19 @@ span.old {
 }
 
 /*media queries*/
-@media screen and (max-width: 1200px) {
-
+@media screen and (max-width: 1240px) {
+  .row {
+    grid-template: 600px / 600px;
+    grid-auto-rows: 600px;
+  }
 }
 
 @media screen and (max-width: 960px) {
-  .item_sm {
-    width: calc((100% / 12) * 6 - 30px);
-  }
+
 }
 
 @media screen and (max-width: 750px) {
-  .product,
-  .item_sm {
-    width: calc((100% / 12) * 12 - 30px);
-  }
+
 }
 
 @media screen and (max-width: 420px) {

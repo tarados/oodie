@@ -43,7 +43,6 @@ export default {
   name: 'Home',
   data() {
     return {
-      // visibleCard: true
     }
   },
   components: {
@@ -126,6 +125,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
+  margin: 0 15%;
 }
 
 
@@ -173,7 +173,25 @@ h4 {
 
 /*media queries********************************************************************************************/
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1240px) {
+  .info-content .info-title h4 {
+    font-size: calc(1.3vmin + 2 * (100vw / 1240));
+  }
+
+  .info-content .info-title span {
+    font-size: calc(1vmin + 2 * (100vw / 1240));
+  }
+
+  .info-content img {
+    width: calc(3.5vmin + 3 * (100vw / 1240));
+  }
+
+  .info {
+    /*margin: 0 16%;*/
+  }
+}
+
+@media screen and (max-width: 1040px) {
   .info-content .info-title h4 {
     font-size: calc(1.3vmin + 2 * (100vw / 1024));
   }
@@ -184,6 +202,24 @@ h4 {
 
   .info-content img {
     width: calc(3.5vmin + 3 * (100vw / 1024));
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .info-content .info-title h4 {
+    font-size: calc(0.8vmin + 1 * (100vw / 960));
+  }
+
+  .info-content .info-title span {
+    font-size: calc(0.6vmin + 1 * (100vw / 960));
+  }
+
+  .info-content img {
+    width: calc(2vmin + 2 * (100vw / 960));
+  }
+
+  .info {
+    /*margin: 0 18%;*/
   }
 }
 
