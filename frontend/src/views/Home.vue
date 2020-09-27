@@ -150,17 +150,17 @@ export default {
 }
 
 .info-content img {
-  width: 6.5vmin;
+  width: calc(5vmin + 5 * (100vw / 1838));
 }
 
 .info-content .info-title h4 {
   padding: 1.1vmin 0;
-  font-size: 2.4vmin;
+  font-size: calc(1.8vmin + 2 * (100vw / 1838));
   font-weight: 500;
 }
 
 .info-content .info-title span {
-  font-size: 2vmin;
+  font-size: calc(1.5vmin + 2 * (100vw / 1838));
   color: #b0b0b0;
 }
 
@@ -174,7 +174,17 @@ h4 {
 /*media queries********************************************************************************************/
 
 @media screen and (max-width: 1024px) {
+  .info-content .info-title h4 {
+    font-size: calc(1.3vmin + 2 * (100vw / 1024));
+  }
 
+  .info-content .info-title span {
+    font-size: calc(1vmin + 2 * (100vw / 1024));
+  }
+
+  .info-content img {
+    width: calc(3.5vmin + 3 * (100vw / 1024));
+  }
 }
 
 @media screen and (max-width: 750px) {

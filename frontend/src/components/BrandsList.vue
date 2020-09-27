@@ -63,18 +63,18 @@ export default {
 .brand-title {
   position: absolute;
   background-color: #c7d9d8;
-  width: 72%;
-  height: 12vmin;
+  width: 60%;
+  height: calc(5vmin + 10 * (100vw / 1838));
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   text-transform: uppercase;
   text-align: center;
-  font-size: calc(22px + 10 * (100vw / 1580));
+  font-size: calc(3.5vmin + 3 * (100vw / 1838));
   font-family: 'Arial', sans-serif;
   bottom: 3vmin;
-  left: 14%;
+  left: 20%;
 }
 
 img {
@@ -93,7 +93,8 @@ img {
 
 @media screen and (max-width: 767px) {
   .brand-title {
-    font-size: calc(24px + (16 + 16 * 0.7) * (100vw / 1580));
+    height: calc(5vmin + 10 * (100vw / 767));
+    font-size: calc(3.5vmin + 3 * (100vw / 767));
   }
 
   .row {
@@ -105,6 +106,12 @@ img {
   .row {
     grid-template-columns: 1fr;
   }
+
+  .brand-title {
+    height: calc(5vmin + 10 * (100vw / 420));
+    font-size: calc(3.5vmin + 3 * (100vw / 420));
+  }
+
 }
 
 @media screen and (max-width: 375px) {
