@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability
+from adminsortable2.admin import SortableAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 
 
@@ -26,7 +27,7 @@ class ProductAvailabilityInline(admin.TabularInline):
 	extra = 0
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
 	list_display = ('title', 'get_price', 'category', 'get_image', 'description', 'hidden', 'availability_info')
 	list_filter = ['category']
 	list_editable = ['hidden']

@@ -33,10 +33,22 @@ class Product(models.Model):
 	new_price = models.IntegerField(verbose_name=u'новая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
 	hidden = models.BooleanField(verbose_name='снять с продажи', default=False)
+	order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
 	class Meta:
+		ordering = ['order']
 		verbose_name = u'товар'
 		verbose_name_plural = u'товары'
+
+	def __str__(self):
+		return self.title
+
+	def get_first_image_url(self):
+		try:
+			first_image = ProductImage.objects.filter(product=self.id)[0]
+			return settings.SITE_URL + first_image.image.url
+		except IndexError:
+			return None
 
 	def get_price(self):
 		try:
@@ -58,9 +70,6 @@ class Product(models.Model):
 			return mark_safe(f'<img src="%s" width="150" height="150"' % image_url)
 
 	get_image.short_description = "Первое изображение"
-
-	def __str__(self):
-		return self.title
 
 	def availability_dict(self):
 		availabilities = ProductAvailability.objects.filter(product=self)

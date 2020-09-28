@@ -10,28 +10,28 @@ from .models import ProductImage, Product, Order, OrderItem, Category, ProductAv
 def products(request):
 	products_list = []
 	categories_list = []
-	all_products = Product.objects.all()
-	all_categories = Category.objects.all()
+	all_products = list(Product.objects.filter(hidden=False))
+	all_categories = list(Category.objects.all())
+
 	for category in all_categories:
 		categories_list.append({
 			'id': category.id,
 			'title': category.name,
 			'slug': category.slug
 		})
+
 	for prod in all_products:
-		if prod.hidden:
-			pass
-		else:
-			products_list.append(
-				{
-					'id': prod.id,
-					'title': prod.title,
-					'category': prod.category_id,
-					'price': prod.price,
-					'new_price': prod.new_price,
-					'image': os.environ['SITE_URL'] + ProductImage.objects.filter(product=prod.id)[0].image.url
-				}
-			)
+		products_list.append(
+			{
+				'id': prod.id,
+				'title': prod.title,
+				'category': prod.category_id,
+				'price': prod.price,
+				'new_price': prod.new_price,
+				'image': prod.get_first_image_url()
+			}
+		)
+
 	return JsonResponse({'products': products_list, 'categories': categories_list})
 
 
