@@ -8,9 +8,15 @@ from .models import ProductImage, Product, Order, OrderItem, Category, ProductAv
 
 
 def products(request):
+	category_id = request.GET.get('category_id', None)
 	products_list = []
 	categories_list = []
-	all_products = list(Product.objects.filter(hidden=False))
+
+	all_products = Product.objects.filter(hidden=False)
+	if category_id:
+		all_products = all_products.filter(category_id=category_id)
+	all_products = list(all_products)
+
 	all_categories = list(Category.objects.all())
 
 	for category in all_categories:
