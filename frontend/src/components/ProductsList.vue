@@ -65,7 +65,7 @@ h4 {
 }
 
 .row {
-  margin: 0 0 5% 0;
+  margin: 0 0 10% 0;
   display: grid;
   grid-template: 600px / repeat(2, 600px);
   grid-auto-rows: 600px;
@@ -140,31 +140,51 @@ span.old {
 }
 
 @media screen and (max-width: 960px) {
-
 }
 
-@media screen and (max-width: 750px) {
-
+@media screen and (max-width: 620px) {
+  .row {
+    grid-template: 450px / 450px;
+    grid-auto-rows: 450px;
+    margin: 0 0 15% 0;
+  }
 }
 
-@media screen and (max-width: 420px) {
-
+@media screen and (max-width: 450px) {
+  .row {
+    grid-template: 380px / 380px;
+    grid-auto-rows: 380px;
+    margin: 0 0 15% 0;
+  }
 }
 
 @media screen and (max-width: 375px) {
-
+  .row {
+    grid-template: 360px / 360px;
+    grid-auto-rows: 360px;
+  }
 }
 
 @media screen and (max-width: 360px) {
-
+  .row {
+    grid-template: 320px / 320px;
+    grid-auto-rows: 320px;
+  }
 }
 
 @media screen and (max-width: 320px) {
+  .row {
+    grid-template: 280px / 280px;
+    grid-auto-rows: 280px;
 
+  }
 }
 
 @media screen and (max-width: 280px) {
-
+  .row {
+    grid-template: 240px / 240px;
+    grid-auto-rows: 240px;
+  }
 }
 
 
