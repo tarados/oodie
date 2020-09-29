@@ -147,7 +147,7 @@ export default {
   /*grid-template-columns: 1fr 1fr;*/
   /*grid-template-rows: calc(3vw + 4 * (100vw / 1838));*/
   /*grid-template-areas: "phone basket";*/
-  background-color: #c7d9d8;
+  background-color: var(--overlay-color);
   /*align-items: center;*/
   /*align-content: center;*/
   /*justify-items: center;*/
@@ -248,7 +248,7 @@ span {
 
 .linkList-item .sub-menu {
   position: absolute;
-  background-color: #c7d9d8;
+  background-color: var(--overlay-color);
   top: calc(100% + 0.5rem);
   width: 80%;
   display: flex;
@@ -266,7 +266,7 @@ span {
 }
 
 .linkList-item .sub-menu .menu-item a {
-  color: white;
+  color: black;
 }
 
 /*media queries*************************************************************************************/
