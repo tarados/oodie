@@ -95,11 +95,22 @@ export default {
   },
   computed: {},
   methods: {
+    clearTimer: function () {
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = -1;
+    },
+
     mouseover: function () {
-      this.isOpen = true
+      this.clearTimer();
+      this.isOpen = true;
     },
     mouseleave: function () {
-      this.isOpen = false
+      this.clearTimer();
+
+      this.timer = setTimeout(() => {
+        this.isOpen = false;
+      }, 500);
+
     }
   },
   mounted() {
