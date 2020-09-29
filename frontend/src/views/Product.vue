@@ -188,6 +188,7 @@ export default {
 <style scoped>
 .wrapper-product {
   margin-top: 55px;
+  margin-bottom: 40px;
 }
 
 .row {
@@ -422,6 +423,10 @@ export default {
   .btn,
   .size-block {
     width: auto;
+  }
+
+  .item + .item {
+    margin-top: 40px;
   }
 
 }
