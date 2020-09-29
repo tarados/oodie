@@ -2,7 +2,7 @@
   <div>
     <header class="showcase">
       <div class="container showcase-inner">
-        <img src="../assets/banner.png"/>
+        <img src="../assets/banner3.jpg"/>
 <!--        <h1>Winter Sale Now On!</h1>-->
 <!--        <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>-->
 <!--        <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>-->
