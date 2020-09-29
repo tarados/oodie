@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <ProductsList :category-id="categoryId"/>
+    <ProductsList :category-id="categoryId" />
     <Instagram/>
   </div>
 </template>

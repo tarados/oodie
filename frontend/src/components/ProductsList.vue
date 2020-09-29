@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="row">
+    <div class="row" :class="size">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
                    v-for="(product, index) in prodList" :key="index"
                    class="product"
@@ -26,11 +26,13 @@ export default {
   props: {
     categoryId: {
       type: Number
-    }
+    },
+    size: String
   },
   data() {
     return {
       category: '',
+
       large: null,
       small: null
     }
@@ -56,7 +58,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  margin: 2% auto;
+  margin: 40px auto 60px;
 }
 
 h4 {
@@ -69,6 +71,17 @@ h4 {
   display: grid;
   grid-template: 600px / repeat(2, 600px);
   grid-auto-rows: 600px;
+  grid-row-gap: 4em;
+  grid-column-gap: 1.2em;
+  grid-auto-flow: row;
+  justify-content: center;
+}
+
+.row.small {
+  margin: 0 0 2% 0;
+  display: grid;
+  grid-template: 400px / repeat(3, 400px);
+  grid-auto-rows: 400px;
   grid-row-gap: 4em;
   grid-column-gap: 1em;
   grid-auto-flow: row;
@@ -137,9 +150,16 @@ span.old {
     grid-template: 600px / 600px;
     grid-auto-rows: 600px;
   }
+
+  .row.small {
+    grid-template: 400px / repeat(2, 400px);
+  }
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 860px) {
+  .row.small {
+    grid-template: 400px / 400px;
+  }
 }
 
 @media screen and (max-width: 620px) {
@@ -156,12 +176,22 @@ span.old {
     grid-auto-rows: 380px;
     margin: 0 0 15% 0;
   }
+
+  .row.small {
+    grid-template: 360px / 360px;
+    grid-auto-rows: 360px;
+  }
 }
 
 @media screen and (max-width: 375px) {
   .row {
     grid-template: 360px / 360px;
     grid-auto-rows: 360px;
+  }
+
+  .row.small {
+    grid-template: 320px / 320px;
+    grid-auto-rows: 320px;
   }
 }
 
@@ -176,7 +206,11 @@ span.old {
   .row {
     grid-template: 280px / 280px;
     grid-auto-rows: 280px;
+  }
 
+  .row.small {
+    grid-template: 260px / 260px;
+    grid-auto-rows: 260px;
   }
 }
 
@@ -184,6 +218,11 @@ span.old {
   .row {
     grid-template: 240px / 240px;
     grid-auto-rows: 240px;
+  }
+
+  .row.small {
+    grid-template: 220px / 220px;
+    grid-auto-rows: 220px;
   }
 }
 
