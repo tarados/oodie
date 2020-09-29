@@ -68,7 +68,7 @@ export default {
 
 .brand-title {
   position: absolute;
-  background-color: #c7d9d8;
+  background-color: rgba(0, 0, 0, 0.5);
   width: 60%;
   height: calc(5vmin + 10 * (100vw / 1838));
   display: flex;
