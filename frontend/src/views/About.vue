@@ -75,9 +75,8 @@ export default {
 
 .icons-messengers {
   grid-area: icons;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: none;
+
   justify-content: space-around;
   width: 40%;
 }
@@ -123,8 +122,11 @@ p {
   }
 
   .icons-messengers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    width: 50%;
+    width: 55%;
   }
 }
 </style>
