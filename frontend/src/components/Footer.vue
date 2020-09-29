@@ -153,7 +153,7 @@ export default {
 
 span,
 p {
-  font-size: calc(1vmin + 12 * (100vw / 1838));
+  font-size: calc(8px + 10 * (100vw / 1838));
 }
 
 .contacts span {
@@ -161,22 +161,20 @@ p {
 }
 
 /*media queries*****************************************/
-@media screen and (max-width: 1200px) {
-
-}
 
 @media screen and (max-width: 750px) {
   .footer {
-    grid-template-rows: calc(15vmin + 15 * (100vw / 750));
+    grid-template-rows: calc(15vmin + (15 + 15 * 0.7) * (100vw / 750));
   }
 
   span,
   p {
-    font-size: calc(1vmin + 6 * (100vw / 750));
+    /*font-size: 20px;*/
+    font-size: calc(8px + (10 + 10 * 0.7) * ((100vw - 320px) / 1838));
   }
 
   .social {
-    width: calc(15vmin + 15 * (100vw / 750));
+    width: calc(15vmin + (15 + 15 * 0.7) * (100vw / 750));
   }
 
   .contacts-item img,
@@ -199,13 +197,11 @@ p {
     grid-template-columns: 1fr 2fr;
     grid-template-areas: "delivery social";
   }
+
   .contacts {
     display: none;
   }
 }
 
-@media screen and (max-width: 320px) {
-
-}
 
 </style>
