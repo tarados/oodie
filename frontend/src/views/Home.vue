@@ -236,9 +236,9 @@ h4 {
     display: none;
   }
 
-  .showcase {
-    height: 490px;
-  }
+  /*.showcase {*/
+  /*  height: 490px;*/
+  /*}*/
 }
 
 @media screen and (max-width: 420px) {

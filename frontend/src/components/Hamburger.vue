@@ -49,15 +49,15 @@ export default {
 .menu-wrap {
   display: none;
   position: fixed;
-  top: 0;
+  top: 8px;
   left: 0;
   z-index: 1;
 }
 
 .menu-wrap .toggler {
   position: fixed;
-  top: 1.55vw;
-  left: 1vw;
+  /*top: 1.55vw;*/
+  /*left: 1vw;*/
   z-index: 2;
   cursor: pointer;
   width: 50px;

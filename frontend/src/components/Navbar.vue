@@ -6,10 +6,7 @@
           <Hamburger/>
         </div>
         <div class="phone">
-          <router-link to="#">
-            <img src="../assets/phone-receiver.svg"/>
-            <p>+380507204066</p>
-          </router-link>
+          <router-link to="#"><img src="../assets/phone-receiver.svg"/>+380507204066</router-link>
         </div>
         <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
           <router-link :to="{name: 'Card'}">
@@ -114,62 +111,79 @@ export default {
 </script>
 
 <style scoped>
+
 .navbar {
   border-bottom: 2px solid #9a9a9a;
-
 }
 
 .container-nav {
-  height: calc(20vw + 29 * (100vw / 1838));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  /*height: calc(20vw + 29 * (100vw / 1838));*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: space-between;*/
+  /*align-items: flex-start;*/
 }
 
 .nav-header {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: calc(3vw + 4 * (100vw / 1838));
-  grid-template-areas: "phone basket";
+  padding: 15px;
+  height: 60px;
+
+  display: flex;
+  flex-direction: row;
+  /*grid-template-columns: 1fr 1fr;*/
+  /*grid-template-rows: calc(3vw + 4 * (100vw / 1838));*/
+  /*grid-template-areas: "phone basket";*/
   background-color: #c7d9d8;
-  align-items: center;
-  align-content: center;
-  justify-items: center;
+  /*align-items: center;*/
+  /*align-content: center;*/
+  /*justify-items: center;*/
 }
 
 .hamburg {
-  grid-area: hamburg;
+  display: none;
+  flex:1 1 auto;
+  /*grid-area: hamburg;*/
 }
 
 .phone {
-  grid-area: phone;
-  justify-self: flex-start;
-  margin: 0 2vmin;
+  flex:1 1 auto;
+  height: 30px;
+  line-height: 30px;
+  /*grid-area: phone;*/
+  align-self: flex-start;
+  /*justify-self: flex-start;*/
+  /*margin: 0 2vmin;*/
 }
 
 .basket {
-  grid-area: basket;
-  justify-self: flex-end;
-  margin: 0 5vmin;
+  flex:1 1 auto;
+  /*grid-area: basket;*/
+  align-self: flex-end;
+  line-height: 30px;
+  /*justify-self: flex-end;*/
+  /*margin: 0 5vmin;*/
 }
 
 .phone a,
 .basket a {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
+  /*flex-wrap: wrap;*/
+  /*justify-content: flex-end;*/
+  /*align-items: center;*/
   text-decoration: none;
   cursor: pointer;
   color: black;
 }
 
+.basket a {
+  justify-content: flex-end;
+}
+
 .phone a img,
 .basket a img {
-  width: 3vmin;
-  margin: 0 1.5vmin;
+  height: 30px;
+  /*margin: 0 1.5vmin;*/
 }
 
 .phone a p,
@@ -245,7 +259,7 @@ span {
 /*media queries*************************************************************************************/
 @media screen and (max-width: 1600px) {
   .container-nav {
-    height: calc(20vw + 22 * (100vw / 1600));
+    /*height: calc(20vw + 22 * (100vw / 1600));*/
   }
 }
 
@@ -257,10 +271,22 @@ span {
 
 @media screen and (max-width: 750px) {
   .nav-header {
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-areas: "hamburg phone basket";
-    justify-items: center;
-    height: calc(7vw + 5 * (100vw / 750));
+    display: block;
+    text-align: center;
+    /*grid-template-columns: 1fr 2fr 1fr;*/
+    /*grid-template-areas: "hamburg phone basket";*/
+    /*justify-items: center;*/
+    /*height: calc(7vw + 5 * (100vw / 750));*/
+  }
+
+  .phone {
+    display: inline-block;
+  }
+
+  .basket {
+    position: absolute;
+    top: 15px;
+    right: 10px;
   }
 
   .phone a p,
@@ -268,12 +294,19 @@ span {
     font-size: calc(14px + (6 + 6 * 0.7) * ((100vw - 320px) / 1838));
   }
 
+  .hamburg {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    display: block;
+  }
+
   .hamburger {
     display: inline;
     width: 15px;
     height: 50px;
     opacity: 0;
-    margin-left: 1vw;
+    /*margin-left: 1vw;*/
   }
 
   .linkList {
@@ -283,41 +316,41 @@ span {
 
 @media screen and (max-width: 525px) {
   .container-nav {
-    height: calc(20vw + 22 * (100vw / 525));
+    /*height: calc(20vw + 22 * (100vw / 525));*/
   }
 
   .nav-header {
-    height: calc(8vw + 5 * (100vw / 525));
+    /*height: calc(8vw + 5 * (100vw / 525));*/
   }
 }
 
 @media screen and (max-width: 475px) {
   .container-nav {
-    height: calc(34vw + 23 * (100vw / 475));
+    /*height: calc(34vw + 23 * (100vw / 475));*/
   }
 
   .nav-header {
-    height: calc(12vw + 9 * (100vw / 475));
+    /*height: calc(12vw + 9 * (100vw / 475));*/
   }
 }
 
 @media screen and (max-width: 375px) {
   .container-nav {
-    height: calc(34vw + 23 * (100vw / 325));
+    /*height: calc(34vw + 23 * (100vw / 325));*/
   }
 
   .nav-header {
-    height: calc(12vw + 9 * (100vw / 325));
+    /*height: calc(12vw + 9 * (100vw / 325));*/
   }
 }
 
 @media screen and (max-width: 280px) {
   .container-nav {
-    height: calc(34vw + 23 * (100vw / 280));
+    /*height: calc(34vw + 23 * (100vw / 280));*/
   }
 
   .nav-header {
-    height: calc(12vw + 9 * (100vw / 280));
+    /*height: calc(12vw + 9 * (100vw / 280));*/
   }
 }
 
