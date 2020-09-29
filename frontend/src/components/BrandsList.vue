@@ -22,10 +22,14 @@ export default {
     brands() {
       let brandsList = [];
       this.allCategories.forEach(item => {
+        const firstProduct = this.allProducts.find(product => product.category === item.id);
+
+        if (!firstProduct) return;
+
         if (item.title !== 'hoodiyalko') {
           const brand = {
             'title': item.title,
-            'images': this.allProducts.find(product => product.category === item.id).image,
+            'images': firstProduct.image,
             'slug': item.slug
           };
           brandsList.push(brand);
