@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-logo">
-    <img src="../assets/logo.jpg">
+    <img src="../assets/logo2.png">
   </div>
 </template>
 
