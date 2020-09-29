@@ -78,6 +78,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-around;
+  width: 40%;
 }
 
 .mail {
@@ -107,7 +109,7 @@ p {
   font-size: 18px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 767px) {
   h1 {
     font-size: calc(18px + (14 + 14 * 0.7) * ((100vw - 320px) / 1600));
   }
@@ -118,6 +120,11 @@ p {
 
   p {
     font-size: calc(12px + (12 + 12 * 0.7) * ((100vw - 320px) / 1600));
+  }
+
+  .icons-messengers {
+    justify-content: space-between;
+    width: 50%;
   }
 }
 </style>
