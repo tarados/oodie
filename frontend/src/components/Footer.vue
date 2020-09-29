@@ -169,7 +169,6 @@ p {
 
   span,
   p {
-    /*font-size: 20px;*/
     font-size: calc(8px + (10 + 10 * 0.7) * ((100vw - 320px) / 1838));
   }
 

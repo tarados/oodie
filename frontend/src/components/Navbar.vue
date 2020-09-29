@@ -174,7 +174,7 @@ export default {
 
 .phone a p,
 .basket a span {
-  font-size: calc(11px + 8 * (100vw / 1580));
+  font-size: calc(14px + 6 * (100vw / 1838));
 }
 
 span {
@@ -263,8 +263,9 @@ span {
     height: calc(7vw + 5 * (100vw / 750));
   }
 
-  p {
-    font-size: 0.71rem;
+  .phone a p,
+  .basket a span {
+    font-size: calc(14px + (6 + 6 * 0.7) * ((100vw - 320px) / 1838));
   }
 
   .hamburger {
@@ -291,11 +292,6 @@ span {
 }
 
 @media screen and (max-width: 475px) {
-  .phone a p,
-  .basket a span {
-    font-size: calc(10px + 6 * (100vw / 475));
-  }
-
   .container-nav {
     height: calc(34vw + 23 * (100vw / 475));
   }
@@ -306,11 +302,6 @@ span {
 }
 
 @media screen and (max-width: 375px) {
-  .phone a p,
-  .basket a span {
-    font-size: calc(10px + 6 * (100vw / 325));
-  }
-
   .container-nav {
     height: calc(34vw + 23 * (100vw / 325));
   }
