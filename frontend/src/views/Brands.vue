@@ -53,7 +53,7 @@ export default {
 
 .brands-info {
   font-size: calc(1vw + 2 * (100vw / 1338));
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 2% 5%;
   padding: 6px;
 }
@@ -71,7 +71,7 @@ export default {
 @media screen and (max-width: 750px) {
   .brands-info {
     font-size: calc(1vw + 10 * (100vw / 750));
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 }
 

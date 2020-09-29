@@ -74,7 +74,7 @@ export default {
   text-transform: uppercase;
   text-align: center;
   font-size: calc(3.5vmin + 3 * (100vw / 1838));
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   bottom: 3vmin;
   left: 20%;
 }
