@@ -113,6 +113,8 @@ export default {
 <style scoped>
 
 .navbar {
+  position: relative;
+  z-index: 2;
   border-bottom: 2px solid #9a9a9a;
 }
 
