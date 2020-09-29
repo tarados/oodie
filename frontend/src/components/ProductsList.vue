@@ -5,8 +5,7 @@
                    v-for="(product, index) in prodList" :key="index"
                    class="product"
       >
-        <div class="image-container"
-            :style="{'background': 'url(' + product.image + ') center no-repeat', 'background-size': 'cover'}"></div>
+        <img :src="product.image">
         <h4>{{ product.title }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
@@ -88,6 +87,11 @@ h4 {
   justify-content: center;
 }
 
+.row img {
+  width: auto;
+  height: 100%;
+}
+
 .image-container {
   width: 100%;
   height: 100%;
@@ -100,9 +104,9 @@ h4 {
   color: #3d4246;
 }
 
-.product img, .item_sm img {
-  width: 100%;
-}
+/*.product img, .item_sm img {*/
+/*  width: 100%;*/
+/*}*/
 
 .price-box {
   width: 100%;
