@@ -77,7 +77,7 @@ export default {
 
 .showcase {
   content: '';
-  /*background: url("../assets/banner.png") no-repeat center;*/
+  /*background: url("../assets/banner3.jpg") no-repeat center;*/
   width: 100%;
   /*height: 35vmax;*/
   margin-bottom: 5vmin;
@@ -86,8 +86,9 @@ export default {
 
 .showcase img {
   width: 100%;
-  max-width: 1200px;
+  /*max-width: 1200px;*/
   height: auto;
+
 }
 
 .showcase .showcase-inner {
@@ -98,6 +99,7 @@ export default {
   /*text-align: center;*/
   /*color: white;*/
   /*height: 100%;*/
+  padding: 0;
 }
 
 .showcase h1 {
