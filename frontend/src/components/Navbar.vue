@@ -126,7 +126,7 @@ export default {
 .navbar {
   position: relative;
   z-index: 2;
-  border-bottom: 2px solid #9a9a9a;
+  /*border-bottom: 2px solid #9a9a9a;*/
 }
 
 .container-nav {
@@ -193,15 +193,23 @@ export default {
   justify-content: flex-end;
 }
 
-.phone a img,
+.phone a img {
+  margin-top: 4px;
+  height: 20px;
+}
+
 .basket a img {
   height: 30px;
   /*margin: 0 1.5vmin;*/
 }
 
+.basket a img {
+}
+
 .phone a p,
 .basket a span {
-  font-size: calc(14px + 6 * (100vw / 1838));
+  padding-left: 8px;
+  font-size: 20px;
 }
 
 span {
@@ -227,7 +235,8 @@ span {
 
 .linkList .linkList-item a:active,
 .linkList .linkList-item a:hover {
-  color: #c7d9d8;
+  /*color: #c7d9d8;*/
+  font-weight: bold;
 }
 
 .linkList .linkList-item a {
@@ -304,7 +313,7 @@ span {
 
   .phone a p,
   .basket a span {
-    font-size: calc(14px + (6 + 6 * 0.7) * ((100vw - 320px) / 1838));
+    /*font-size: calc(14px + (6 + 6 * 0.7) * ((100vw - 320px) / 1838));*/
   }
 
   .hamburg {
