@@ -17,3 +17,5 @@ new Vue({
   render: h => h(App)
 }).$mount('#app');
 store.dispatch('loadFromCard');
+store.dispatch('loadProducts');
+

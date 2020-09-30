@@ -40,7 +40,7 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.dispatch('loadProducts');
+    // this.$store.dispatch('loadProducts');
   }
 }
 </script>
