@@ -57,8 +57,9 @@ export default {
   },
   methods: {
     basketVisible() {
-      if (this.$store.state.productsStore.basketVisible) ;
-      else (this.$store.dispatch('changeVisibleBasket'));
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
     }
   },
   mounted() {

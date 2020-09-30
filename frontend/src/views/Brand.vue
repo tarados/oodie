@@ -13,7 +13,6 @@ export default {
   name: "Brand",
   data() {
     return {
-      visibleCard: true,
       slug: ''
     }
   },
@@ -41,7 +40,13 @@ export default {
 
     }
   },
-  methods: {},
+  methods: {
+    basketVisible() {
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
+    }
+  },
   watch: {
     $route(to) {
       this.slug = to.params.slug;
@@ -49,6 +54,7 @@ export default {
   },
   mounted() {
     this.slug = this.$route.params.slug;
+    this.basketVisible();
   }
 }
 </script>

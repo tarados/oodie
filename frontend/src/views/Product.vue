@@ -177,10 +177,16 @@ export default {
     },
     select(index) {
       this.size = index;
+    },
+    basketVisible() {
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
     }
   },
   mounted() {
     this.loadProduct(this.$route.params.id);
+    this.basketVisible();
   }
 }
 </script>
