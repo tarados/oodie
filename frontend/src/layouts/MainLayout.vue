@@ -1,8 +1,12 @@
 <template>
-  <div class="wrapper-layout">
-    <Navbar/>
-    <router-view/>
-    <Footer/>
+  <div class="wrapper-layout" id="content-wrapper">
+    <div id="content">
+      <Navbar/>
+      <router-view/>
+    </div>
+    <div id="footer">
+      <Footer/>
+    </div>
   </div>
 </template>
 
