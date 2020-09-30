@@ -49,15 +49,15 @@ export default {
 .menu-wrap {
   display: none;
   position: fixed;
-  top: 0;
+  top: 8px;
   left: 0;
   z-index: 1;
 }
 
 .menu-wrap .toggler {
   position: fixed;
-  top: 1.55vw;
-  left: 1vw;
+  /*top: 1.55vw;*/
+  /*left: 1vw;*/
   z-index: 2;
   cursor: pointer;
   width: 50px;
@@ -73,7 +73,7 @@ export default {
   width: 50px;
   height: 40px;
   padding: 1.2rem 1rem 1rem 1rem;
-  background-color: #c7d9d8;
+  background-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,9 +169,9 @@ export default {
 
 .menu-wrap .menu > div > div > ul > li {
   list-style: none;
-  color: #fff;
+  color: #000;
   font-size: 1.11rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #000;
   padding: 0.65rem;
 }
 

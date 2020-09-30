@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-brands">
-    <div class="brands-info">ТУТ БУДЕТ ТЕКСТ ПРО ОТБОР БРЕНДОВ ДРУЗЕЙ, КАКИЕ ОРИГИНАЛЬНЫЕ ТУТ ТОВАРЫ И КАК ОНИ ХОРОШИ НА ПОДАРОК
-      ТЕКСТ ПРИМЕРНО НА 500 ЗНАКОВ, О ТВОРЧЕСТВЕ НЕБОЛЬШИХ КОМПАНИЙ И УНИКАЛЬНОСТИ, И ПРО ДОСТАВКУ В ОДНОЙ ПОСЫЛКЕ</div>
+<!--    <div class="brands-info">ТУТ БУДЕТ ТЕКСТ ПРО ОТБОР БРЕНДОВ ДРУЗЕЙ, КАКИЕ ОРИГИНАЛЬНЫЕ ТУТ ТОВАРЫ И КАК ОНИ ХОРОШИ НА ПОДАРОК-->
+<!--      ТЕКСТ ПРИМЕРНО НА 500 ЗНАКОВ, О ТВОРЧЕСТВЕ НЕБОЛЬШИХ КОМПАНИЙ И УНИКАЛЬНОСТИ, И ПРО ДОСТАВКУ В ОДНОЙ ПОСЫЛКЕ</div>-->
     <BrandsList/>
   </div>
 </template>
@@ -13,7 +13,6 @@ export default {
   name: "Brands",
   data() {
     return {
-      visibleCard: true,
       categoryId: null,
       slug: ''
     }
@@ -33,14 +32,21 @@ export default {
       return a
     }
   },
-  methods: {},
+  methods: {
+    basketVisible() {
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
+    }
+  },
   watch: {
     $route(to) {
       this.slug = to.params.slug;
     }
   },
   mounted() {
-    this.slug = this.$route.params.slug;
+    this.slug = this.$route.params.slug;3
+    this.basketVisible();
   }
 }
 </script>
@@ -49,11 +55,12 @@ export default {
 .wrapper-brands {
   max-width: 1380px;
   margin: 0 auto;
+  padding-top: 40px;
 }
 
 .brands-info {
   font-size: calc(1vw + 2 * (100vw / 1338));
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 2% 5%;
   padding: 6px;
 }
@@ -71,7 +78,7 @@ export default {
 @media screen and (max-width: 750px) {
   .brands-info {
     font-size: calc(1vw + 10 * (100vw / 750));
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 }
 

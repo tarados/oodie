@@ -130,10 +130,15 @@ export default {
       } else {
         alert("В наличии только " + this.maxValue);
       }
+    },
+    basketVisible() {
+      if (this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
     }
   },
   mounted() {
-    this.$store.dispatch('changeVisibleBasket');
+    this.basketVisible();
   }
 }
 </script>

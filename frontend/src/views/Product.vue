@@ -80,9 +80,7 @@
           </div>
           <div class="btn" @click="toCard">в корзину</div>
           <div class="product-description">
-            <div class="description">
-              {{ this.currentProduct.description }}
-            </div>
+            <div class="description">{{ this.currentProduct.description }}</div>
           </div>
         </div>
       </div>
@@ -179,10 +177,16 @@ export default {
     },
     select(index) {
       this.size = index;
+    },
+    basketVisible() {
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
     }
   },
   mounted() {
     this.loadProduct(this.$route.params.id);
+    this.basketVisible();
   }
 }
 </script>
@@ -190,6 +194,7 @@ export default {
 <style scoped>
 .wrapper-product {
   margin-top: 55px;
+  margin-bottom: 40px;
 }
 
 .row {
@@ -248,7 +253,7 @@ export default {
 
 .price {
   margin: 15px 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -265,7 +270,8 @@ export default {
 
 .description {
   margin-top: 3rem;
-  line-height: 1.6rem;
+  line-height: 1.5rem;
+  white-space: pre-wrap;
 }
 
 .markdown {
@@ -279,7 +285,7 @@ export default {
 .btn {
   display: flex;
   justify-content: center;
-  width: 30%;
+  max-width: 200px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -312,11 +318,17 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  width: 3rem;
+  width: auto;
+  min-width: 3rem;
   height: 3rem;
   border: 1px solid grey;
-  padding-top: 5px;
-  margin: 1% 2.5% 1% 1%;
+  padding: 0px 5px;
+  line-height: 3rem;
+  /*margin: 1% 2.5% 1% 1%;*/
+}
+
+.square + .square {
+  margin-left: 8px;
 }
 
 .size-block .square:hover {
@@ -343,7 +355,6 @@ export default {
   display: inline-flex;
   align-items: baseline;
   justify-content: start;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 
@@ -355,7 +366,7 @@ export default {
 }
 
 .product-category div {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-left: 1%;
 }
 
@@ -366,7 +377,7 @@ export default {
 }
 
 .product-title div {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
@@ -398,7 +409,7 @@ export default {
 
 @media screen and (max-width: 960px) {
   h1, .current {
-    font-size: calc(3.125vw + 10px);
+    /*font-size: calc(3.125vw + 10px);*/
   }
 }
 
@@ -418,6 +429,10 @@ export default {
   .btn,
   .size-block {
     width: auto;
+  }
+
+  .item + .item {
+    margin-top: 40px;
   }
 
 }

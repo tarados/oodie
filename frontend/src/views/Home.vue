@@ -2,9 +2,10 @@
   <div>
     <header class="showcase">
       <div class="container showcase-inner">
-        <h1>Winter Sale Now On!</h1>
-        <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>
-        <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>
+        <img src="../assets/banner3.jpg"/>
+<!--        <h1>Winter Sale Now On!</h1>-->
+<!--        <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>-->
+<!--        <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>-->
       </div>
     </header>
     <div class="info">
@@ -30,7 +31,7 @@
         </div>
       </div>
     </div>
-    <ProductsList :category-id="categoryId"/>
+    <ProductsList :category-id="categoryId" />
     <Instagram/>
   </div>
 </template>
@@ -56,8 +57,9 @@ export default {
   },
   methods: {
     basketVisible() {
-      if (this.$store.state.productsStore.basketVisible) ;
-      else (this.$store.dispatch('changeVisibleBasket'));
+      if (!this.$store.state.productsStore.basketVisible) {
+        this.$store.dispatch('changeVisibleBasket')
+      }
     }
   },
   mounted() {
@@ -68,7 +70,7 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 960px;
+  /*max-width: 960px;*/
   margin: auto;
   overflow: hidden;
   padding: 0.3rem;
@@ -76,20 +78,29 @@ export default {
 
 .showcase {
   content: '';
-  background: url("../assets/tile.jpg") no-repeat center center/cover;
+  /*background: url("../assets/banner3.jpg") no-repeat center;*/
   width: 100%;
-  height: 35vmax;
+  /*height: 35vmax;*/
   margin-bottom: 5vmin;
+  text-align: center;
+}
+
+.showcase img {
+  width: 100%;
+  /*max-width: 1200px;*/
+  height: auto;
+
 }
 
 .showcase .showcase-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  height: 100%;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*text-align: center;*/
+  /*color: white;*/
+  /*height: 100%;*/
+  padding: 0;
 }
 
 .showcase h1 {
@@ -228,9 +239,9 @@ h4 {
     display: none;
   }
 
-  .showcase {
-    height: 490px;
-  }
+  /*.showcase {*/
+  /*  height: 490px;*/
+  /*}*/
 }
 
 @media screen and (max-width: 420px) {

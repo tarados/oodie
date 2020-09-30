@@ -22,10 +22,14 @@ export default {
     brands() {
       let brandsList = [];
       this.allCategories.forEach(item => {
+        const firstProduct = this.allProducts.find(product => product.category === item.id);
+
+        if (!firstProduct) return;
+
         if (item.title !== 'hoodiyalko') {
           const brand = {
             'title': item.title,
-            'images': this.allProducts.find(product => product.category === item.id).image,
+            'images': firstProduct.image,
             'slug': item.slug
           };
           brandsList.push(brand);
@@ -36,7 +40,7 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$store.dispatch('loadProducts');
+    // this.$store.dispatch('loadProducts');
   }
 }
 </script>
@@ -64,7 +68,7 @@ export default {
 
 .brand-title {
   position: absolute;
-  background-color: #c7d9d8;
+  background-color: rgba(0, 0, 0, 0.5);
   width: 60%;
   height: calc(5vmin + 10 * (100vw / 1838));
   display: flex;
@@ -74,7 +78,7 @@ export default {
   text-transform: uppercase;
   text-align: center;
   font-size: calc(3.5vmin + 3 * (100vw / 1838));
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   bottom: 3vmin;
   left: 20%;
 }

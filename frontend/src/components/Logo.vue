@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-logo">
-    <img src="../assets/logo.jpg">
+    <img src="../assets/logo2.png">
   </div>
 </template>
 
@@ -16,11 +16,14 @@ export default {
   justify-content: center;
   align-items: center;
   align-self: center;
+  margin-top: 50px;
+  margin-bottom: 40px;
 
 }
 
 img {
-  width: calc(35vw + 16 * (100vw / 1835));
+  width: 80%;
+  max-width: 400px;
   margin: 0 auto;
 }
 

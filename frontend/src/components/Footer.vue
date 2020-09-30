@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .wrapper-footer {
   margin: 0;
-  background-color: #c3d7d6;
+  background-color: var(--overlay-color);
 }
 
 .footer {

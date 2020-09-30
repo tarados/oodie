@@ -67,7 +67,6 @@ export default {
 }
 
 .breadcrumbs__link--active {
-  color: #009578;
-  font-weight: 500;
+  color: black;
 }
 </style>
