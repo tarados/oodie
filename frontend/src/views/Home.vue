@@ -3,9 +3,6 @@
     <header class="showcase">
       <div class="container showcase-inner">
         <img src="../assets/banner3.jpg"/>
-<!--        <h1>Winter Sale Now On!</h1>-->
-<!--        <p>One size fits all hooded blanket perfect for those chilly mornings and cold afternoons!</p>-->
-<!--        <router-link :to="{name: 'Brands'}" class="btn">BUY NOW</router-link>-->
       </div>
     </header>
     <div class="info">
@@ -32,13 +29,12 @@
       </div>
     </div>
     <ProductsList :category-id="categoryId" />
-    <Instagram/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
-import Instagram from "@/components/Instagram";
+
 
 export default {
   name: 'Home',
@@ -47,8 +43,7 @@ export default {
     }
   },
   components: {
-    ProductsList,
-    Instagram
+    ProductsList
   },
   computed: {
     categoryId() {
@@ -70,7 +65,6 @@ export default {
 
 <style scoped>
 .container {
-  /*max-width: 960px;*/
   margin: auto;
   overflow: hidden;
   padding: 0.3rem;
@@ -78,28 +72,18 @@ export default {
 
 .showcase {
   content: '';
-  /*background: url("../assets/banner3.jpg") no-repeat center;*/
   width: 100%;
-  /*height: 35vmax;*/
   margin-bottom: 5vmin;
   text-align: center;
 }
 
 .showcase img {
   width: 100%;
-  /*max-width: 1200px;*/
   height: auto;
 
 }
 
 .showcase .showcase-inner {
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /*text-align: center;*/
-  /*color: white;*/
-  /*height: 100%;*/
   padding: 0;
 }
 
@@ -135,6 +119,7 @@ export default {
 .info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 3em;
   align-items: center;
   margin: 0 15%;
 }
@@ -161,17 +146,16 @@ export default {
 }
 
 .info-content img {
-  width: calc(5vmin + 5 * (100vw / 1838));
+  width: 7vmin;
 }
 
 .info-content .info-title h4 {
-  padding: 1.1vmin 0;
-  font-size: calc(1.8vmin + 2 * (100vw / 1838));
+  font-size: calc(10px + 5 * (100vw / 1838));
   font-weight: 500;
 }
 
 .info-content .info-title span {
-  font-size: calc(1.5vmin + 2 * (100vw / 1838));
+  font-size: calc(8px + 4 * (100vw / 1838));
   color: #b0b0b0;
 }
 
@@ -185,52 +169,18 @@ h4 {
 /*media queries********************************************************************************************/
 
 @media screen and (max-width: 1240px) {
-  .info-content .info-title h4 {
-    font-size: calc(1.3vmin + 2 * (100vw / 1240));
-  }
-
-  .info-content .info-title span {
-    font-size: calc(1vmin + 2 * (100vw / 1240));
-  }
-
-  .info-content img {
-    width: calc(3.5vmin + 3 * (100vw / 1240));
-  }
-
   .info {
-    /*margin: 0 16%;*/
-  }
-}
-
-@media screen and (max-width: 1040px) {
-  .info-content .info-title h4 {
-    font-size: calc(1.3vmin + 2 * (100vw / 1024));
-  }
-
-  .info-content .info-title span {
-    font-size: calc(1vmin + 2 * (100vw / 1024));
-  }
-
-  .info-content img {
-    width: calc(3.5vmin + 3 * (100vw / 1024));
+    margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 960px) {
   .info-content .info-title h4 {
-    font-size: calc(0.8vmin + 1 * (100vw / 960));
+    font-size: calc(10px + (5 + 5 * 0.7) * ((100vw - 750px) / 1838));
   }
 
   .info-content .info-title span {
-    font-size: calc(0.6vmin + 1 * (100vw / 960));
-  }
-
-  .info-content img {
-    width: calc(2vmin + 2 * (100vw / 960));
-  }
-
-  .info {
-    /*margin: 0 18%;*/
+    font-size: calc(8px + (4 + 4 * 0.7) * ((100vw - 750px) / 1838));
   }
 }
 
@@ -239,9 +189,6 @@ h4 {
     display: none;
   }
 
-  /*.showcase {*/
-  /*  height: 490px;*/
-  /*}*/
 }
 
 @media screen and (max-width: 420px) {
@@ -249,15 +196,15 @@ h4 {
 }
 
 @media screen and (max-width: 375px) {
-  .logo svg {
-    width: 34vw;
-  }
+  /*.logo svg {*/
+  /*  width: 34vw;*/
+  /*}*/
 }
 
 @media screen and (max-width: 360px) {
-  .logo svg {
-    width: 34vw;
-  }
+  /*.logo svg {*/
+  /*  width: 34vw;*/
+  /*}*/
 }
 
 @media screen and (max-width: 320px) {
