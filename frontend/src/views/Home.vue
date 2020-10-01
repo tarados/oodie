@@ -7,21 +7,27 @@
     </header>
     <div class="info">
       <div class="info-content">
-        <img src="../assets/size.png">
+        <div class="wrapper-image">
+          <img src="../assets/size.png">
+        </div>
         <div class="info-title">
           <h4>Один размер</h4>
           <span>Подходит для всех</span>
         </div>
       </div>
       <div class="info-content">
-        <img src="../assets/cat.png">
+        <div class="wrapper-image">
+          <img src="../assets/cat.png">
+        </div>
         <div class="info-title">
           <h4>теплое и очень мягкое</h4>
           <span>как котик</span>
         </div>
       </div>
       <div class="info-content">
-        <img src="../assets/delivery.png">
+        <div class="wrapper-image">
+          <img src="../assets/delivery.png">
+        </div>
         <div class="info-title">
           <h4>бесплатная доставка</h4>
           <span>для заказов от 2000 грн</span>
@@ -145,8 +151,17 @@ export default {
   margin: 0 2vmin;
 }
 
-.info-content img {
-  width: 7vmin;
+.wrapper-image {
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+.wrapper-image img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .info-content .info-title h4 {
