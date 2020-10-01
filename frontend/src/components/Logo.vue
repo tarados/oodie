@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper-logo">
-    <img src="../assets/logo2.png">
+    <router-link :to="{name: 'Home'}">
+      <img src="../assets/logo2.png">
+    </router-link>
   </div>
 </template>
 
@@ -71,8 +73,8 @@ img {
 }
 
 @media screen and (max-width: 280px) {
-.wrapper-logo {
-  margin-bottom: calc(6vw + 12 * (100vw / 280));
-}
+  .wrapper-logo {
+    margin-bottom: calc(6vw + 12 * (100vw / 280));
+  }
 }
 </style>
