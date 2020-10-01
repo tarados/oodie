@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="row" :class="size">
+    <div class="row">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
                    v-for="(product, index) in prodList" :key="index"
-                   class="product"
+                   :class="{product: large, brand: small}"
       >
         <img :src="product.image">
         <h4>{{ product.title }}</h4>
@@ -31,7 +31,6 @@ export default {
   data() {
     return {
       category: '',
-
       large: null,
       small: null
     }
@@ -47,10 +46,18 @@ export default {
     }
   },
   methods: {
-
+    loadSize() {
+      if (this.size === 'small') {
+        this.small = true;
+        this.large =false;
+        } else {
+        this.small = false;
+        this.large = true;
+      }
+      }
   },
   mounted() {
-    // this.$store.dispatch('loadProducts');
+    this.loadSize();
   }
 }
 </script>
@@ -81,7 +88,18 @@ h4 {
   color: #3d4246;
 }
 
-.product img {
+.brand {
+  width: calc((100% / 12) * 4 - 20px);
+  height: 100%;
+  margin: 0 10px 0 10px;
+  text-align: center;
+  padding-bottom: 1rem;
+  text-decoration: none;
+  color: #3d4246;
+}
+
+.product img,
+.brand img {
   width: 100%;
   height: 100%;
 }
@@ -102,28 +120,8 @@ h4 {
   justify-content: space-between;
 }
 
-span.old {
-  /*color: red;*/
-}
-
 .no-current {
   text-decoration: line-through;
-}
-
-.category-title {
-  width: 80%;
-  height: 3.5vmax;
-  display: block;
-  text-align: center;
-  position: relative;
-  margin-top: -15%;
-  margin-left: 10%;
-  background-color: #c7d9d8;
-  color: white;
-}
-
-.category-title span {
-  font-size: 3rem;
 }
 
 /*media queries*/
