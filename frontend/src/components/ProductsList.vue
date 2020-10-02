@@ -127,7 +127,7 @@ h4 {
 /*media queries*/
 @media screen and (max-width: 1240px) {
   .product {
-    width: calc((100% / 12) * 4 - 20px);
+    /*width: calc((100% / 12) * 4 - 20px);*/
   }
 }
 

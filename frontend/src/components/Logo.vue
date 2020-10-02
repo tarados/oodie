@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper-logo">
-    <router-link :to="{name: 'Home'}">
-      <img src="../assets/logo2.png">
-    </router-link>
+    <img src="../assets/logo2.png">
   </div>
 </template>
 

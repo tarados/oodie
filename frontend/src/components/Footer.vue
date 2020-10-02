@@ -79,6 +79,7 @@ export default {
 .container {
   max-width: 1240px;
   margin: 0 auto;
+  padding-left: 5%;
 }
 
 .footer_row {
@@ -170,8 +171,8 @@ p {
 
 @media screen and (max-width: 750px) {
   .container {
-    width: calc(100vw - 20px);
-    margin: 0 auto;
+    width: calc(100vw - 40px);
+    padding-left: 3%;
   }
 
   .footer_row {
