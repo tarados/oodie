@@ -152,10 +152,9 @@ export default {
       this.invalidPhone = !this.$v.phone.required;
       this.invalidEmail = !this.$v.email.required;
       this.delivery = this.selected;
-      console.log(response);
-      // if (response && !this.$v.$invalid) {
-      //   await this.$router.push({name: 'Successful'});
-      // }
+      if (response && !this.$v.$invalid) {
+        await this.$router.push({name: 'Successful'});
+      }
       if (this.$v.invalid) {
         this.$v.$touch();
         return

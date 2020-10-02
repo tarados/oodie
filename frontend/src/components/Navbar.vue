@@ -115,7 +115,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('changeVisibleBasket');
-    console.log(this.$store.state.productsStore.basketVisible);
   }
 }
 

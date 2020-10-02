@@ -58,6 +58,7 @@ export default {
   },
   mounted() {
     this.loadSize();
+    console.log(this.allProducts);
   }
 }
 </script>
