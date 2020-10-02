@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 
@@ -28,7 +28,7 @@ class ProductAvailabilityInline(admin.TabularInline):
 
 
 class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
-	list_display = ('title', 'get_price', 'category', 'get_image', 'description', 'hidden', 'availability_info')
+	list_display = ('title', 'get_price', 'category', 'table', 'get_image', 'description', 'hidden', 'availability_info')
 	list_filter = ['category']
 	list_editable = ['hidden']
 	inlines = [
@@ -78,6 +78,7 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Category)
+admin.site.register(TableOfSize)
 admin.site.register(Size)
 admin.site.register(ProductAvailability, ProductAvailabilityAdmin)
 admin.site.site_title = "HOODIYALKO"

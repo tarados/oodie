@@ -133,7 +133,8 @@ export default {
         productsList.push({
           'id': product.id,
           'price': product.price,
-          'quantity': product.quantity
+          'quantity': product.quantity,
+          'size': product.size
         });
       });
       let order = {
@@ -151,9 +152,10 @@ export default {
       this.invalidPhone = !this.$v.phone.required;
       this.invalidEmail = !this.$v.email.required;
       this.delivery = this.selected;
-      if (response && !this.$v.$invalid) {
-        await this.$router.push({name: 'Successful'});
-      }
+      console.log(response);
+      // if (response && !this.$v.$invalid) {
+      //   await this.$router.push({name: 'Successful'});
+      // }
       if (this.$v.invalid) {
         this.$v.$touch();
         return

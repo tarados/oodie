@@ -26,12 +26,25 @@ class Size(models.Model):
 		return self.name
 
 
+class TableOfSize(models.Model):
+	name = models.CharField(max_length=200, null=True, blank=True)
+	image = models.ImageField(upload_to='images/', verbose_name=u'Таблица размеров')
+
+	class Meta:
+		verbose_name = u'Таблица размеров'
+		verbose_name_plural = u'Таблицы размеров'
+
+	def __str__(self):
+		return self.name
+
+
 class Product(models.Model):
 	title = models.CharField(max_length=255, verbose_name=u'название')
 	description = models.TextField(verbose_name=u'описание')
 	price = models.IntegerField(verbose_name=u'цена')
 	new_price = models.IntegerField(verbose_name=u'новая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
+	table = models.ForeignKey(TableOfSize, verbose_name=u'таблица размеров', null=True, blank=True, on_delete=models.SET_NULL)
 	hidden = models.BooleanField(verbose_name='снять с продажи', default=False)
 	order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
@@ -92,11 +105,18 @@ class Product(models.Model):
 
 	availability_info.short_description = "Размеры в наличии"
 
+	def get_table_of_size(self):
+		if self.table_id:
+			return settings.SITE_URL + self.table.image.url
+		return None
+
+	get_table_of_size.short_description = "Таблица размеров"
+
 
 class ProductAvailability(models.Model):
 	size = models.ForeignKey(Size, verbose_name=u'размер', null=True, on_delete=models.CASCADE)
 	product = models.ForeignKey(Product, verbose_name=u'название модели', null=True, on_delete=models.CASCADE)
-	quantity = models.CharField(max_length=10, verbose_name='Количество', null=True)
+	quantity = models.IntegerField(verbose_name='Количество', null=True)
 
 	class Meta:
 		verbose_name = u'наличие товара'
@@ -165,3 +185,5 @@ class OrderItem(models.Model):
 
 	def __str__(self):
 		return 'Заказ № %s для %s' % (self.order.id, self.order.customer_name)
+
+

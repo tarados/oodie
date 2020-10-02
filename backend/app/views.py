@@ -52,6 +52,7 @@ def product(request, product_id):
 		'price': prod.price,
 		'category': prod.category_id,
 		'availability': prod.availability_dict(),
+		'table': prod.get_table_of_size(),
 		'new_price': prod.new_price,
 		'description': prod.description,
 		'image_list': images_url
@@ -78,6 +79,12 @@ def order(request):
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
 		current_price = product.price
+		availabilities = ProductAvailability.objects.filter(product=product)
+		for availability in availabilities:
+			if availability.size.name == order_item['size']:
+				new_quantity = availability.quantity - order_item['quantity']
+				availability.quantity = new_quantity
+				availability.save()
 		if current_price >= order_item["price"]:
 			product_price = current_price
 		else:
