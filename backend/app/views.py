@@ -32,6 +32,8 @@ def products(request):
 				'id': prod.id,
 				'title': prod.title,
 				'category': prod.category_id,
+				'availability': prod.availability_dict(),
+				'table': prod.get_table_of_size(),
 				'price': prod.price,
 				'new_price': prod.new_price,
 				'image': prod.get_first_image_url()
