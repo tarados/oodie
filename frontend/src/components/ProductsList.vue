@@ -132,16 +132,21 @@ h4 {
 }
 
 @media screen and (max-width: 860px) {
+  .brand {
+    width: calc((100% / 12) * 6 - 20px);
+  }
 }
 
 @media screen and (max-width: 620px) {
-  .product {
+  .product,
+  .brand {
     width: calc((100% / 12) * 6 - 20px);
   }
 }
 
 @media screen and (max-width: 450px) {
-  .product {
+  .product,
+  .brand {
     width: calc((100% / 12) * 12 - 20px);
   }
 }
