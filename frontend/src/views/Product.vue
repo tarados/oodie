@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import {get} from "../js/send"
 import {VueperSlides, VueperSlide} from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -139,16 +138,14 @@ export default {
     }
   },
   methods: {
-    async loadProduct(id) {
-      const response = await get('products/product' + '/' + id);
-      const images = response.product.image_list;
+    async loadProduct() {
+      const images = this.currentProduct.image_list;
       images.forEach(image => {
         this.slides.push({
           'image': image
         });
       });
-      this.availabilities = response.product.availability;
-      this.$store.commit('setCurrentProduct', response.product);
+      this.availabilities = this.currentProduct.availability;
     },
     showImage(index) {
       this.imageIndex = index;
@@ -185,7 +182,8 @@ export default {
     }
   },
   mounted() {
-    this.loadProduct(this.$route.params.id);
+    this.$store.dispatch('loadProduct', this.$route.params.id)
+    this.loadProduct();
     this.basketVisible();
   }
 }

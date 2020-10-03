@@ -9,6 +9,10 @@ export default {
             context.commit('addProducts', response.products);
             context.commit('addCategories', response.categories);
         },
+        async loadProduct(context, id) {
+            const response = await get('products/product' + '/' + id);
+            context.commit('setCurrentProduct', response.product);
+        },
         async loadCities(context) {
             const response = await get('cities');
             context.commit('loadCities', response);
