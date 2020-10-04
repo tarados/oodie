@@ -64,7 +64,7 @@
             <div
                 class="square"
                 v-for="(availability, index) in availabilities"
-                :class="{selected: index === size}"
+                :class="{selected: index === size, notActive: availability.quantity <= 0}"
                 :key="index"
                 @click="select(index)"
             >
@@ -396,6 +396,12 @@ export default {
 
 .selected {
   background-color: #c7d9d8;
+}
+
+.notActive {
+  background-color: #9a9a9a;
+  pointer-events: none;
+  cursor: default;
 }
 
 /*media queries**************************************************************************/
