@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-
+    <img src="/images/sewer_cat.gif"/>
   </div>
 </template>
 
@@ -21,5 +21,8 @@ export default {
 </script>
 
 <style scoped>
-
+.wrapper {
+  text-align: center;
+  padding-bottom: 40px;
+}
 </style>

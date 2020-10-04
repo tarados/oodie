@@ -24,7 +24,7 @@
         </div>
         <div class="social">
           <div class="social-title">
-            <span>Мы в соцсетях:</span>
+            <span>Мы в соцсетях</span>
           </div>
           <div class="social-icons">
             <div class="social-content">
@@ -74,12 +74,13 @@ export default {
 <style scoped>
 .wrapper-footer {
   background-color: var(--overlay-color);
+  padding: 32px;
 }
 
 .container {
   max-width: 1240px;
   margin: 0 auto;
-  padding-left: 5%;
+  /*padding-left: 5%;*/
 }
 
 .footer_row {
@@ -89,7 +90,7 @@ export default {
 .contacts,
 .delivery,
 .social {
-  padding: 50px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -136,7 +137,7 @@ export default {
 .social {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .social-icons {
@@ -144,8 +145,8 @@ export default {
   flex-wrap: wrap;
 }
 
-.social-content {
-  margin-right: 15px;
+.social-content + .social-content {
+  margin-left: 8px;
 }
 
 .circl {
@@ -162,6 +163,11 @@ p {
   font-size: calc(10px + 8 * (100vw / 1838));
 }
 
+.social-title {
+  text-align: center;
+  padding-bottom: 8px;
+}
+
 .contacts-item span {
   padding-bottom: 10px;
   text-transform: uppercase;
@@ -170,13 +176,18 @@ p {
 /*media queries*****************************************/
 
 @media screen and (max-width: 750px) {
+  .wrapper-footer {
+    background-color: var(--overlay-color);
+    padding: 16px;
+  }
   .container {
-    width: calc(100vw - 40px);
-    padding-left: 3%;
+    /*width: calc(100vw - 40px);*/
+    /*padding-left: 3%;*/
   }
 
   .footer_row {
     justify-content: space-between;
+    min-height: 100px;
   }
 
   .contacts {
@@ -185,7 +196,8 @@ p {
 
   span,
   p {
-    font-size: calc(10px + (8 + 8 * 0.7) * ((100vw - 320px) / 1838));
+    font-size: 16px;
+    padding-bottom: 14px;
   }
 
   .delivery {
@@ -195,6 +207,23 @@ p {
   .social {
     width: auto;
   }
+
+  .social-title {
+    display: none;
+  }
+
+  .social-content + .social-content {
+    margin-left: 8px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  span,
+  p {
+    font-size: 14px;
+    padding-bottom: 5px;
+  }
+
 
 }
 </style>
