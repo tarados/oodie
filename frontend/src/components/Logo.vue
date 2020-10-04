@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-logo">
+  <div class="wrapper-logo" @click="toMain">
     <img src="../assets/logo2.png">
   </div>
 </template>
@@ -7,6 +7,11 @@
 <script>
 export default {
   name: "logo",
+  methods: {
+    toMain() {
+      this.$router.push({name: 'Home'})
+    }
+  }
 };
 </script>
 
@@ -18,6 +23,7 @@ export default {
   align-self: center;
   margin-top: 50px;
   margin-bottom: 40px;
+  cursor: pointer;
 
 }
 
