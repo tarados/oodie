@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 
 
@@ -17,7 +18,7 @@ def submit_row(context):
 	return ctx
 
 
-class ProductImageInline(admin.TabularInline):
+class ProductImageInline(SortableInlineAdminMixin, admin.TabularInline):
 	model = ProductImage
 	extra = 0
 
