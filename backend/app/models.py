@@ -75,6 +75,16 @@ class Product(models.Model):
 
     get_price.short_description = "Цена"
 
+    def admin_description(self):
+        max_len = 30
+        result = self.description
+        if len(result) > max_len:
+            result = result[:max_len] + "..."
+        return result
+
+    admin_description.short_description = "Описание"
+
+
     def get_image(self):
         size = 50
         image_url = f'{settings.SITE_URL}{settings.STATIC_URL}no-img.jpg'
