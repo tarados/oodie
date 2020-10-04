@@ -21,9 +21,15 @@
         </div>
       </div>
       <h2>Подписывайся на наши страницы:</h2>
-      <p>facebook.com/hoodiyalko/</p>
+      <a target="_blank" href="https://www.facebook.com/hoodiyalko/">
+        <p>facebook.com/hoodiyalko/</p>
+      </a>
+      <a target="_blank" href="https://www.instagram.com/hoodiyalko/">
       <p>instagram.com/hoodiyalko/</p>
+      </a>
+      <a target="_blank" href="https://www.tiktok.com/hoodiyalko/">
       <p>tiktok.com/@hoodiyalko/</p>
+      </a>
       <h2>Возможен самовывоз возле м.Контрактовая площадь по предварительной договоренности.</h2>
     </div>
   </div>
@@ -108,6 +114,12 @@ h1 {
 
 h2 {
   font-size: calc(14px + 10 * (100vw / 1600));
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
 }
 
 p {
