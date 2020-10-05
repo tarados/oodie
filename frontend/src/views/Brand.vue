@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper-brand">
-    <Breadcrumbs :current-category="activeCategoryTitle"/>
     <ProductsList :category-id="activeCategoryId" size="small"/>
   </div>
 </template>
 
 <script>
 import ProductsList from "@/components/ProductsList";
-import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default {
   name: "Brand",
@@ -18,7 +16,6 @@ export default {
   },
   components: {
     ProductsList,
-    Breadcrumbs
   },
   computed: {
     activeCategoryId() {

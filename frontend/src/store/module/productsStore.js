@@ -97,6 +97,28 @@ export default {
                 sum += item.total;
             });
             return sum + ' грн';
+        },
+        breadcrumbs(state) {
+            const { currentProduct, categoriesList } = state;
+            const result = [];
+            if (currentProduct && currentProduct.category === 1) {
+                result.push({ title: "Главная", routeName: "Home" });
+            } else {
+                result.push({ title: "Бренды друзья", routeName: "Brands" });
+
+                if (currentProduct) {
+                    const category = categoriesList.find(category => category.id === currentProduct.category);
+                    if (category) {
+                        result.push({ title: category.title, routeName: "Brand", routeParams: { slug: category.slug } });
+                    }
+                }
+            }
+
+            if (currentProduct) {
+                result.push({ title: currentProduct.title });
+            }
+
+            return result;
         }
     }
 }
