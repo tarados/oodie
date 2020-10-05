@@ -23,14 +23,14 @@
         <div class="linkList-item">
           <router-link :to="{name: 'Home'}"
           >
-            <p>главная</p>
+            <p>{{ links['1'] }}</p>
           </router-link>
         </div>
         <div class="linkList-item">
           <router-link
               :to="{name: 'About'}"
           >
-            <p>о нас</p>
+            <p>{{ links['2'] }}</p>
           </router-link>
         </div>
         <div class="linkList-item"
@@ -40,7 +40,7 @@
           <router-link
               :to="{name: 'Brands'}"
           >
-            <p>бренды друзья</p>
+            <p>{{ links['3'] }}</p>
           </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -67,7 +67,7 @@
           <router-link
               :to="{name: 'Contacts'}"
           >
-            <p>контакты</p>
+            <p>{{ links['4'] }}</p>
           </router-link>
         </div>
       </div>
@@ -78,6 +78,7 @@
 <script>
 import Hamburger from "./Hamburger";
 import Logo from "./Logo";
+import linkList from '../js/linkList'
 
 export default {
   name: "NavBar",
@@ -90,10 +91,12 @@ export default {
       selected: "",
       isOpen: false,
       options: [],
+      links: {},
       hamburger: false,
     };
   },
-  computed: {},
+  computed: {
+  },
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
@@ -111,10 +114,14 @@ export default {
         this.isOpen = false;
       }, 500);
 
+    },
+    getLinkList() {
+      this.links = linkList();
     }
   },
   mounted() {
     this.$store.dispatch('changeVisibleBasket');
+    this.getLinkList();
   }
 }
 
@@ -125,16 +132,8 @@ export default {
 .navbar {
   position: relative;
   z-index: 2;
-  /*border-bottom: 2px solid #9a9a9a;*/
 }
 
-.container-nav {
-  /*height: calc(20vw + 29 * (100vw / 1838));*/
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*justify-content: space-between;*/
-  /*align-items: flex-start;*/
-}
 
 .nav-header {
   width: 100%;
@@ -143,46 +142,30 @@ export default {
 
   display: flex;
   flex-direction: row;
-  /*grid-template-columns: 1fr 1fr;*/
-  /*grid-template-rows: calc(3vw + 4 * (100vw / 1838));*/
-  /*grid-template-areas: "phone basket";*/
   background-color: var(--overlay-color);
-  /*align-items: center;*/
-  /*align-content: center;*/
-  /*justify-items: center;*/
 }
 
 .hamburg {
   display: none;
   flex:1 1 auto;
-  /*grid-area: hamburg;*/
 }
 
 .phone {
   flex:1 1 auto;
   height: 30px;
   line-height: 30px;
-  /*grid-area: phone;*/
   align-self: flex-start;
-  /*justify-self: flex-start;*/
-  /*margin: 0 2vmin;*/
 }
 
 .basket {
   flex:1 1 auto;
-  /*grid-area: basket;*/
   align-self: flex-end;
   line-height: 30px;
-  /*justify-self: flex-end;*/
-  /*margin: 0 5vmin;*/
 }
 
 .phone a,
 .basket a {
   display: flex;
-  /*flex-wrap: wrap;*/
-  /*justify-content: flex-end;*/
-  /*align-items: center;*/
   text-decoration: none;
   cursor: pointer;
   color: black;
@@ -199,7 +182,6 @@ export default {
 
 .basket a img {
   height: 30px;
-  /*margin: 0 1.5vmin;*/
 }
 
 .basket a img {
@@ -227,14 +209,12 @@ span {
 .linkList .linkList-item {
   padding: 0 calc(3vw + 12 * (100vw / 1838));
   position: relative;
-  /*border-bottom: 3px solid transparent;*/
   display: flex;
   transition: 0.4s;
 }
 
 .linkList .linkList-item a:active,
 .linkList .linkList-item a:hover {
-  /*color: #c7d9d8;*/
   font-weight: bold;
 }
 
@@ -278,12 +258,6 @@ span {
 }
 
 /*media queries*************************************************************************************/
-@media screen and (max-width: 1600px) {
-  .container-nav {
-    /*height: calc(20vw + 22 * (100vw / 1600));*/
-  }
-}
-
 @media screen and (max-width: 1200px) {
   .linkList .linkList-item {
     padding: 0 calc(1vw + 12 * (100vw / 1200));
@@ -294,10 +268,6 @@ span {
   .nav-header {
     display: block;
     text-align: center;
-    /*grid-template-columns: 1fr 2fr 1fr;*/
-    /*grid-template-areas: "hamburg phone basket";*/
-    /*justify-items: center;*/
-    /*height: calc(7vw + 5 * (100vw / 750));*/
   }
 
   .phone {
@@ -308,11 +278,6 @@ span {
     position: absolute;
     top: 15px;
     right: 10px;
-  }
-
-  .phone a p,
-  .basket a span {
-    /*font-size: calc(14px + (6 + 6 * 0.7) * ((100vw - 320px) / 1838));*/
   }
 
   .hamburg {
@@ -327,53 +292,10 @@ span {
     width: 15px;
     height: 50px;
     opacity: 0;
-    /*margin-left: 1vw;*/
   }
 
   .linkList {
     display: none;
   }
 }
-
-@media screen and (max-width: 525px) {
-  .container-nav {
-    /*height: calc(20vw + 22 * (100vw / 525));*/
-  }
-
-  .nav-header {
-    /*height: calc(8vw + 5 * (100vw / 525));*/
-  }
-}
-
-@media screen and (max-width: 475px) {
-  .container-nav {
-    /*height: calc(34vw + 23 * (100vw / 475));*/
-  }
-
-  .nav-header {
-    /*height: calc(12vw + 9 * (100vw / 475));*/
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .container-nav {
-    /*height: calc(34vw + 23 * (100vw / 325));*/
-  }
-
-  .nav-header {
-    /*height: calc(12vw + 9 * (100vw / 325));*/
-  }
-}
-
-@media screen and (max-width: 280px) {
-  .container-nav {
-    /*height: calc(34vw + 23 * (100vw / 280));*/
-  }
-
-  .nav-header {
-    /*height: calc(12vw + 9 * (100vw / 280));*/
-  }
-}
-
-
 </style>

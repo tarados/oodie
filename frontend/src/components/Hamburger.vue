@@ -9,16 +9,16 @@
         <div>
           <ul>
             <li @click="closeHamburger">
-              <router-link :to="{name: 'Home'}">Худиялки</router-link>
+              <router-link :to="{name: 'Home'}">{{ links['1'] }}</router-link>
             </li>
             <li @click="closeHamburger">
-              <router-link :to="{name: 'About'}">О нас</router-link>
+              <router-link :to="{name: 'About'}">{{ links['2'] }}</router-link>
             </li>
             <li @click="closeHamburger">
-              <router-link :to="{name: 'Brands'}">Дружеские бренды</router-link>
+              <router-link :to="{name: 'Brands'}">{{ links['3'] }}</router-link>
             </li>
             <li @click="closeHamburger">
-              <router-link :to="{name: 'Contacts'}">Контакты</router-link>
+              <router-link :to="{name: 'Contacts'}">{{ links['4'] }}</router-link>
             </li>
           </ul>
         </div>
@@ -28,19 +28,26 @@
 </template>
 
 <script>
+import linkList from '../js/linkList';
+
 export default {
   name: "Hamburger",
   data() {
     return {
       checked: false,
+      links: {}
     };
   },
   methods: {
     closeHamburger() {
       this.checked = false;
     },
+    getLinkList() {
+      this.links = linkList();
+    }
   },
   mounted() {
+    this.getLinkList();
   },
 };
 </script>
