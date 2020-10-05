@@ -1,23 +1,20 @@
 <template>
-  <div>
     <ul class="breadcrumbs">
-      <li class="breadcrumbs__item">
-        <router-link :to="{name: 'Brands'}" class="breadcrumbs__link">Бренды друзья</router-link>
-      </li>
-      <li class="breadcrumbs__item">
-        <router-link :to="{name: 'Brand', params: {slug: this.slug}}" class="breadcrumbs__link">{{
-            currentCategory
-          }}
-        </router-link>
-      </li>
-      <li class="breadcrumbs__item">
-        <a class="breadcrumbs__link breadcrumbs__link--active">{{ currentProduct }}</a>
+      <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
+        <router-link
+            v-if="index < breadcrumbs.length - 1"
+            :to="{name: item.routeName, params: item.routeParams}"
+             class="breadcrumbs__link">{{ item.title }}</router-link>
+
+        <a v-if="index === breadcrumbs.length - 1"
+           class="breadcrumbs__link breadcrumbs__link--active">{{ item.title }}</a>
       </li>
     </ul>
-  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Breadcrumbs",
   props: {
@@ -36,14 +33,18 @@ export default {
         return ''
       }
 
-    }
+    },
+
+    ...mapGetters(["breadcrumbs"])
   }
 }
 </script>
 
 <style scoped>
 .breadcrumbs {
-  padding: 15px;
+  ;
+  display: inline-block;
+  padding: 0px 0px 15px;
 }
 
 .breadcrumbs__item {

@@ -25,4 +25,9 @@ export default {
   text-align: center;
   padding-bottom: 40px;
 }
+
+img {
+  width: 100%;
+  max-width: 500px;
+}
 </style>

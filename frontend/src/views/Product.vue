@@ -1,9 +1,11 @@
 <template>
   <div>
-    <Breadcrumbs :current-category="this.currentCategory" :current-product="this.currentProduct.title"/>
-    <div class="wrapper-product">
+    <div class="wrapper-product" v-if="this.currentProduct">
+
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
+          <Breadcrumbs/>
+
           <div class="item-left">
             <img :src="this.currentProduct.image_list[imageIndex]" class="zoomImg">
           </div>
@@ -90,10 +92,10 @@
 </template>
 
 <script>
-import {VueperSlides, VueperSlide} from 'vueperslides';
-import 'vueperslides/dist/vueperslides.css';
+import { VueperSlides, VueperSlide } from "vueperslides";
+import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import {required} from 'vuelidate/lib/validators';
+import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "Product",
@@ -106,25 +108,25 @@ export default {
       slides: [],
       breakpoints: {
         420: {
-          disable: false
-        }
-      }
-    }
+          disable: false,
+        },
+      },
+    };
   },
   validations: {
-    size: {required}
+    size: { required },
   },
   components: {
     VueperSlide,
     VueperSlides,
-    Breadcrumbs
+    Breadcrumbs,
   },
   computed: {
     currentProduct() {
       try {
-        return this.$store.state.productsStore.currentProduct
+        return this.$store.state.productsStore.currentProduct;
       } catch (TypeError) {
-        return {}
+        return {};
       }
 
     },
@@ -132,17 +134,17 @@ export default {
       try {
         return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
       } catch (TypeError) {
-        return ''
+        return "";
       }
 
-    }
+    },
   },
   methods: {
     async loadProduct() {
       const images = this.currentProduct.image_list;
       images.forEach(image => {
         this.slides.push({
-          'image': image
+          "image": image,
         });
       });
       this.availabilities = this.currentProduct.availability;
@@ -152,41 +154,41 @@ export default {
     },
     toCard() {
       const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
-        'size': '',
-        'quantity': '0'
+        "size": "",
+        "quantity": "0",
       };
       const productToCard = {
-        'id': this.currentProduct.id,
-        'title': this.currentProduct.title,
-        'price': this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
-        'quantity': 1,
-        'availability': availability.quantity,
-        'size': availability.size,
-        'image': this.currentProduct.image_list[this.imageIndex]
+        "id": this.currentProduct.id,
+        "title": this.currentProduct.title,
+        "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
+        "quantity": 1,
+        "availability": availability.quantity,
+        "size": availability.size,
+        "image": this.currentProduct.image_list[this.imageIndex],
       };
-      if (productToCard.size === '') {
+      if (productToCard.size === "") {
         delete productToCard.size;
       }
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
-      this.$router.push({name: 'Card'});
+      this.$router.push({ name: "Card" });
     },
     select(index) {
       this.size = index;
     },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
+        this.$store.dispatch("changeVisibleBasket");
       }
-    }
+    },
   },
   mounted() {
-    this.$store.dispatch('loadProduct', this.$route.params.id)
+    this.$store.dispatch("loadProduct", this.$route.params.id);
     this.loadProduct();
     this.basketVisible();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
