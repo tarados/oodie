@@ -119,7 +119,7 @@ export default {
     },
     plusQuantity(index) {
       if (!this.$v.$invalid) {
-        this.quantity = this.$store.state.productsStore.cardProducts[index].quantity +1;
+        this.quantity = this.$store.state.productsStore.cardProducts[index].quantity +2;
         const availability = this.$store.state.productsStore.cardProducts[index].availability;
         if (availability === '0') {
           this.maxValue = 200;
@@ -129,7 +129,11 @@ export default {
         this.$store.commit('increment', index);
       } else {
         alert("В наличии только " + this.maxValue);
-        this.$store.commit('decrement', index);
+        console.log(this.quantity);
+        if (this.quantity === this.maxValue + 2) {
+          this.$store.commit('decrement', index);
+          this.quantity -= 1;
+        }
       }
     },
     basketVisible() {

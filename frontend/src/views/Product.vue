@@ -60,7 +60,7 @@
           <div class="product-title">
             <div>{{ this.currentProduct.title }}</div>
           </div>
-          <div class="size-block" v-show="this.currentProduct.category !== 1">
+          <div class="size-block">
             <div
                 class="square"
                 v-for="(availability, index) in availabilities"
