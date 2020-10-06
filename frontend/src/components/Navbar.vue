@@ -6,7 +6,7 @@
           <Hamburger/>
         </div>
         <div class="phone">
-          <router-link to="#"><img src="../assets/phone-receiver.svg"/>+380507204066</router-link>
+          <a href="tel:+380507204066"><img src="../assets/phone-receiver.svg"/>+380507204066</a>
         </div>
         <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
           <router-link :to="{name: 'Card'}">

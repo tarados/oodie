@@ -1,38 +1,35 @@
 <template>
   <div class="wrapper">
     <div class="content-about">
-      <h1>Есть вопросы?</h1>
-      <h2>Мы будем рады получить твое сообщение:</h2>
-      <div class="messengers">
-        <div class="phone">
-          <img src="../assets/phone-receiver.svg"/>
-          <router-link class="link" to="#">
-            <p>+380507204066</p>
-          </router-link>
-        </div>
-        <div class="mail">
-          <img src="../assets/email.svg">
-          <p>hoodiyalko@gmail.com</p>
-        </div>
-        <div class="icons-messengers">
-          <img src="../assets/media.png">
-          <img src="../assets/messenger.png">
-          <img src="../assets/phone.png">
-        </div>
+      <p>Есть вопросы?</p>
+      <p>Мы будем рады получить твое сообщение:</p>
+
+      <div class="contact-row">
+        <img class="contact-icon" src="../assets/phone-receiver.svg"/>
+        <a href="tel:+380507204066">+380507204066</a>
+
+
+<!--        <img class="contact-icon extra" src="../assets/media.png">-->
+<!--        <img class="contact-icon" src="../assets/phone.png">-->
       </div>
-      <h2>Подписывайся на наши страницы:</h2>
-      <a target="_blank" href="https://www.facebook.com/hoodiyalko/">
-        <p>facebook.com/hoodiyalko/</p>
-      </a>
-      <a target="_blank" href="https://www.instagram.com/hoodiyalko/">
-      <p>instagram.com/hoodiyalko/</p>
-      </a>
-      <a target="_blank" href="https://www.tiktok.com/hoodiyalko/">
-      <p>tiktok.com/@hoodiyalko/</p>
-      </a>
-      <h2>Возможен самовывоз возле м.Контрактовая площадь по предварительной договоренности.</h2>
+
+      <div class="contact-row">
+        <img class="contact-icon" src="../assets/email.svg">
+        <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
+      </div>
+      <br>
+      <p><strong>Возможен самовывоз возле м.Контрактовая площадь по предварительной договоренности.</strong></p>
+      <br>
+      <p>Подписывайся на наши страницы:</p>
+      <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/">facebook.com/hoodiyalko</a></p>
+      <p><a target="_blank" href="https://www.instagram.com/hoodiyalko/">instagram.com/hoodiyalko</a></p>
+      <a target="_blank" href="https://www.tiktok.com/hoodiyalko">tiktok.com/@hoodiyalko</a>
     </div>
+
+
+
   </div>
+
 </template>
 
 <script>
@@ -41,114 +38,59 @@ export default {
   methods: {
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
+        this.$store.dispatch("changeVisibleBasket");
       }
-    }
+    },
   },
   mounted() {
     this.basketVisible();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
 .wrapper {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 800px;
+  padding: 16px;
+  padding-bottom: 40px;
 }
 
 .content-about {
-  margin: 6vmin;
-  display: grid;
-  grid-template: repeat(8, auto) / 1fr;
-  grid-row-gap: 3vmin;
+  /*margin: 6vmin;*/
+  /*display: grid;*/
+  /*grid-template: repeat(8, auto) / 1fr;*/
+  /*grid-row-gap: 3vmin;*/
+
+  font-size: 16px;
 }
 
-.messengers {
-  display: grid;
-  grid-template: repeat(2, auto) / repeat(2, 1fr);
-  grid-template-areas:
-      "phone icons"
-      "mail mail";
+.content-about p, .contact-row {
+  margin-bottom: 8px;
 }
 
-.phone {
-  grid-area: phone;
+.contact-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
 }
 
-.phone p,
-.mail p {
-  margin: 0 3%;
-}
-
-.phone .link {
-  text-decoration: none;
+.content-about a {
   color: black;
-}
-
-.icons-messengers {
-  grid-area: icons;
-  display: none;
-
-  justify-content: space-around;
-  width: 40%;
-}
-
-.mail {
-  grid-area: mail;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.messengers img {
-  width: 6vmin;
-}
-
-h1 {
-  font-size: calc(18px + 14 * (100vw / 1600));
-}
-
-h2 {
-  font-size: calc(14px + 10 * (100vw / 1600));
-}
-
-a {
   text-decoration: none;
-  cursor: pointer;
-  color: black;
 }
 
-p {
-  font-size: calc(12px + 12 * (100vw / 1600));
+.content-about a:hover {
+  text-decoration: underline;
 }
 
-.test {
-  font-size: 18px;
+.contact-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 }
 
-@media screen and (max-width: 767px) {
-  h1 {
-    font-size: calc(18px + (14 + 14 * 0.7) * ((100vw - 320px) / 1600));
-  }
-
-  h2 {
-    font-size: calc(14px + (10 + 10 * 0.7) * ((100vw - 320px) / 1600));
-  }
-
-  p {
-    font-size: calc(12px + (12 + 12 * 0.7) * ((100vw - 320px) / 1600));
-  }
-
-  .icons-messengers {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    width: 55%;
-  }
+.extra {
+  margin-left: 16px;
 }
+
 </style>

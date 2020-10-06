@@ -8,13 +8,11 @@
           </div>
           <div class="contacts-item phone">
             <img src="../assets/phone-receiver.svg"/>
-            <router-link to="#">
-              <p>+380507204066</p>
-            </router-link>
+            <a href="tel:+380507204066">+380507204066</a>
           </div>
           <div class="contacts-item">
             <img src="../assets/email.svg">
-            <p>hoodiyalko@gmail.com</p>
+            <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
           </div>
         </div>
         <div class="delivery">
