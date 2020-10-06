@@ -76,12 +76,8 @@
               {{ availability.size }}
             </div>
           </div>
-          <div class="size-table" v-show="this.currentProduct.category !== 1">
-            <router-link
-                :to="{name: 'Table'}"
-            >
-              <small>Таблица размеров</small>
-            </router-link>
+          <div class="size-table" v-if="this.currentProduct.table">
+           <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
           </div>
           <div class="btn" @click="toCard">в корзину</div>
           <div class="product-description">
@@ -98,6 +94,7 @@
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
+
 import { required } from "vuelidate/lib/validators";
 
 export default {

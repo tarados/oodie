@@ -10,6 +10,7 @@ export default {
             context.commit('addCategories', response.categories);
         },
         async loadProduct(context, id) {
+            context.commit('setCurrentProduct', null);
             const response = await get('products/product' + '/' + id);
             context.commit('setCurrentProduct', response.product);
         },
