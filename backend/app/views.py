@@ -4,6 +4,7 @@ import datetime
 from django.shortcuts import render
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
+from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
 
 
@@ -62,10 +63,13 @@ def product(request, product_id):
 	return JsonResponse({'product': product_case})
 
 
+@transaction.atomic
 def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
+
 	print(order_content)
+
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],
@@ -77,6 +81,7 @@ def order(request):
 		comment=order_content["comment"]
 	)
 	order.save()
+
 	order_total_sum = 0
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
@@ -102,6 +107,7 @@ def order(request):
 		order_total_sum = order_total_sum + order_item.cost_product
 	order.total_price = order_total_sum
 	order.save()
+
 	return JsonResponse({'success': True})
 
 
