@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="wrapper-product" v-if="this.currentProduct">
+      <div class="breadcrumbs-wrapper">
+          <Breadcrumbs/>
+      </div>
 
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
-          <Breadcrumbs/>
-
           <div class="item-left">
             <img :src="this.currentProduct.image_list[imageIndex]" class="zoomImg">
           </div>
+
           <div class="item-left viewer">
             <vueper-slides
                 class="no-shadow"
@@ -32,6 +34,7 @@
               </vueper-slide>
             </vueper-slides>
           </div>
+
           <div class="item-left-slider">
             <div class="slider" v-for="(image, index) in currentProduct.image_list" :key="image">
               <img :src="image" @click="showImage(index)">
@@ -195,6 +198,17 @@ export default {
 .wrapper-product {
   margin-top: 55px;
   margin-bottom: 40px;
+}
+
+.breadcrumbs-wrapper {
+  padding-left: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: inherit;
+  align-content: center;
 }
 
 .row {
