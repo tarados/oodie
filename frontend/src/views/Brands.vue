@@ -56,6 +56,7 @@ export default {
   max-width: 1380px;
   margin: 0 auto;
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .brands-info {
