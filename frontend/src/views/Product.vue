@@ -65,7 +65,7 @@
           <div class="product-title">
             <div>{{ this.currentProduct.title }}</div>
           </div>
-          <div class="size-block">
+          <div class="size-block" v-if="!this.hideSize">
             <div
                 class="square"
                 v-for="(availability, index) in availabilities"
@@ -109,6 +109,7 @@ export default {
       availabilities: [],
       visibleCard: true,
       slides: [],
+      hideSize: false,
       breakpoints: {
         420: {
           disable: false,
@@ -144,6 +145,7 @@ export default {
   },
   methods: {
     async loadProduct() {
+      await this.$store.dispatch("loadProduct", this.$route.params.id);
       const images = this.currentProduct.image_list;
       images.forEach(image => {
         this.slides.push({
@@ -151,6 +153,11 @@ export default {
         });
       });
       this.availabilities = this.currentProduct.availability;
+
+      if (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE") {
+        this.hideSize = true;
+      }
+
     },
     showImage(index) {
       this.imageIndex = index;
@@ -187,7 +194,6 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("loadProduct", this.$route.params.id);
     this.loadProduct();
     this.basketVisible();
   },
