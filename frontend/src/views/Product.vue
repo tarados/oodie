@@ -239,6 +239,7 @@ export default {
 }
 
 .item img.zoomImg:hover {
+
   /*max-height: 50px;*/
   /*transform: scale(1.2);*/
 }
@@ -251,13 +252,19 @@ export default {
 .item-left-slider {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 0.25rem;
 }
 
 .slider {
-  width: calc((100% / 12) * 3 - 1rem);
-  margin: 0 2% 1% 0;
+
+  width: calc((100% / 12) * 3 - 10px);
+  height: calc((100% / 12) * 3 - 10px);
+  /*margin: 0 2% 1% 0;*/
+}
+
+.slider {
+
 }
 
 .slider img:hover {
