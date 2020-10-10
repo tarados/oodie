@@ -9,7 +9,7 @@
           <img :src="product.image">
         </div>
         <div class="item product">
-          <div class="remove" @click="deleteOrder(index)">удалить</div>
+<!--          <div class="remove" @click="deleteOrder(index)">удалить</div>-->
           <div class="name">
             {{ product.title }}
             <strong v-if="needShowSize(product)">
@@ -28,6 +28,7 @@
           </div>
         </div>
         <div class="item total-val">{{ product.total }} грн</div>
+        <div class="item close"><button @click="deleteOrder(index)">X</button></div>
       </div>
       <div class="mobile">
         <div class="mobile-content">
@@ -147,7 +148,7 @@ h1 {
   display: grid;
   max-width: 900px;
   margin: 15px auto;
-  grid-template-columns: 10% 66% 10% 14%;
+  grid-template-columns: 10% 55% 10% 19% 6%;
 }
 
 .container-border {
@@ -216,11 +217,8 @@ img {
 
 .product .name {
   flex-grow: 2;
-  margin-left: 20%;
-}
-
-.product .size {
-  margin-right: 5%;
+  /*padding-left: 8px;*/
+  /*margin-left: 20%;*/
 }
 
 .remove {
@@ -289,6 +287,30 @@ img {
 .total-val {
   text-align: center;
   align-self: center;
+}
+
+.item.close {
+  text-align: center;
+  align-self: center;
+}
+
+.item.close button {
+  border: none;
+  background: transparent;
+  /*font-weight: bold;*/
+  font-size: 20px;
+  color: #a3a4a5;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.item.close button:hover {
+  color: black;
+}
+
+.item.close button:focus {
+  outline: none;
 }
 
 .triangle {
@@ -392,6 +414,10 @@ img {
 
 /*media queries*************************************************************************************/
 @media screen and (max-width: 800px) {
+
+}
+
+@media screen and (max-width: 680px) {
   .wrapper-card {
     margin: 5vw;
   }
@@ -420,7 +446,8 @@ img {
   .continue-mobile-shopping,
   .checkout-mobile,
   .remove {
-    font-size: calc(3.125vw + 2px);
+    font-size: 16px;
+    /*font-size: calc(3.125vw + 2px);*/
     /*margin-left: 3%;*/
   }
 
