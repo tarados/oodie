@@ -94,6 +94,7 @@
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import settings from "../settings";
 
 import { required } from "vuelidate/lib/validators";
 
@@ -151,7 +152,7 @@ export default {
       });
       this.availabilities = this.currentProduct.availability;
 
-      if (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE") {
+      if (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize) {
         this.hideSize = true;
       }
 

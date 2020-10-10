@@ -1,13 +1,7 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1>Ваша корзина:</h1>
-    </div>
-    <div class="grid-container first">
-      <div class="item title">Название</div>
-      <div class="item price">Цена</div>
-      <div class="item quantity">Количество</div>
-      <div class="item total">Сумма</div>
+      <h1>Корзина</h1>
     </div>
     <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
       <div class="grid-container second">
@@ -18,12 +12,12 @@
           <div class="remove" @click="deleteOrder(index)">удалить</div>
           <div class="name">
             {{ product.title }}
-          </div>
-          <div class="size" v-if="product.size">
-            Size - {{ product.size }}
+            <strong v-if="needShowSize(product)">
+              {{ product.size }}
+            </strong>
           </div>
         </div>
-        <div class="item price-val">{{ product.price }} грн</div>
+<!--        <div class="item price-val">{{ product.price }} грн</div>-->
         <div class="item quantity-val">
           <div>
             {{ product.quantity }}
@@ -40,25 +34,20 @@
           <div class="image">
             <img :src="product.image">
           </div>
-          <div class="product" v-if="product.size">
-            {{ product.title }} Size - {{ product.size }}
-          </div>
-          <div class="product" v-else>
-            {{ product.title }}
-          </div>
+          <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{ product.size }}</span></div>
           <div class="total-val">{{ product.total }} грн</div>
         </div>
         <div class="mobile-edit">
           <div class="remove-mobile" @click="deleteOrder(index)">Удалить</div>
           <div class="quantity-val-mobile">
-            <div class="up">
-              <div class="triangle-mobile-up" @click="plusQuantity(index)"></div>
+            <div class="down">
+              <div class="triangle-mobile-down" @click="minusQuantity(index)"></div>
             </div>
             <div class="product-quantity">
               {{ product.quantity }}
             </div>
-            <div class="down">
-              <div class="triangle-mobile-down" @click="minusQuantity(index)"></div>
+            <div class="up">
+              <div class="triangle-mobile-up" @click="plusQuantity(index)"></div>
             </div>
           </div>
           <div></div>
@@ -69,71 +58,57 @@
       <div class="subtotal-mobile-title">Итого:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
-    <div class="submit-mobile-box">
-      <router-link :to="{name: 'Home'}" class="continue-mobile-shopping">Продолжить покупки</router-link>
-      <router-link :to="{name: 'Checkout'}" class="checkout-mobile">Оплатить</router-link>
+    <div class="container container-border">
+      <div class="subtotal-box">
+        <span>Итого </span>
+        <span v-text="totalPrice"></span>
+      </div>
     </div>
-    <div class="grid-container second subtotal-box">
-      <div class="item subtotal-title">Итого:</div>
-      <div class="item subtotal" v-text="totalPrice"></div>
+    <div class="container checkout-buttons">
+        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping">Продолжить покупки</router-link>
+        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout">Оплатить</router-link>
     </div>
-    <div class="submit-box">
-      <router-link :to="{name: 'Home'}" class="item continue-shopping">Продолжить покупки</router-link>
-      <router-link :to="{name: 'Checkout'}" class="item checkout">Оплатить</router-link>
-    </div>
+
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-import {maxValue} from 'vuelidate/lib/validators'
+import settings from "@/settings";
+
 
 export default {
   name: "Card",
   data() {
     return {
-      quantity: null,
-      valQuantity: 0,
-      maxValue: null,
-      availability: null
+      availability: null,
     }
-  },
-  validations() {
-    return {
-      quantity: {[this.valQuantity]: maxValue(this.maxValue)}
-    }
-
   },
   computed: {
     ...mapGetters(["totalPrice"])
   },
   methods: {
+    needShowSize(product) {
+      const result = product.size && product.size !== settings.hideSize;
+      return result;
+    },
     deleteOrder(index) {
       this.$store.commit('delProduct', index);
     },
     minusQuantity(index) {
-      if (this.quantity > 2) {
-        this.quantity -= 1;
+      const item = this.$store.state.productsStore.cardProducts[index];
+      let newAvailability = item.quantity - 1;
+      if (newAvailability > 0) {
         this.$store.commit('decrement', index);
       }
     },
     plusQuantity(index) {
-      if (!this.$v.$invalid) {
-        this.quantity = this.$store.state.productsStore.cardProducts[index].quantity +2;
-        const availability = this.$store.state.productsStore.cardProducts[index].availability;
-        if (availability === '0') {
-          this.maxValue = 200;
-        } else {
-          this.maxValue = availability;
-        }
+      const item = this.$store.state.productsStore.cardProducts[index];
+      let newAvailability = item.quantity + 1;
+      if (newAvailability <= item.availability) {
         this.$store.commit('increment', index);
       } else {
-        alert("В наличии только " + this.maxValue);
-        console.log(this.quantity);
-        if (this.quantity === this.maxValue + 2) {
-          this.$store.commit('decrement', index);
-          this.quantity -= 1;
-        }
+        alert("В наличии только " + item.availability);
       }
     },
     basketVisible() {
@@ -143,12 +118,18 @@ export default {
     }
   },
   mounted() {
+    console.log("mounted");
     this.basketVisible();
   }
 }
 </script>
 
 <style scoped>
+
+.wrapper-card {
+  margin: 5vw;
+}
+
 
 .header {
   margin: 2% auto;
@@ -164,9 +145,23 @@ h1 {
 
 .grid-container {
   display: grid;
-  max-width: 1200px;
+  max-width: 900px;
   margin: 15px auto;
-  grid-template-columns: 10% 58% 10% 11% 11%;
+  grid-template-columns: 10% 66% 10% 14%;
+}
+
+.container-border {
+  border-top: 1px solid black;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  max-width: 900px;
+  margin: auto;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0px 16px;
 }
 
 .first {
@@ -229,7 +224,8 @@ img {
 }
 
 .remove {
-  width: 12%;
+  /*width: 12%;*/
+  padding: 8px;
   height: 1.65vmax;
   display: flex;
   justify-content: center;
@@ -343,8 +339,12 @@ img {
   justify-self: center;
 }
 
+
+
 .subtotal-box {
-  border-bottom: none;
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .submit-box {
@@ -357,49 +357,48 @@ img {
   border-bottom: none;
 }
 
-.checkout {
-  justify-self: flex-end;
-  align-self: center;
-  width: 41.08%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background-color: #f87c56;
-  color: white;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 400;
-  text-decoration: none;
+.checkout-buttons {
+  margin-top: 32px;
+  margin-bottom: 64px;
 }
 
-.checkout:hover,
-.continue-shopping:hover {
-  opacity: 0.5;
+.checkout-button {
+  display: flex;
+  padding: 16px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
   transition: opacity 0.7s ease;
 }
 
+.checkout-button + .checkout-button {
+  margin-left: 16px;
+}
+
+.checkout {
+  background-color: #f87c56;
+  color: white;
+}
+
+.checkout-button:hover {
+  opacity: 0.5;
+}
+
 .continue-shopping {
-  justify-self: flex-end;
-  align-self: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 27.38%;
-  height: 100%;
-  border: 1px solid #e8e9eb;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
+  border: 1px solid black;
+  color: black;
 }
 
 /*media queries*************************************************************************************/
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 800px) {
   .wrapper-card {
     margin: 5vw;
+  }
+
+  .container {
+    padding: 0;
+    justify-content: space-between;
   }
 
   h1 {
@@ -422,7 +421,7 @@ img {
   .checkout-mobile,
   .remove {
     font-size: calc(3.125vw + 2px);
-    margin-left: 3%;
+    /*margin-left: 3%;*/
   }
 
   .first,
@@ -529,7 +528,7 @@ img {
     justify-content: space-between;
     width: 100%;
     border-top: 1px solid grey;
-    padding: 5%;
+    padding: 16px 0px;
   }
 
   .submit-mobile-box {
@@ -562,6 +561,14 @@ img {
     justify-content: center;
     align-items: center
   }
+
+  .subtotal-box {
+    display: none;
+  }
+
+  .container-border {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -583,7 +590,10 @@ img {
   }
 }
 
-@media screen and (max-width: 325px) {
-
+@media screen and (max-width: 320px) {
+  .checkout-button {
+    padding: 8px;
+    font-size: 13px;
+  }
 }
 </style>
