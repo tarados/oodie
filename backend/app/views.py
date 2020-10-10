@@ -68,11 +68,12 @@ def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
 
-	print(order_content)
+	# print(order_content)
 
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],
+		customer_surname=order_content["userSurname"],
 		customer_phone=order_content["phone"],
 		delivery=order_content["delivery"],
 		city=order_content["city"],
