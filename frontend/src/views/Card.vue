@@ -42,13 +42,13 @@
           <div class="remove-mobile" @click="deleteOrder(index)">Удалить</div>
           <div class="quantity-val-mobile">
             <div class="down">
-              <div class="triangle-mobile-down" @click="minusQuantity(index)"></div>
+              <div class="quantity-button" @click="minusQuantity(index)">-</div>
             </div>
             <div class="product-quantity">
               {{ product.quantity }}
             </div>
             <div class="up">
-              <div class="triangle-mobile-up" @click="plusQuantity(index)"></div>
+              <div class="quantity-button" @click="plusQuantity(index)">+</div>
             </div>
           </div>
           <div></div>
@@ -139,7 +139,7 @@ export default {
 
 h1 {
   font-size: 2rem;
-  color: rgb(61, 66, 70);;
+  color: rgb(61, 66, 70);
   text-transform: uppercase;
   letter-spacing: 0;
 }
@@ -451,6 +451,11 @@ img {
     /*margin-left: 3%;*/
   }
 
+  .product {
+
+    justify-content: left;
+  }
+
   .first,
   .second,
   .submit-box {
@@ -534,19 +539,31 @@ img {
   }
 
 
-  .triangle-mobile-down {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 10px solid black;
+  .quantity-button {
+    width: 24px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid rgb(61, 66, 70);
+    color: rgb(61, 66, 70);
+
+    /*width: 0;*/
+    /*height: 0;*/
+    /*border-left: 5px solid transparent;*/
+    /*border-right: 5px solid transparent;*/
+    /*border-top: 10px solid black;*/
   }
 
-  .up,
-  .down,
   .product-quantity {
-    flex-grow: 1;
+    min-width: 24px;
+    text-align: center;
+    line-height: 24px;
   }
+  /*.up,*/
+  /*.down,*/
+  /*.product-quantity {*/
+  /*  flex-grow: 1;*/
+  /*}*/
 
   .subtotal-mobile-box {
     display: flex;
