@@ -9,7 +9,7 @@
     </div>
     <form class="submit-box" @submit.prevent="submitHandler">
       <div class="title-name">
-        Имя:
+        <span>Имя:</span>
       </div>
       <div class="user-name">
         <input
@@ -19,7 +19,7 @@
         <small v-show="invalidName"> Введите Ваше имя!</small>
       </div>
       <div class="title-surname">
-        Фамилия:
+        <span>Фамилия:</span>
       </div>
       <div class="user-surname">
         <input
@@ -29,7 +29,7 @@
         <small v-show="invalidSurname"> Введите Вашу фамилию!</small>
       </div>
       <div class="title-phone">
-        Телефон:
+        <span>Телефон:</span>
       </div>
       <div class="phone">
         <input
@@ -47,7 +47,7 @@
         </small>
       </div>
       <div class="title-mail">
-        E-mail:
+        <span>E-mail:</span>
       </div>
       <div class="mail">
         <input
@@ -57,7 +57,7 @@
         <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
       <div class="title-payment">
-        Способ оплаты:
+        <span>Способ оплаты:</span>
       </div>
       <div class="payment">
         <select v-model="selectedPayment">
@@ -68,7 +68,7 @@
         </select>
       </div>
       <div class="title-delivery">
-        Способ доставки:
+        <span>Способ доставки:</span>
       </div>
       <div class="delivery">
         <select v-model="selected">
@@ -77,14 +77,18 @@
           <option>Другие</option>
         </select>
       </div>
-      <div class="title-city" v-show="selected === 'Новая почта'">Город:</div>
+      <div class="title-city" v-show="selected === 'Новая почта'">
+        <span>Город:</span>
+      </div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
         <autocomplete
             :search="search"
             @submit="setCity"
         ></autocomplete>
       </div>
-      <div class="title-office" v-show="selected === 'Новая почта'">Выберите отделение:</div>
+      <div class="title-office" v-show="selected === 'Новая почта'">
+        <span>Выберите отделение:</span>
+      </div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
         <autocomplete
             class="autocomplete"
@@ -93,7 +97,9 @@
         ></autocomplete>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="title-others" v-show="selected === 'Другие'">Адрес:</div>
+      <div class="title-others" v-show="selected === 'Другие'">
+        <span>Адрес:</span>
+      </div>
       <div class="others" v-show="selected === 'Другие'">
                   <textarea
                       id="others"
@@ -101,13 +107,19 @@
                   ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
       </div>
-      <div class="description-title">Комментарии</div>
+      <div class="description-title">
+        <span>Комментарии</span>
+      </div>
       <div class="description-content">
         <textarea v-model="comment"></textarea>
       </div>
       <div class="button-block">
-        <button @click="toCard" class="continue-shopping">Вернуться в корзину</button>
-        <button type="submit" class="continue-shipping">Купить</button>
+        <button @click="toCard" class="continue-shopping">
+          <span>Вернуться в корзину</span>
+        </button>
+        <button type="submit" class="continue-shipping">
+          <span> Купить</span>
+        </button>
       </div>
     </form>
   </div>
@@ -280,15 +292,23 @@ export default {
   color: rgb(61, 66, 70);
   margin-top: 1%;
   margin-bottom: 1%;
-  font-size: 2rem;
+  font-size: calc(22px + 10 * (100vw / 1835));
   text-transform: uppercase;
   letter-spacing: 0.8px;
+}
+
+span,
+.button-block {
+  font-size: calc(12px + 4 * (100vw / 1835));
+}
+
+select {
+  font-size: calc(8px + 2 * (100vw / 1835));
 }
 
 .subtotal-title {
   color: rgb(48, 48, 48);
   font-weight: 600;
-  font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
@@ -297,7 +317,6 @@ export default {
   justify-self: end;
   color: rgb(48, 48, 48);
   font-weight: 600;
-  font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
@@ -329,16 +348,6 @@ h2 {
   align-self: center;
 }
 
-.user-name,
-.phone,
-.mail,
-.new-post-city,
-.new-post-office {
-  /*display: flex;*/
-  /*flex-wrap: wrap;*/
-  /*justify-content: flex-end;*/
-}
-
 input {
   padding: 0 2%;
   align-self: center;
@@ -353,17 +362,6 @@ input {
 .autocomplete {
   width: 100%;
 }
-
-.title-others,
-.others {
-  /*grid-row: 5 / 7;*/
-}
-
-.description-title,
-.description-content {
-  /*grid-row: 7/7;*/
-}
-
 
 .description-content input {
   padding-left: 10px;
@@ -400,6 +398,7 @@ select {
   padding-left: 1%;
 }
 
+
 input,
 select,
 textarea {
@@ -418,7 +417,6 @@ textarea:focus {
 
 .button-block {
   grid-column: 1/3;
-  /*grid-row: 9/9;*/
   display: grid;
   grid-template: 1fr / 1fr 1fr;
   gap: 20vw;
@@ -428,7 +426,6 @@ textarea:focus {
   background-color: white;
   border: 1px solid #bbbbbb;
   text-transform: uppercase;
-  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -439,7 +436,6 @@ textarea:focus {
   color: white;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.875rem;
   font-weight: 400;
 }
 
@@ -478,19 +474,6 @@ textarea {
     display: none;
   }
 
-  h1 {
-    font-size: 2rem;
-  }
-
-  .subtotal-title,
-  .subtotal-val {
-    font-size: 0.78rem;
-  }
-
-  h2 {
-    font-size: 1.1rem;
-  }
-
   select {
     width: 100%;
   }
@@ -503,17 +486,18 @@ textarea {
     width: 3.6rem;
   }
 
-  .title-name,
-  .title-phone,
-  select,
-  .title-city,
-  .title-office,
-  .title-others,
-  .title-delivery,
-  .title-mail,
-  .continue-shipping,
-  .continue-shopping {
-    font-size: 0.71rem;
+  span,
+  .button-block {
+    font-size: calc(12px + (4 * 0.7) * ((100vw - 320px) / 1835));
+  }
+
+  select {
+    font-size: calc(8px + (2 * 0.7) * ((100vw - 320px) / 1835));
+  }
+
+
+  header h1 {
+    font-size: calc(22px + 7 * ((100vw - 320px) / 1835));
   }
 }
 
@@ -521,36 +505,7 @@ textarea {
   .submit-box {
     margin: 0 5%;
   }
-
-  .header h1 {
-    font-size: 1.25rem;
-    margin-top: 5%;
-    margin-bottom: 5%
-  }
-
-  h2 {
-    font-size: 1rem;
-  }
-
-  .continue-shipping,
-  .continue-shopping {
-    font-size: 0.6rem;
-  }
 }
 
-@media (max-width: 375px) {
-
-}
-
-@media (max-width: 360px) {
-
-}
-
-@media (max-width: 320px) {
-  .continue-shipping,
-  .continue-shopping {
-    font-size: 0.45rem;
-  }
-}
 
 </style>
