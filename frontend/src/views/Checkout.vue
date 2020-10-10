@@ -232,19 +232,16 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
-  width: 37vmax;
   margin: 0 auto;
 }
 
 .subtotal {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 3% 0;
+  display: grid;
+  margin: 0 15% 3%;
+  grid-template: 1fr / 1fr 1fr;
 }
 
 .header {
-  margin: 3% 0;
   text-align: center;
 }
 
@@ -266,6 +263,7 @@ export default {
 }
 
 .subtotal-val {
+  justify-self: end;
   color: rgb(48, 48, 48);
   font-weight: 600;
   font-size: 1.25rem;
@@ -276,10 +274,9 @@ export default {
 /*Contact information*************************************************************************/
 .submit-box {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: repeat(10, 2.36rem);
+  grid-template: repeat(10, minmax(auto, 35px)) / 1fr 2fr;
   grid-gap: 1vw;
-  margin-top: 5%;
+  margin: 0 15%;
 }
 
 h2 {
@@ -386,13 +383,12 @@ textarea:focus {
 .button-block {
   grid-column: 1/3;
   grid-row: 9/9;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  gap: 20vw;
 }
 
 .continue-shopping {
-  width: 32%;
   background-color: white;
   border: 1px solid #bbbbbb;
   text-transform: uppercase;
@@ -402,7 +398,6 @@ textarea:focus {
 }
 
 .continue-shipping {
-  width: 32%;
   background-color: green;
   border: 0;
   color: white;
@@ -431,9 +426,15 @@ textarea {
 }
 
 /*media queries*****************************************************************************/
+@media screen and (max-width: 1200px) {
+  .submit-box {
+    margin: 0 10%;
+  }
+}
+
 @media screen and (max-width: 960px) {
-  .wrapper-checkout {
-    width: 50vmax;
+  .submit-box {
+    margin: 0 8%;
   }
 
   .mail,
@@ -445,10 +446,6 @@ textarea {
     font-size: 2rem;
   }
 
-  .subtotal {
-    max-width: 20rem;
-  }
-
   .subtotal-title,
   .subtotal-val {
     font-size: 0.78rem;
@@ -458,32 +455,8 @@ textarea {
     font-size: 1.1rem;
   }
 
-  .submit-box {
-    grid-template-rows: repeat(9, 2rem);
-    grid-gap: 0.6rem;
-    margin-top: 10%;
-  }
-
-  .button-block {
-    grid-row: 8/8;
-  }
-
-  .description-title,
-  .description-content {
-    grid-row: 6/6;
-  }
-
-
   select {
     width: 100%;
-  }
-
-  .continue-shipping {
-    width: 43.95%;
-  }
-
-  .continue-shopping {
-    width: 42%;
   }
 
   small {
@@ -509,8 +482,8 @@ textarea {
 }
 
 @media (max-width: 450px) {
-  .wrapper-checkout {
-    width: 45vmax;
+  .submit-box {
+    margin: 0 5%;
   }
 
   .header h1 {
@@ -530,41 +503,17 @@ textarea {
 }
 
 @media (max-width: 375px) {
-  .wrapper-checkout {
-    width: 43vmax;
-  }
+
 }
 
 @media (max-width: 360px) {
-  .wrapper-checkout {
-    width: 50vmax;
-  }
+
 }
 
 @media (max-width: 320px) {
-  .wrapper-checkout {
-    width: 50vmax;
-  }
-
-  .header h1 {
-    font-size: 1.25rem;
-    margin-top: 5%;
-    margin-bottom: 5%
-  }
-
-  h2 {
-    font-size: 1rem;
-  }
-
   .continue-shipping,
   .continue-shopping {
     font-size: 0.45rem;
-  }
-}
-
-@media (max-width: 280px) {
-  .wrapper-checkout {
-    width: 38vmax;
   }
 }
 
