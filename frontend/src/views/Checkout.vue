@@ -18,6 +18,16 @@
         >
         <small v-show="invalidName"> Введите Ваше имя!</small>
       </div>
+      <div class="title-surname">
+        Фамилия:
+      </div>
+      <div class="user-surname">
+        <input
+            v-model="userSurname"
+            :class="{invalid: invalidSurname}"
+        >
+        <small v-show="invalidSurname"> Введите Вашу фамилию!</small>
+      </div>
       <div class="title-phone">
         Телефон:
       </div>
@@ -45,6 +55,17 @@
             :class="{invalid: !this.$v.email.email}"
         >
         <small v-if="!$v.email.email">Enter E-mail!</small>
+      </div>
+      <div class="title-payment">
+        Способ оплаты:
+      </div>
+      <div class="payment">
+        <select v-model="selectedPayment">
+          <option disabled value="">Выберите способ олпаты</option>
+          <option>Наличными</option>
+          <option>На карту</option>
+          <option>Наложенным платежем</option>
+        </select>
       </div>
       <div class="title-delivery">
         Способ доставки:
@@ -94,9 +115,10 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators'
-import {post} from '../js/send'
-import Autocomplete from '@trevoreyre/autocomplete-vue'
+import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators';
+import {clearLocalStorage} from "@/js/card";
+import {post} from '../js/send';
+import Autocomplete from '@trevoreyre/autocomplete-vue';
 
 export default {
   name: "Checkout",
@@ -106,7 +128,9 @@ export default {
   data() {
     return {
       selected: '',
+      selectedPayment: '',
       userName: '',
+      userSurname: '',
       address: '',
       city: '',
       postOffice: '',
@@ -114,12 +138,14 @@ export default {
       email: '',
       comment: '',
       invalidName: false,
+      invalidSurname: false,
       invalidEmail: false,
       invalidPhone: false
     }
   },
   validations: {
     userName: {required},
+    userSurname: {required},
     phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
     email: {email}
   },
@@ -140,7 +166,9 @@ export default {
       let order = {
         'products': productsList,
         'username': this.userName,
+        'userSurname': this.userSurname,
         'phone': this.phone,
+        'payment': this.selectedPayment,
         'delivery': this.selected,
         'city': this.city,
         'post-office': this.postOffice,
@@ -149,11 +177,14 @@ export default {
       };
       const response = await post("order", order);
       this.invalidName = !this.$v.userName.required;
+      this.invalidSurname = !this.$v.userSurname.required;
       this.invalidPhone = !this.$v.phone.required;
       this.invalidEmail = !this.$v.email.required;
       this.delivery = this.selected;
       if (response && !this.$v.$invalid) {
         await this.$router.push({name: 'Successful'});
+        clearLocalStorage();
+        this.$store.commit('clearBasket');
       }
       if (this.$v.invalid) {
         this.$v.$touch();
@@ -275,7 +306,7 @@ export default {
 .submit-box {
   display: grid;
   grid-template: repeat(10, minmax(auto, 35px)) / 1fr 2fr;
-  grid-gap: 1vw;
+  grid-gap: 18px;
   margin: 0 15%;
 }
 
@@ -287,6 +318,7 @@ h2 {
 }
 
 .title-name,
+.title-surname,
 .title-delivery,
 .title-phone,
 .title-mail,
@@ -302,9 +334,9 @@ h2 {
 .mail,
 .new-post-city,
 .new-post-office {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  /*display: flex;*/
+  /*flex-wrap: wrap;*/
+  /*justify-content: flex-end;*/
 }
 
 input {
@@ -324,12 +356,12 @@ input {
 
 .title-others,
 .others {
-  grid-row: 5 / 7;
+  /*grid-row: 5 / 7;*/
 }
 
 .description-title,
 .description-content {
-  grid-row: 7/7;
+  /*grid-row: 7/7;*/
 }
 
 
@@ -349,9 +381,13 @@ textarea {
 small {
   color: red;
   padding-left: 1%;
+  position: relative;
+  top: -5px;
+  right: 0;
 }
 
-.delivery {
+.delivery,
+.payment {
   height: 100%;
 }
 
@@ -382,7 +418,7 @@ textarea:focus {
 
 .button-block {
   grid-column: 1/3;
-  grid-row: 9/9;
+  /*grid-row: 9/9;*/
   display: grid;
   grid-template: 1fr / 1fr 1fr;
   gap: 20vw;

@@ -68,6 +68,9 @@ export default {
         },
         isVisible(state) {
             state.basketVisible = !state.basketVisible;
+        },
+        clearBasket(state) {
+            state.cardProducts = [];
         }
     },
     state: {
