@@ -176,8 +176,13 @@ export default {
 }
 
 .phone a img {
-  margin-top: 4px;
-  height: 20px;
+  margin-top: 6px;
+  height: 16px;
+}
+
+.phone img {
+  margin-right: 8px;
+  height: 16px;
 }
 
 .basket a img {
