@@ -17,14 +17,14 @@ def send_order_notification(order):
     for item in order_items:
         products.append({
             'name': item.product.title,
-            'quantity': item.quantity,
+            'quantity': int(item.quantity),
             'size': item.size.name,
-            'price': item.cost_product,
+            'price': int(item.cost_product),
         })
 
     send_email_template(settings.ADMIN_EMAILS, "Новый Заказ", "order_email.html", {
         'order_id': order.id,
-        'customer_name': order.customer_name,
+        'customer_name': f'{order.customer_name} {order.customer_surname}',
         'customer_phone': order.customer_phone,
         'delivery': delivery,
         'payment': order.payment,
