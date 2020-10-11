@@ -56,7 +56,8 @@ class OrderItemInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
 	list_display = (
-		"idOrder", "date", "total_price", "customer_name", "customer_phone", "status")
+		"idOrder", "date", "total_price", "customer_name", "customer_surname", "customer_phone", "delivery", "payment",
+		"status")
 	list_filter = ("status",)
 	inlines = [
 		OrderItemInline,

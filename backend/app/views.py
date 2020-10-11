@@ -76,6 +76,7 @@ def order(request):
 		customer_surname=order_content["userSurname"],
 		customer_phone=order_content["phone"],
 		delivery=order_content["delivery"],
+		payment=order_content["payment"],
 		city=order_content["city"],
 		post_office=order_content["post-office"],
 		address=order_content["others"],
