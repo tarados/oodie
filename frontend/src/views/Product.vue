@@ -79,7 +79,8 @@
           <div class="size-table" v-if="this.currentProduct.table">
            <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
           </div>
-          <div class="btn" @click="toCard">в корзину</div>
+          <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
+          <div class="btn" @click="toCard" v-if="!isUnavailable">в корзину</div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description }}</div>
           </div>
@@ -140,6 +141,12 @@ export default {
       }
 
     },
+
+    isUnavailable() {
+      let num = 0;
+      this.currentProduct.availability.forEach(el => num += el.quantity)
+      return num <= 0;
+    }
   },
   methods: {
     async loadProduct() {
@@ -152,7 +159,7 @@ export default {
       });
       this.availabilities = this.currentProduct.availability;
 
-      if (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize) {
+      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
         this.hideSize = true;
       }
 
@@ -429,6 +436,15 @@ export default {
   background-color: #9a9a9a;
   pointer-events: none;
   cursor: default;
+}
+
+.unavailable {
+  width: 200px;
+  padding: 16px 8px;
+  border: 2px solid #565555;
+  color: #565555;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /*media queries**************************************************************************/
