@@ -213,6 +213,7 @@ img {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  padding-left: 16px;
 }
 
 .product .name {

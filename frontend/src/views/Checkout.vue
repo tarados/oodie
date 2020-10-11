@@ -7,28 +7,30 @@
       <div class="subtotal-title">Всего</div>
       <div class="subtotal-val" v-text="totalPrice"></div>
     </div>
-    <form class="submit-box" @submit.prevent="submitHandler">
-      <div class="title-name">
+    <form class="submit-box" @submit.prevent="submitHandler" autocomplete="off">
+      <div class="form-title required">
         <span>Имя:</span>
       </div>
-      <div class="user-name">
+      <div>
         <input
+            autocomplete="nope"
             v-model="userName"
             :class="{invalid: invalidName}"
         >
-        <small v-show="invalidName"> Введите Ваше имя!</small>
+        <small v-show="invalidName">Введите Ваше имя</small>
       </div>
-      <div class="title-surname">
+      <div class="form-title required">
         <span>Фамилия:</span>
       </div>
       <div class="user-surname">
         <input
+            autocomplete="nope"
             v-model="userSurname"
             :class="{invalid: invalidSurname}"
         >
-        <small v-show="invalidSurname"> Введите Вашу фамилию!</small>
+        <small v-show="invalidSurname">Введите Вашу фамилию</small>
       </div>
-      <div class="title-phone">
+      <div class="form-title required">
         <span>Телефон:</span>
       </div>
       <div class="phone">
@@ -46,7 +48,7 @@
           Введите номер телефона!
         </small>
       </div>
-      <div class="title-mail">
+      <div class="form-title">
         <span>E-mail:</span>
       </div>
       <div class="mail">
@@ -56,18 +58,19 @@
         >
         <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
-      <div class="title-payment">
+
+      <div class="form-title required">
         <span>Способ оплаты:</span>
       </div>
       <div class="payment">
         <select v-model="selectedPayment">
-          <option disabled value="">Выберите способ олпаты</option>
+          <option disabled value="">Выберите способ оплаты</option>
           <option>Наличными</option>
           <option>На карту</option>
           <option>Наложенным платежем</option>
         </select>
       </div>
-      <div class="title-delivery">
+      <div class="form-title required">
         <span>Способ доставки:</span>
       </div>
       <div class="delivery">
@@ -77,7 +80,7 @@
           <option>Другие</option>
         </select>
       </div>
-      <div class="title-city" v-show="selected === 'Новая почта'">
+      <div class="form-title required" v-show="selected === 'Новая почта'">
         <span>Город:</span>
       </div>
       <div class="new-post-city" v-show="selected === 'Новая почта'">
@@ -86,18 +89,19 @@
             @submit="setCity"
         ></autocomplete>
       </div>
-      <div class="title-office" v-show="selected === 'Новая почта'">
-        <span>Выберите отделение:</span>
+      <div class="form-title required" v-show="selected === 'Новая почта'">
+        <span>Отделение:</span>
       </div>
       <div class="new-post-office" v-show="selected === 'Новая почта'">
         <autocomplete
             class="autocomplete"
+            autocomplete="nope"
             :search="searchWarehouse"
             @submit="setWarehouse"
         ></autocomplete>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="title-others" v-show="selected === 'Другие'">
+      <div class="form-title" v-show="selected === 'Другие'">
         <span>Адрес:</span>
       </div>
       <div class="others" v-show="selected === 'Другие'">
@@ -107,11 +111,11 @@
                   ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
       </div>
-      <div class="description-title">
-        <span>Комментарии</span>
+      <div class="form-title">
+        <span>Комментарий</span>
       </div>
       <div class="description-content">
-        <textarea v-model="comment"></textarea>
+        <textarea v-model="comment" rows="4"></textarea>
       </div>
       <div class="button-block">
         <button @click="toCard" class="continue-shopping">
@@ -275,7 +279,9 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
+  max-width: 600px;
   margin: 0 auto;
+  padding-bottom: 64px;
 }
 
 .subtotal {
@@ -297,9 +303,18 @@ export default {
   letter-spacing: 0.8px;
 }
 
+.button-block {
+  margin-top: 32px;
+}
+
 span,
 .button-block {
-  font-size: calc(12px + 4 * (100vw / 1835));
+  font-size: 16px;
+}
+
+.button-block button {
+  padding: 8px;
+  font-size: 16px;
 }
 
 select {
@@ -324,9 +339,8 @@ select {
 /*Contact information*************************************************************************/
 .submit-box {
   display: grid;
-  grid-template: repeat(10, minmax(auto, 35px)) / 1fr 2fr;
-  grid-gap: 18px;
-  margin: 0 15%;
+  grid-template: repeat(10, minmax(35px, auto)) / 0.7fr 2fr;
+  grid-gap: 20px;
 }
 
 h2 {
@@ -336,16 +350,12 @@ h2 {
   margin-top: 1rem;
 }
 
-.title-name,
-.title-surname,
-.title-delivery,
-.title-phone,
-.title-mail,
-.title-city,
-.title-office,
-.description-title,
-.title-others {
+.form-title {
   align-self: center;
+}
+
+.form-title.required {
+  /*font-weight: bold;*/
 }
 
 input {
@@ -368,8 +378,8 @@ input {
 }
 
 textarea {
-  padding-left: 10px;
-  padding-top: 10px;
+  resize: none;
+  padding: 10px;
 }
 
 .invalid {
@@ -395,7 +405,9 @@ select {
   border: 1px solid #bbb;
   color: rgb(80, 80, 80);
   background-color: white;
-  padding-left: 1%;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 14px;
 }
 
 
@@ -441,9 +453,9 @@ textarea:focus {
 
 textarea {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
   border: 1px solid #bbb;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   color: rgb(80, 80, 80);
 }
 
@@ -469,11 +481,6 @@ textarea {
     margin: 0 8%;
   }
 
-  .mail,
-  .title-mail {
-    display: none;
-  }
-
   select {
     width: 100%;
   }
@@ -492,7 +499,7 @@ textarea {
   }
 
   select {
-    font-size: calc(8px + (2 * 0.7) * ((100vw - 320px) / 1835));
+    /*font-size: calc(8px + (2 * 0.7) * ((100vw - 320px) / 1835));*/
   }
 
 
@@ -504,6 +511,10 @@ textarea {
 @media (max-width: 450px) {
   .submit-box {
     margin: 0 5%;
+  }
+
+  .form-title {
+    font-size: 14px;
   }
 }
 

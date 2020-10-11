@@ -18,7 +18,7 @@
         <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
       </div>
       <br>
-      <p><strong>Возможен самовывоз возле м.Контрактовая площадь по предварительной договоренности.</strong></p>
+      <p><strong>Возможен самовывоз возле метро Контрактовая площадь<br> по предварительной договоренности.</strong></p>
       <br>
       <p>Подписывайся на наши страницы:</p>
       <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/">facebook.com/hoodiyalko</a></p>
