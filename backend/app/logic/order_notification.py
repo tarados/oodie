@@ -22,7 +22,7 @@ def send_order_notification(order):
             'price': item.cost_product,
         })
 
-    send_email_template(settings.ADMIN_EMAILS, "Новый Заказ", "email.html", {
+    send_email_template(settings.ADMIN_EMAILS, "Новый Заказ", "order_email.html", {
         'order_id': order.id,
         'customer_name': order.customer_name,
         'customer_phone': order.customer_phone,
