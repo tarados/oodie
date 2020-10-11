@@ -143,4 +143,5 @@ FROM_EMAIL = 'admin <lith2009@mail.ru>'
 
 ADMIN_EMAILS = [
 	"dmitryzvada@gmail.com",
+	"hoodiyalko@gmail.com",
 ]
