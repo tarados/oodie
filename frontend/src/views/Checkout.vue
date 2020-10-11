@@ -7,7 +7,7 @@
       <div class="subtotal-title">Всего</div>
       <div class="subtotal-val" v-text="totalPrice"></div>
     </div>
-    <form class="submit-box" @submit.prevent="submitHandler" autocomplete="off">
+    <form class="submit-box" @submit.prevent="submitHandler">
       <div class="form-title required">
         <span>Имя:</span>
       </div>
@@ -74,12 +74,14 @@
       <div class="form-title required" v-if="isNovaPoshta">
         <span>Город:</span>
       </div>
-      <div class="new-post-city" v-if="isNovaPoshta" :class="{invalid: invalidCity}">
+      <div class="" v-if="isNovaPoshta" :class="{invalid: invalidCity}">
         <autocomplete
+            placeholder="Начните вводить название города"
+            autocomplete="nope"
             :search="search"
             @submit="setCity"
         ></autocomplete>
-        <small v-if="invalidCity">Нужно выбрать город</small>
+<!--        <small v-if="invalidCity">Нужно выбрать город</small>-->
       </div>
       <div class="form-title required" v-if="isNovaPoshta">
         <span>Отделение:</span>
@@ -87,6 +89,7 @@
       <div class="new-post-office" v-if="isNovaPoshta" :class="{invalid: invalidOffice}">
         <autocomplete
             class="autocomplete"
+            placeholder="Начните вводить номер или адрес отделения"
             autocomplete="nope"
             :search="searchWarehouse"
             @submit="setWarehouse"
@@ -417,7 +420,7 @@ input {
   padding: 0 2%;
   align-self: center;
   width: 100%;
-  height: 100%;
+  height: 35px;
   font-size: 0.81rem;
   color: #555;
   outline: none;
@@ -447,9 +450,9 @@ textarea {
 
 small {
   color: red;
-  padding-left: 1%;
+  padding-left: 8px;
   position: relative;
-  top: -2px;
+  top: 4px;
   right: 0;
 }
 

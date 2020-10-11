@@ -60,6 +60,10 @@ button:focus {
     border-color: red;
 }
 
+.autocomplete-input::placeholder {
+    font-size: 14px;
+}
+
 .autocomplete-input:focus,
 .autocomplete-input[aria-expanded=true] {
     border-color: #c7d9d8;
