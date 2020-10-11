@@ -1,0 +1,15 @@
+Новый заказ №<a href="https://hoodiyalko.avallon.im/admin/app/order/{{ order_id }}/change/">{{ order_id }}</a>.
+<br>
+Имя: {{ customer_name }}
+Телефона: {{ customer_phone }}
+Доставка: {{ delivery }}
+Оплата: {{ payment }}
+Сумма заказа: {{ total_price }}
+Комментарий к заказу: {{ comment }}
+<br>
+
+<ul>
+{% for product in products %}
+    <li>{{ product.name }} x{{ product.quantity }} - {{ product.size }} - {{ product.price }}</li>
+{% endfor %}
+</ul>

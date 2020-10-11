@@ -2,6 +2,8 @@ import os
 import json
 import datetime
 from django.shortcuts import render
+
+from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
@@ -87,6 +89,7 @@ def order(request):
 	order_total_sum = 0
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
+		size = Size.objects.get(name=order_item['size'])
 		current_price = product.price
 		availabilities = ProductAvailability.objects.filter(product=product)
 		for availability in availabilities:
@@ -103,12 +106,15 @@ def order(request):
 			product=product,
 			quantity=order_item["quantity"],
 			price=product_price,
+			size=size,
 			cost_product=product_price * order_item["quantity"]
 		)
 		order_item.save()
 		order_total_sum = order_total_sum + order_item.cost_product
 	order.total_price = order_total_sum
 	order.save()
+
+	send_order_notification(order)
 
 	return JsonResponse({'success': True})
 

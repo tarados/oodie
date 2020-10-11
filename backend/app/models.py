@@ -191,10 +191,11 @@ class OrderItem(models.Model):
     """Модель Контент заказа"""
 
     order = models.ForeignKey(Order, related_name='item', on_delete=models.CASCADE, null=True, blank=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
     price = models.FloatField("Цена", null=True, blank=True)
     quantity = models.FloatField("Количество", null=True, blank=True)
     cost_product = models.FloatField("Сумма", null=True, blank=True)
+    size = models.ForeignKey(Size, verbose_name=u'размер', null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = "Контент заказа"

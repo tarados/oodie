@@ -26,6 +26,7 @@ DEBUG = os.environ['DEBUG']
 
 
 ALLOWED_HOSTS = [
+	"hoodiyalko.com.ua",
 	"hoodiyalko.avallon.im",
 	"localhost",
 ]
@@ -131,3 +132,15 @@ CORS_ORIGIN_ALLOW_ALL = True
 SITE_URL = os.environ['SITE_URL']
 
 NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'avaloid'
+EMAIL_HOST_PASSWORD = 'first23;laud'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+FROM_EMAIL = 'admin <admin@hoodiyalko.com.ua>'
+
+ADMIN_EMAILS = [
+	"dmitryzvada@gmail.com",
+]
