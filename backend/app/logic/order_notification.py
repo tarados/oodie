@@ -4,7 +4,7 @@ from .email import send_email_template
 
 
 def send_order_notification(order):
-    delivery_list = list(order.delivery)
+    delivery_list = [order.delivery]
     if order.city:
         delivery_list.append(order.city)
     if order.post_office:
