@@ -203,7 +203,7 @@ export default {
       this.invalidDelivery = !this.$v.deliveryMethod.required;
       this.invalidPayment = !this.$v.selectedPayment.required;
 
-      if (!this.checkNovaPoshta()) {
+      if (this.isNovaPoshta && !this.checkNovaPoshta()) {
         return;
       }
 
@@ -300,7 +300,8 @@ export default {
       this.invalidName = this.$v.userName.$invalid;
       localStorage.setItem('userName', newValue);
     },
-    userSurname: (newValue) => {
+    userSurname: function (newValue) {
+      this.invalidSurname = !newValue;
       localStorage.setItem('userSurname', newValue);
     },
     phone: function (newValue) {
@@ -466,7 +467,7 @@ small {
 }
 
 select {
-  height: 100%;
+  height: 35px;
   width: 100%;
   border: 1px solid #bbb;
   color: rgb(80, 80, 80);
