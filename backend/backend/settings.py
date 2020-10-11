@@ -133,11 +133,12 @@ SITE_URL = os.environ['SITE_URL']
 
 NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'avaloid'
-EMAIL_HOST_PASSWORD = 'first23;laud'
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hoodiyalko@gmail.com'
+EMAIL_HOST_PASSWORD = 'Z1a2i3r4a5'
 
 FROM_EMAIL = 'admin <admin@hoodiyalko.com.ua>'
 
