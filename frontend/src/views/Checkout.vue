@@ -35,18 +35,19 @@
       <div class="form-content phone">
         <input
             v-model="phone"
-            :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
+            :class="{invalid: invalidPhone}"
         >
-        <small v-if="!$v.phone.numeric"> Вводите только числа!</small>
-        <small
-            v-else-if="!$v.phone.minLength || !$v.phone.maxLength"
-        >
-          В номере должно быть {{ $v.phone.$params.maxLength.max }} чисел. Сейчас их {{ phone.length }}!
-        </small>
-        <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength">
+<!--        <small v-if="!$v.phone.numeric"> Вводите только числа!</small>-->
+<!--        <small-->
+<!--            v-else-if="!$v.phone.minLength || !$v.phone.maxLength"-->
+<!--        >-->
+<!--          В номере должно быть {{ $v.phone.$params.maxLength.max }} чисел. Сейчас их {{ phone.length }}!-->
+<!--        </small>-->
+        <small v-show="invalidPhone">
           Введите номер телефона
         </small>
       </div>
+
       <div class="form-title">
         <span>E-mail:</span>
       </div>
@@ -57,73 +58,74 @@
         >
         <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
+
       <div class="form-title required">
         <span>Способ доставки:</span>
       </div>
       <div class="form-content delivery">
-        <select v-model="selected">
+        <select v-model="deliveryMethod" :class="{invalid: invalidDelivery}">
           <option disabled value="">Выберите способ доставки</option>
           <option>Новая почта</option>
           <option>Самовывоз</option>
         </select>
+        <small v-if="invalidDelivery">Нужно выбрать способ доставки</small>
       </div>
-      <div class="form-title required" v-show="selected === 'Новая почта'">
+
+      <div class="form-title required" v-if="isNovaPoshta">
         <span>Город:</span>
       </div>
-      <div class="new-post-city" v-show="selected === 'Новая почта'">
+      <div class="new-post-city" v-if="isNovaPoshta" :class="{invalid: invalidCity}">
         <autocomplete
             :search="search"
             @submit="setCity"
         ></autocomplete>
-<!--        <small v-show="!$v.city.$invalid">-->
-<!--          Выберите город-->
-<!--        </small>-->
+        <small v-if="invalidCity">Нужно выбрать город</small>
       </div>
-      <div class="form-title required" v-show="selected === 'Новая почта'">
+      <div class="form-title required" v-if="isNovaPoshta">
         <span>Отделение:</span>
       </div>
-      <div class="new-post-office" v-show="selected === 'Новая почта'">
+      <div class="new-post-office" v-if="isNovaPoshta" :class="{invalid: invalidOffice}">
         <autocomplete
             class="autocomplete"
             autocomplete="nope"
             :search="searchWarehouse"
             @submit="setWarehouse"
         ></autocomplete>
-<!--        <small v-show="!$v.postOffice.$invalid">-->
-<!--          Выберите отделение-->
-<!--        </small>-->
+        <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="form-title" v-show="selected === 'Самовывоз'">
-        <span>Адрес:</span>
-      </div>
-      <div class="others" v-show="selected === 'Самовывоз'">
-                  <textarea
-                      id="others"
-                      v-model="address"
-                  ></textarea>
-        <label data-first="Enter address" data-second="delivery address"></label>
-      </div>
-      <div class="form-title required"
-           :class="{visible: isVisible}"
-      >
+
+<!--      <div class="form-title" v-show="deliveryMethod === 'Самовывоз'">-->
+<!--        <span>Адрес:</span>-->
+<!--      </div>-->
+<!--      <div class="others" v-show="deliveryMethod === 'Самовывоз'">-->
+<!--                  <textarea-->
+<!--                      id="others"-->
+<!--                      v-model="address"-->
+<!--                  ></textarea>-->
+<!--        <label data-first="Enter address" data-second="delivery address"></label>-->
+<!--      </div>-->
+
+      <div class="form-title required" v-if="deliveryMethod">
         <span>Способ оплаты:</span>
       </div>
-      <div class="payment-content"
-           :class="{visible: isVisible}"
-      >
+      <div class="payment-content" v-if="deliveryMethod" :class="{invalid: invalidPayment}">
         <select v-model="selectedPayment">
           <option disabled value="">Выберите способ оплаты</option>
-          <option>Наличными</option>
           <option>На карту</option>
           <option>Наложенным платежем</option>
         </select>
+        <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
       </div>
+
       <div class="form-title">
         <span>Комментарий</span>
       </div>
       <div class="description-content">
         <textarea v-model="comment" rows="4"></textarea>
+      </div>
+      <div class="button-block">
+        <strong v-if="isSelfDelivery">Вы сможете забрать посылку возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения времени и адреса.</strong>
       </div>
       <div class="button-block">
         <button @click="toCard" class="continue-shopping">
@@ -139,7 +141,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {required, numeric, minLength, maxLength, email} from 'vuelidate/lib/validators';
+import {required, email} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/send';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
@@ -151,15 +153,15 @@ export default {
   },
   data() {
     return {
-      selected: '',
+      deliveryMethod: "",
       selectedPayment: '',
       isVisible: true,
-      userName: '',
-      userSurname: '',
+      userName: localStorage.getItem('userName') || "",
+      userSurname: localStorage.getItem('userSurname') || "",
       address: '',
       city: '',
       postOffice: '',
-      phone: '',
+      phone: localStorage.getItem('phone') || "",
       email: '',
       comment: '',
       invalidName: false,
@@ -167,23 +169,43 @@ export default {
       invalidCity: false,
       invalidOffice: false,
       invalidEmail: false,
-      invalidPhone: false
+      invalidPhone: false,
+      invalidDelivery: false,
+      invalidPayment: false,
     }
   },
   validations: {
     userName: {required},
     userSurname: {required},
-    city: {required},
-    postOffice: {required},
-    phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
+    selectedPayment: {required},
+    deliveryMethod: {required},
+    phone: {required},
     email: {email}
   },
   computed: {
-    ...mapGetters(["totalPrice", "allCities", "allWarehouses"])
+    ...mapGetters(["totalPrice", "allCities", "allWarehouses"]),
+    isNovaPoshta() {
+      return this.deliveryMethod === "Новая почта";
+    },
+    isSelfDelivery() {
+      return this.deliveryMethod === "Самовывоз";
+    },
   },
   methods: {
     async submitHandler() {
+      this.invalidName = !this.$v.userName.required;
+      this.invalidSurname = !this.$v.userSurname.required;
+      this.invalidPhone = !this.$v.phone.required;
+      this.invalidEmail = !this.$v.email.required;
+      this.invalidDelivery = !this.$v.deliveryMethod.required;
+      this.invalidPayment = !this.$v.selectedPayment.required;
+
+      if (!this.checkNovaPoshta()) {
+        return;
+      }
+
       const productsList = [];
+
       this.$store.state.productsStore.cardProducts.forEach(product => {
         productsList.push({
           'id': product.id,
@@ -198,18 +220,15 @@ export default {
         'userSurname': this.userSurname,
         'phone': this.phone,
         'payment': this.selectedPayment,
-        'delivery': this.selected,
+        'delivery': this.deliveryMethod,
         'city': this.city,
         'post-office': this.postOffice,
         'others': this.address,
         'comment': this.comment
       };
       const response = await post("order", order);
-      this.invalidName = !this.$v.userName.required;
-      this.invalidSurname = !this.$v.userSurname.required;
-      this.invalidPhone = !this.$v.phone.required;
-      this.invalidEmail = !this.$v.email.required;
-      this.delivery = this.selected;
+
+
       if (response && !this.$v.$invalid) {
         await this.$router.push({name: 'Successful'});
         clearLocalStorage();
@@ -255,20 +274,38 @@ export default {
     },
     setCity(city) {
       this.city = city;
+      this.invalidCity = false;
     },
     setWarehouse(warehouse) {
       this.postOffice = warehouse;
+      this.invalidOffice = false;
+    },
+    checkNovaPoshta() {
+      if (!this.city) {
+        this.invalidCity = true;
+      }
+
+      if (!this.postOffice) {
+        this.invalidOffice = true;
+      }
+
+      return !this.invalidCity && !this.invalidOffice;
     }
   },
   watch: {
-    userName: function () {
+    userName: function (newValue) {
       this.invalidName = this.$v.userName.$invalid;
+      localStorage.setItem('userName', newValue);
     },
-    phone: function () {
+    userSurname: (newValue) => {
+      localStorage.setItem('userSurname', newValue);
+    },
+    phone: function (newValue) {
       if (this.$v.phone.$invalid) {
         this.invalidPhone = this.$v.phone.required;
       } else {
         this.invalidPhone = !this.$v.phone.required;
+        localStorage.setItem('phone', newValue);
       }
     },
     email: function () {
@@ -281,17 +318,13 @@ export default {
     city: function () {
       let cityId = this.allCities.find(city => city.name === this.city).id;
       this.$store.dispatch('loadWarehouses', cityId);
-      if (this.$v.city.$invalid) {
-        this.invalidCity = true;
-      } else {
-        this.invalidCity = !this.$v.city.required;
-      }
     },
-    selected: function () {
-      if(this.selected) {
-        this.isVisible = false;
-      }
-    }
+    deliveryMethod: function(newValue) {
+      this.invalidDelivery = !newValue;
+    },
+    selectedPayment: function(newValue) {
+      this.invalidPayment = !newValue;
+    },
   },
   mounted() {
     this.cardVisible();

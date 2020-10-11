@@ -41,6 +41,11 @@ h1, h3, h4, h5, h6, span, p {
     background-repeat:no-repeat;
     background-position:12px;
 }
+
+.invalid .autocomplete-input {
+    border-color: red;
+}
+
 .autocomplete-input:focus,
 .autocomplete-input[aria-expanded=true] {
     border-color: #c7d9d8;
