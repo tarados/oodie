@@ -66,8 +66,8 @@
       </div>
     </div>
     <div class="container checkout-buttons">
-        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping">Продолжить покупки</router-link>
-        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout">Оплатить</router-link>
+        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
+        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout button">Оплатить</router-link>
     </div>
 
   </div>
@@ -392,7 +392,6 @@ img {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  transition: opacity 0.7s ease;
 }
 
 .checkout-button + .checkout-button {
@@ -404,9 +403,9 @@ img {
   color: white;
 }
 
-.checkout-button:hover {
-  opacity: 0.5;
-}
+/*.checkout-button:hover {*/
+/*  opacity: 0.5;*/
+/*}*/
 
 .continue-shopping {
   border: 1px solid black;

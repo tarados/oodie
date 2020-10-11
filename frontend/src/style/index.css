@@ -28,6 +28,20 @@ h1, h3, h4, h5, h6, span, p {
     font-family: 'Roboto', sans-serif;
 }
 
+button, .button {
+    opacity: 1;
+    transition: opacity 0.7s ease;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
+    opacity: 0.5;
+}
+
+button:focus {
+    outline: none;
+}
+
 /*************/
 .autocomplete-input {
     border:1px solid #bbb;
