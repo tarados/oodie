@@ -133,14 +133,13 @@ SITE_URL = os.environ['SITE_URL']
 
 NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "lith2009@mail.ru"
+EMAIL_HOST_PASSWORD = "zvada1601"
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'hoodiyalko@gmail.com'
-EMAIL_HOST_PASSWORD = 'Z1a2i3r4a5'
 
-FROM_EMAIL = 'admin <admin@hoodiyalko.com.ua>'
+FROM_EMAIL = 'admin <lith2009@mail.ru>'
 
 ADMIN_EMAILS = [
 	"dmitryzvada@gmail.com",
