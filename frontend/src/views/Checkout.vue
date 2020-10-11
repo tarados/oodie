@@ -11,9 +11,8 @@
       <div class="form-title required">
         <span>Имя:</span>
       </div>
-      <div class="username">
+      <div class="form-content username">
         <input
-            autocomplete="nope"
             v-model="userName"
             :class="{invalid: invalidName}"
         >
@@ -22,7 +21,7 @@
       <div class="form-title required">
         <span>Фамилия:</span>
       </div>
-      <div class="user-surname">
+      <div class="form-content user-surname">
         <input
             autocomplete="nope"
             v-model="userSurname"
@@ -33,7 +32,7 @@
       <div class="form-title required">
         <span>Телефон:</span>
       </div>
-      <div class="phone">
+      <div class="form-content phone">
         <input
             v-model="phone"
             :class="{invalid: invalidPhone || !$v.phone.numeric || !$v.phone.minLength || !$v.phone.maxLength}"
@@ -45,13 +44,13 @@
           В номере должно быть {{ $v.phone.$params.maxLength.max }} чисел. Сейчас их {{ phone.length }}!
         </small>
         <small v-show="invalidPhone && $v.phone.numeric && $v.phone.minLength && $v.phone.maxLength">
-          Введите номер телефона!
+          Введите номер телефона
         </small>
       </div>
       <div class="form-title">
         <span>E-mail:</span>
       </div>
-      <div class="mail">
+      <div class="form-content mail">
         <input
             v-model="email"
             :class="{invalid: !this.$v.email.email}"
@@ -61,7 +60,7 @@
       <div class="form-title required">
         <span>Способ доставки:</span>
       </div>
-      <div class="delivery">
+      <div class="form-content delivery">
         <select v-model="selected">
           <option disabled value="">Выберите способ доставки</option>
           <option>Новая почта</option>
@@ -76,6 +75,9 @@
             :search="search"
             @submit="setCity"
         ></autocomplete>
+<!--        <small v-show="!$v.city.$invalid">-->
+<!--          Выберите город-->
+<!--        </small>-->
       </div>
       <div class="form-title required" v-show="selected === 'Новая почта'">
         <span>Отделение:</span>
@@ -87,6 +89,9 @@
             :search="searchWarehouse"
             @submit="setWarehouse"
         ></autocomplete>
+<!--        <small v-show="!$v.postOffice.$invalid">-->
+<!--          Выберите отделение-->
+<!--        </small>-->
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
       <div class="form-title" v-show="selected === 'Самовывоз'">
@@ -159,6 +164,8 @@ export default {
       comment: '',
       invalidName: false,
       invalidSurname: false,
+      invalidCity: false,
+      invalidOffice: false,
       invalidEmail: false,
       invalidPhone: false
     }
@@ -166,6 +173,8 @@ export default {
   validations: {
     userName: {required},
     userSurname: {required},
+    city: {required},
+    postOffice: {required},
     phone: {required, numeric, minLength: minLength(10), maxLength: maxLength(10)},
     email: {email}
   },
@@ -272,6 +281,11 @@ export default {
     city: function () {
       let cityId = this.allCities.find(city => city.name === this.city).id;
       this.$store.dispatch('loadWarehouses', cityId);
+      if (this.$v.city.$invalid) {
+        this.invalidCity = true;
+      } else {
+        this.invalidCity = !this.$v.city.required;
+      }
     },
     selected: function () {
       if(this.selected) {
@@ -362,6 +376,10 @@ h2 {
   /*font-weight: bold;*/
 }
 
+.form-content {
+  height: 100%;
+}
+
 input {
   padding: 0 2%;
   align-self: center;
@@ -375,6 +393,10 @@ input {
 
 .autocomplete {
   width: 100%;
+}
+
+.autocomplete-input {
+  border-color: red;
 }
 
 .description-content input {
@@ -394,7 +416,7 @@ small {
   color: red;
   padding-left: 1%;
   position: relative;
-  top: 20px;
+  top: -2px;
   right: 0;
 }
 
