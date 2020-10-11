@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <div class="orderSuccessful">
-      <p>Ваша заявка принята! Спасибо за покупку!</p>
-      <button @click="backToMain">Вернуться на главную страницу</button>
+      <p>Ваша заявка принята!</p>
+      <p>Спасибо за покупку!</p>
+      <button @click="backToMain">на главную</button>
     </div>
   </div>
 
@@ -28,8 +29,8 @@
     text-align: center;
     margin: 20px 0;
     padding: 15px;
-    border: 1px solid green;
-    background-color: #f2f2f2;
+    /*border: 1px solid green;*/
+    /*background-color: #f2f2f2;*/
     border-radius: 3px;
   }
 
@@ -62,6 +63,16 @@
     -ms-transform:scale(1.25); /* IE 9 */
     -o-transform:scale(1.25); /* Opera */
     transform:scale(1.25);
+  }
+
+  .orderSuccessful button {
+    margin-top: 32px;
+    padding: 16px 32px;
+    background-color: green;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    font-size: 18px;
   }
 
 </style>
