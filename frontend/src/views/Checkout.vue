@@ -11,7 +11,7 @@
       <div class="form-title required">
         <span>Имя:</span>
       </div>
-      <div>
+      <div class="username">
         <input
             autocomplete="nope"
             v-model="userName"
@@ -58,18 +58,6 @@
         >
         <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
-
-      <div class="form-title required">
-        <span>Способ оплаты:</span>
-      </div>
-      <div class="payment">
-        <select v-model="selectedPayment">
-          <option disabled value="">Выберите способ оплаты</option>
-          <option>Наличными</option>
-          <option>На карту</option>
-          <option>Наложенным платежем</option>
-        </select>
-      </div>
       <div class="form-title required">
         <span>Способ доставки:</span>
       </div>
@@ -77,7 +65,7 @@
         <select v-model="selected">
           <option disabled value="">Выберите способ доставки</option>
           <option>Новая почта</option>
-          <option>Другие</option>
+          <option>Самовывоз</option>
         </select>
       </div>
       <div class="form-title required" v-show="selected === 'Новая почта'">
@@ -101,15 +89,30 @@
         ></autocomplete>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="form-title" v-show="selected === 'Другие'">
+      <div class="form-title" v-show="selected === 'Самовывоз'">
         <span>Адрес:</span>
       </div>
-      <div class="others" v-show="selected === 'Другие'">
+      <div class="others" v-show="selected === 'Самовывоз'">
                   <textarea
                       id="others"
                       v-model="address"
                   ></textarea>
         <label data-first="Enter address" data-second="delivery address"></label>
+      </div>
+      <div class="form-title required"
+           :class="{visible: isVisible}"
+      >
+        <span>Способ оплаты:</span>
+      </div>
+      <div class="payment-content"
+           :class="{visible: isVisible}"
+      >
+        <select v-model="selectedPayment">
+          <option disabled value="">Выберите способ оплаты</option>
+          <option>Наличными</option>
+          <option>На карту</option>
+          <option>Наложенным платежем</option>
+        </select>
       </div>
       <div class="form-title">
         <span>Комментарий</span>
@@ -145,6 +148,7 @@ export default {
     return {
       selected: '',
       selectedPayment: '',
+      isVisible: true,
       userName: '',
       userSurname: '',
       address: '',
@@ -268,6 +272,11 @@ export default {
     city: function () {
       let cityId = this.allCities.find(city => city.name === this.city).id;
       this.$store.dispatch('loadWarehouses', cityId);
+    },
+    selected: function () {
+      if(this.selected) {
+        this.isVisible = false;
+      }
     }
   },
   mounted() {
@@ -390,8 +399,12 @@ small {
 }
 
 .delivery,
-.payment {
+.payment-content {
   height: 100%;
+}
+
+.visible {
+  display: none;
 }
 
 select {
