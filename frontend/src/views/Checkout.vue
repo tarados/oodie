@@ -286,7 +286,7 @@ export default {
 
 .subtotal {
   display: grid;
-  margin: 0 15% 3%;
+  margin: 30px 0 30px;
   grid-template: 1fr / 1fr 1fr;
 }
 
@@ -385,7 +385,7 @@ small {
   color: red;
   padding-left: 1%;
   position: relative;
-  top: -5px;
+  top: 20px;
   right: 0;
 }
 
@@ -451,9 +451,7 @@ textarea:focus {
 
 textarea {
   width: 100%;
-  /*height: 100%;*/
   border: 1px solid #bbb;
-  /*border-radius: 5px;*/
   color: rgb(80, 80, 80);
 }
 
