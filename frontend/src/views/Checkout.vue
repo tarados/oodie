@@ -303,10 +303,6 @@ export default {
   letter-spacing: 0.8px;
 }
 
-.button-block {
-  margin-top: 32px;
-}
-
 span,
 .button-block {
   font-size: 16px;
@@ -314,7 +310,6 @@ span,
 
 .button-block button {
   padding: 8px;
-  font-size: 16px;
 }
 
 select {
@@ -429,12 +424,14 @@ textarea:focus {
 
 .button-block {
   grid-column: 1/3;
-  display: grid;
-  grid-template: 1fr / 1fr 1fr;
-  gap: 20vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 32px 0 0 0;
 }
 
 .continue-shopping {
+  flex: 1;
+  margin-right: 20px;
   background-color: white;
   border: 1px solid #bbbbbb;
   text-transform: uppercase;
@@ -443,6 +440,7 @@ textarea:focus {
 }
 
 .continue-shipping {
+  flex: 1;
   background-color: green;
   border: 0;
   color: white;
@@ -515,6 +513,10 @@ textarea {
 
   .form-title {
     font-size: 14px;
+  }
+
+  button span {
+    font-size: 10px;
   }
 }
 
