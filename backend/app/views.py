@@ -1,6 +1,8 @@
 import os
 import json
 import datetime
+
+from backend.backend import settings
 from django.shortcuts import render
 
 from .logic.order_notification import send_order_notification
@@ -70,7 +72,7 @@ def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
 
-	# print(order_content)
+	print(order_content)
 
 	order = Order(
 		date=datetime.datetime.now(),
@@ -114,7 +116,8 @@ def order(request):
 	order.total_price = order_total_sum
 	order.save()
 
-	send_order_notification(order)
+	if not settings.DEBUG:
+		send_order_notification(order)
 
 	return JsonResponse({'success': True})
 

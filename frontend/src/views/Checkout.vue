@@ -33,21 +33,15 @@
         <span>Телефон:</span>
       </div>
       <div class="form-content phone">
-        <input
+        <vue-tel-input
             v-model="phone"
+            v-bind="bindProps"
             :class="{invalid: invalidPhone}"
-        >
-<!--        <small v-if="!$v.phone.numeric"> Вводите только числа!</small>-->
-<!--        <small-->
-<!--            v-else-if="!$v.phone.minLength || !$v.phone.maxLength"-->
-<!--        >-->
-<!--          В номере должно быть {{ $v.phone.$params.maxLength.max }} чисел. Сейчас их {{ phone.length }}!-->
-<!--        </small>-->
+        ></vue-tel-input>
         <small v-show="invalidPhone">
           Введите номер телефона
         </small>
       </div>
-
       <div class="form-title">
         <span>E-mail:</span>
       </div>
@@ -58,7 +52,6 @@
         >
         <small v-if="!$v.email.email">Enter E-mail!</small>
       </div>
-
       <div class="form-title required">
         <span>Способ доставки:</span>
       </div>
@@ -70,7 +63,6 @@
         </select>
         <small v-if="invalidDelivery">Нужно выбрать способ доставки</small>
       </div>
-
       <div class="form-title required" v-if="isNovaPoshta">
         <span>Город:</span>
       </div>
@@ -81,7 +73,6 @@
             :search="search"
             @submit="setCity"
         ></autocomplete>
-<!--        <small v-if="invalidCity">Нужно выбрать город</small>-->
       </div>
       <div class="form-title required" v-if="isNovaPoshta">
         <span>Отделение:</span>
@@ -97,18 +88,6 @@
         <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-
-<!--      <div class="form-title" v-show="deliveryMethod === 'Самовывоз'">-->
-<!--        <span>Адрес:</span>-->
-<!--      </div>-->
-<!--      <div class="others" v-show="deliveryMethod === 'Самовывоз'">-->
-<!--                  <textarea-->
-<!--                      id="others"-->
-<!--                      v-model="address"-->
-<!--                  ></textarea>-->
-<!--        <label data-first="Enter address" data-second="delivery address"></label>-->
-<!--      </div>-->
-
       <div class="form-title required" v-if="deliveryMethod">
         <span>Способ оплаты:</span>
       </div>
@@ -120,7 +99,6 @@
         </select>
         <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
       </div>
-
       <div class="form-title">
         <span>Комментарий</span>
       </div>
@@ -148,11 +126,13 @@ import {required, email} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/send';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
+import { VueTelInput } from 'vue-tel-input'
 
 export default {
   name: "Checkout",
   components: {
-    Autocomplete
+    Autocomplete,
+    VueTelInput
   },
   data() {
     return {
@@ -165,6 +145,31 @@ export default {
       city: '',
       postOffice: '',
       phone: localStorage.getItem('phone') || "",
+      bindProps: {
+        mode: "international",
+        defaultCountry: "UA",
+        disabledFetchingCountry: false,
+        disabled: false,
+        disabledFormatting: false,
+        placeholder: "Введите номер телефона",
+        required: false,
+        enabledCountryCode: true,
+        enabledFlags: true,
+        preferredCountries: ["RU", "PL"],
+        onlyCountries: [],
+        ignoredCountries: [],
+        autocomplete: "on",
+        name: "telephone",
+        maxLen: 25,
+        wrapperClasses: "",
+        inputClasses: "",
+        dropdownOptions: {
+          disabledDialCode: false
+        },
+        inputOptions: {
+          showDialCode: false
+        }
+      },
       email: '',
       comment: '',
       invalidName: false,
@@ -305,6 +310,7 @@ export default {
       localStorage.setItem('userSurname', newValue);
     },
     phone: function (newValue) {
+      console.log(this.phone);
       if (this.$v.phone.$invalid) {
         this.invalidPhone = this.$v.phone.required;
       } else {
