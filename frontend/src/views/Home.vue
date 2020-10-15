@@ -2,7 +2,7 @@
   <div>
     <header class="showcase">
       <div class="container showcase-inner">
-        <img src="../assets/banner3.jpg"/>
+        <img src="../assets/banner4.jpg"/>
       </div>
     </header>
     <div class="info">

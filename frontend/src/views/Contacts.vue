@@ -23,7 +23,6 @@
       <p>Подписывайся на наши страницы:</p>
       <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/">facebook.com/hoodiyalko</a></p>
       <p><a target="_blank" href="https://www.instagram.com/hoodiyalko/">instagram.com/hoodiyalko</a></p>
-      <a target="_blank" href="https://www.tiktok.com/hoodiyalko">tiktok.com/@hoodiyalko</a>
     </div>
 
 

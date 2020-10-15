@@ -8,16 +8,16 @@
       <div>
         <div>
           <ul>
-            <li @click="closeHamburger">
+            <li @click="closeHamburger" class="menu-item">
               <router-link :to="{name: 'Home'}">{{ links['1'] }}</router-link>
             </li>
-            <li @click="closeHamburger">
+            <li @click="closeHamburger" class="menu-item">
               <router-link :to="{name: 'About'}">{{ links['2'] }}</router-link>
             </li>
-            <li @click="closeHamburger">
+            <li @click="closeHamburger" class="menu-item">
               <router-link :to="{name: 'Brands'}">{{ links['3'] }}</router-link>
             </li>
-            <li @click="closeHamburger">
+            <li @click="closeHamburger" class="menu-item">
               <router-link :to="{name: 'Contacts'}">{{ links['4'] }}</router-link>
             </li>
           </ul>
@@ -177,14 +177,18 @@ export default {
 .menu-wrap .menu > div > div > ul > li {
   list-style: none;
   color: #000;
-  font-size: 1.11rem;
-  border-bottom: 1px solid #000;
+  font-size: 16px;
   padding: 0.65rem;
+}
+
+.menu-item + .menu-item {
+  border-top: 1px solid #000;
 }
 
 .menu-wrap .menu > div > div > ul > li > a {
   color: inherit;
   text-decoration: none;
+  text-transform: uppercase;
   transition: color 0.4s ease;
 }
 

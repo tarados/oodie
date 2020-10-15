@@ -27,21 +27,21 @@
           <div class="social-icons">
             <div class="social-content">
               <div class="circl">
-                <a href="https://www.facebook.com/hoodiyalko/">
+                <a target="_blank" href="https://www.facebook.com/hoodiyalko/">
                   <img src="../assets/facebook.png">
                 </a>
               </div>
             </div>
             <div class="social-content">
               <div class="circl">
-                <a href="https://www.instagram.com/hoodiyalko/">
+                <a target="_blank" href="https://www.instagram.com/hoodiyalko/">
                   <img src="../assets/instagram.png">
                 </a>
               </div>
             </div>
             <div class="social-content">
               <div class="circl">
-                <a href="https://www.tiktok.com/hoodiyalko/">
+                <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/">
                   <img src="../assets/tik-tok.png">
                 </a>
               </div>
@@ -221,7 +221,5 @@ p {
     font-size: 14px;
     padding-bottom: 5px;
   }
-
-
 }
 </style>
