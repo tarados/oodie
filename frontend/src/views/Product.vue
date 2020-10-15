@@ -2,13 +2,18 @@
   <div>
     <div class="wrapper-product" v-if="this.currentProduct">
       <div class="breadcrumbs-wrapper">
-          <Breadcrumbs/>
+        <Breadcrumbs/>
       </div>
 
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
           <div class="item-left">
-            <img :src="this.currentProduct.image_list[imageIndex]" class="zoomImg">
+            <vueper-slides
+                :fixed-height="true"
+                :initSlide="imageIndex"
+            >
+              <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+            </vueper-slides>
           </div>
 
           <div class="item-left viewer">
@@ -77,7 +82,7 @@
             </div>
           </div>
           <div class="size-table" v-if="this.currentProduct.table">
-           <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
+            <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
           </div>
           <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
           <div class="btn" @click="toCard" v-if="!isUnavailable">в корзину</div>
@@ -92,12 +97,12 @@
 </template>
 
 <script>
-import { VueperSlides, VueperSlide } from "vueperslides";
+import {VueperSlides, VueperSlide} from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import settings from "../settings";
 
-import { required } from "vuelidate/lib/validators";
+import {required} from "vuelidate/lib/validators";
 
 export default {
   name: "Product",
@@ -117,7 +122,7 @@ export default {
     };
   },
   validations: {
-    size: { required },
+    size: {required},
   },
   components: {
     VueperSlide,
@@ -139,9 +144,10 @@ export default {
       } catch (TypeError) {
         return "";
       }
-
     },
-
+    selectedImage() {
+      return this.imageIndex;
+    },
     isUnavailable() {
       let num = 0;
       this.currentProduct.availability.forEach(el => num += el.quantity)
@@ -187,7 +193,7 @@ export default {
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
-      this.$router.push({ name: "Card" });
+      this.$router.push({name: "Card"});
     },
     select(index) {
       this.size = index;
@@ -209,6 +215,16 @@ export default {
 .wrapper-product {
   margin-top: 55px;
   margin-bottom: 40px;
+}
+
+.wrapper__slider {
+  background-color: yellow;
+  width: 100%;
+  height: 570px;
+}
+
+.vueperslides--fixed-height {
+  height: calc(100vh - 76px);
 }
 
 .breadcrumbs-wrapper {
@@ -246,15 +262,13 @@ export default {
   overflow: hidden;
 }
 
-.item img.zoomImg:hover {
-
-  /*max-height: 50px;*/
-  /*transform: scale(1.2);*/
-}
-
 .content {
   width: 100%;
   height: 100%;
+}
+
+.item-left {
+  margin-bottom: 15px;
 }
 
 .item-left-slider {
@@ -265,15 +279,11 @@ export default {
 }
 
 .slider {
-
   width: calc((100% / 12) * 3 - 10px);
   height: calc((100% / 12) * 3 - 10px);
   /*margin: 0 2% 1% 0;*/
 }
 
-.slider {
-
-}
 
 .slider img:hover {
   border: 1px solid black;
@@ -294,6 +304,10 @@ export default {
   /*color: #eb6f6e;*/
 }
 
+.left {
+
+}
+
 .right {
   display: flex;
   flex-direction: column;
@@ -308,10 +322,6 @@ export default {
 
 .markdown {
   display: none;
-}
-
-.item-left {
-
 }
 
 .btn {
@@ -455,12 +465,36 @@ export default {
 }
 
 @media screen and (max-width: 960px) {
-  h1, .current {
-    /*font-size: calc(3.125vw + 10px);*/
+  .vueperslides--fixed-height {
+    height: calc(100vh - 278px);
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 318px);
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 650px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 372px);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 424px);
+  }
+}
+
+
+@media screen and (max-width: 460px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 250px);
+  }
+
   .item {
     width: calc(100% - 30px);
   }
@@ -485,7 +519,9 @@ export default {
 }
 
 @media screen and (max-width: 375px) {
-
+  .vueperslides--fixed-height {
+    height: calc(100vh - 324px);
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -493,7 +529,9 @@ export default {
 }
 
 @media screen and (max-width: 320px) {
-
+  .vueperslides--fixed-height {
+    height: calc(100vh - 370px);
+  }
 }
 
 </style>

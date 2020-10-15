@@ -2,7 +2,7 @@ import os
 import json
 import datetime
 
-from backend.backend import settings
+from django.conf import settings
 from django.shortcuts import render
 
 from .logic.order_notification import send_order_notification
