@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="delivery">
-          <p>Доставка и оплата</p>
+          <router-link :to="{name: 'Delivery' }">Доставка и оплата</router-link>
           <p>Сотрудничество</p>
           <p>Обмен и возврат</p>
         </div>
@@ -100,6 +100,7 @@ export default {
 
 .delivery {
   width: 35%;
+  /*margin-top: 32px;*/
 }
 
 .contacts-item {
@@ -158,7 +159,19 @@ export default {
 
 span,
 p {
-  font-size: calc(10px + 8 * (100vw / 1838));
+  font-size: 16px;
+  padding-bottom: 14px;
+}
+
+.delivery a {
+  font-size: 16px;
+  padding-bottom: 14px;
+  color: black;
+  text-decoration: none;
+}
+
+.delivery a:hover {
+  text-decoration: underline;
 }
 
 .social-title {

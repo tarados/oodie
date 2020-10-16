@@ -90,11 +90,11 @@
       <div class="form-title required" v-if="deliveryMethod">
         <span>Способ оплаты:</span>
       </div>
-      <div class="payment-content" v-if="deliveryMethod" :class="{invalid: invalidPayment}">
+      <div class="payment-content" :class="{invalid: invalidPayment}">
         <select v-model="selectedPayment">
           <option disabled value="">Выберите способ оплаты</option>
           <option>На карту</option>
-          <option>Наложенным платежем</option>
+          <option>Наложенный платеж</option>
         </select>
         <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
       </div>
@@ -105,7 +105,7 @@
         <textarea v-model="comment" rows="4"></textarea>
       </div>
       <div class="button-block">
-        <strong v-if="isSelfDelivery">Вы сможете забрать посылку возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения времени и адреса.</strong>
+        <strong v-if="isSelfDelivery">Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей.</strong>
       </div>
       <div class="button-block">
         <button @click="toCard" class="continue-shopping">

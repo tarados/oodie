@@ -23,6 +23,12 @@ const routes = [
         component: () => import('../views/Contacts')
     },
     {
+        path: '/delivery',
+        name: 'Delivery',
+        meta: {layout: 'main'},
+        component: () => import('../views/Delivery')
+    },
+    {
         path: '/brands/:slug',
         name: 'Brand',
         meta: {layout: 'main'},
