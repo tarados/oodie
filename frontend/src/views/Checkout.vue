@@ -87,7 +87,7 @@
         <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
         <label data-first="Enter post address" data-second="Post address"></label>
       </div>
-      <div class="form-title required" v-if="deliveryMethod">
+      <div class="form-title required">
         <span>Способ оплаты:</span>
       </div>
       <div class="payment-content" :class="{invalid: invalidPayment}">
