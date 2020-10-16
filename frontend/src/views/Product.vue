@@ -206,7 +206,7 @@ export default {
 }
 
 .vueperslides--fixed-height {
-  height: calc(100vh - 76px);
+  /*height: calc(100vh - 76px);*/
 }
 
 .breadcrumbs-wrapper {
