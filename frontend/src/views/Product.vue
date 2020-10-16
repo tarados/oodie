@@ -8,41 +8,23 @@
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
           <div class="item-left">
-            <vueper-slides
-                :fixed-height="true"
-                :initSlide="imageIndex"
-            >
-              <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
-            </vueper-slides>
-          </div>
-
-          <div class="item-left viewer">
-            <vueper-slides
-                class="no-shadow"
-                :infinite="false"
-                :visible-slides="4"
-                slide-multiple
-                :gap="3"
-                :slide-ratio="1 / 4"
-                :dragging-distance="70"
-                :arrows-outside="false"
-            >
-              <vueper-slide
-                  class="slide-image"
-                  v-for="(slade, i) in slides"
-                  :key="i"
-                  :image="slade.image"
+<!--            <div class="image-container">-->
+              <vueper-slides
+                  :touchable="true"
+                  :bullets="false"
+                  :slide-ratio="841 / 561"
+                  :initSlide="imageIndex"
+                  ref="vueperslides1"
               >
-                <template v-slot:content>
-                  <div class="content" @click="showImage(i)"></div>
-                </template>
-              </vueper-slide>
-            </vueper-slides>
+                <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+              </vueper-slides>
+<!--            </div>-->
+
           </div>
 
           <div class="item-left-slider">
             <div class="slider" v-for="(image, index) in currentProduct.image_list" :key="image">
-              <img :src="image" @click="showImage(index)">
+              <img :src="image" @click="$refs.vueperslides1.goToSlide(index)">
             </div>
           </div>
         </div>
@@ -271,18 +253,32 @@ export default {
   margin-bottom: 15px;
 }
 
+.image-container {
+  width: 500px;
+}
+
 .item-left-slider {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   margin-top: 0.25rem;
 }
 
 .slider {
-  width: calc((100% / 12) * 3 - 10px);
-  height: calc((100% / 12) * 3 - 10px);
+  /*width: calc((100% / 12) * 3 - 10px);*/
+  /*height: calc((100% / 12) * 3 - 10px);*/
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  margin-right: 8px;
+  margin-bottom: 12px;
   /*margin: 0 2% 1% 0;*/
 }
+
+/*.slider:nth-child(even) {*/
+/*  margin-left: 8px;*/
+/*  margin-right: 8px;*/
+/*}*/
 
 
 .slider img:hover {
