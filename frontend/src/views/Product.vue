@@ -10,7 +10,7 @@
           <div class="item-left">
 <!--            <div class="image-container">-->
               <vueper-slides
-                  :touchable="true"
+                  :touchable="false"
                   :bullets="false"
                   :slide-ratio="841 / 561"
                   :initSlide="imageIndex"
@@ -495,9 +495,9 @@ export default {
     width: calc(100% - 30px);
   }
 
-  .item-left-slider {
-    display: none;
-  }
+  /*.item-left-slider {*/
+  /*  display: none;*/
+  /*}*/
 
   .viewer {
     display: contents;
