@@ -33,11 +33,10 @@
         <span>Телефон:</span>
       </div>
       <div class="form-content phone">
-        <vue-tel-input
+        <input
             v-model="phone"
-            v-bind="bindProps"
             :class="{invalid: invalidPhone}"
-        ></vue-tel-input>
+        >
         <small v-show="invalidPhone">
           Введите номер телефона
         </small>
@@ -126,13 +125,11 @@ import {required, email} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/send';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
-import { VueTelInput } from 'vue-tel-input'
 
 export default {
   name: "Checkout",
   components: {
-    Autocomplete,
-    VueTelInput
+    Autocomplete
   },
   data() {
     return {
@@ -145,31 +142,6 @@ export default {
       city: '',
       postOffice: '',
       phone: localStorage.getItem('phone') || "",
-      bindProps: {
-        mode: "international",
-        defaultCountry: "UA",
-        disabledFetchingCountry: false,
-        disabled: false,
-        disabledFormatting: false,
-        placeholder: "Введите номер телефона",
-        required: false,
-        enabledCountryCode: true,
-        enabledFlags: true,
-        preferredCountries: ["RU", "PL"],
-        onlyCountries: [],
-        ignoredCountries: [],
-        autocomplete: "on",
-        name: "telephone",
-        maxLen: 25,
-        wrapperClasses: "",
-        inputClasses: "",
-        dropdownOptions: {
-          disabledDialCode: false
-        },
-        inputOptions: {
-          showDialCode: false
-        }
-      },
       email: '',
       comment: '',
       invalidName: false,

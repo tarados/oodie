@@ -9,7 +9,6 @@
         <div class="item left">
           <div class="item-left">
             <vueper-slides
-                :fixed-height="true"
                 :initSlide="imageIndex"
             >
               <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
@@ -21,7 +20,7 @@
                 class="no-shadow"
                 :infinite="false"
                 :visible-slides="4"
-                slide-multiple
+                slide-multipleq
                 :gap="3"
                 :slide-ratio="1 / 4"
                 :dragging-distance="70"
@@ -224,7 +223,7 @@ export default {
 }
 
 .vueperslides--fixed-height {
-  height: calc(100vh - 76px);
+  /*height: calc(100vh - 76px);*/
 }
 
 .breadcrumbs-wrapper {
