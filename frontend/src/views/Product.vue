@@ -483,6 +483,11 @@ export default {
   .vueperslides--fixed-height {
     height: calc(100vh - 424px);
   }
+
+  .slider {
+    width: 78px;
+    height: 78px;
+  }
 }
 
 
