@@ -39,11 +39,14 @@
     </div>
 
     <ProductsList :category-id="categoryId" />
+
+    <InstaWidget/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
+import InstaWidget from "../components/InstaWidget";
 
 
 export default {
@@ -53,7 +56,8 @@ export default {
     }
   },
   components: {
-    ProductsList
+    ProductsList,
+    InstaWidget
   },
   computed: {
     categoryId() {
