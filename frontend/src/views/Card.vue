@@ -67,7 +67,7 @@
     </div>
     <div class="container checkout-buttons">
         <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
-        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout button">Оплатить</router-link>
+        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout button">Оформить заказ</router-link>
     </div>
 
   </div>
@@ -620,7 +620,9 @@ img {
 }
 
 @media screen and (max-width: 450px) {
-
+  .checkout-buttons a {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -637,7 +639,6 @@ img {
 @media screen and (max-width: 320px) {
   .checkout-button {
     padding: 8px;
-    font-size: 13px;
   }
 }
 </style>

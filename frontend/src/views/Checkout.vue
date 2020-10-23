@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper-checkout">
-    <div class="header">
-      <h1>К оплате:</h1>
-    </div>
-    <div class="subtotal">
-      <div class="subtotal-title">Всего</div>
-      <div class="subtotal-val" v-text="totalPrice"></div>
-    </div>
-    <form class="submit-box" @submit.prevent="submitHandler">
+<!--    <div class="header">-->
+<!--      <h1>Офор</h1>-->
+<!--    </div>-->
+
+    <form  @submit.prevent="submitHandler">
+      <div class="submit-box">
       <div class="form-title required">
         <span>Имя:</span>
       </div>
@@ -104,9 +102,15 @@
       <div class="description-content">
         <textarea v-model="comment" rows="4"></textarea>
       </div>
-      <div class="button-block">
-        <strong v-if="isSelfDelivery">Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей.</strong>
+      <div class="button-block" v-if="isSelfDelivery">
+        <strong>Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей.</strong>
       </div>
+      </div>
+      <div class="subtotal">
+        <div class="subtotal-title">К оплате</div>
+        <div class="subtotal-val" v-text="totalPrice"></div>
+      </div>
+      <div class="submit-box">
       <div class="button-block">
         <button @click="toCard" class="continue-shopping">
           <span>Вернуться в корзину</span>
@@ -114,6 +118,7 @@
         <button type="submit" class="continue-shipping">
           <span> Купить</span>
         </button>
+      </div>
       </div>
     </form>
   </div>
@@ -319,13 +324,21 @@ export default {
 .wrapper-checkout {
   max-width: 600px;
   margin: 0 auto;
+  padding: 0px 16px;
   padding-bottom: 64px;
+
 }
 
 .subtotal {
-  display: grid;
-  margin: 30px 0 30px;
-  grid-template: 1fr / 1fr 1fr;
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+
+  border-top: 1px solid black;
+  /*margin: 30px 0 30px;*/
+  /*grid-template: 1fr / 1fr 1fr;*/
 }
 
 .header {
@@ -372,7 +385,7 @@ select {
 /*Contact information*************************************************************************/
 .submit-box {
   display: grid;
-  grid-template: repeat(10, minmax(35px, auto)) / 0.7fr 2fr;
+  grid-template: repeat(auto-fit, minmax(35px, auto)) / 0.7fr 2fr;
   grid-gap: 20px;
 }
 
@@ -518,13 +531,13 @@ textarea {
 /*media queries*****************************************************************************/
 @media screen and (max-width: 1200px) {
   .submit-box {
-    margin: 0 10%;
+    /*margin: 0 10%;*/
   }
 }
 
 @media screen and (max-width: 960px) {
   .submit-box {
-    margin: 0 8%;
+    /*margin: 0 8%;*/
   }
 
   select {
@@ -556,7 +569,7 @@ textarea {
 
 @media (max-width: 450px) {
   .submit-box {
-    margin: 0 5%;
+    /*margin: 0 5%;*/
   }
 
   .form-title {
