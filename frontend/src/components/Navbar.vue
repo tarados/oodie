@@ -231,6 +231,7 @@ span {
 
 .linkList .linkList-item svg {
   width: 18px;
+  height: 18px;
   margin-left: 10px;
 }
 
