@@ -3,6 +3,7 @@ from .models import Category, Product, ProductImage, Order, OrderItem, Size, Pro
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
+from django import forms
 
 
 @register.inclusion_tag('admin/submit_line.html', takes_context=True)
@@ -56,17 +57,42 @@ class OrderItemInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
 	list_display = (
-		"idOrder", "date", "total_price", "customer_name", "customer_surname", "customer_phone", "delivery", "payment",
-		"status")
+		"id_order", "status", "format_datetime", "total_price_fix", "customer", "customer_phone", "delivery", "payment")
 	list_filter = ("status",)
+	list_editable = ('status',)
+	exclude = ('total_price', )
 	inlines = [
 		OrderItemInline,
 	]
 
-	def idOrder(self, obj):
-		return 'Заказ № %s' % str(obj.id)
+	def formfield_for_dbfield(self, db_field, **kwargs):
+		formfield = super(OrderAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+		if db_field.name == 'post_office':
+			formfield.widget = forms.TextInput(attrs=formfield.widget.attrs)
+		if db_field.name == 'address':
+			formfield.widget = forms.TextInput(attrs=formfield.widget.attrs)
+		return formfield
 
-	idOrder.short_description = "Номер заказа"
+	def id_order(self, obj):
+		return '%s' % str(obj.id)
+
+	id_order.short_description = "№"
+
+	def format_datetime(self, obj):
+		new = str(obj.date.strftime('%b'))
+		return '%s.%s, %s' % (str(obj.date.day), new, str(obj.date.strftime('%H:%M')))
+
+	format_datetime.short_description = "Дата"
+
+	def total_price_fix(self, obj):
+		return str(obj.total_price_calc()).split('.')[0]
+
+	total_price_fix.short_description = "Сумма"
+
+	def customer(self, obj):
+		return '%s %s' % (obj.customer_surname, obj.customer_name)
+
+	customer.short_description = "Заказчик"
 
 	def save_model(self, request, obj, form, change):
 		obj.save()

@@ -1,46 +1,58 @@
 <template>
   <div class="wrapper-footer">
     <div class="container">
-      <div class="footer_row">
-        <div class="contacts">
-          <div class="contacts-item">
+      <div class="footer-content">
+        <div class="footer-content__item">
+          <div class="footer-content__item--contacts">
             <span>Контакты:</span>
           </div>
-          <div class="contacts-item phone">
+          <div class="footer-content__item--contacts">
             <img src="../assets/phone-receiver.svg"/>
-            <a href="tel:+380507204066">+380507204066</a>
+            <a href="tel:+380507204066">
+              <span>+380507204066</span>
+            </a>
           </div>
-          <div class="contacts-item">
+          <div class="footer-content__item--contacts">
             <img src="../assets/email.svg">
-            <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
+            <a href="mailto:hoodiyalko@gmail.com">
+              <span>hoodiyalko@gmail.com</span>
+            </a>
           </div>
         </div>
-        <div class="delivery">
-          <router-link :to="{name: 'Delivery' }">Доставка и оплата</router-link>
-          <p>Сотрудничество</p>
-          <p>Обмен и возврат</p>
+        <div class="footer-content__item">
+          <div class="footer-content__item--delivery">
+            <router-link :to="{name: 'Delivery' }">
+              <span>Доставка и оплата</span>
+            </router-link>
+          </div>
+          <div class="footer-content__item--delivery">
+            <span>Сотрудничество</span>
+          </div>
+          <div class="footer-content__item--delivery">
+            <span>Обмен и возврат</span>
+          </div>
         </div>
-        <div class="social">
-          <div class="social-title">
+        <div class="footer-content__item">
+          <div class="footer-content__item--social">
             <span>Мы в соцсетях</span>
           </div>
-          <div class="social-icons">
-            <div class="social-content">
-              <div class="circl">
+          <div class="footer-content__item--social">
+            <div class="icon">
+              <div class="icon__circl">
                 <a target="_blank" href="https://www.facebook.com/hoodiyalko/">
                   <img src="../assets/facebook.png">
                 </a>
               </div>
             </div>
-            <div class="social-content">
-              <div class="circl">
+            <div class="icon">
+              <div class="icon__circl">
                 <a target="_blank" href="https://www.instagram.com/hoodiyalko/">
                   <img src="../assets/instagram.png">
                 </a>
               </div>
             </div>
-            <div class="social-content">
-              <div class="circl">
+            <div class="icon">
+              <div class="icon__circl">
                 <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/">
                   <img src="../assets/tik-tok.png">
                 </a>
@@ -78,77 +90,67 @@ export default {
 .container {
   max-width: 1240px;
   margin: 0 auto;
-  /*padding-left: 5%;*/
 }
 
-.footer_row {
+.footer-content {
   display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
-.contacts,
-.delivery,
-.social {
-  padding: 20px 0;
+.footer-content__item {
+  min-height: 120px;
+  min-width: 136px;
+  padding: 15px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.contacts {
-  width: 40%;
+.footer-content__item:nth-child(1) .footer-content__item--contacts:nth-child(1) span {
+  text-transform: uppercase;
 }
 
-.delivery {
-  width: 35%;
-  /*margin-top: 32px;*/
+.footer-content__item:nth-child(3) {
+  min-width: 150px;
+  align-items: center;
 }
 
-.contacts-item {
+.footer-content__item--contacts {
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-end;
 }
 
-.phone {
-  padding-bottom: 10px;
-}
-
-.contacts-item a,
-.contacts-item p {
+.footer-content__item span {
   text-decoration: none;
   cursor: pointer;
   color: black;
 }
 
-.contacts-item img{
+.footer-content__item--contacts img{
   margin-right: 15px;
 }
 
-.contacts-item img,
-.circl img {
+.footer-content__item--contacts img,
+.icon__circl img {
   width: 22px;
 }
 
-.circl img {
+.icon__circl img {
   margin-top: 8px;
 }
 
-.social {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.social-icons {
+.footer-content__item--social {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.social-content + .social-content {
-  margin-left: 8px;
+.footer-content__item--social:nth-child(2) {
+  width: 100%;
 }
 
-.circl {
+.icon__circl {
   margin: 2% 5% 1% 0;
   width: 40px;
   height: 40px;
@@ -157,82 +159,49 @@ export default {
   border-radius: 50%;
 }
 
-span,
-p {
-  font-size: 16px;
-  padding-bottom: 14px;
-}
-
-.delivery a {
-  font-size: 16px;
-  padding-bottom: 14px;
+.footer-content__item a {
   color: black;
   text-decoration: none;
 }
 
-.delivery a:hover {
+.footer-content__item a:hover {
   text-decoration: underline;
-}
-
-.social-title {
-  text-align: center;
-  padding-bottom: 8px;
-}
-
-.contacts-item span {
-  padding-bottom: 10px;
-  text-transform: uppercase;
 }
 
 /*media queries*****************************************/
 
 @media screen and (max-width: 750px) {
-  .wrapper-footer {
-    background-color: var(--overlay-color);
-    padding: 16px;
-  }
-  .container {
-    /*width: calc(100vw - 40px);*/
-    /*padding-left: 3%;*/
-  }
-
-  .footer_row {
-    justify-content: space-between;
-    min-height: 100px;
-  }
-
-  .contacts {
+  .footer-content__item:nth-child(1) {
     display: none;
   }
 
-  span,
-  p {
-    font-size: 16px;
-    padding-bottom: 14px;
-  }
-
-  .delivery {
-    width: auto;
-  }
-
-  .social {
-    width: auto;
-  }
-
-  .social-title {
-    display: none;
-  }
-
-  .social-content + .social-content {
-    margin-left: 8px;
+  span {
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  span,
-  p {
-    font-size: 14px;
-    padding-bottom: 5px;
+  .footer-content__item {
+    padding: 10px 0;
+    min-height: 100px;
+  }
+
+  .footer-content__item:nth-child(2) {
+    min-width: 120px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 280px){
+  .footer-content__item:nth-child(3) {
+    min-width: 120px;
+  }
+
+  span {
+    font-size: 11px;
   }
 }
 </style>

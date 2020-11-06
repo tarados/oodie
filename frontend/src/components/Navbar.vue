@@ -21,7 +21,7 @@
       <Logo/>
       <div class="linkList">
         <div class="linkList-item">
-          <router-link :to="{name: 'Home'}"
+          <router-link :to="{name: 'Home'}" exact
           >
             <p>{{ links['1'] }}</p>
           </router-link>
@@ -218,7 +218,10 @@ span {
   transition: 0.4s;
 }
 
-.linkList .linkList-item a:active,
+.linkList .linkList-item a.router-link-active {
+  font-weight: bold;
+}
+
 .linkList .linkList-item a:hover {
   font-weight: bold;
 }

@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1>Корзина</h1>
+      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">Корзина</h1>
+      <h1 v-else>Ваша корзина пуста!</h1>
     </div>
     <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
       <div class="grid-container second">
@@ -9,7 +10,6 @@
           <img :src="product.image">
         </div>
         <div class="item product">
-<!--          <div class="remove" @click="deleteOrder(index)">удалить</div>-->
           <div class="name">
             {{ product.title }}
             <strong v-if="needShowSize(product)">
@@ -17,7 +17,6 @@
             </strong>
           </div>
         </div>
-<!--        <div class="item price-val">{{ product.price }} грн</div>-->
         <div class="item quantity-val">
           <div>
             {{ product.quantity }}
@@ -55,21 +54,24 @@
         </div>
       </div>
     </div>
-    <div class="subtotal-mobile-box">
+    <div class="subtotal-mobile-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
       <div class="subtotal-mobile-title">Итого:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
-      <div class="subtotal-box">
+      <div class="subtotal-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
         <span>Итого </span>
         <span v-text="totalPrice"></span>
       </div>
     </div>
     <div class="container checkout-buttons">
         <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
-        <router-link :to="{name: 'Checkout'}" class="checkout-button checkout button">Оформить заказ</router-link>
+        <router-link
+            :to="{name: 'Checkout'}"
+            class="checkout-button checkout button"
+            v-show="this.$store.state.productsStore.cardProducts.length > 0"
+        >Оформить заказ</router-link>
     </div>
-
   </div>
 </template>
 
@@ -119,7 +121,6 @@ export default {
     }
   },
   mounted() {
-    console.log("mounted");
     this.basketVisible();
   }
 }
@@ -218,12 +219,9 @@ img {
 
 .product .name {
   flex-grow: 2;
-  /*padding-left: 8px;*/
-  /*margin-left: 20%;*/
 }
 
 .remove {
-  /*width: 12%;*/
   padding: 8px;
   height: 1.65vmax;
   display: flex;
@@ -298,7 +296,6 @@ img {
 .item.close button {
   border: none;
   background: transparent;
-  /*font-weight: bold;*/
   font-size: 20px;
   color: #a3a4a5;
   cursor: pointer;
@@ -333,10 +330,6 @@ img {
   border-right: 5px solid transparent;
   border-bottom: 10px solid black;
 }
-
-/*.triangle-up:hover, .triangle-down:hover {*/
-/*  background: rgba(150, 21, 100, 0.5);*/
-/*}*/
 
 .triangle-down {
   width: 0;
@@ -403,19 +396,12 @@ img {
   color: white;
 }
 
-/*.checkout-button:hover {*/
-/*  opacity: 0.5;*/
-/*}*/
-
 .continue-shopping {
   border: 1px solid black;
   color: black;
 }
 
 /*media queries*************************************************************************************/
-@media screen and (max-width: 800px) {
-
-}
 
 @media screen and (max-width: 680px) {
   .wrapper-card {
@@ -447,8 +433,6 @@ img {
   .checkout-mobile,
   .remove {
     font-size: 16px;
-    /*font-size: calc(3.125vw + 2px);*/
-    /*margin-left: 3%;*/
   }
 
   .product {
@@ -546,12 +530,6 @@ img {
     font-size: 20px;
     border: 1px solid rgb(61, 66, 70);
     color: rgb(61, 66, 70);
-
-    /*width: 0;*/
-    /*height: 0;*/
-    /*border-left: 5px solid transparent;*/
-    /*border-right: 5px solid transparent;*/
-    /*border-top: 10px solid black;*/
   }
 
   .product-quantity {
@@ -559,12 +537,6 @@ img {
     text-align: center;
     line-height: 24px;
   }
-  /*.up,*/
-  /*.down,*/
-  /*.product-quantity {*/
-  /*  flex-grow: 1;*/
-  /*}*/
-
   .subtotal-mobile-box {
     display: flex;
     flex-wrap: wrap;
@@ -615,20 +587,11 @@ img {
   }
 }
 
-@media screen and (max-width: 640px) {
-
-}
-
 @media screen and (max-width: 450px) {
   .checkout-buttons a {
     font-size: 12px;
   }
 }
-
-@media screen and (max-width: 375px) {
-
-}
-
 
 @media screen and (max-width: 360px) {
   img {

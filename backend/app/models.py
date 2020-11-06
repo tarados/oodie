@@ -1,6 +1,8 @@
 from django.db import models
+from django.dispatch import receiver
 from django.utils.safestring import mark_safe
 from django.conf import settings
+from django.db.models.signals import post_save, post_delete
 
 
 class Category(models.Model):
@@ -84,7 +86,6 @@ class Product(models.Model):
 
     admin_description.short_description = "Описание"
 
-
     def get_image(self):
         size = 50
         image_url = f'{settings.SITE_URL}{settings.STATIC_URL}no-img.jpg'
@@ -166,25 +167,52 @@ class Order(models.Model):
     STATUS_CHOICE = ((1, "Новый"),
                      (2, "В обработке"),
                      (3, "Выполнен"))
-    date = models.DateTimeField("Дата заказа", null=True, blank=True)
-    total_price = models.FloatField("Сумма заказа", null=True, blank=True)
+    date = models.DateTimeField("Дата", null=True, blank=True)
+    total_price = models.FloatField("Сумма", null=True, blank=True)
     customer_name = models.CharField("Имя", max_length=20)
     customer_surname = models.CharField("Фамилия", max_length=20, null=True, blank=True)
     customer_phone = models.CharField("Телефон", max_length=20)
-    delivery = models.CharField("Способ доставки", max_length=50, null=True, blank=True)
-    payment = models.CharField("Способ оплаты", max_length=50, null=True, blank=True)
-    city = models.CharField("Город", max_length=20, null=True, blank=True)
+    delivery = models.CharField("Доставка", max_length=50, null=True, blank=True)
+    payment = models.CharField("Оплата", max_length=50, null=True, blank=True)
+    city = models.CharField("Город", max_length=255, null=True, blank=True)
     post_office = models.TextField("Почтовое отделение", null=True, blank=True)
-    address = models.CharField("Адрес доставки", max_length=250, null=True, blank=True)
-    comment = models.CharField("Комментарий", max_length=250, null=True, blank=True)
+    address = models.TextField("Адрес доставки", null=True, blank=True)
+    comment = models.TextField("Комментарий", null=True, blank=True)
+    invoice_number = models.CharField("ТНН 'Новой почты'", max_length=250, null=True, blank=True)
     status = models.IntegerField("Статус", choices=STATUS_CHOICE, default=1)
 
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
 
+    def total_price_calc(self):
+        products = list(OrderItem.objects.filter(order=self.id))
+        total_price = 0
+        for product in products:
+            total_price = total_price + product.cost_product_calc()
+        return total_price
+    total_price_calc.short_description = "Сумма"
+
+    def save(self):
+        order_items = OrderItem.objects.filter(order=self.id)
+        availabilities = ProductAvailability.objects.all()
+        if self.status == 3:
+            for order_item in order_items:
+                availability = availabilities.get(product=order_item.product, size=order_item.size)
+                availability.quantity = availability.quantity - order_item.quantity
+                availability.save()
+        super().save()
+
+    def delete(self):
+        order_items = OrderItem.objects.filter(order=self.id)
+        availabilities = ProductAvailability.objects.all()
+        for order_item in order_items:
+            availability = availabilities.get(product=order_item.product, size=order_item.size)
+            availability.quantity = availability.quantity + order_item.quantity
+            availability.save()
+
     def __str__(self):
-        return 'Заказ № %s' % str(self.id)
+        return '№ %s' % str(self.id)
 
 
 class OrderItem(models.Model):
@@ -201,5 +229,16 @@ class OrderItem(models.Model):
         verbose_name = "Контент заказа"
         verbose_name_plural = "Контент заказов"
 
+    def cost_product_calc(self):
+        return self.price * self.quantity
+
     def __str__(self):
         return 'Заказ № %s для %s' % (self.order.id, self.order.customer_name)
+
+
+@receiver(post_save, sender=OrderItem)
+def update_calculated_fields(sender, instance, **kwargs):
+    cost_product = instance.cost_product_calc()
+    sender.objects.filter(pk=instance.pk).update(cost_product=cost_product)
+
+

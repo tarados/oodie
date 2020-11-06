@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="info-content">
-          <div class="wrapper-image delivery">
+          <div class="wrapper-image footer-content__item">
             <img src="../assets/delivery.png">
           </div>
           <div class="info-title">
@@ -176,7 +176,7 @@ export default {
   /*margin-right: 8px;*/
 }
 
-.wrapper-image.delivery {
+.wrapper-image.footer-content__item {
   margin-right: 16px;
 }
 

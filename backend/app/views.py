@@ -72,8 +72,6 @@ def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
 
-	print(order_content)
-
 	order = Order(
 		date=datetime.datetime.now(),
 		customer_name=order_content["username"],
@@ -91,25 +89,24 @@ def order(request):
 	order_total_sum = 0
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
-		size = Size.objects.get(name=order_item['size'])
-		current_price = product.price
-		availabilities = ProductAvailability.objects.filter(product=product)
-		for availability in availabilities:
-			if availability.size.name == order_item['size']:
-				new_quantity = availability.quantity - order_item['quantity']
-				availability.quantity = new_quantity
-				availability.save()
-		if current_price >= order_item["price"]:
-			product_price = current_price
+		if product.new_price > 0:
+			price = product.new_price
 		else:
-			product_price = order_item["price"]
+			price = product.price
+		size = Size.objects.get(name=order_item['size'])
+		# availabilities = ProductAvailability.objects.filter(product=product)
+		# for availability in availabilities:
+		# 	if availability.size.name == order_item['size']:
+		# 		new_quantity = availability.quantity - order_item['quantity']
+		# 		availability.quantity = new_quantity
+		# 	availability.save()
 		order_item = OrderItem(
 			order=order,
 			product=product,
 			quantity=order_item["quantity"],
-			price=product_price,
+			price=price,
 			size=size,
-			cost_product=product_price * order_item["quantity"]
+			cost_product=order_item["price"] * order_item["quantity"]
 		)
 		order_item.save()
 		order_total_sum = order_total_sum + order_item.cost_product

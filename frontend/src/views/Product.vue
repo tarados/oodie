@@ -392,7 +392,7 @@ export default {
 .product-category {
   display: inline-flex;
   align-items: baseline;
-  justify-content: start;
+  /*justify-content: start;*/
   text-transform: uppercase;
   letter-spacing: 0.08em;
 

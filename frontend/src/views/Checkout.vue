@@ -1,124 +1,130 @@
 <template>
   <div class="wrapper-checkout">
-<!--    <div class="header">-->
-<!--      <h1>Офор</h1>-->
-<!--    </div>-->
-
-    <form  @submit.prevent="submitHandler">
+    <form @submit.prevent="submitHandler">
       <div class="submit-box">
-      <div class="form-title required">
-        <span>Имя:</span>
-      </div>
-      <div class="form-content username">
-        <input
-            v-model="userName"
-            :class="{invalid: invalidName}"
-        >
-        <small v-show="invalidName">Введите Ваше имя</small>
-      </div>
-      <div class="form-title required">
-        <span>Фамилия:</span>
-      </div>
-      <div class="form-content user-surname">
-        <input
-            autocomplete="nope"
-            v-model="userSurname"
-            :class="{invalid: invalidSurname}"
-        >
-        <small v-show="invalidSurname">Введите Вашу фамилию</small>
-      </div>
-      <div class="form-title required">
-        <span>Телефон:</span>
-      </div>
-      <div class="form-content phone">
-        <input
-            v-model="phone"
-            :class="{invalid: invalidPhone}"
-        >
-        <small v-show="invalidPhone">
-          Введите номер телефона
-        </small>
-      </div>
-      <div class="form-title">
-        <span>E-mail:</span>
-      </div>
-      <div class="form-content mail">
-        <input
-            v-model="email"
-            :class="{invalid: !this.$v.email.email}"
-        >
-        <small v-if="!$v.email.email">Enter E-mail!</small>
-      </div>
-      <div class="form-title required">
-        <span>Способ доставки:</span>
-      </div>
-      <div class="form-content delivery">
-        <select v-model="deliveryMethod" :class="{invalid: invalidDelivery}">
-          <option disabled value="">Выберите способ доставки</option>
-          <option>Новая почта</option>
-          <option>Самовывоз</option>
-        </select>
-        <small v-if="invalidDelivery">Нужно выбрать способ доставки</small>
-      </div>
-      <div class="form-title required" v-if="isNovaPoshta">
-        <span>Город:</span>
-      </div>
-      <div class="" v-if="isNovaPoshta" :class="{invalid: invalidCity}">
-        <autocomplete
-            placeholder="Начните вводить название города"
-            autocomplete="nope"
-            :search="search"
-            @submit="setCity"
-        ></autocomplete>
-      </div>
-      <div class="form-title required" v-if="isNovaPoshta">
-        <span>Отделение:</span>
-      </div>
-      <div class="new-post-office" v-if="isNovaPoshta" :class="{invalid: invalidOffice}">
-        <autocomplete
-            class="autocomplete"
-            placeholder="Начните вводить номер или адрес отделения"
-            autocomplete="nope"
-            :search="searchWarehouse"
-            @submit="setWarehouse"
-        ></autocomplete>
-        <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
-        <label data-first="Enter post address" data-second="Post address"></label>
-      </div>
-      <div class="form-title required">
-        <span>Способ оплаты:</span>
-      </div>
-      <div class="payment-content" :class="{invalid: invalidPayment}">
-        <select v-model="selectedPayment">
-          <option disabled value="">Выберите способ оплаты</option>
-          <option>На карту</option>
-          <option>Наложенный платеж</option>
-        </select>
-        <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
-      </div>
-      <div class="form-title">
-        <span>Комментарий</span>
-      </div>
-      <div class="description-content">
-        <textarea v-model="comment" rows="4"></textarea>
-      </div>
-      <div class="button-block" v-if="isSelfDelivery">
-        <strong>Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей.</strong>
-      </div>
+        <div class="form-title required">
+          <span>Имя:</span>
+        </div>
+        <div class="form-content username">
+          <input
+              v-model="userName"
+              :class="{invalid: invalidName}"
+          >
+          <small v-show="invalidName">Введите Ваше имя</small>
+        </div>
+        <div class="form-title required">
+          <span>Фамилия:</span>
+        </div>
+        <div class="form-content user-surname">
+          <input
+              autocomplete="nope"
+              v-model="userSurname"
+              :class="{invalid: invalidSurname}"
+          >
+          <small v-show="invalidSurname">Введите Вашу фамилию</small>
+        </div>
+        <div class="form-title required">
+          <span>Телефон:</span>
+        </div>
+        <div class="form-content phone">
+          <input
+              v-model="phone"
+              :class="{invalid: invalidPhone}"
+          >
+          <small v-show="invalidPhone">
+            Введите номер телефона
+          </small>
+        </div>
+        <div class="form-title">
+          <span>E-mail:</span>
+        </div>
+        <div class="form-content mail">
+          <input
+              v-model="email"
+              :class="{invalid: !this.$v.email.email}"
+          >
+          <small v-if="!$v.email.email">Enter E-mail!</small>
+        </div>
+        <div class="form-title required">
+          <span>Способ доставки:</span>
+        </div>
+        <div class="form-content footer-content__item">
+          <select v-model="deliveryMethod" :class="{invalid: invalidDelivery}">
+            <option disabled value="">Выберите способ доставки</option>
+            <option>Новая почта</option>
+            <option>Курьером Новой почты</option>
+            <option>Самовывоз</option>
+          </select>
+          <small v-if="invalidDelivery">Нужно выбрать способ доставки</small>
+        </div>
+        <div class="form-title required" v-if="deliveryMethod === 'Новая почта'">
+          <span>Город:</span>
+        </div>
+        <div class="" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidCity}">
+          <autocomplete
+              placeholder="Начните вводить название города"
+              autocomplete="nope"
+              :search="search"
+              @submit="setCity"
+          ></autocomplete>
+          <small v-if="invalidCity">Выберите город</small>
+        </div>
+        <div class="form-title required" v-if="deliveryMethod === 'Новая почта'">
+          <span>Отделение:</span>
+        </div>
+        <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
+          <autocomplete
+              class="autocomplete"
+              placeholder="Начните вводить номер или адрес отделения"
+              autocomplete="nope"
+              :search="searchWarehouse"
+              @submit="setWarehouse"
+          ></autocomplete>
+          <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
+          <label data-first="Enter post address" data-second="Post address"></label>
+        </div>
+        <div class="form-title required" v-if="deliveryMethod === 'Курьером Новой почты'">
+          <span>Адрес:</span>
+        </div>
+        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAdress}">
+          <textarea v-model="adress" rows="4"></textarea>
+          <small v-if="invalidAdress">Нужно указать адрес доставки</small>
+        </div>
+        <div class="form-title required">
+          <span>Способ оплаты:</span>
+        </div>
+        <div class="payment-content" :class="{invalid: invalidPayment}">
+          <select v-model="selectedPayment">
+            <option disabled value="">Выберите способ оплаты</option>
+            <option>На карту</option>
+            <option>Наложенный платеж</option>
+          </select>
+          <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
+        </div>
+        <div class="form-title">
+          <span>Комментарий</span>
+        </div>
+        <div class="description-content">
+          <textarea v-model="comment" rows="4"></textarea>
+        </div>
+        <div class="button-block" v-if="deliveryMethod === 'Самовывоз'">
+          <strong>Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с
+            вами для уточнения деталей.</strong>
+        </div>
       </div>
       <div class="subtotal">
         <div class="subtotal-title">К оплате</div>
         <div class="subtotal-val" v-text="totalPrice"></div>
       </div>
       <div class="submit-box">
-      <div class="button-block">
-        <button @click="toCard" class="continue-shopping">
-          <span>Вернуться в корзину</span>
-        </button>
-        <button type="submit" class="continue-shipping">
-          <span> Купить</span>
-        </button>
-      </div>
+        <div class="button-block">
+          <button @click="toCard" class="continue-shopping">
+            <span>Вернуться в корзину</span>
+          </button>
+          <button type="submit" class="continue-shipping">
+            <span> Купить</span>
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -138,25 +144,26 @@ export default {
   },
   data() {
     return {
-      deliveryMethod: "",
-      selectedPayment: '',
-      isVisible: true,
-      userName: localStorage.getItem('userName') || "",
-      userSurname: localStorage.getItem('userSurname') || "",
-      address: '',
-      city: '',
-      postOffice: '',
-      phone: localStorage.getItem('phone') || "",
-      email: '',
-      comment: '',
-      invalidName: false,
-      invalidSurname: false,
-      invalidCity: false,
-      invalidOffice: false,
-      invalidEmail: false,
-      invalidPhone: false,
-      invalidDelivery: false,
-      invalidPayment: false,
+      "deliveryMethod": "",
+      "selectedPayment": '',
+      "isVisible": true,
+      "userName": localStorage.getItem('userName') || "",
+      "userSurname": localStorage.getItem('userSurname') || "",
+      "adress": '',
+      "city": '',
+      "postOffice": '',
+      "phone": localStorage.getItem('phone') || "",
+      "email": '',
+      "comment": '',
+      "invalidName": false,
+      "invalidSurname": false,
+      "invalidCity": false,
+      "invalidOffice": false,
+      "invalidEmail": false,
+      "invalidPhone": false,
+      "invalidDelivery": false,
+      "invalidPayment": false,
+      "invalidAdress": false
     }
   },
   validations: {
@@ -169,24 +176,21 @@ export default {
   },
   computed: {
     ...mapGetters(["totalPrice", "allCities", "allWarehouses"]),
-    isNovaPoshta() {
-      return this.deliveryMethod === "Новая почта";
-    },
-    isSelfDelivery() {
-      return this.deliveryMethod === "Самовывоз";
-    },
   },
   methods: {
     async submitHandler() {
-      this.invalidName = !this.$v.userName.required;
-      this.invalidSurname = !this.$v.userSurname.required;
-      this.invalidPhone = !this.$v.phone.required;
-      this.invalidEmail = !this.$v.email.required;
-      this.invalidDelivery = !this.$v.deliveryMethod.required;
-      this.invalidPayment = !this.$v.selectedPayment.required;
-
-      if (this.isNovaPoshta && !this.checkNovaPoshta()) {
-        return;
+      this.invalidName = this.$v.userName.$invalid;
+      this.invalidSurname = this.$v.userSurname.$invalid;
+      this.invalidPhone = this.$v.phone.$invalid;
+      this.invalidEmail = this.$v.email.$invalid;
+      this.invalidDelivery = this.$v.deliveryMethod.$invalid;
+      this.invalidPayment = this.$v.selectedPayment.$invalid;
+      if (this.deliveryMethod === 'Новая почта') {
+        this.invalidAdress = false;
+      } else if (this.adress === '') {
+        this.invalidAdress = true;
+      } else {
+        this.invalidAdress = false;
       }
 
       const productsList = [];
@@ -208,16 +212,19 @@ export default {
         'delivery': this.deliveryMethod,
         'city': this.city,
         'post-office': this.postOffice,
-        'others': this.address,
+        'others': this.adress,
         'comment': this.comment
       };
-      const response = await post("order", order);
 
-
-      if (response && !this.$v.$invalid) {
-        await this.$router.push({name: 'Successful'});
-        clearLocalStorage();
-        this.$store.commit('clearBasket');
+      if (!this.$v.$invalid) {
+        if ((this.city !== '' && this.postOffice !== '') || !this.invalidAdress || this.deliveryMethod === 'Самовывоз') {
+          const response = await post("order", order);
+          if (response) {
+            await this.$router.push({name: 'Successful'});
+            clearLocalStorage();
+            this.$store.commit('clearBasket');
+          }
+        }
       }
       if (this.$v.invalid) {
         this.$v.$touch();
@@ -264,17 +271,6 @@ export default {
     setWarehouse(warehouse) {
       this.postOffice = warehouse;
       this.invalidOffice = false;
-    },
-    checkNovaPoshta() {
-      if (!this.city) {
-        this.invalidCity = true;
-      }
-
-      if (!this.postOffice) {
-        this.invalidOffice = true;
-      }
-
-      return !this.invalidCity && !this.invalidOffice;
     }
   },
   watch: {
@@ -287,7 +283,6 @@ export default {
       localStorage.setItem('userSurname', newValue);
     },
     phone: function (newValue) {
-      console.log(this.phone);
       if (this.$v.phone.$invalid) {
         this.invalidPhone = this.$v.phone.required;
       } else {
@@ -302,14 +297,17 @@ export default {
         this.invalidEmail = !this.$v.email.required;
       }
     },
+    adress: function (newValue) {
+      this.invalidAdress = !newValue;
+    },
     city: function () {
       let cityId = this.allCities.find(city => city.name === this.city).id;
       this.$store.dispatch('loadWarehouses', cityId);
     },
-    deliveryMethod: function(newValue) {
+    deliveryMethod: function (newValue) {
       this.invalidDelivery = !newValue;
     },
-    selectedPayment: function(newValue) {
+    selectedPayment: function (newValue) {
       this.invalidPayment = !newValue;
     },
   },
@@ -448,7 +446,7 @@ small {
   right: 0;
 }
 
-.delivery,
+.footer-content__item,
 .payment-content {
   height: 100%;
 }
