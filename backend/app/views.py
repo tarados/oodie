@@ -89,7 +89,7 @@ def order(request):
 	order_total_sum = 0
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
-		if product.new_price > 0:
+		if product.new_price is not None:
 			price = product.new_price
 		else:
 			price = product.price
