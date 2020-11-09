@@ -1,5 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.db.models.signals import post_save, post_delete
@@ -185,6 +186,14 @@ class Order(models.Model):
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
 
+    # def status_color(self):
+    #     if self.status != 1:
+    #         return format_html('<select style="background-color: yellow;">{0}</div>', self.status)
+    #     return self.status
+    # status_color.allow_tags = True
+    # status_color.choise = STATUS_CHOICE
+    # status_color.short_description = "Статус"
+
     def total_price_calc(self):
         products = list(OrderItem.objects.filter(order=self.id))
         total_price = 0
@@ -240,5 +249,4 @@ class OrderItem(models.Model):
 def update_calculated_fields(sender, instance, **kwargs):
     cost_product = instance.cost_product_calc()
     sender.objects.filter(pk=instance.pk).update(cost_product=cost_product)
-
 

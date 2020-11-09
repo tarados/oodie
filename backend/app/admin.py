@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html
+
 from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
@@ -57,13 +59,21 @@ class OrderItemInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
 	list_display = (
-		"id_order", "status", "format_datetime", "total_price_fix", "customer", "customer_phone", "delivery", "payment")
+		"status_color", "id_order", "status", "format_datetime",
+		"total_price_fix", "customer", "customer_phone", "delivery", "payment")
 	list_filter = ("status",)
 	list_editable = ('status',)
 	exclude = ('total_price', )
 	inlines = [
 		OrderItemInline,
 	]
+
+	def status_color(self, obj):
+		if obj.status != 1:
+			return format_html('<th class="field-id_order" style="background-color: yellow;"></div>')
+		return format_html('<th class="field-id_order" style="background-color: blue;"></div>')
+	status_color.allow_tags = True
+	status_color.short_description = "С"
 
 	def formfield_for_dbfield(self, db_field, **kwargs):
 		formfield = super(OrderAdmin, self).formfield_for_dbfield(db_field, **kwargs)
