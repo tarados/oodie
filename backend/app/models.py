@@ -167,7 +167,8 @@ class Order(models.Model):
 
     STATUS_CHOICE = ((1, "Новый"),
                      (2, "В обработке"),
-                     (3, "Выполнен"))
+                     (3, "Выполнен"),
+                     (4, "Отменен"))
     date = models.DateTimeField("Дата", null=True, blank=True)
     total_price = models.FloatField("Сумма", null=True, blank=True)
     customer_name = models.CharField("Имя", max_length=20)
@@ -185,14 +186,6 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
-
-    # def status_color(self):
-    #     if self.status != 1:
-    #         return format_html('<select style="background-color: yellow;">{0}</div>', self.status)
-    #     return self.status
-    # status_color.allow_tags = True
-    # status_color.choise = STATUS_CHOICE
-    # status_color.short_description = "Статус"
 
     def total_price_calc(self):
         products = list(OrderItem.objects.filter(order=self.id))
