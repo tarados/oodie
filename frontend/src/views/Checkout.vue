@@ -217,7 +217,7 @@ export default {
       };
 
       if (!this.$v.$invalid) {
-        if ((this.city !== '' && this.postOffice !== '') || !this.invalidAdress || this.deliveryMethod === 'Самовывоз') {
+        if (!this.invalidAdress || this.deliveryMethod === 'Самовывоз') {
           const response = await post("order", order);
           if (response) {
             await this.$router.push({name: 'Successful'});
