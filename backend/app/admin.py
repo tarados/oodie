@@ -67,6 +67,10 @@ class OrderAdmin(admin.ModelAdmin):
         OrderItemInline,
     ]
 
+    class Media:
+        css = {"all": ("admin/css/my_style.css",)}
+        js = ("admin/js/my_script.js",)
+
     def status_color(self, obj):
         if obj.status == 1:
             return format_html('<div style="width:7rem; height:2rem; background-color: red; display: flex;'

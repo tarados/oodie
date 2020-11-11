@@ -180,8 +180,8 @@ class Order(models.Model):
     post_office = models.TextField("Почтовое отделение", null=True, blank=True)
     address = models.TextField("Адрес доставки", null=True, blank=True)
     comment = models.TextField("Комментарий", null=True, blank=True)
-    invoice_number = models.CharField("ТНН 'Новой почты'", max_length=250, null=True, blank=True)
     status = models.IntegerField("Статус", choices=STATUS_CHOICE, default=1)
+    invoice_number = models.CharField("ТНН 'Новой почты'", max_length=250, null=True, blank=True)
 
     class Meta:
         verbose_name = "Заказ"
