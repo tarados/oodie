@@ -62,14 +62,20 @@ class OrderAdmin(admin.ModelAdmin):
         "id_order", "status_color", "format_datetime",
         "total_price_fix", "customer", "customer_phone", "delivery", "payment")
     list_filter = ("status",)
-    exclude = ('total_price',)
+    exclude = ('total_price', 'get_fields',)
     inlines = [
         OrderItemInline,
     ]
 
     class Media:
         css = {"all": ("admin/css/my_style.css",)}
-        js = ("admin/js/my_script.js",)
+
+    def get_fields(self, request, obj):
+        fields = list(super(OrderAdmin, self).get_fields(request, obj))
+        exclude_set = set()
+        if obj:  # obj will be None on the add page, and something on change pages
+            exclude_set.add('invoice_number')
+        return [f for f in fields if f not in exclude_set]
 
     def status_color(self, obj):
         if obj.status == 1:
