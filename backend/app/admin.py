@@ -57,6 +57,7 @@ class OrderItemInline(admin.TabularInline):
     extra = 0
 
 
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id_order", "status_color", "format_datetime",
@@ -68,18 +69,22 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
     def status_color(self, obj):
-        if obj.status == 1:
-            return format_html('<div style="width:7rem; height:2rem; background-color: red; display: flex;'
-                               ' justify-content: center; align-items: center; color: white">Новый</div>')
-        elif obj.status == 2:
-            return format_html('<div style="width:7rem; height:2rem; background-color: yellow; display: flex;'
-                               ' justify-content: center; align-items: center;">В обработке</div>')
-        elif obj.status == 3:
-            return format_html('<div style="width:7rem; height:2rem; background-color: green; display: flex;'
-                               ' justify-content: center; align-items: center; color: white">Выполнен</div>')
-        else:
-            return format_html('<div style="width:7rem; height:2rem; background-color: grey; display: flex;'
-                               ' justify-content: center; align-items: center;">Отменен</div>')
+        status_text = None
+        status_color = None
+        text_color = "black"
+        i = 0
+        for el in Order.STATUS_CHOICE:
+            if el[0] == obj.status:
+                status_text = el[1]
+                status_color = Order.STATUS_COLORS[i][1]
+                break
+            i += 1
+
+        if obj.status in (Order.STATUS_CHOICE[0][0], Order.STATUS_CHOICE[2][0]):
+            text_color = "white"
+
+        return format_html(f'<div style="width:7rem; background-color: {status_color}; display: flex; '
+                           f'justify-content: center; align-items: center; color: {text_color}">{status_text}</div>')
 
     status_color.allow_tags = True
     status_color.short_description = "Статус"

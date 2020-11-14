@@ -169,6 +169,10 @@ class Order(models.Model):
                      (2, "В обработке"),
                      (3, "Выполнен"),
                      (4, "Отменен"))
+    STATUS_COLORS = ((1, "red"),
+                     (2, "yellow"),
+                     (3, "green"),
+                     (4, "grey"))
     date = models.DateTimeField("Дата", null=True, blank=True)
     total_price = models.FloatField("Сумма", null=True, blank=True)
     customer_name = models.CharField("Имя", max_length=20)
