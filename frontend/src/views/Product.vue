@@ -65,7 +65,10 @@
           </div>
           <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
           <div class="btn" @click="toCard" v-if="!isUnavailable">{{ getStatusProduct }}</div>
-          <div class="preorder" v-if="statusProduct">Поставка ожидается 20 декабря 2020 года!</div>
+          <div class="preorder" v-if="statusProduct">
+            Отправка этого товара будет ориентировочно 20-го декабря.
+            Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
+          </div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description }}</div>
           </div>

@@ -252,4 +252,8 @@ class OrderItem(models.Model):
 @receiver(post_save, sender=OrderItem)
 def update_calculated_fields(sender, instance, **kwargs):
 	cost_product = instance.cost_product_calc()
+	instance_id = str(instance.order).split(' ')[1]
+	order = Order.objects.get(id=instance_id)
+	order.preorder = instance.preorder
+	order.save()
 	sender.objects.filter(pk=instance.pk).update(cost_product=cost_product)
