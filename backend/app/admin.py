@@ -57,12 +57,11 @@ class OrderItemInline(admin.TabularInline):
     extra = 0
 
 
-
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id_order", "status_color", "format_datetime",
-        "total_price_fix", "customer", "customer_phone", "delivery", "payment")
-    list_filter = ("status",)
+        "total_price_fix", "customer", "customer_phone", "delivery", "payment", "preorder")
+    list_filter = ("status", "preorder",)
     exclude = ('total_price',)
     inlines = [
         OrderItemInline,
@@ -80,7 +79,7 @@ class OrderAdmin(admin.ModelAdmin):
                 break
             i += 1
 
-        if obj.status in (Order.STATUS_CHOICE[0][0], Order.STATUS_CHOICE[2][0]):
+        if obj.status in (Order.STATUS_CHOICE[0][0], Order.STATUS_CHOICE[2][0], Order.STATUS_CHOICE[3][0]):
             text_color = "white"
 
         return format_html(f'<div style="width:7rem; background-color: {status_color}; display: flex; '
@@ -123,7 +122,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class ProductAvailabilityAdmin(admin.ModelAdmin):
-    list_display = ("product", "quantity", "size")
+    list_display = ("product", "quantity", "size", "preorder")
+    list_editable = ['preorder']
     list_filter = ("product",)
 
 

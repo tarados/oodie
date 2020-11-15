@@ -8,18 +8,15 @@
       <div class="row" v-if="this.currentProduct">
         <div class="item left">
           <div class="item-left">
-<!--            <div class="image-container">-->
-              <vueper-slides
-                  :touchable="false"
-                  :bullets="false"
-                  :slide-ratio="841 / 561"
-                  :initSlide="imageIndex"
-                  ref="vueperslides1"
-              >
-                <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
-              </vueper-slides>
-<!--            </div>-->
-
+            <vueper-slides
+                :touchable="false"
+                :bullets="false"
+                :slide-ratio="841 / 561"
+                :initSlide="imageIndex"
+                ref="vueperslides1"
+            >
+              <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+            </vueper-slides>
           </div>
 
           <div class="item-left-slider">
@@ -67,7 +64,8 @@
             <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
           </div>
           <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
-          <div class="btn" @click="toCard" v-if="!isUnavailable">в корзину</div>
+          <div class="btn" @click="toCard" v-if="!isUnavailable">{{ getStatusProduct }}</div>
+          <div class="preorder" v-if="statusProduct">Поставка ожидается 20 декабря 2020 года!</div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description }}</div>
           </div>
@@ -93,6 +91,7 @@ export default {
       imageIndex: 0,
       size: 0,
       availabilities: [],
+      statusProduct: null,
       visibleCard: true,
       slides: [],
       hideSize: false,
@@ -118,7 +117,6 @@ export default {
       } catch (TypeError) {
         return {};
       }
-
     },
     currentCategory() {
       try {
@@ -134,6 +132,17 @@ export default {
       let num = 0;
       this.currentProduct.availability.forEach(el => num += el.quantity)
       return num <= 0;
+    },
+    getStatusProduct() {
+      try {
+        if (this.availabilities[this.size].preorder) {
+          return 'Предзаказ'
+        } else {
+          return 'В корзину'
+        }
+      } catch (TypeError) {
+        return ''
+      }
     }
   },
   methods: {
@@ -150,7 +159,7 @@ export default {
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
         this.hideSize = true;
       }
-
+      this.statusProduct = this.availabilities[0].preorder;
     },
     showImage(index) {
       this.imageIndex = index;
@@ -159,13 +168,15 @@ export default {
       const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
         "size": "",
         "quantity": "0",
+        "preorder": false
       };
       const productToCard = {
         "id": this.currentProduct.id,
-        "title": this.currentProduct.title,
+        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.statusProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
         "availability": availability.quantity,
+        "preorder": availability.preorder,
         "size": availability.size,
         "image": this.currentProduct.image_list[this.imageIndex],
       };
@@ -179,12 +190,22 @@ export default {
     },
     select(index) {
       this.size = index;
+      this.availabilities[index].preorder ? this.statusProduct = true : this.statusProduct = false;
     },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
         this.$store.dispatch("changeVisibleBasket");
       }
-    },
+    }
+  },
+  watch: {
+    size: function () {
+      if (this.availabilities[this.size].preorder) {
+        this.statusProduct = true
+      } else {
+        this.statusProduct = false
+      }
+    }
   },
   mounted() {
     this.loadProduct();
@@ -389,6 +410,11 @@ export default {
   letter-spacing: 0.04em;
 }
 
+.preorder {
+  color: #d24e49;
+  margin: 20px 0;
+}
+
 .product-category {
   display: inline-flex;
   align-items: baseline;
@@ -503,7 +529,6 @@ export default {
   /*.item-left-slider {*/
   /*  display: none;*/
   /*}*/
-
   .viewer {
     display: contents;
   }

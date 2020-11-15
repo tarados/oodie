@@ -200,7 +200,8 @@ export default {
           'id': product.id,
           'price': product.price,
           'quantity': product.quantity,
-          'size': product.size
+          'size': product.size,
+          'preorder': product.preorder
         });
       });
       let order = {
