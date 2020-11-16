@@ -60,9 +60,10 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id_order", "status_color", "format_datetime",
-        "total_price_fix", "customer", "customer_phone", "delivery", "payment")
-    list_filter = ("status",)
-    exclude = ('total_price', 'get_fields',)
+        "total_price_fix", "customer", "customer_phone", "delivery", "payment", "preorder")
+    list_filter = ("status", "preorder",)
+    exclude = ('total_price',)
+    date_hierarchy = 'date'
     inlines = [
         OrderItemInline,
     ]
@@ -78,18 +79,22 @@ class OrderAdmin(admin.ModelAdmin):
         return [f for f in fields if f not in exclude_set]
 
     def status_color(self, obj):
-        if obj.status == 1:
-            return format_html('<div style="width:7rem; height:2rem; background-color: red; display: flex;'
-                               ' justify-content: center; align-items: center; color: white">Новый</div>')
-        elif obj.status == 2:
-            return format_html('<div style="width:7rem; height:2rem; background-color: yellow; display: flex;'
-                               ' justify-content: center; align-items: center;">В обработке</div>')
-        elif obj.status == 3:
-            return format_html('<div style="width:7rem; height:2rem; background-color: green; display: flex;'
-                               ' justify-content: center; align-items: center; color: white">Выполнен</div>')
-        else:
-            return format_html('<div style="width:7rem; height:2rem; background-color: grey; display: flex;'
-                               ' justify-content: center; align-items: center;">Отменен</div>')
+        status_text = None
+        status_color = None
+        text_color = "black"
+        i = 0
+        for el in Order.STATUS_CHOICE:
+            if el[0] == obj.status:
+                status_text = el[1]
+                status_color = Order.STATUS_COLORS[i][1]
+                break
+            i += 1
+
+        if obj.status in (Order.STATUS_CHOICE[0][0], Order.STATUS_CHOICE[2][0], Order.STATUS_CHOICE[3][0]):
+            text_color = "white"
+
+        return format_html(f'<div style="width:7rem; background-color: {status_color}; display: flex; '
+                           f'justify-content: center; align-items: center; color: {text_color}">{status_text}</div>')
 
     status_color.allow_tags = True
     status_color.short_description = "Статус"
@@ -128,7 +133,8 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class ProductAvailabilityAdmin(admin.ModelAdmin):
-    list_display = ("product", "quantity", "size")
+    list_display = ("product", "quantity", "size", "preorder")
+    list_editable = ['preorder']
     list_filter = ("product",)
 
 

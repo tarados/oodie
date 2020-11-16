@@ -64,6 +64,11 @@
         <span v-text="totalPrice"></span>
       </div>
     </div>
+    <div class="container" v-if="isPreorder">
+      <p>В Вашей корзине есть товар по предзаказу!
+      Отправка этого товара будет ориентировочно 20-го декабря. Мы свяжемся с вами когда товар появится
+        в наличии для подтверждения и отправим ваш заказ в первую очередь.</p>
+    </div>
     <div class="container checkout-buttons">
         <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
         <router-link
@@ -88,7 +93,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["totalPrice"])
+    ...mapGetters(["totalPrice"]),
+    isPreorder() {
+      let el = false
+      this.$store.state.productsStore.cardProducts.forEach(product => {
+        if (product.preorder) {
+          el = true
+        }
+      })
+      return el
+    }
   },
   methods: {
     needShowSize(product) {
@@ -122,6 +136,7 @@ export default {
   },
   mounted() {
     this.basketVisible();
+    console.log(this.$store.state.productsStore.cardProducts);
   }
 }
 </script>
@@ -238,6 +253,14 @@ img {
 .remove:hover {
   opacity: 0.6;
   transition: all 0.7s ease;
+}
+
+p {
+  margin: 25px 0;
+  color: #f1410b;
+  letter-spacing: 0.96px;
+  line-height: 25px;
+  text-transform: uppercase;
 }
 
 .price {

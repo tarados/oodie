@@ -71,6 +71,7 @@ def product(request, product_id):
 def order(request):
 	order_str = request.body.decode()
 	order_content = json.loads(order_str)
+	print(order_content)
 
 	order = Order(
 		date=datetime.datetime.now(),
@@ -87,6 +88,7 @@ def order(request):
 	order.save()
 
 	order_total_sum = 0
+	preorder = False
 	for order_item in order_content["products"]:
 		product = Product.objects.get(id=int(order_item["id"]))
 		if product.new_price is not None:
@@ -94,23 +96,21 @@ def order(request):
 		else:
 			price = product.price
 		size = Size.objects.get(name=order_item['size'])
-		# availabilities = ProductAvailability.objects.filter(product=product)
-		# for availability in availabilities:
-		# 	if availability.size.name == order_item['size']:
-		# 		new_quantity = availability.quantity - order_item['quantity']
-		# 		availability.quantity = new_quantity
-		# 	availability.save()
 		order_item = OrderItem(
 			order=order,
 			product=product,
 			quantity=order_item["quantity"],
 			price=price,
 			size=size,
+			preorder=order_item["preorder"],
 			cost_product=order_item["price"] * order_item["quantity"]
 		)
+		if order_item.preorder:
+			preorder = order_item.preorder
 		order_item.save()
 		order_total_sum = order_total_sum + order_item.cost_product
 	order.total_price = order_total_sum
+	order.preorder = preorder
 	order.save()
 
 	if not settings.DEBUG:
