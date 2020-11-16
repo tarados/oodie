@@ -62,7 +62,7 @@ class OrderAdmin(admin.ModelAdmin):
         "id_order", "status_color", "format_datetime",
         "total_price_fix", "customer", "customer_phone", "delivery", "payment", "preorder")
     list_filter = ("status", "preorder",)
-    exclude = ('total_price',)
+    exclude = ('total_price', 'preorder')
     date_hierarchy = 'date'
     inlines = [
         OrderItemInline,
