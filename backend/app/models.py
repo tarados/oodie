@@ -249,6 +249,13 @@ class OrderItem(models.Model):
 		return 'Заказ № %s для %s' % (self.order.id, self.order.customer_name)
 
 
+class Invoice(Order):
+	class Meta:
+		proxy = True
+		verbose_name = 'ТТН Новой почты'
+		verbose_name_plural = 'ТТН Новой почты'
+
+
 @receiver(post_save, sender=OrderItem)
 def update_calculated_fields(sender, instance, **kwargs):
 	cost_product = instance.cost_product_calc()
