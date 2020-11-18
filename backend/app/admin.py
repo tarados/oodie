@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize, Invoice
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
@@ -136,6 +136,17 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
     list_display = ("product", "quantity", "size", "preorder")
     list_editable = ['preorder']
     list_filter = ("product",)
+
+
+@admin.register(Invoice)
+class SaleSummaryAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/invoice.html'
+
+    class Media:
+        css = {
+            "all": ("admin/css/my_style.css",)
+        }
+        js = ("admin/js/my_code.js",)
 
 
 admin.site.register(Product, ProductAdmin)
