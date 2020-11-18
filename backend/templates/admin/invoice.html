@@ -3,170 +3,166 @@
 {% extends "admin/change_list.html" %}
 
 {% block content_title %}
-  <h1> ТТН Новой почты </h1>
+    <h1> ТТН Новой почты </h1>
 {% endblock %}
 
 {% block result_list %}
-  <div class="wrapper">
-    <div class="container">
-      <div class="container__left">
-        <div class="recipient">
-          <div class="recipient__title">
-            <h2>Получатель</h2>
-          </div>
-          <div class="recipient__label">
-            <span>Получатель</span>
-          </div>
-          <div class="recipient__type">
-            <input type="text" value="">
-          </div>
-          <div class="recipient__label">
-            <span>Контактное лицо</span>
-          </div>
-          <div class="recipient__name">
-            <input type="text" value="">
-          </div>
-          <div class="recipient__label">
-            <span>Телефон</span>
-          </div>
-          <div class="recipient__phone">
-            <input type="text" value="">
-          </div>
-          <div class="recipient__label">
-            <span>Область</span>
-          </div>
-          <div class="recipient__area">
-            <input type="text" value="">
-          </div>
-          <div class="recipient__label">
-            <span>Город</span>
-          </div>
-          <div class="recipient__city">
-            <input type="text" value="">
-          </div>
-          <div class="recipient__label">
-            <span>Отделение</span>
-          </div>
-          <div class="recipient__office">
-            <input type="text" value="">
-          </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="container__item">
+                <div class="container__title">
+                    <h2>Получатель</h2>
+                </div>
+                <div class="container__label">
+                    <span>Получатель</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Контактное лицо</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Телефон</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Область</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Город</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Отделение</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+            </div>
+            <div class="container__item">
+                <div class="container__title">
+                    <h2>Параметры отправления</h2>
+                </div>
+                <div class="container__label">
+                    <span>Тип отправления</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Вес</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Общий объем отправления</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Количество мест</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Объявленная стоимость</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Описание отправления</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+            </div>
+            <div class="container__item">
+                <div class="container__title">
+                    <h2>Дополнительно</h2>
+                </div>
+                <div class="container__label">
+                    <span>Дата отправки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Предпочтительная дата доставки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Внутренний номер заказа клиента</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Номер упаковки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Дополнительная информация об отправлении</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+            </div>
+            <div class="container__item">
+                <div class="container__title">
+                    <h2>Оплата</h2>
+                </div>
+                <div class="container__label">
+                    <span>Плательщик доставки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Форма оплаты</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Обратная доставка</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Сумма обратной доставки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+                <div class="container__label">
+                    <span>Плательщик обратной доставки</span>
+                </div>
+                <div class="container__context">
+                    <input type="text" value="">
+                </div>
+            </div>
         </div>
-        <div class="extra">
-          <div class="extra__title">
-            <h2>Дополнительно</h2>
-          </div>
-          <div class="extra__label">
-            <span>Дата отправки</span>
-          </div>
-          <div class="extra__date">
-            <input type="text" value="">
-          </div>
-          <div class="extra__label">
-            <span>Предпочтительная дата доставки</span>
-          </div>
-          <div class="extra__send-date">
-            <input type="text" value="">
-          </div>
-          <div class="extra__label">
-            <span>Внутренний номер заказа клиента</span>
-          </div>
-          <div class="extra__order-number">
-            <input type="text" value="">
-          </div>
-          <div class="extra__label">
-            <span>Номер упаковки</span>
-          </div>
-          <div class="extra__number-package">
-            <input type="text" value="">
-          </div>
-          <div class="extra__label">
-            <span>Дополнительная информация об отправлении</span>
-          </div>
-          <div class="extra__extra-info">
-            <input type="text" value="">
-          </div>
-        </div>
-      </div>
-      <div class="container__right">
-        <div class="options">
-          <div class="options__title">
-            <h2>Параметры отправления</h2>
-          </div>
-          <div class="options__label">
-            <span>Тип отправления</span>
-          </div>
-          <div class="options__type">
-            <input type="text" value="">
-          </div>
-          <div class="options__label">
-            <span>Вес</span>
-          </div>
-          <div class="options__weight">
-            <input type="text" value="">
-          </div>
-          <div class="options__label">
-            <span>Общий объем отправления</span>
-          </div>
-          <div class="options__volume">
-            <input type="text" value="">
-          </div>
-          <div class="options__label">
-            <span>Количество мест</span>
-          </div>
-          <div class="options__amount">
-            <input type="text" value="">
-          </div>
-          <div class="options__label">
-            <span>Объявленная стоимость</span>
-          </div>
-          <div class="options__cost">
-            <input type="text" value="">
-          </div>
-          <div class="options__label">
-            <span>Описание отправления</span>
-          </div>
-          <div class="options__description">
-            <input type="text" value="">
-          </div>
-        </div>
-        <div class="payment">
-          <div class="payment__title">
-            <h2>Оплата</h2>
-          </div>
-          <div class="payment__label">
-            <span>Плательщик доставки</span>
-          </div>
-          <div class="payment__type">
-            <input type="text" value="">
-          </div>
-          <div class="payment__label">
-            <span>Форма оплаты</span>
-          </div>
-          <div class="payment__payment-form">
-            <input type="text" value="">
-          </div>
-          <div class="payment__label">
-            <span>Обратная доставка</span>
-          </div>
-          <div class="payment__return-shipping">
-            <input type="text" value="">
-          </div>
-          <div class="payment__label">
-            <span>Сумма обратной доставки</span>
-          </div>
-          <div class="payment__cost-shipping">
-            <input type="text" value="">
-          </div>
-          <div class="payment__label">
-            <span>Плательщик обратной доставки</span>
-          </div>
-          <div class="payment__shipping-payer">
-            <input type="text" value="">
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block pagination %}{% endblock %}
