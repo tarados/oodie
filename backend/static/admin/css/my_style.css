@@ -31,3 +31,7 @@ input {
     border-top: 1px solid #cccccc;
     padding-top: 30px;
 }
+
+.button {
+    margin-right: 35px;
+}
