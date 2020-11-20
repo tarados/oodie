@@ -139,7 +139,7 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
 
 
 @admin.register(Invoice)
-class SaleSummaryAdmin(admin.ModelAdmin):
+class invoiceAdmin(admin.ModelAdmin):
     change_list_template = 'admin/invoice.html'
 
     class Media:
