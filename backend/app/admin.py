@@ -71,12 +71,12 @@ class OrderAdmin(admin.ModelAdmin):
     class Media:
         css = {"all": ("admin/css/my_style.css",)}
 
-    def get_fields(self, request, obj):
-        fields = list(super(OrderAdmin, self).get_fields(request, obj))
-        exclude_set = set()
-        if obj:  # obj will be None on the add page, and something on change pages
-            exclude_set.add('invoice_number')
-        return [f for f in fields if f not in exclude_set]
+    # def get_fields(self, request, obj):
+    #     fields = list(super(OrderAdmin, self).get_fields(request, obj))
+    #     exclude_set = set()
+    #     if obj:  # obj will be None on the add page, and something on change pages
+    #         exclude_set.add('invoice_number')
+    #     return [f for f in fields if f not in exclude_set]
 
     def status_color(self, obj):
         status_text = None
