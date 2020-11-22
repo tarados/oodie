@@ -27,10 +27,20 @@
           <span>Телефон:</span>
         </div>
         <div class="form-content phone">
-          <input
-              v-model="phone"
-              :class="{invalid: invalidPhone}"
-          >
+          <div class="form-content__phone">
+            <input
+                v-model="country"
+                class="country"
+                @input="handleUserInputCountry"
+            >
+            <input
+                v-model="phone"
+                placeholder="__-___-__-__"
+                :class="{invalid: invalidPhone}"
+                class="phone-context"
+                @input="handleUserInput"
+            >
+          </div>
           <small v-show="invalidPhone">
             Введите номер телефона
           </small>
@@ -151,6 +161,7 @@ export default {
       "userSurname": "",
       "adress": '',
       "city": '',
+      "country": '+(380)',
       "postOffice": '',
       "phone": "",
       "email": '',
@@ -208,7 +219,7 @@ export default {
         'products': productsList,
         'username': this.userName,
         'userSurname': this.userSurname,
-        'phone': this.phone,
+        'phone': this.country + this.phone,
         'payment': this.selectedPayment,
         'delivery': this.deliveryMethod,
         'city': this.city,
@@ -272,6 +283,15 @@ export default {
     setWarehouse(warehouse) {
       this.postOffice = warehouse;
       this.invalidOffice = false;
+    },
+    handleUserInput(e) {
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+      this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
+          + (replacedInput[3] ? '-' + replacedInput[3]: '') + (replacedInput[4] ?'-' + replacedInput[4] : '');
+    },
+    handleUserInputCountry(e) {
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})(\d{0,1})/);
+      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] +(replacedInput[3] ? replacedInput[3] +')' : '');
     }
   },
   watch: {
@@ -405,6 +425,22 @@ h2 {
 
 .form-content {
   height: 100%;
+}
+
+.form-content__phone {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.form-content__phone input.country {
+  border-right: none;
+  width: 15%;
+}
+
+.form-content__phone input.phone-context {
+  border-left: none;
+  margin: 0;
+  padding: 0;
 }
 
 input {
