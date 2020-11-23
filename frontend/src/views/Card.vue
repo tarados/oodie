@@ -136,7 +136,6 @@ export default {
   },
   mounted() {
     this.basketVisible();
-    console.log(this.$store.state.productsStore.cardProducts);
   }
 }
 </script>

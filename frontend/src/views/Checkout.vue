@@ -31,6 +31,7 @@
             <input
                 v-model="country"
                 class="country"
+                :class="{invalid: invalidPhone}"
                 @input="handleUserInputCountry"
             >
             <input
@@ -41,8 +42,11 @@
                 @input="handleUserInput"
             >
           </div>
-          <small v-show="invalidPhone">
+          <small v-if="!$v.phone.required && $v.phone.minLength && invalidPhone">
             Введите номер телефона
+          </small>
+          <small v-show="$v.phone.required && !$v.phone.minLength">
+            Номер включает в себя 12 цифр. Сейчас их {{phone.length}}
           </small>
         </div>
         <div class="form-title">
@@ -142,7 +146,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {required, email} from 'vuelidate/lib/validators';
+import {required, email, minLength} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/send';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
@@ -182,7 +186,7 @@ export default {
     userSurname: {required},
     selectedPayment: {required},
     deliveryMethod: {required},
-    phone: {required},
+    phone: {required, minLength: minLength(12)},
     email: {email}
   },
   computed: {
