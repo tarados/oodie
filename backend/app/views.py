@@ -133,8 +133,3 @@ def novaposhta_api_warehouse(request):
         name = request.GET.get('name', '')
         result = get_warehouses(city_id, name)
     return HttpResponse(json.dumps(result), content_type='application/json')
-
-
-def invoice(request):
-    print('fdhd')
-    return redirect('/')

@@ -7,5 +7,4 @@ urlpatterns = [
 	path('cities', novaposhta_api_city),
 	path('warehouse', novaposhta_api_warehouse),
 	path('order', order),
-	path('invoice', invoice),
 ]

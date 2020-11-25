@@ -214,7 +214,9 @@ export default {
         'payment': this.selectedPayment,
         'delivery': this.deliveryMethod,
         'city': this.city,
+        'city-ref': this.cityRef,
         'post-office': this.postOffice,
+        'post-office-ref': this.postOfficeRef,
         'others': this.adress,
         'comment': this.comment
       };
@@ -257,7 +259,7 @@ export default {
     },
     searchWarehouse(input) {
       let warehouseList = this.allWarehouses.map(warehouse => {
-        return warehouse
+        return warehouse.warehouse
       });
       if (input.length < 1) {
         return []
@@ -273,8 +275,7 @@ export default {
       this.invalidCity = false;
     },
     setWarehouse(warehouse) {
-      this.postOfficeRef = this.allWarehouses.find(el => el.name === warehouse).id;
-      console.log(this.postOfficeRef);
+      this.postOfficeRef = this.allWarehouses.find(el => el.warehouse === warehouse).warehouseRef;
       this.postOffice = warehouse;
       this.invalidOffice = false;
     }
