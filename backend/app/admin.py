@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize, Invoice
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
@@ -69,14 +69,10 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
     class Media:
-        css = {"all": ("admin/css/my_style.css",)}
-
-    def get_fields(self, request, obj):
-        fields = list(super(OrderAdmin, self).get_fields(request, obj))
-        exclude_set = set()
-        if obj:  # obj will be None on the add page, and something on change pages
-            exclude_set.add('invoice_number')
-        return [f for f in fields if f not in exclude_set]
+        css = {
+            "all": ("admin/css/my_style.css",)
+        }
+        js = ("admin/js/my_code.js",)
 
     def status_color(self, obj):
         status_text = None
@@ -136,17 +132,6 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
     list_display = ("product", "quantity", "size", "preorder")
     list_editable = ['preorder']
     list_filter = ("product",)
-
-
-@admin.register(Invoice)
-class invoiceAdmin(admin.ModelAdmin):
-    change_list_template = 'admin/invoice.html'
-
-    class Media:
-        css = {
-            "all": ("admin/css/my_style.css",)
-        }
-        js = ("admin/js/my_code.js",)
 
 
 admin.site.register(Product, ProductAdmin)

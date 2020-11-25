@@ -151,7 +151,9 @@ export default {
       "userSurname": localStorage.getItem('userSurname') || "",
       "adress": '',
       "city": '',
+      "cityRef": '',
       "postOffice": '',
+      "postOfficeRef": '',
       "phone": localStorage.getItem('phone') || "",
       "email": '',
       "comment": '',
@@ -266,10 +268,13 @@ export default {
       });
     },
     setCity(city) {
+      this.cityRef = this.allCities.find(el => el.name === city).id;
       this.city = city;
       this.invalidCity = false;
     },
     setWarehouse(warehouse) {
+      this.postOfficeRef = this.allWarehouses.find(el => el.name === warehouse).id;
+      console.log(this.postOfficeRef);
       this.postOffice = warehouse;
       this.invalidOffice = false;
     }

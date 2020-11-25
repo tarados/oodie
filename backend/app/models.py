@@ -1,9 +1,8 @@
 from django.db import models
 from django.dispatch import receiver
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save
 
 
 class Category(models.Model):
@@ -247,13 +246,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return 'Заказ № %s для %s' % (self.order.id, self.order.customer_name)
-
-
-class Invoice(Order):
-    class Meta:
-        proxy = True
-        verbose_name = 'ТТН Новой почты'
-        verbose_name_plural = 'ТТН Новой почты'
 
 
 @receiver(post_save, sender=OrderItem)
