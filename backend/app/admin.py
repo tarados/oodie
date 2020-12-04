@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.utils.html import format_html
-
+from .novaposhta_api import invoice
 from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 from django import forms
+from django.contrib import messages
+from django.utils.translation import ngettext
 
 
 @register.inclusion_tag('admin/submit_line.html', takes_context=True)
@@ -67,12 +69,32 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [
         OrderItemInline,
     ]
+    actions = ['make_published']
 
     class Media:
         css = {
             "all": ("admin/css/my_style.css",)
         }
         js = ("admin/js/my_code.js",)
+
+    def make_published(self, request, queryset):
+        order_id = queryset[0].pk
+        invoice(order_id)
+        updated = queryset.update(status='3')
+        self.message_user(request, ngettext(
+            '%d story was successfully marked as published.',
+            '%d stories were successfully marked as published.',
+            updated,
+        ) % updated, messages.SUCCESS)
+    make_published.short_description = "Создать накладную"
+
+    def get_fields(self, request, obj):
+        fields = list(super(OrderAdmin, self).get_fields(request, obj))
+        exclude_set = set()
+        if obj:  # obj will be None on the add page, and something on change pages
+            # exclude_set.add('post_office_ref')
+            exclude_set.add('city_ref')
+        return [f for f in fields if f not in exclude_set]
 
     def status_color(self, obj):
         status_text = None

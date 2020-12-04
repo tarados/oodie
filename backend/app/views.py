@@ -81,6 +81,8 @@ def order(request):
         delivery=order_content["delivery"],
         payment=order_content["payment"],
         city=order_content["city"],
+        city_ref=order_content["city-ref"],
+        post_office_ref=order_content["post-office-ref"],
         post_office=order_content["post-office"],
         address=order_content["others"],
         comment=order_content["comment"]
@@ -133,3 +135,4 @@ def novaposhta_api_warehouse(request):
         name = request.GET.get('name', '')
         result = get_warehouses(city_id, name)
     return HttpResponse(json.dumps(result), content_type='application/json')
+
