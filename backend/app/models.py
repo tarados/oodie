@@ -192,8 +192,9 @@ class Order(models.Model):
     volume_general = models.CharField("Общий объем, куб. м.", max_length=10, null=True, blank=True)
     weight = models.CharField("Вес фактический, кг.", max_length=10, null=True, blank=True)
     cost = models.CharField("Объявленная стоимость, грн.", max_length=10, null=True, blank=True)
-    invoice_number = models.CharField("Номер накладной", max_length=250, null=True, blank=True)
     date_send = models.DateField("Дата отправки", null=True, blank=True)
+    invoice_number = models.CharField("Номер накладной", max_length=250, null=True, blank=True)
+    cost_on_site = models.CharField("Стоимость доставки, грн.", max_length=10, null=True, blank=True)
     status = models.IntegerField("Статус", choices=STATUS_CHOICE, default=1)
     preorder = models.BooleanField(verbose_name='Предзаказ', default=False)
 

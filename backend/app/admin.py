@@ -78,12 +78,13 @@ class OrderAdmin(admin.ModelAdmin):
         js = ("admin/js/my_code.js",)
 
     def make_published(self, request, queryset):
-        order_id = queryset[0].pk
-        invoice(order_id)
+        for i in range(0, len(queryset)):
+            order_id = queryset[i].pk
+            invoice(order_id)
         updated = queryset.update(status='3')
         self.message_user(request, ngettext(
-            '%d story was successfully marked as published.',
-            '%d stories were successfully marked as published.',
+            '%d накладная успешно создана.',
+            '%d накладные успешно созданы.',
             updated,
         ) % updated, messages.SUCCESS)
     make_published.short_description = "Создать накладную"

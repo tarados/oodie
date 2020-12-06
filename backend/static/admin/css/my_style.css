@@ -1,0 +1,18 @@
+div.submit-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.submit-row .deletelink-box {
+    order: 1;
+}
+
+div.submit-row .default {
+    order: 3;
+}
+
+div.submit-row input {
+    order: 2;
+    background-color: #417690;
+    text-transform: uppercase;
+}
