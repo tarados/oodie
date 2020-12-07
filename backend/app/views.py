@@ -10,6 +10,7 @@ from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
+from .novaposhta_api import invoice
 
 
 def products(request):
@@ -135,4 +136,11 @@ def novaposhta_api_warehouse(request):
         name = request.GET.get('name', '')
         result = get_warehouses(city_id, name)
     return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+def novaposhta_api_invoice(request, order_id):
+    print(order_id)
+    # invoice(order_id)
+    return JsonResponse({'success': True})
+
 
