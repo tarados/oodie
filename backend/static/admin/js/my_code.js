@@ -1,18 +1,16 @@
 $(document).ready(function () {
     let $ = django.jQuery;
-    let order_id = $(".breadcrumbs > a:last-child ").text();
-    console.log(order_id);
+    let content = $(".breadcrumbs").text();
+    let order_id = Number(content.match(/\d+/)[0]);
     $(".invoice").click(function () {
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/edit_favorites/",
-        //     data: {
-        //         'video': $('#test').val() // from form
-        //     },
-        //     success: function () {
-        //         $('#message').html("<h2>Contact Form Submitted!</h2>")
-        //     }
-        // });
+        console.log(order_id);
+        $.ajax({
+            type: "GET",
+            url: "app/invoice/2",
+            success: function () {
+                $('#message').html("<h2>Contact Form Submitted!</h2>")
+            }
+        });
         console.log('ddd');
     })
 })
