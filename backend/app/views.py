@@ -138,10 +138,9 @@ def novaposhta_api_warehouse(request):
     return HttpResponse(json.dumps(result), content_type='application/json')
 
 
-def novaposhta_api_invoice(request, order_id):
-    print(request.GET)
-    print(order_id)
-    # invoice(order_id)
+def novaposhta_api_invoice(request):
+    order_id = int(request.GET.get('order_id', ''))
+    invoice(order_id)
     return JsonResponse({'success': True})
 
 

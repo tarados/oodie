@@ -109,6 +109,7 @@ def invoice(order_id):
 	try:
 		response = requests.post(API_URL, json=data)
 		response_data = response.json()
+		print(response_data)
 		if response_data['success']:
 			for el in response_data['data']:
 				order.invoice_number = el['IntDocNumber']

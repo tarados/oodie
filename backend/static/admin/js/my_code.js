@@ -1,16 +1,17 @@
 $(document).ready(function () {
     let $ = django.jQuery;
-    let content = $(".breadcrumbs").text();
-    let order_id = Number(content.match(/\d+/)[0]);
     $(".invoice").click(function () {
-        console.log(order_id);
+        let content = $(".breadcrumbs").text();
+        let order_id = Number(content.match(/\d+/)[0]);
         $.ajax({
-            type: "GET",
-            url: "app/invoice/2",
-            success: function () {
-                $('#message').html("<h2>Contact Form Submitted!</h2>")
+            url: "http://localhost:8000/app/invoice",
+            method: 'get',
+            dataType: 'json',
+            data: {order_id: order_id},
+            success: function(){
+                alert("data");
             }
         });
-        console.log('ddd');
+        console.log(order_id);
     })
 })
