@@ -2,6 +2,7 @@
 
 import requests
 from .models import Order
+import re
 
 API_URL = 'https://api.novaposhta.ua/v2.0/json/'
 
@@ -67,8 +68,7 @@ def get_warehouses(city_id, name):
 def invoice(order_id):
 	order = Order.objects.get(id=order_id)
 	recipient_name = '%s %s' % (order.customer_surname, order.customer_name)
-	customer_phone = order.customer_phone.replace('-', '')
-	recipient_phone = '+38%s' % customer_phone
+	customer_phone = "".join(re.split('[()-]+', order.customer_phone))
 	date_send = order.date_send
 	if order.payment == "Наложенный платеж":
 		payment = "Cash"
@@ -102,18 +102,43 @@ def invoice(order_id):
 			"RecipientFlat": "",
 			"RecipientName": recipient_name,
 			"RecipientType": "PrivatePerson",
-			"RecipientsPhone": recipient_phone,
+			"RecipientsPhone": customer_phone,
 			"DateTime": date_send.strftime("%d.%m.%Y")
 		}
 	}
+	success = False
 	try:
 		response = requests.post(API_URL, json=data)
 		response_data = response.json()
-		print(response_data)
 		if response_data['success']:
 			for el in response_data['data']:
 				order.invoice_number = el['IntDocNumber']
 				order.cost_on_site = el['CostOnSite']
+			order.save()
+			success = True
 	except requests.exceptions.HTTPError:
 		pass
-	order.save()
+	result = {
+		'success': success,
+		'response': response_data
+	}
+	return result
+
+
+def get_errors():
+	data = {
+		"apiKey": "cd0fe6f50623590fa01e0ad0a88aaaad",
+		"modelName": "CommonGeneral",
+		"calledMethod": "getMessageCodeText",
+		"methodProperties": {}
+	}
+	error_codes = []
+	try:
+		response = requests.post(API_URL, json=data)
+		response_data = response.json()
+		if response_data['success']:
+			for el in response_data['data']:
+				error_codes.append(el)
+	except requests.exceptions.HTTPError:
+		pass
+	return error_codes

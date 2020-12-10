@@ -3,14 +3,14 @@ import json
 import datetime
 
 from django.conf import settings
-from django.shortcuts import redirect
+from django.contrib import messages
 
 from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
-from .novaposhta_api import invoice
+from .novaposhta_api import invoice, get_errors
 
 
 def products(request):
@@ -140,7 +140,19 @@ def novaposhta_api_warehouse(request):
 
 def novaposhta_api_invoice(request):
     order_id = int(request.GET.get('order_id', ''))
-    invoice(order_id)
+    result = invoice(order_id)
+    if not result['success']:
+        errors_text = []
+        list_errors = list(get_errors())
+        for el in result['response']['errorCodes']:
+            for error in list_errors:
+                if el == error['MessageCode']:
+                    if error['MessageDescriptionRU'] is not None:
+                        errors_text.append(error['MessageDescriptionRU'])
+                    else:
+                        errors_text.append(error['MessageText'])
+        message = ', '.join(errors_text)
+        messages.error(request, message)
     return JsonResponse({'success': True})
 
 
