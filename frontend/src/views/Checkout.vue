@@ -27,12 +27,26 @@
           <span>Телефон:</span>
         </div>
         <div class="form-content phone">
-          <input
-              v-model="phone"
-              :class="{invalid: invalidPhone}"
-          >
-          <small v-show="invalidPhone">
+          <div class="form-content__phone">
+            <input
+                v-model="country"
+                class="country"
+                :class="{invalid: invalidPhone}"
+                @input="handleUserInputCountry"
+            >
+            <input
+                v-model="phone"
+                placeholder="__-___-__-__"
+                :class="{invalid: invalidPhone}"
+                class="phone-context"
+                @input="handleUserInput"
+            >
+          </div>
+          <small v-if="!$v.phone.required && $v.phone.minLength && invalidPhone">
             Введите номер телефона
+          </small>
+          <small v-show="$v.phone.required && !$v.phone.minLength">
+            Номер включает в себя 12 цифр. Сейчас их {{phone.length}}
           </small>
         </div>
         <div class="form-title">
@@ -132,7 +146,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {required, email} from 'vuelidate/lib/validators';
+import {required, email, minLength} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/send';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
@@ -147,14 +161,15 @@ export default {
       "deliveryMethod": "",
       "selectedPayment": '',
       "isVisible": true,
-      "userName": localStorage.getItem('userName') || "",
-      "userSurname": localStorage.getItem('userSurname') || "",
+      "userName": "",
+      "userSurname": "",
       "adress": '',
       "city": '',
+      "country": '+(380)',
       "cityRef": '',
       "postOffice": '',
       "postOfficeRef": '',
-      "phone": localStorage.getItem('phone') || "",
+      "phone": "",
       "email": '',
       "comment": '',
       "invalidName": false,
@@ -173,7 +188,7 @@ export default {
     userSurname: {required},
     selectedPayment: {required},
     deliveryMethod: {required},
-    phone: {required},
+    phone: {required, minLength: minLength(12)},
     email: {email}
   },
   computed: {
@@ -210,7 +225,7 @@ export default {
         'products': productsList,
         'username': this.userName,
         'userSurname': this.userSurname,
-        'phone': this.phone,
+        'phone': this.country + this.phone,
         'payment': this.selectedPayment,
         'delivery': this.deliveryMethod,
         'city': this.city,
@@ -278,6 +293,15 @@ export default {
       this.postOfficeRef = this.allWarehouses.find(el => el.warehouse === warehouse).warehouseRef;
       this.postOffice = warehouse;
       this.invalidOffice = false;
+    },
+    handleUserInput(e) {
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+      this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
+          + (replacedInput[3] ? '-' + replacedInput[3]: '') + (replacedInput[4] ?'-' + replacedInput[4] : '');
+    },
+    handleUserInputCountry(e) {
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})(\d{0,1})/);
+      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] +(replacedInput[3] ? replacedInput[3] +')' : '');
     }
   },
   watch: {
@@ -411,6 +435,22 @@ h2 {
 
 .form-content {
   height: 100%;
+}
+
+.form-content__phone {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.form-content__phone input.country {
+  border-right: none;
+  width: 15%;
+}
+
+.form-content__phone input.phone-context {
+  border-left: none;
+  margin: 0;
+  padding: 0;
 }
 
 input {

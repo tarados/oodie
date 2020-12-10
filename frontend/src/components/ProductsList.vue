@@ -6,6 +6,7 @@
                    :class="{product: large, brand: small}"
       >
         <img :src="product.image">
+        <div class="preorder-mark" v-if="isPreorder(product)">предзаказ</div>
         <h4>{{ product.title }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
@@ -50,11 +51,15 @@ export default {
       if (this.size === 'small') {
         this.small = true;
         this.large =false;
-        } else {
+      } else {
         this.small = false;
         this.large = true;
       }
-      }
+    },
+
+    isPreorder(product) {
+      return product.availability && product.availability[0] && product.availability[0].preorder;
+    }
   },
   mounted() {
     this.loadSize();
@@ -79,6 +84,7 @@ h4 {
 }
 
 .product {
+  position: relative;
   width: calc((100% / 12) * 6 - 20px);
   height: 100%;
   margin: 0 10px 0 10px;
@@ -124,8 +130,37 @@ h4 {
   text-decoration: line-through;
 }
 
+.preorder-mark {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 60%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  /*height: calc(5vmin + 10 * (100vw / 1838));*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  top: 74%;
+  left: 20%;
+}
+
+
 /*media queries*/
 @media screen and (max-width: 1240px) {
+  .product {
+    /*width: calc((100% / 12) * 4 - 20px);*/
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .preorder-mark {
+    top: 72%;
+  }
   .product {
     /*width: calc((100% / 12) * 4 - 20px);*/
   }
@@ -135,12 +170,41 @@ h4 {
   .brand {
     width: calc((100% / 12) * 6 - 20px);
   }
+
+  .preorder-mark {
+    top: 68%;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .preorder-mark {
+    top: 64%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 16px;
+  }
 }
 
 @media screen and (max-width: 620px) {
+  .preorder-mark {
+    top: 62%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 16px;
+  }
+
   .product,
   .brand {
     width: calc((100% / 12) * 6 - 20px);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .preorder-mark {
+    top: 70%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 16px;
   }
 }
 
