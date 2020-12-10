@@ -5,13 +5,12 @@ $(document).ready(function () {
         let content = $(".breadcrumbs").text();
         let order_id = Number(content.match(/\d+/)[0]);
         $.ajax({
-            url: "http://localhost:8000/app/invoice",
+            url: "/app/invoice",
             method: 'get',
             data: {order_id: order_id},
             success: function () {
                 location.reload();
             }
         });
-
     })
 })
