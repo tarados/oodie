@@ -606,6 +606,12 @@ textarea {
   }
 }
 
+@media screen and (max-width: 540px) {
+  .form-content__phone input.country {
+    width: 20%;
+  }
+}
+
 @media (max-width: 450px) {
   .submit-box {
     /*margin: 0 5%;*/
@@ -617,6 +623,22 @@ textarea {
 
   button span {
     font-size: 10px;
+  }
+
+  .form-content__phone input.country {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .form-content__phone input.country {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 300px){
+  .form-content__phone input.country {
+    width: 40%;
   }
 }
 
