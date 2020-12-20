@@ -31,8 +31,8 @@
             <img src="../assets/delivery.png">
           </div>
           <div class="info-title">
-            <h4>бесплатная доставка</h4>
-            <span>для заказов от 2000 грн</span>
+            <h4>быстрая доставка</h4>
+            <span>1-2 дня по Украине</span>
           </div>
         </div>
       </div>
