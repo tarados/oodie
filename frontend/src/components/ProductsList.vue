@@ -5,14 +5,19 @@
                    v-for="(product, index) in prodList" :key="index"
                    :class="{product: large, brand: small}"
       >
-        <img :src="product.image">
+        <img
+            :src="product.image"
+            :class="{black: black}"
+        >
         <div class="preorder-mark" v-if="isPreorder(product)">предзаказ</div>
+        <div class="preorder-mark" v-if="isAvailability(product) === 0">нет в наличии</div>
         <h4>{{ product.title }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
           <span v-else>{{ product.price }} грн</span>
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
+
       </router-link>
     </div>
   </div>
@@ -33,7 +38,8 @@ export default {
     return {
       category: '',
       large: null,
-      small: null
+      small: null,
+      black: true
     }
   },
   computed: {
@@ -50,7 +56,7 @@ export default {
     loadSize() {
       if (this.size === 'small') {
         this.small = true;
-        this.large =false;
+        this.large = false;
       } else {
         this.small = false;
         this.large = true;
@@ -59,6 +65,12 @@ export default {
 
     isPreorder(product) {
       return product.availability && product.availability[0] && product.availability[0].preorder;
+    },
+    isAvailability(product) {
+      if (product.availability[0].quantity === 0) {
+        this.black = !this.black;
+      }
+      return product.availability[0].quantity;
     }
   },
   mounted() {
@@ -110,6 +122,15 @@ h4 {
   height: 100%;
 }
 
+.product img.black {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  /*-ms-filter: grayscale(100%);*/
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  /*filter: gray; !* IE 6-9 *!*/
+}
+
 .price-box {
   width: 100%;
   margin-bottom: 10px;
@@ -149,6 +170,10 @@ h4 {
   left: 20%;
 }
 
+.availability {
+  opacity: 0;
+}
+
 
 /*media queries*/
 @media screen and (max-width: 1240px) {
@@ -161,6 +186,7 @@ h4 {
   .preorder-mark {
     top: 72%;
   }
+
   .product {
     /*width: calc((100% / 12) * 4 - 20px);*/
   }
