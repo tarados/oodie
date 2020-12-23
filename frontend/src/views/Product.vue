@@ -66,8 +66,11 @@
           <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
           <div class="btn" @click="toCard" v-if="!isUnavailable">{{ getStatusProduct }}</div>
           <div class="preorder" v-if="statusProduct">
-            Отправка этого товара будет ориентировочно в конце декабря.
+            Отправка этого товара будет ориентировочно 25-го декабря.
             Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
+          </div>
+          <div class="preorder" v-if="!statusProduct">
+            Доставка 1-2 дня
           </div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description }}</div>
@@ -335,7 +338,7 @@ export default {
 }
 
 .description {
-  margin-top: 3rem;
+  /*margin-top: 3rem;*/
   line-height: 1.5rem;
   white-space: pre-wrap;
 }
