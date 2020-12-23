@@ -7,7 +7,7 @@
       >
         <img
             :src="product.image"
-            :class="{black: black}"
+            :class="{black: isAvailability(product) === 0}"
         >
         <div class="preorder-mark" v-if="isPreorder(product)">предзаказ</div>
         <div class="preorder-mark" v-if="isAvailability(product) === 0">нет в наличии</div>
@@ -67,9 +67,6 @@ export default {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
     isAvailability(product) {
-      if (product.availability[0].quantity === 0) {
-        this.black = !this.black;
-      }
       return product.availability[0].quantity;
     }
   },
