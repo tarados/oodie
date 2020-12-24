@@ -1,14 +1,18 @@
-.ttn {
-    padding: 12px 14px;
-    margin: 0 0 20px;
-    background: #f8f8f8;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    text-align: left;
-    overflow: hidden;
+div.submit-row {
+    display: flex;
+    justify-content: space-between;
 }
 
-.ttn button {
-    height: 35px;
-    padding: 10px 15px;
+div.submit-row .deletelink-box {
+    order: 1;
+}
+
+div.submit-row .default {
+    order: 3;
+}
+
+div.submit-row input {
+    order: 2;
+    background-color: #417690;
+    text-transform: uppercase;
 }

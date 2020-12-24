@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.utils.html import format_html
-
+from .novaposhta_api import invoice
 from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
 from django import forms
+from django.contrib import messages
+from django.utils.translation import ngettext
 
 
 @register.inclusion_tag('admin/submit_line.html', takes_context=True)
@@ -62,21 +64,38 @@ class OrderAdmin(admin.ModelAdmin):
         "id_order", "status_color", "format_datetime",
         "total_price_fix", "customer", "customer_phone", "delivery", "payment", "preorder")
     list_filter = ("status", "preorder",)
-    exclude = ('total_price', 'preorder')
+    exclude = ('total_price', "preorder")
     date_hierarchy = 'date'
     inlines = [
         OrderItemInline,
     ]
+    actions = ['make_published']
 
     class Media:
-        css = {"all": ("admin/css/my_style.css",)}
+        css = {
+            "all": ("admin/css/my_style.css",)
+        }
+        js = ("admin/js/my_code.js",)
 
-    # def get_fields(self, request, obj):
-    #     fields = list(super(OrderAdmin, self).get_fields(request, obj))
-    #     exclude_set = set()
-    #     if obj:  # obj will be None on the add page, and something on change pages
-    #         exclude_set.add('invoice_number')
-    #     return [f for f in fields if f not in exclude_set]
+    def make_published(self, request, queryset):
+        for i in range(0, len(queryset)):
+            order_id = queryset[i].pk
+            invoice(order_id)
+        updated = queryset.update(status='3')
+        self.message_user(request, ngettext(
+            '%d накладная успешно создана.',
+            '%d накладные успешно созданы.',
+            updated,
+        ) % updated, messages.SUCCESS)
+    make_published.short_description = "Создать накладную"
+
+    def get_fields(self, request, obj):
+        fields = list(super(OrderAdmin, self).get_fields(request, obj))
+        exclude_set = set()
+        if obj:  # obj will be None on the add page, and something on change pages
+            # exclude_set.add('post_office_ref')
+            exclude_set.add('city_ref')
+        return [f for f in fields if f not in exclude_set]
 
     def status_color(self, obj):
         status_text = None
