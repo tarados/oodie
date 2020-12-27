@@ -273,13 +273,11 @@ export default {
       });
     },
     searchWarehouse(input) {
-      let warehouseList = this.allWarehouses.map(warehouse => {
-        return warehouse.warehouse
-      });
       if (input.length < 1) {
-        return []
+        return [];
       }
-      return warehouseList.filter(warehouse => {
+
+      return this.allWarehouses.filter(warehouse => {
         return warehouse.toLowerCase()
             .match(input.toLowerCase())
       });
