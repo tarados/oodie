@@ -277,7 +277,11 @@ export default {
         return [];
       }
 
-      return this.allWarehouses.filter(warehouse => {
+      let warehouseList = this.allWarehouses.map(warehouse => {
+        return warehouse.warehouse
+      });
+
+      return warehouseList.filter(warehouse => {
         return warehouse.toLowerCase()
             .match(input.toLowerCase())
       });
