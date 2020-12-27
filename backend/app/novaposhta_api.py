@@ -2,10 +2,11 @@
 
 import requests
 from .models import Order
+import re
 
 API_URL = 'https://api.novaposhta.ua/v2.0/json/'
 
-NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
+NOVAPOSHTA_API_KEY = '0dfcb26f26a8b36a211887975c95d7fe'
 
 
 def get_city(name=None):
@@ -57,6 +58,7 @@ def get_warehouses(city_id, name):
 				result.append({
 					'warehouse': warehouse['DescriptionRu'],
 					'warehouseRef': warehouse['Number'],
+					'Ref': warehouse['Ref'],
 				})
 	except requests.exceptions.HTTPError:
 		pass
@@ -67,33 +69,27 @@ def get_warehouses(city_id, name):
 def invoice(order_id):
 	order = Order.objects.get(id=order_id)
 	recipient_name = '%s %s' % (order.customer_surname, order.customer_name)
-	customer_phone = order.customer_phone.replace('-', '')
-	recipient_phone = '+38%s' % customer_phone
-	date_send = order.date_send
-	if order.payment == "Наложенный платеж":
-		payment = "Cash"
-	else:
-		payment = "NonCash"
+	customer_phone = "".join(re.split('[()-]+', order.customer_phone))
 	data = {
-		"apiKey": "cd0fe6f50623590fa01e0ad0a88aaaad",
+		"apiKey": NOVAPOSHTA_API_KEY,
 		"modelName": "InternetDocument",
 		"calledMethod": "save",
 		"methodProperties": {
 			"NewAddress": "1",
-			"PayerType": "Sender",
-			"PaymentMethod": payment,
+			"PayerType": "Recipient",
+			"PaymentMethod": "Cash",
 			"CargoType": "Cargo",
-			"VolumeGeneral": "0.1",
-			"Weight": "1",
+			"VolumeGeneral": "",
+			"Weight": "5",
 			"ServiceType": "WarehouseWarehouse",
 			"SeatsAmount": "1",
 			"Description": "одежда",
-			"Cost": "500",
+			"Cost": "1499",
 			"CitySender": "8d5a980d-391c-11dd-90d9-001a92567626",
-			"Sender": "10e048ed-e089-11ea-8513-b88303659df5",
-			"SenderAddress": "00000000-0000-0000-0000-000000000000",
-			"ContactSender": "1fcf8db1-e089-11ea-8513-b88303659df5",
-			"SendersPhone": "380991234567",
+			"Sender": "78db64c2-9ad6-11e6-a54a-005056801333",
+			"SenderAddress": "01ae25f4-e1c2-11e3-8c4a-0050568002cf",
+			"ContactSender": "32a28604-cd6b-11e8-8b24-005056881c6b",
+			"SendersPhone": "380507204066",
 			"RecipientCityName": order.city,
 			"RecipientArea": "",
 			"RecipientAreaRegions": "",
@@ -102,18 +98,49 @@ def invoice(order_id):
 			"RecipientFlat": "",
 			"RecipientName": recipient_name,
 			"RecipientType": "PrivatePerson",
-			"RecipientsPhone": recipient_phone,
-			"DateTime": date_send.strftime("%d.%m.%Y")
+			"RecipientsPhone": customer_phone,
+			"BackwardDeliveryData": [
+				{
+					"PayerType": "Recipient",
+					"CargoType": "Money",
+					"RedeliveryString": "1499"
+				}
+			]
 		}
 	}
+	success = False
 	try:
 		response = requests.post(API_URL, json=data)
 		response_data = response.json()
-		print(response_data)
 		if response_data['success']:
 			for el in response_data['data']:
 				order.invoice_number = el['IntDocNumber']
 				order.cost_on_site = el['CostOnSite']
+			order.save()
+			success = True
 	except requests.exceptions.HTTPError:
 		pass
-	order.save()
+	result = {
+		'success': success,
+		'response': response_data
+	}
+	return result
+
+
+def get_errors():
+	data = {
+		"apiKey": NOVAPOSHTA_API_KEY,
+		"modelName": "CommonGeneral",
+		"calledMethod": "getMessageCodeText",
+		"methodProperties": {}
+	}
+	error_codes = []
+	try:
+		response = requests.post(API_URL, json=data)
+		response_data = response.json()
+		if response_data['success']:
+			for el in response_data['data']:
+				error_codes.append(el)
+	except requests.exceptions.HTTPError:
+		pass
+	return error_codes
