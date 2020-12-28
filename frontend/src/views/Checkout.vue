@@ -165,7 +165,7 @@ export default {
       "userSurname": "",
       "adress": '',
       "city": '',
-      "country": '+(380)',
+      "country": '+(38)',
       "cityRef": '',
       "postOffice": '',
       "postOfficeRef": '',
@@ -297,12 +297,12 @@ export default {
       this.invalidOffice = false;
     },
     handleUserInput(e) {
-      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
       this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
           + (replacedInput[3] ? '-' + replacedInput[3]: '') + (replacedInput[4] ?'-' + replacedInput[4] : '');
     },
     handleUserInputCountry(e) {
-      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})(\d{0,1})/);
+      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})/);
       this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] +(replacedInput[3] ? replacedInput[3] +')' : '');
     }
   },
