@@ -165,9 +165,11 @@ export default {
       "userSurname": "",
       "adress": '',
       "city": '',
+      "cityError": '',
       "country": '+(38)',
       "cityRef": '',
       "postOffice": '',
+      "postOfficeError": '',
       "postOfficeRef": '',
       "phone": "",
       "email": '',
@@ -221,6 +223,11 @@ export default {
           'preorder': product.preorder
         });
       });
+
+      if (this.city === '') {
+        this.city = this.cityError;
+        this.postOffice = this.postOfficeError;
+      }
       let order = {
         'products': productsList,
         'username': this.userName,
@@ -267,6 +274,7 @@ export default {
       if (input.length < 1) {
         return []
       }
+      this.cityError = input;
       return cityList.filter(city => {
         return city.toLowerCase()
             .startsWith(input.toLowerCase())
@@ -280,7 +288,7 @@ export default {
       let warehouseList = this.allWarehouses.map(warehouse => {
         return warehouse.warehouse
       });
-
+      this.postOfficeError = input;
       return warehouseList.filter(warehouse => {
         return warehouse.toLowerCase()
             .match(input.toLowerCase())
@@ -334,8 +342,13 @@ export default {
       this.invalidAdress = !newValue;
     },
     city: function () {
-      let cityId = this.allCities.find(city => city.name === this.city).id;
-      this.$store.dispatch('loadWarehouses', cityId);
+      try {
+        let cityId = this.allCities.find(city => city.name === this.city).id;
+        this.$store.dispatch('loadWarehouses', cityId);
+      } catch (TypeError) {
+        console.log('error in name city');
+      }
+
     },
     deliveryMethod: function (newValue) {
       this.invalidDelivery = !newValue;
