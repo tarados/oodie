@@ -14,7 +14,6 @@ from .models import ProductImage, Product, Order, OrderItem, Category, ProductAv
 from .novaposhta_api import invoice, get_errors
 
 
-
 def products(request):
     category_id = request.GET.get('category_id', None)
     products_list = []

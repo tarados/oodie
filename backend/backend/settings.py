@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from corsheaders.defaults import default_headers
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -130,6 +134,10 @@ MEDIA_ROOT = os.environ['MEDIA_ROOT']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_HEADERS = list(default_headers) + [
+	'sentry-trace',
+]
+
 SITE_URL = os.environ['SITE_URL']
 
 NOVAPOSHTA_API_KEY = 'cd0fe6f50623590fa01e0ad0a88aaaad'
@@ -146,3 +154,13 @@ ADMIN_EMAILS = [
 	"dmitryzvada@gmail.com",
 	"hoodiyalko@gmail.com",
 ]
+
+sentry_sdk.init(
+	dsn="https://6df622b069b8449fbe56509e5546f5a6@o498785.ingest.sentry.io/5578609",
+	integrations=[DjangoIntegration()],
+	traces_sample_rate=1.0,
+
+	# If you wish to associate users to errors (assuming you are using
+	# django.contrib.auth) you may enable sending PII data.
+	send_default_pii=True
+)

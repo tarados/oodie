@@ -25,7 +25,10 @@
               <span>Доставка и оплата</span>
             </router-link>
           </div>
-          <div class="footer-content__item--delivery">
+          <div
+              class="footer-content__item--delivery"
+              @click="errorForSentry"
+          >
             <span>Сотрудничество</span>
           </div>
           <div class="footer-content__item--delivery">
@@ -74,6 +77,11 @@ export default {
         "../assets/instagram.png",
         "../assets/instagram.png"
       ]
+    }
+  },
+  methods: {
+    errorForSentry() {
+      throw Error('123');
     }
   },
   mounted() {
