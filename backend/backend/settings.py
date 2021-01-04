@@ -136,6 +136,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
 	'sentry-trace',
+	'Access-Control-Allow-Headers',
+	'Access-Control-Allow-Credentials',
+]
+
+CORS_ORIGIN_WHITELIST = [
+	'http://localhost:8080',
+	'https://hoodiyalko.avallon.im',
 ]
 
 SITE_URL = os.environ['SITE_URL']
