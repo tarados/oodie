@@ -53,7 +53,7 @@
             <div
                 class="square"
                 v-for="(availability, index) in availabilities"
-                :class="{selected: index === size, notActive: availability.quantity <= 0}"
+                :class="{selected: index === size, notActive: availability.quantity <= 0 && !availability.preorder}"
                 :key="index"
                 @click="select(index)"
             >
@@ -63,8 +63,7 @@
           <div class="size-table" v-if="this.currentProduct.table">
             <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
           </div>
-          <div class="unavailable" v-if="isUnavailable">нет в наличии</div>
-          <div class="btn" @click="toCard" v-if="!isUnavailable">{{ getStatusProduct }}</div>
+          <div class="btn" @click="toCard">{{ getStatusProduct }}</div>
           <div class="preorder" v-if="statusProduct">
             Товар ожидается в наличии в первой половине января.
             Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
@@ -134,14 +133,9 @@ export default {
     selectedImage() {
       return this.imageIndex;
     },
-    isUnavailable() {
-      let num = 0;
-      this.currentProduct.availability.forEach(el => num += el.quantity)
-      return num <= 0;
-    },
     getStatusProduct() {
       try {
-        if (this.availabilities[this.size].preorder) {
+        if (this.statusProduct) {
           return 'Предзаказ'
         } else {
           return 'В корзину'
@@ -165,7 +159,6 @@ export default {
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
         this.hideSize = true;
       }
-      this.statusProduct = this.availabilities[0].preorder;
     },
     showImage(index) {
       this.imageIndex = index;
@@ -368,7 +361,7 @@ export default {
 }
 
 .size-block {
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -532,9 +525,6 @@ export default {
     width: calc(100% - 30px);
   }
 
-  /*.item-left-slider {*/
-  /*  display: none;*/
-  /*}*/
   .viewer {
     display: contents;
   }
@@ -542,6 +532,10 @@ export default {
   .btn,
   .size-block {
     width: auto;
+  }
+
+  .size-block .square {
+    min-width: 2rem;
   }
 
   .item + .item {
