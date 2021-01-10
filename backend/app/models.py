@@ -208,6 +208,12 @@ class Order(models.Model):
 
     total_price_calc.short_description = "Сумма"
 
+    def total_products_list(self):
+        products = list(OrderItem.objects.filter(order=self.id))
+        return products
+
+    total_price_calc.short_description = "Сумма"
+
     def save(self):
         order_items = OrderItem.objects.filter(order=self.id)
         availabilities = ProductAvailability.objects.all()

@@ -67,11 +67,16 @@ export default {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
     isAvailability(product) {
-      return product.availability[0].quantity;
+      try {
+        return product.availability[0].quantity
+      } catch (TypeError) {
+        return 0
+      }
     }
   },
   mounted() {
     this.loadSize();
+    console.log(this.category);
   }
 }
 </script>
