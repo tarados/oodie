@@ -13,7 +13,7 @@
             <img src="../assets/size.png">
           </div>
           <div class="info-title">
-            <h4>Один размер</h4>
+            <h4>{{ 'InfoTitle' | localize }}</h4>
             <span>Подходит для всех</span>
           </div>
         </div>

@@ -71,6 +71,9 @@ export default {
         },
         clearBasket(state) {
             state.cardProducts = [];
+        },
+        setLocale(state, locale) {
+            state.locale = locale;
         }
     },
     state: {
@@ -80,7 +83,8 @@ export default {
         cardProducts: [],
         basketVisible: true,
         citiesList: [],
-        warehouseList: []
+        warehouseList: [],
+        locale: null
     },
     getters: {
         allProducts(state) {
@@ -123,6 +127,9 @@ export default {
             }
 
             return result;
+        },
+        getLocale(state) {
+            return state.locale;
         }
     }
 }

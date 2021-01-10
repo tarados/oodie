@@ -8,6 +8,30 @@
         <div class="phone">
           <a href="tel:+380507204066"><img src="../assets/phone-receiver.svg"/>+380507204066</a>
         </div>
+        <div class="langSelector"
+             @mouseover="mouseoverLang"
+             @mouseleave="mouseleaveLang"
+        >
+          <flag :iso="selectedLanguage"></flag>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <path d="M9 14l3 3l3 -3"/>
+          </svg>
+          <transition name="fade" appear>
+            <div class="sub-menu" v-if="isOpenLang">
+              <div
+                  class="menu-item"
+                  v-for="(item, index) in langList" :key="index"
+                  @click="getLocale(index)"
+
+              >
+                <flag :iso="item.slug"></flag>
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </transition>
+        </div>
         <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
           <router-link :to="{name: 'Card'}">
             <img src="../assets/cart.svg">
@@ -23,7 +47,7 @@
         <div class="linkList-item">
           <router-link :to="{name: 'Home'}" exact
           >
-            <p>{{ links['1'] }}</p>
+            <p>{{ links['1'] | localize }}</p>
           </router-link>
         </div>
         <div class="linkList-item">
@@ -78,7 +102,9 @@
 <script>
 import Hamburger from "./Hamburger";
 import Logo from "./Logo";
-import linkList from '../js/linkList'
+import links from '../js/linkList'
+import {langList} from '../js/linkList'
+// import {mapGetters} from 'vuex'
 
 export default {
   name: "NavBar",
@@ -89,20 +115,21 @@ export default {
   data() {
     return {
       selected: "",
+      selectedLanguage: "",
       isOpen: false,
+      isOpenLang: false,
       options: [],
       links: {},
+      langList: [],
       hamburger: false,
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
       this.timer = -1;
     },
-
     mouseover: function () {
       this.clearTimer();
       this.isOpen = true;
@@ -115,8 +142,27 @@ export default {
       }, 500);
 
     },
+    mouseoverLang: function () {
+      this.clearTimer();
+      this.isOpenLang = true;
+    },
+    mouseleaveLang: function () {
+      this.clearTimer();
+
+      this.timer = setTimeout(() => {
+        this.isOpenLang = false;
+      }, 500);
+
+    },
     getLinkList() {
-      this.links = linkList();
+      this.links = links();
+      this.langList = langList();
+    },
+    getLocale(index) {
+      const locale = this.langList[index].name;
+      this.$store.commit('setLocale', locale);
+      this.selectedLanguage = this.langList[index].slug;
+      console.log(this.$store.getters.getLocale);
     }
   },
   mounted() {
@@ -147,18 +193,19 @@ export default {
 
 .hamburg {
   display: none;
-  flex:1 1 auto;
+  flex: 1 1 auto;
 }
 
-.phone {
-  flex:1 1 auto;
+.phone,
+.langSelector {
+  flex: 1 1 auto;
   height: 30px;
   line-height: 30px;
   align-self: flex-start;
 }
 
 .basket {
-  flex:1 1 auto;
+  flex: 1 1 auto;
   align-self: flex-end;
   line-height: 30px;
 }
@@ -222,17 +269,24 @@ span {
   font-weight: bold;
 }
 
-.linkList .linkList-item a:hover {
+.linkList .linkList-item a:hover,
+.linkList .linkList-item p:hover {
   font-weight: bold;
 }
 
-.linkList .linkList-item a {
+.linkList .linkList-item a,
+.linkList .linkList-item p {
   color: #3d4246;
   text-transform: uppercase;
   text-decoration: none;
 }
 
-.linkList .linkList-item svg {
+.linkList .linkList-item p {
+  cursor: pointer;
+}
+
+.linkList .linkList-item svg,
+.nav-header .langSelector svg {
   width: 18px;
   height: 18px;
   margin-left: 10px;
@@ -256,6 +310,11 @@ span {
 
 .linkList-item .sub-menu .menu-item {
   margin: 3%;
+}
+
+.linkList-item .sub-menu .lang {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .linkList-item .sub-menu .menu-item:hover {
