@@ -164,12 +164,13 @@ def report(request):
 	for el in orders_list:
 		order_items = OrderItem.objects.filter(order=el.id)
 		for order_item in order_items:
+			if not order_item.product.title:
+				continue
 			sales.append({
 				'name': order_item.product.title,
 				'quantity': order_item.quantity
 			})
 	sales = sorted(sales, key=lambda x: x['name'])
-
 	products_sale = {}
 	for group in groupby(sales, key=lambda x: x['name']):
 		name = group[0]
