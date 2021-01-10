@@ -164,7 +164,7 @@ def report(request):
 	for el in orders_list:
 		order_items = OrderItem.objects.filter(order=el.id)
 		for order_item in order_items:
-			if order_item.product.title is None:
+			if order_item.product is None:
 				continue
 			sales.append({
 				'name': order_item.product.title,
