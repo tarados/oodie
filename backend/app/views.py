@@ -159,16 +159,15 @@ def novaposhta_api_invoice(request):
 
 
 def report(request):
-	orders_sale = []
 	orders_list = list(Order.objects.filter(status="3"))
-	for el in orders_list:
-		orders_sale.append(OrderItem.objects.get(order=el.id))
 	sales = []
-	for el in orders_sale:
-		sales.append({
-			'name': el.product.title,
-			'quantity': el.quantity
-		})
+	for el in orders_list:
+		order_items = OrderItem.objects.filter(order=el.id)
+		for order_item in order_items:
+			sales.append({
+				'name': order_item.product.title,
+				'quantity': order_item.quantity
+			})
 	sales = sorted(sales, key=lambda x: x['name'])
 
 	products_sale = {}
@@ -181,6 +180,4 @@ def report(request):
 		products_sale.update({
 			name: item_quantity
 		})
-	print(products_sale)
-
 	return JsonResponse(products_sale)
