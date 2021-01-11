@@ -11,17 +11,17 @@ export default function links() {
 export function langList() {
   const lang = [
     {
-      'title': 'русский',
+      'title': 'RU',
       'name': 'ru-RU',
       'slug': 'ru'
     },
     {
-      'title': 'английский',
+      'title': 'EN',
       'name': 'en-US',
       'slug': 'us'
     },
     {
-      'title': 'украинский',
+      'title': 'UA',
       'name': 'ua-UA',
       'slug': 'ua'
     }

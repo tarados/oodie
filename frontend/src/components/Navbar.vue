@@ -12,16 +12,19 @@
              @mouseover="mouseoverLang"
              @mouseleave="mouseleaveLang"
         >
-          <flag :iso="selectedLanguage"></flag>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z"/>
-            <path d="M9 14l3 3l3 -3"/>
-          </svg>
+          <div class="langSelector_item">
+            <flag :iso="selectedLanguageIcon"></flag>
+            <span>{{selectedLanguage}}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z"/>
+              <path d="M9 14l3 3l3 -3"/>
+            </svg>
+          </div>
           <transition name="fade" appear>
             <div class="sub-menu" v-if="isOpenLang">
               <div
-                  class="menu-item"
+                  class="menu-item lang"
                   v-for="(item, index) in langList" :key="index"
                   @click="getLocale(index)"
 
@@ -115,7 +118,8 @@ export default {
   data() {
     return {
       selected: "",
-      selectedLanguage: "",
+      selectedLanguageIcon: "ru",
+      selectedLanguage: "RU",
       isOpen: false,
       isOpenLang: false,
       options: [],
@@ -161,7 +165,8 @@ export default {
     getLocale(index) {
       const locale = this.langList[index].name;
       this.$store.commit('setLocale', locale);
-      this.selectedLanguage = this.langList[index].slug;
+      this.selectedLanguageIcon = this.langList[index].slug;
+      this.selectedLanguage = this.langList[index].title;
       console.log(this.$store.getters.getLocale);
     }
   },
@@ -182,32 +187,66 @@ export default {
 
 
 .nav-header {
-  width: 100%;
+  /*width: 100%;*/
   padding: 15px;
   height: 60px;
-
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr 1fr;
   background-color: var(--overlay-color);
 }
 
 .hamburg {
   display: none;
-  flex: 1 1 auto;
+  /*flex: 1 1 auto;*/
 }
 
-.phone,
-.langSelector {
-  flex: 1 1 auto;
+.phone {
+  /*flex: 1 1 auto;*/
   height: 30px;
   line-height: 30px;
-  align-self: flex-start;
+  grid-column: 1 / 3;
+  /*align-self: flex-start;*/
+}
+
+.langSelector {
+  width: 70%;
+  grid-column: 3 / 4;
+  justify-self: end;
+  align-self: start;
+}
+
+.langSelector .langSelector_item {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.langSelector .langSelector_item span {
+  margin-left: 3px;
+}
+
+.nav-header .langSelector svg {
+  width: 18px;
+  height: 18px;
+  /*margin-left: 3px;*/
+}
+
+.nav-header .langSelector .sub-menu .lang {
+  width: 70%;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  background-color: var(--overlay-color);
+  margin-top: 10px;
+  margin-left: 3px;
 }
 
 .basket {
-  flex: 1 1 auto;
-  align-self: flex-end;
+  /*flex: 1 1 auto;*/
+  /*align-self: flex-end;*/
   line-height: 30px;
+  grid-column: 4 / 5;
 }
 
 .phone a,
@@ -285,8 +324,7 @@ span {
   cursor: pointer;
 }
 
-.linkList .linkList-item svg,
-.nav-header .langSelector svg {
+.linkList .linkList-item svg {
   width: 18px;
   height: 18px;
   margin-left: 10px;
@@ -305,16 +343,16 @@ span {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 3%;
+  padding-top: 3%;
 }
 
 .linkList-item .sub-menu .menu-item {
   margin: 3%;
 }
 
-.linkList-item .sub-menu .lang {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.langSelector .sub-menu {
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 1fr;*/
 }
 
 .linkList-item .sub-menu .menu-item:hover {

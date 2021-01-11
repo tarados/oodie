@@ -8,6 +8,10 @@ const locales = {
   'en-US': {
     'InfoTitle': 'One size',
     'MenuHome': 'Home'
+  },
+  'ua-UA': {
+    'InfoTitle': 'Один розмір',
+    'MenuHome': 'Головна'
   }
 }
 
