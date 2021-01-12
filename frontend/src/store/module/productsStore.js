@@ -9,6 +9,10 @@ export default {
             context.commit('addProducts', response.products);
             context.commit('addCategories', response.categories);
         },
+        async loadLocales(context) {
+            const response = await get('locales');
+            context.commit('addLocales', response);
+        },
         async loadProduct(context, id) {
             context.commit('setCurrentProduct', null);
             const response = await get('products/product' + '/' + id);
@@ -74,6 +78,9 @@ export default {
         },
         setLocale(state, locale) {
             state.locale = locale;
+        },
+        addLocales(state, response) {
+            state.locales = response;
         }
     },
     state: {
@@ -84,7 +91,8 @@ export default {
         basketVisible: true,
         citiesList: [],
         warehouseList: [],
-        locale: null
+        locale: null,
+        locales: {}
     },
     getters: {
         allProducts(state) {
@@ -130,6 +138,9 @@ export default {
         },
         getLocale(state) {
             return state.locale;
+        },
+        getLocales(state) {
+            return state.locales;
         }
     }
 }

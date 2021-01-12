@@ -107,7 +107,7 @@ import Hamburger from "./Hamburger";
 import Logo from "./Logo";
 import links from '../js/linkList'
 import {langList} from '../js/linkList'
-// import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: "NavBar",
@@ -128,7 +128,7 @@ export default {
       hamburger: false,
     };
   },
-  computed: {},
+  computed: {...mapGetters(["getLocales",])},
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
@@ -167,7 +167,7 @@ export default {
       this.$store.commit('setLocale', locale);
       this.selectedLanguageIcon = this.langList[index].slug;
       this.selectedLanguage = this.langList[index].title;
-      console.log(this.$store.getters.getLocale);
+      console.log(this.getLocales[locale]);
     }
   },
   mounted() {
@@ -372,12 +372,11 @@ span {
 
 @media screen and (max-width: 750px) {
   .nav-header {
-    display: block;
-    text-align: center;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
   }
 
   .phone {
-    display: inline-block;
+    grid-column: 2 / 2;
   }
 
   .basket {
@@ -387,6 +386,7 @@ span {
   }
 
   .hamburg {
+    grid-column: 1 / 2;
     position: absolute;
     top: 15px;
     left: 10px;

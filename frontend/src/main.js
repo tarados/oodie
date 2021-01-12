@@ -37,4 +37,5 @@ new Vue({
 }).$mount('#app');
 store.dispatch('loadFromCard');
 store.dispatch('loadProducts');
+store.dispatch('loadLocales');
 

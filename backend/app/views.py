@@ -10,7 +10,7 @@ from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
-from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
+from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size, Localization
 from .novaposhta_api import invoice, get_errors
 
 
@@ -155,3 +155,21 @@ def novaposhta_api_invoice(request):
         message = ', '.join(errors_text)
         messages.error(request, message)
     return JsonResponse({'success': True})
+
+
+def locales(request):
+    localizations = Localization.objects.all()
+    locale = {}
+    key_ru = {}
+    key_ua = {}
+    key_en = {}
+    for el in localizations:
+        key_ru.update({el.key: el.value})
+        key_ua.update({el.key: el.value_ua})
+        key_en.update({el.key: el.value_en})
+    locale.update({
+        'ru-RU': key_ru,
+        'ua-UA': key_ua,
+        'en-US': key_en
+    })
+    return JsonResponse(locale)
