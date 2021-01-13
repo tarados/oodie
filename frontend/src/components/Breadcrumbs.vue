@@ -4,7 +4,7 @@
         <router-link
             v-if="index < breadcrumbs.length - 1"
             :to="{name: item.routeName, params: item.routeParams}"
-             class="breadcrumbs__link">{{ item.title }}</router-link>
+             class="breadcrumbs__link">{{ item.title | localize }}</router-link>
 
         <a v-if="index === breadcrumbs.length - 1"
            class="breadcrumbs__link breadcrumbs__link--active">{{ item.title }}</a>
@@ -34,8 +34,10 @@ export default {
       }
 
     },
-
     ...mapGetters(["breadcrumbs"])
+  },
+  mounted() {
+    console.log(this.breadcrumbs);
   }
 }
 </script>

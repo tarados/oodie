@@ -61,16 +61,11 @@
             </div>
           </div>
           <div class="size-table" v-if="this.currentProduct.table">
-            <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
+            <a :href="this.currentProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
-          <div class="btn" @click="toCard">{{ getStatusProduct }}</div>
-          <div class="preorder" v-if="statusProduct">
-            Товар ожидается в наличии в первой половине января.
-            Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
-          </div>
-          <div class="preorder" v-if="!statusProduct">
-            Доставка 1-2 дня
-          </div>
+          <div class="btn" @click="toCard">{{ getStatusProduct | localize }}</div>
+          <div class="preorder" v-if="statusProduct">{{ 'ProductStatusPreorderDescription' | localize }}</div>
+          <div class="preorder" v-if="!statusProduct">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description }}</div>
           </div>
@@ -136,9 +131,9 @@ export default {
     getStatusProduct() {
       try {
         if (this.statusProduct) {
-          return 'Предзаказ'
+          return 'ProductStatusPreorder'
         } else {
-          return 'В корзину'
+          return 'ProductStatusBasket'
         }
       } catch (TypeError) {
         return ''

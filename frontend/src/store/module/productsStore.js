@@ -118,7 +118,7 @@ export default {
             const { currentProduct, categoriesList } = state;
             const result = [];
             if (currentProduct && currentProduct.category === 1) {
-                result.push({ title: "Главная", routeName: "Home" });
+                result.push({ title: "MenuHome", routeName: "Home" });
             } else {
                 result.push({ title: "Бренды друзья", routeName: "Brands" });
 
