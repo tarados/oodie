@@ -27,7 +27,7 @@
         </div>
         <div class="item right">
           <div class="product-category">
-            <span>бренд: </span>
+            <span>{{ 'ProductBrand' | localize }}: </span>
             <div>{{ this.currentCategory }}</div>
           </div>
           <div class="product-price">

@@ -4,7 +4,7 @@
       <div class="footer-content">
         <div class="footer-content__item">
           <div class="footer-content__item--contacts">
-            <span>Контакты:</span>
+            <span>{{ 'FooterContacts' | localize }}:</span>
           </div>
           <div class="footer-content__item--contacts">
             <img src="../assets/phone-receiver.svg"/>
@@ -22,22 +22,22 @@
         <div class="footer-content__item">
           <div class="footer-content__item--delivery">
             <router-link :to="{name: 'Delivery' }">
-              <span>Доставка и оплата</span>
+              <span>{{ 'FooterShipping' | localize }}</span>
             </router-link>
           </div>
           <div
               class="footer-content__item--delivery"
               @click="errorForSentry"
           >
-            <span>Сотрудничество</span>
+            <span>{{ 'FooterCooperation' | localize }}</span>
           </div>
           <div class="footer-content__item--delivery">
-            <span>Обмен и возврат</span>
+            <span>{{ 'FooterExchange' | localize }}</span>
           </div>
         </div>
         <div class="footer-content__item">
           <div class="footer-content__item--social">
-            <span>Мы в соцсетях</span>
+            <span>{{ 'FooterSocial' | localize }}</span>
           </div>
           <div class="footer-content__item--social">
             <div class="icon">

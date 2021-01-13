@@ -13,8 +13,8 @@
             <img src="../assets/size.png">
           </div>
           <div class="info-title">
-            <h4>{{ 'InfoTitle' | localize }}</h4>
-            <span>Подходит для всех</span>
+            <h4>{{ 'InfoSize' | localize }}</h4>
+            <span>{{ 'InfoSizeDescription' | localize }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -22,8 +22,8 @@
             <img src="../assets/cat.png">
           </div>
           <div class="info-title">
-            <h4>теплое и очень мягкое</h4>
-            <span>как котик</span>
+            <h4>{{ 'InfoCat' | localize }}</h4>
+            <span>{{ 'InfoCatDescription' | localize }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -31,8 +31,8 @@
             <img src="../assets/delivery.png">
           </div>
           <div class="info-title">
-            <h4>быстрая доставка</h4>
-            <span>1-2 дня по Украине</span>
+            <h4>{{ 'InfoDelivery' | localize }}</h4>
+            <span>{{ 'InfoDeliveryDescription' | localize }}</span>
           </div>
         </div>
       </div>

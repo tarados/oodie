@@ -57,7 +57,7 @@
           <router-link
               :to="{name: 'About'}"
           >
-            <p>{{ links['2'] }}</p>
+            <p>{{ links['2'] | localize }}</p>
           </router-link>
         </div>
         <div class="linkList-item"
@@ -67,7 +67,7 @@
           <router-link
               :to="{name: 'Brands'}"
           >
-            <p>{{ links['3'] }}</p>
+            <p>{{ links['3'] | localize  }}</p>
           </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -94,7 +94,7 @@
           <router-link
               :to="{name: 'Contacts'}"
           >
-            <p>{{ links['4'] }}</p>
+            <p>{{ links['4'] | localize }}</p>
           </router-link>
         </div>
       </div>
@@ -187,7 +187,6 @@ export default {
 
 
 .nav-header {
-  /*width: 100%;*/
   padding: 15px;
   height: 60px;
   display: grid;
@@ -197,15 +196,12 @@ export default {
 
 .hamburg {
   display: none;
-  /*flex: 1 1 auto;*/
 }
 
 .phone {
-  /*flex: 1 1 auto;*/
   height: 30px;
   line-height: 30px;
   grid-column: 1 / 3;
-  /*align-self: flex-start;*/
 }
 
 .langSelector {
@@ -229,7 +225,6 @@ export default {
 .nav-header .langSelector svg {
   width: 18px;
   height: 18px;
-  /*margin-left: 3px;*/
 }
 
 .nav-header .langSelector .sub-menu .lang {
@@ -243,8 +238,6 @@ export default {
 }
 
 .basket {
-  /*flex: 1 1 auto;*/
-  /*align-self: flex-end;*/
   line-height: 30px;
   grid-column: 4 / 5;
 }

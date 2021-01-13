@@ -1,9 +1,9 @@
 export default function links() {
   const links = {
     '1': 'MenuHome',
-    '2': 'о нас',
-    '3': 'бренды друзья',
-    '4': 'контакты'
+    '2': 'MenuAboutUs',
+    '3': 'MenuBrandsFriends',
+    '4': 'MenuContacts'
   }
   return links
 }
