@@ -65,7 +65,7 @@
           </div>
           <div class="btn" @click="toCard">{{ getStatusProduct }}</div>
           <div class="preorder" v-if="statusProduct">
-            Товар ожидается в наличии в первой половине января.
+            Товар ожидается в наличии ориентировочно 20-го января.
             Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
           </div>
           <div class="preorder" v-if="!statusProduct">
