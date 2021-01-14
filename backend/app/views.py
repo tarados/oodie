@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import json
 import datetime
@@ -173,3 +174,15 @@ def locales(request):
         'en-US': key_en
     })
     return JsonResponse(locale)
+
+
+def import_locales(request):
+    filename = os.path.join(settings.BASE_DIR, 'static', 'locales.json')
+    locale = {}
+    with open(filename, 'r', encoding='utf-8') as outfile:
+        locale.update(json.load(outfile))
+    for key, val in locale["ru-RU"].items():
+        print(key)
+    return JsonResponse(locale)
+
+

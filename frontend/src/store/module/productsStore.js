@@ -120,7 +120,7 @@ export default {
             if (currentProduct && currentProduct.category === 1) {
                 result.push({ title: "MenuHome", routeName: "Home" });
             } else {
-                result.push({ title: "Бренды друзья", routeName: "Brands" });
+                result.push({ title: "MenuBrandsFriends", routeName: "Brands" });
 
                 if (currentProduct) {
                     const category = categoriesList.find(category => category.id === currentProduct.category);
