@@ -155,6 +155,7 @@ export default {
         });
       });
       this.availabilities = this.currentProduct.availability;
+      this.statusProduct = this.availabilities[0].preorder;
 
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
         this.hideSize = true;
@@ -169,9 +170,10 @@ export default {
         "quantity": "0",
         "preorder": false
       };
+
       const productToCard = {
         "id": this.currentProduct.id,
-        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.statusProduct.title,
+        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
         "availability": availability.quantity,
