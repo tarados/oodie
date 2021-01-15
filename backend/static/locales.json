@@ -1,38 +1,292 @@
 {
-    "ru-RU": {
-        "MenuAbout": "О нас",
-        "MenuContacts": "контакты",
-        "MenuBrandsFriends": "бренды друзья",
-        "InfoTitle": "один размер",
-        "MenuHome": "главная",
-        "ProductStatusPreorder": "Предзаказ",
-        "ProductStatusBasket": "В корзину",
-        "ProductSizeTable": "Таблица размеров",
-        "ProductStatusPreorderDescription": "Товар ожидается в наличии в первой половине января. Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь",
-        "ProductStatusBasketDescription": "Доставка 1-2 дня"
-    },
-    "ua-UA": {
-        "MenuAbout": "про нас",
-        "MenuContacts": "контакти",
-        "MenuBrandsFriends": "бренди друзі",
-        "InfoTitle": "один розмір",
-        "MenuHome": "головна",
-        "ProductStatusPreorder": "Передзамовлення",
-        "ProductStatusBasket": "В кошик",
-        "ProductSizeTable": "Таблиця розмірів",
-        "ProductStatusPreorderDescription": "Товар очікується в наявності в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу",
-        "ProductStatusBasketDescription": "Доставка 1-2 дня"
-    },
-    "en-US": {
-        "MenuAbout": "About us",
-        "MenuContacts": "Contacts",
-        "MenuBrandsFriends": "brands friends",
-        "InfoTitle": "one size",
-        "MenuHome": "home",
-        "ProductStatusPreorder": "Preorder",
-        "ProductStatusBasket": "Add to cart",
-        "ProductSizeTable": "Size table",
-        "ProductStatusPreorderDescription": "The product is expected to be available in the first half of January. We will contact you when the product is in stock for confirmation and send your order first.",
-        "ProductStatusBasketDescription": "Delivery 1-2 days"
-    }
+    "InfoSize": [
+        "Один размер",
+        "Один розмір",
+        "One size"
+    ],
+    "InfoSizeDescription": [
+        "ПОДХОДИТ ДЛЯ ВСЕХ",
+        "ПІДХОДИТЬ ДЛЯ ВСІХ",
+        "SUITABLE FOR ALL"
+    ],
+    "InfoCat": [
+        "ТЕПЛОЕ И ОЧЕНЬ МЯГКОЕ",
+        "ТЕПЛЕ І ДУЖЕ М'ЯКЕ",
+        "WARM AND VERY SOFT"
+    ],
+    "InfoCatDescription": [
+        "КАК КОТИК",
+        "ЯК КОТИК",
+        "AS A CAT"
+    ],
+    "InfoDelivery": [
+        "БЫСТРАЯ ДОСТАВКА",
+        "ШВИДКА ДОСТАВКА",
+        "FAST DELIVERY"
+    ],
+    "InfoDeliveryDescription": [
+        "1-2 ДНЯ ПО УКРАИНЕ",
+        "1-2 ДНЯ ПО УКРАЇНІ",
+        "1-2 DAYS ACROSS UKRAINE"
+    ],
+    "FooterContacts": [
+        "Контакты",
+        "Контакти",
+        "Contacts"
+    ],
+    "FooterShipping": [
+        "Доставка и оплата",
+        "Доставка і оплата",
+        "Shipping and payment"
+    ],
+    "FooterCooperation": [
+        "Сотрудничество",
+        "Співробітництво",
+        "Cooperation"
+    ],
+    "FooterExchange": [
+        "Обмен и возврат",
+        "Обмін і повернення",
+        "Exchange and return"
+    ],
+    "ProductStatusPreorder": [
+        "Предзаказ",
+        "Передзамовлення",
+        "Preorder"
+    ],
+    "FooterSocial": [
+        "Мы в соцсетях",
+        "Ми в соцмережах",
+        "We are in social networks"
+    ],
+    "AvailabilityNo": [
+        "Нет в наличии",
+        "Немає в наявності",
+        "Not available"
+    ],
+    "ProductBrand": [
+        "Бренд",
+        "Бренд",
+        "Brand"
+    ],
+    "ProductStatusBasket": [
+        "В корзину",
+        "В кошик",
+        "Add to cart"
+    ],
+    "CheckoutCity": [
+        "Город",
+        "Місто",
+        "City"
+    ],
+    "ProductCard": [
+        "Корзина",
+        "Кошик",
+        "Basket"
+    ],
+    "ProductSizeTable": [
+        "Таблица размеров",
+        "Таблиця розмірів",
+        "Size table"
+    ],
+    "ProductCardEmpty": [
+        "Ваша корзина пуста!",
+        "Ваш кошик порожній!",
+        "Your basket is empty!"
+    ],
+    "ProductDelete": [
+        "Удалить",
+        "Вилучити",
+        "Delete"
+    ],
+    "CheckoutSurnameError": [
+        "Введите Вашу фамилию",
+        "Введіть Ваше прізвище",
+        "Enter your last name"
+    ],
+    "BasketPreorderDescription": [
+        "В Вашей корзине есть товар по предзаказу!\r\nОтправка этого товара будет в первой половине января. Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь",
+        "У Вашому кошику є товар за попереднім замовленням!\r\nВідправлення цього товару буде в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу",
+        "There is a pre-order item in your cart!\r\nThis item will ship in the first half of January. We will contact you when the product is in stock for confirmation and send your order first."
+    ],
+    "BasketTotalPrice": [
+        "Итого",
+        "Разом",
+        "Total"
+    ],
+    "ContinueShopping": [
+        "Продолжить покупки",
+        "Продовжити покупки",
+        "Continue shopping"
+    ],
+    "BasketCheckout": [
+        "Оформить заказ",
+        "Оформити замовлення",
+        "Checkout"
+    ],
+    "CheckoutEnterYouName": [
+        "Введите Ваше имя",
+        "Введіть ваше ім'я",
+        "Enter your name"
+    ],
+    "ChecoutPhone": [
+        "Телефон",
+        "Телефон",
+        "Phone"
+    ],
+    "CheckoutEnterPhone": [
+        "Введите номер телефона",
+        "Введіть номер телефону",
+        "Enter your phone number"
+    ],
+    "CheckoutPhoneWarning": [
+        "Номер включает в себя 12 цифр. Сейчас их",
+        "Номер включає в себе 12 цифр. зараз їх",
+        "The number includes 12 digits. Now their"
+    ],
+    "CheckoutDeliveryMethod": [
+        "Способ доставки",
+        "Спосіб доставки",
+        "Delivery method"
+    ],
+    "CheckoutSelectDeliveryMethod": [
+        "Выберите способ доставки",
+        "Виберіть спосіб доставки",
+        "Select delivery method"
+    ],
+    "CheckoutNovaPoshta": [
+        "Новая почта",
+        "Нова Пошта",
+        "NovaPoshta"
+    ],
+    "CheckoutCourier": [
+        "Курьером Новой почты",
+        "Кур'єром Нової пошти",
+        "Courier Nova Poshta"
+    ],
+    "CheckoutPickup": [
+        "Самовывоз",
+        "Самовивіз",
+        "Pickup"
+    ],
+    "CheckoutSelectDeliveryMethodError": [
+        "Нужно выбрать способ доставки",
+        "Потрібно вибрати спосіб доставки",
+        "You need to choose a delivery method"
+    ],
+    "CheckoutPostOffice": [
+        "Отделение",
+        "Відділення",
+        "Postoffice"
+    ],
+    "CheckoutSurname": [
+        "Фамилия",
+        "Прізвище",
+        "Last name"
+    ],
+    "CheckoutName": [
+        "Имя",
+        "Ім'я",
+        "First name"
+    ],
+    "CheckoutSelectCity": [
+        "Выберите город",
+        "Виберіть місто",
+        "Select city"
+    ],
+    "CheckoutPostOfficeError": [
+        "Нужно выбрать склад Новой Почты",
+        "Потрібно вибрати склад Нової Пошти",
+        "You need to choose a warehouse for Nova Poshta"
+    ],
+    "CheckoutAddress": [
+        "Адрес",
+        "Адреса",
+        "Address"
+    ],
+    "CheckoutAddressError": [
+        "Нужно указать адрес доставки",
+        "Потрібно вказати адресу доставки",
+        "You need to specify the delivery address"
+    ],
+    "CheckoutPaymentMethod": [
+        "Способ оплаты",
+        "Спосіб оплати",
+        "Payment method"
+    ],
+    "CheckoutPaymentCard": [
+        "На карту",
+        "На карту",
+        "To the card"
+    ],
+    "CheckoutComment": [
+        "Комментарий",
+        "Коментар",
+        "Comment"
+    ],
+    "ProductStatusPreorderDescription": [
+        "Товар ожидается в наличии в первой половине января. Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь",
+        "Товар очікується в наявності в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу",
+        "The product is expected to be available in the first half of January. We will contact you when the product is in stock for confirmation and send your order first"
+    ],
+    "ProductStatusBasketDescription": [
+        "Доставка 1-2 дня",
+        "Доставка 1-2 дня",
+        "Delivery 1-2 days"
+    ],
+    "MenuBrandsFriends": [
+        "Бренды друзья",
+        "Бренди друзі",
+        "Brands friends"
+    ],
+    "MenuHome": [
+        "Главная",
+        "Головна",
+        "Home"
+    ],
+    "MenuAboutUs": [
+        "О нас",
+        "Про нас",
+        "About us"
+    ],
+    "MenuContacts": [
+        "Контакты",
+        "Контакти",
+        "Contacts"
+    ],
+    "CheckoutPaymentCOD": [
+        "Наложенный платеж",
+        "Накладений платіж",
+        "C.O.D"
+    ],
+    "CheckoutPaymentCODError": [
+        "Нужно выбрать способ оплаты",
+        "Потрібно вибрати спосіб оплати",
+        "You need to choose a payment method"
+    ],
+    "CheckoutPickupDescription": [
+        "Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей",
+        "Ви зможете забрати замовлення біля метро Контрактова. Після оформлення замовлення, наш менеджер зв'яжеться з вами для уточнення деталей",
+        "You can pick up your order near the Kontraktovaya metro station. After placing an order, our manager will contact you to clarify the details"
+    ],
+    "CheckoutPay": [
+        "К оплате",
+        "До оплати",
+        "To pay"
+    ],
+    "CheckoutBack": [
+        "Вернуться в корзину",
+        "Повернутися в кошик",
+        "Back to cart"
+    ],
+    "CheckoutBuy": [
+        "Купить",
+        "Купити",
+        "Buy"
+    ],
+    "CheckoutSelectPaymentMethod": [
+        "Выберите способ оплаты",
+        "Оберіть спосіб оплати",
+        "Select a payment method"
+    ]
 }

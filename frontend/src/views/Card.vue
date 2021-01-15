@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">Корзина</h1>
-      <h1 v-else>Ваша корзина пуста!</h1>
+      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
+      <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
     </div>
     <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
       <div class="grid-container second">
@@ -38,7 +38,7 @@
           <div class="total-val">{{ product.total }} грн</div>
         </div>
         <div class="mobile-edit">
-          <div class="remove-mobile" @click="deleteOrder(index)">Удалить</div>
+          <div class="remove-mobile" @click="deleteOrder(index)">{{ 'ProductDelete' | localize }}</div>
           <div class="quantity-val-mobile">
             <div class="down">
               <div class="quantity-button" @click="minusQuantity(index)">-</div>
@@ -55,27 +55,24 @@
       </div>
     </div>
     <div class="subtotal-mobile-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
-      <div class="subtotal-mobile-title">Итого:</div>
+      <div class="subtotal-mobile-title">{{ 'BasketTotalPrice' | localize }}:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
       <div class="subtotal-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
-        <span>Итого </span>
+        <span>{{ 'BasketTotalPrice' | localize }} </span>
         <span v-text="totalPrice"></span>
       </div>
     </div>
     <div class="container" v-if="isPreorder">
-      <p>В Вашей корзине есть товар по предзаказу!
-      Отправка этого товара будет в первой половине января. Мы свяжемся с вами когда товар появится
-        в наличии для подтверждения и отправим ваш заказ в первую очередь.</p>
+      <p>{{ 'BasketPreorderDescription' | localize }}</p>
     </div>
     <div class="container checkout-buttons">
-        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
+        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">{{ 'ContinueShopping' | localize }}</router-link>
         <router-link
             :to="{name: 'Checkout'}"
             class="checkout-button checkout button"
-            v-show="this.$store.state.productsStore.cardProducts.length > 0"
-        >Оформить заказ</router-link>
+            v-show="this.$store.state.productsStore.cardProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
     </div>
   </div>
 </template>

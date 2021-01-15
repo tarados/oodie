@@ -8,6 +8,5 @@ urlpatterns = [
 	path('warehouse', novaposhta_api_warehouse),
 	path('order', order),
 	path('locales', locales),
-	path('import', import_locales),
 	path('invoice', novaposhta_api_invoice),
 ]

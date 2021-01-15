@@ -166,7 +166,7 @@ export default {
       };
       const productToCard = {
         "id": this.currentProduct.id,
-        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.statusProduct.title,
+        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
         "availability": availability.quantity,

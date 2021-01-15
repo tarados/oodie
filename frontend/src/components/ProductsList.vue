@@ -10,7 +10,7 @@
             :class="{black: isAvailability(product) <= 0}"
         >
         <div class="preorder-mark" v-if="isPreorder(product)">предзаказ</div>
-        <div class="preorder-mark" v-if="isAvailability(product) <= 0">нет в наличии</div>
+        <div class="preorder-mark" v-if="isAvailability(product) <= 0">{{ 'AvailabilityNo' | localize }}</div>
         <h4>{{ product.title }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>

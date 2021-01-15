@@ -167,7 +167,6 @@ export default {
       this.$store.commit('setLocale', locale);
       this.selectedLanguageIcon = this.langList[index].slug;
       this.selectedLanguage = this.langList[index].title;
-      console.log(this.getLocales[locale]);
     }
   },
   mounted() {

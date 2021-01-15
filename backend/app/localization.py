@@ -10,18 +10,11 @@ filename = os.path.join(BASE_DIR, 'static', 'locales.json')
 def export_locales():
     localizations = Localization.objects.all()
     locale = {}
-    key_ru = {}
-    key_ua = {}
-    key_en = {}
     for el in localizations:
-        key_ru.update({el.key: el.value})
-        key_ua.update({el.key: el.value_ua})
-        key_en.update({el.key: el.value_en})
-    locale.update({
-        'ru-RU': key_ru,
-        'ua-UA': key_ua,
-        'en-US': key_en
-    })
+        val_el = [el.value, el.value_ua, el.value_en]
+        locale.update({
+            el.key: val_el
+        })
     with open(filename, 'w', encoding='utf-8') as outfile:
         json.dump(locale, outfile, ensure_ascii=False, indent=4)
 
@@ -31,9 +24,17 @@ def delete_localization():
 
 
 def import_locales():
-    print('fg')
-    # with open(filename, 'r', encoding='utf-8') as outfile:
-    #     print(json.load(outfile))
+    locale = {}
+    with open(filename, 'r', encoding='utf-8') as outfile:
+        locale.update(json.load(outfile))
+    for key, val in locale.items():
+        locales = Localization(
+            key=key,
+            value=val[0],
+            value_ua=val[1],
+            value_en=val[2]
+        )
+        locales.save()
 
 
 """Экспорт локалей из БД производим по схеме:
