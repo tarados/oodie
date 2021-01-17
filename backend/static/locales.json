@@ -149,21 +149,6 @@
         "Спосіб доставки",
         "Delivery method"
     ],
-    "CheckoutSelectDeliveryMethod": [
-        "Выберите способ доставки",
-        "Виберіть спосіб доставки",
-        "Select delivery method"
-    ],
-    "CheckoutNovaPoshta": [
-        "Новая почта",
-        "Нова Пошта",
-        "NovaPoshta"
-    ],
-    "CheckoutCourier": [
-        "Курьером Новой почты",
-        "Кур'єром Нової пошти",
-        "Courier Nova Poshta"
-    ],
     "CheckoutPickup": [
         "Самовывоз",
         "Самовивіз",
@@ -288,5 +273,70 @@
         "Выберите способ оплаты",
         "Оберіть спосіб оплати",
         "Select a payment method"
+    ],
+    "CheckoutSelectDeliveryMethod": [
+        "Выберите способ доставки",
+        "Виберіть спосіб доставки",
+        "Select delivery method"
+    ],
+    "CheckoutCourier": [
+        "Курьером Новой почты",
+        "Кур'єром Нової пошти",
+        "Courier Nova poshta"
+    ],
+    "CheckoutNovaPoshta": [
+        "Новая почта",
+        "Нова пошта",
+        "Nova poshta"
+    ],
+    "CheckoutSelectCityInput": [
+        "Начните вводить название города",
+        "Почніть вводити назву міста",
+        "Start typing the city name"
+    ],
+    "ChekoutSelectWarehouseInput": [
+        "Начните вводить номер или адрес отделения",
+        "Почніть вводити номер або адресу відділення",
+        "Start typing the branch number or address"
+    ],
+    "ContactsQuestions": [
+        "Есть вопросы?",
+        "Є питання?",
+        "Have questions"
+    ],
+    "ContactsMessage": [
+        "Мы будем рады получить твое сообщение:",
+        "Ми будемо раді отримати твоє повідомлення:",
+        "We will be glad to receive your message:"
+    ],
+    "ContactsDescriptionOne": [
+        "Возможен самовывоз возле метро Контрактовая площадь",
+        "Є можливість самовивозу біля метро Контрактова площа",
+        "Pickup possible near Kontraktova Ploshcha metro station"
+    ],
+    "ContactsDescriptionTwo": [
+        "по предварительной договоренности.",
+        "за попередньою домовленістю.",
+        "by prior arrangement."
+    ],
+    "ContactsSubscribe": [
+        "Подписывайся на наши страницы:",
+        "Підписуйся на наші сторінки:",
+        "Subscribe to our pages:"
+    ],
+    "SuccessfulMessageOne": [
+        "Ваша заявка принята!",
+        "Ваша заявка прийнята!",
+        "Your application is accepted!"
+    ],
+    "SuccessfulMessageTwo": [
+        "Спасибо за покупку!",
+        "Дякую за покупку!",
+        "Thank you for your purchase!"
+    ],
+    "SuccessfulToHome": [
+        "на главную",
+        "На головну",
+        "To home"
     ]
 }
