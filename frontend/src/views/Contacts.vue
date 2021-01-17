@@ -1,16 +1,12 @@
 <template>
   <div class="wrapper">
     <div class="content-about">
-      <p>Есть вопросы?</p>
-      <p>Мы будем рады получить твое сообщение:</p>
+      <p>{{ 'ContactsQuestions' | localize }}</p>
+      <p>{{ 'ContactsMessage' | localize }}</p>
 
       <div class="contact-row">
         <img class="contact-icon" src="../assets/phone-receiver.svg"/>
         <a href="tel:+380507204066">+380507204066</a>
-
-
-<!--        <img class="contact-icon extra" src="../assets/media.png">-->
-<!--        <img class="contact-icon" src="../assets/phone.png">-->
       </div>
 
       <div class="contact-row">
@@ -18,9 +14,9 @@
         <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
       </div>
       <br>
-      <p><strong>Возможен самовывоз возле метро Контрактовая площадь<br> по предварительной договоренности.</strong></p>
+      <p><strong>{{ 'ContactsDescriptionOne' | localize }}<br> {{ 'ContactsDescriptionTwo' | localize }}</strong></p>
       <br>
-      <p>Подписывайся на наши страницы:</p>
+      <p>{{ 'ContactsSubscribe' | localize }}</p>
       <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/">facebook.com/hoodiyalko</a></p>
       <p><a target="_blank" href="https://www.instagram.com/hoodiyalko/">instagram.com/hoodiyalko</a></p>
     </div>

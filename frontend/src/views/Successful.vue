@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="orderSuccessful">
-      <p>Ваша заявка принята!</p>
-      <p>Спасибо за покупку!</p>
-      <button @click="backToMain">на главную</button>
+      <p>{{ 'SuccessfulMessageOne' | localize }}</p>
+      <p>{{ 'SuccessfulMessageTwo' | localize }}</p>
+      <button @click="backToMain">{{ 'SuccessfulToHome' | localize }}</button>
     </div>
   </div>
 

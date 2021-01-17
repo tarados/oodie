@@ -46,7 +46,7 @@
             {{ 'CheckoutEnterPhone' | localize }}
           </small>
           <small v-show="$v.phone.required && !$v.phone.minLength">
-            {{ 'CheckoutPhoneWarning' | localize }} {{phone.length}}
+            {{ 'CheckoutPhoneWarning' | localize }} {{ phone.length }}
           </small>
         </div>
         <div class="form-title">
@@ -63,20 +63,20 @@
           <span>{{ 'CheckoutDeliveryMethod' | localize }}:</span>
         </div>
         <div class="form-content footer-content__item">
-          <select v-model="deliveryMethod" :class="{invalid: invalidDelivery}">
+          <select v-model="selectDeliveryMethod" :class="{invalid: invalidDelivery}">
             <option disabled value="">{{ 'CheckoutSelectDeliveryMethod' | localize }}</option>
             <option>{{ 'CheckoutNovaPoshta' | localize }}</option>
             <option>{{ 'CheckoutCourier' | localize }}</option>
             <option>{{ 'CheckoutPickup' | localize }}</option>
           </select>
-          <small v-if="invalidDelivery">{{ 'CheckoutSelectDeliveryMethodError' | localize}}</small>
+          <small v-if="invalidDelivery">{{ 'CheckoutSelectDeliveryMethodError' | localize }}</small>
         </div>
         <div class="form-title required" v-if="deliveryMethod === 'Новая почта'">
           <span>{{ 'CheckoutCity' | localize }}:</span>
         </div>
         <div class="" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidCity}">
           <autocomplete
-              placeholder="Начните вводить название города"
+              :placeholder="CheckoutSelectCityInput | localize"
               autocomplete="nope"
               :search="search"
               @submit="setCity"
@@ -89,7 +89,7 @@
         <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
           <autocomplete
               class="autocomplete"
-              placeholder="Начните вводить номер или адрес отделения"
+              :placeholder="ChekoutSelectWarehouseInput | localize"
               autocomplete="nope"
               :search="searchWarehouse"
               @submit="setWarehouse"
@@ -158,6 +158,7 @@ export default {
   data() {
     return {
       "deliveryMethod": "",
+      "selectDeliveryMethod": "",
       "delivery": null,
       "selectedPayment": '',
       "isVisible": true,
@@ -165,6 +166,8 @@ export default {
       "userSurname": "",
       "adress": '',
       "city": '',
+      "CheckoutSelectCityInput": "CheckoutSelectCityInput",
+      "ChekoutSelectWarehouseInput": "ChekoutSelectWarehouseInput",
       "cityError": '',
       "country": '+(38)',
       "cityRef": '',
@@ -307,11 +310,11 @@ export default {
     handleUserInput(e) {
       let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
       this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
-          + (replacedInput[3] ? '-' + replacedInput[3]: '') + (replacedInput[4] ?'-' + replacedInput[4] : '');
+          + (replacedInput[3] ? '-' + replacedInput[3] : '') + (replacedInput[4] ? '-' + replacedInput[4] : '');
     },
     handleUserInputCountry(e) {
       let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})/);
-      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] +(replacedInput[3] ? replacedInput[3] +')' : '');
+      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] + (replacedInput[3] ? replacedInput[3] + ')' : '');
     }
   },
   watch: {
@@ -356,6 +359,17 @@ export default {
     selectedPayment: function (newValue) {
       this.invalidPayment = !newValue;
     },
+    selectDeliveryMethod(newValue) {
+      if (newValue === 'Новая почта' || newValue === 'Нова пошта' || newValue === 'Nova poshta') {
+        this.deliveryMethod = 'Новая почта';
+      }
+      if (newValue === 'Курьером Новой почты' || newValue === 'Кур\'єром Нової пошти' || newValue === 'Courier Nova poshta') {
+        this.deliveryMethod = 'Курьером Новой почты';
+      }
+      if (newValue === 'Самовывоз' || newValue === 'Самовивіз' || newValue === 'Pickup') {
+        this.deliveryMethod = 'Самовывоз';
+      }
+    }
   },
   mounted() {
     this.cardVisible();
@@ -651,13 +665,13 @@ textarea {
   }
 }
 
-@media screen and (max-width: 360px){
+@media screen and (max-width: 360px) {
   .form-content__phone input.country {
     width: 30%;
   }
 }
 
-@media screen and (max-width: 300px){
+@media screen and (max-width: 300px) {
   .form-content__phone input.country {
     width: 40%;
   }
