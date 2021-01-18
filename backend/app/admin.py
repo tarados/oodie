@@ -163,10 +163,14 @@ class LocalizationAdmin(admin.ModelAdmin):
     ordering = ("key",)
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "pk",)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Localization, LocalizationAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(TableOfSize)
 admin.site.register(Size)
 admin.site.register(ProductAvailability, ProductAvailabilityAdmin)

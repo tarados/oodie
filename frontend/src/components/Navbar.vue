@@ -212,9 +212,6 @@ export default {
 
 .langSelector .langSelector_item {
   margin-top: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
 }
 
 .langSelector .langSelector_item span {
