@@ -50,12 +50,15 @@ class Localization(models.Model):
 		verbose_name = "Локализация"
 		verbose_name_plural = "Локализации"
 
+	def __str__(self):
+		return self.key
+
 
 class Product(models.Model):
 	title = models.CharField(max_length=255, verbose_name=u'название')
-	title_locale = models.ForeignKey(Localization, verbose_name=u'перевод названия', null=True, on_delete=models.CASCADE, related_name='title_translate')
+	title_locale = models.ForeignKey(Localization, verbose_name=u'перевод названия', null=True, blank=True, on_delete=models.CASCADE, related_name='title_translate')
 	description = models.TextField(verbose_name=u'описание')
-	description_locale = models.ForeignKey(Localization, verbose_name=u'перевод описания', null=True, on_delete=models.CASCADE, related_name='description_translate')
+	description_locale = models.ForeignKey(Localization, verbose_name=u'перевод описания', null=True, blank=True, on_delete=models.CASCADE, related_name='description_translate')
 	price = models.IntegerField(verbose_name=u'цена')
 	new_price = models.IntegerField(verbose_name=u'новая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)

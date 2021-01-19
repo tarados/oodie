@@ -338,5 +338,150 @@
         "на главную",
         "На головну",
         "To home"
+    ],
+    "PajamasPuma": [
+        "пижама \"Пума\"",
+        "піжама \"Пума\"",
+        "pajamas \"Puma\""
+    ],
+    "PajamasPumaDescription": [
+        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
+        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
+        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    ],
+    "Oodie_Twin_Pack": [
+        "Oodie Twin Pack",
+        "Oodie Twin Pack",
+        "Oodie Twin Pack"
+    ],
+    "OodieTwinPackDescription": [
+        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
+        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
+        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
+    ],
+    "UnicornOodie": [
+        "Unicorn Oodie",
+        "Unicorn Oodie",
+        "Unicorn Oodie"
+    ],
+    "CorgiOodieDescription": [
+        "Oodie - сверхмягкое одеяло с капюшоном, ПОДХОДЯЩИМ ДЛЯ САМЫХ РАЗМЕРОВ. В его основе худи 6XL.\r\n\r\nС мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!",
+        "- Oodie - це надзвичайно м’яке ковдру з ОДИН РОЗМІР, ЩО ВІДПОВІДАЄ БАГАТО капюшоном. Він створений на балахоні 6XL.\r\n\r\n- За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи зсередини, ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!",
+        "- The Oodie is a super soft ONE SIZE FITS MOST hooded blanket. It is based on a 6XL hoodie.\r\n\r\n- With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it!"
+    ],
+    "OodieTrackiesBlackDescription": [
+        "Брюки-унисекс Oodie - идеальный компаньон для носимого одеяла Oodie. Они изготовлены из уникального сочетания вискозы и спандекса и созданы для идеальной посадки, доступны в темно-синем или светло-сером цвете.",
+        "Унісекс-штани Oodie є ідеальним супутником ковдри The Oodie - виготовленої з нашої унікальної суміші Rayon та Spandex і розробленої для ідеального посадки, вони доступні в темно-темно-синьому або світло-сірому кольорах.",
+        "The Oodie unisex pants are a perfect companion to The Oodie wearable blanket - made from our unique blend of Rayon and Spandex and designed for a perfect fit, they are available in dark navy blue or light grey."
+    ],
+    "UnicornOodieDescription": [
+        "Что такое худиялко?\r\nЭто самая мягкая, теплая и уютная одежда, которая у вас когда-либо была.\r\n\r\nМы используем сверхмягкую ворсистую внешнюю ткань в сочетании с легким воздушным внутренним слоем, что дает ощущение как будто вы в облачке.\r\n\r\nИдеально подходит:\r\n-Холодным утром, когда так сложно выбраться из под одеяла\r\n-Для просмотра фильмов зимними вечерами\r\n-Во время пикников в прохладное время года\r\n-Для расслабления и отдыха\r\n-В качестве подарка\r\n\r\nОдин размер, который подходит всем от XXS до 6XL",
+        "Що таке худіялко?\r\nЦе сама м'яка, тепла і затишна одяг, яка у вас коли-небудь була.\r\n\r\nМи використовуємо надм'яку ворсисту зовнішню тканину в поєднанні з легким повітряним внутрішнім шаром, що дає відчуття, неначе ви в хмарці.\r\n\r\nІдеально підходить:\r\n-Холодна вранці, коли так складно вибратися з-під ковдри\r\n-Для перегляду фільмів зимовими вечорами\r\n-Під час пікніків в холодну пору року\r\n-Для розслаблення і відпочинку\r\n-В якості подарунка\r\n\r\nОдин розмір, який підходить всім від XXS до 6XL",
+        "What is a hoodie?\r\nThese are the softest, warmest and most comfortable clothes you will ever own.\r\n\r\nWe use an ultra-soft, fleecy outer fabric combined with a light, airy inner layer for a cloud-like feeling.\r\n\r\nPerfect fit:\r\n-Cold morning when it's so hard to get out of the blanket\r\n-For watching movies on winter evenings\r\n-During picnics during the cooler season\r\n-For relaxation and rest\r\n-As a present\r\n\r\nOne size that fits all from XXS to 6XL"
+    ],
+    "pajamasDogDescription": [
+        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
+        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
+        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    ],
+    "PajamasCat": [
+        "пижама \"Кот\"",
+        "піжама \"Кот\"",
+        "pajamas \"Cat\""
+    ],
+    "PajamasCatDescription": [
+        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
+        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
+        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    ],
+    "PajamasDog": [
+        "пижама \"Пес\"",
+        "піжама \"Пес\"",
+        "pajamas \"Dog\""
+    ],
+    "PajamasAvocado": [
+        "пижама \"Авокадо\"",
+        "піжама \"Авокадо\"",
+        "pajamas \"Avocado\""
+    ],
+    "PajamasAvocadoDescription": [
+        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
+        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
+        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    ],
+    "PajamasRaccoon": [
+        "Пижамы \"Енот\"",
+        "Піжами \"Єнот\"",
+        "Pajamas \"Raccoon\""
+    ],
+    "PajamasRaccoonDescription": [
+        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
+        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
+        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars"
+    ],
+    "GermanShepherdOodie": [
+        "German Shepherd Oodie",
+        "German Shepherd Oodie",
+        "German Shepherd Oodie"
+    ],
+    "GermanShepherdOodieDescription": [
+        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
+        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
+        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
+    ],
+    "CorgiOodie": [
+        "Corgi Oodie",
+        "Corgi Oodie",
+        "Corgi Oodie"
+    ],
+    "CatOodie": [
+        "Cat Oodie",
+        "Cat Oodie",
+        "Cat Oodie"
+    ],
+    "CatOodieDescription": [
+        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
+        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
+        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it! \r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
+    ],
+    "BulldogOodie": [
+        "Bulldog Oodie",
+        "Bulldog Oodie",
+        "Bulldog Oodie"
+    ],
+    "BulldogOodieDescription": [
+        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
+        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
+        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it!\r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
+    ],
+    "AvocadoOodie": [
+        "Avocado Oodie",
+        "Avocado Oodie",
+        "Avocado Oodie"
+    ],
+    "AvocadoOodieDescription": [
+        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
+        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
+        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it! \r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
+    ],
+    "OodieTrackies": [
+        "The Oodie Trackies",
+        "The Oodie Trackies",
+        "The Oodie Trackies"
+    ],
+    "OodieTrackiesDescription": [
+        "Брюки-унисекс Oodie - идеальный компаньон для носимого одеяла Oodie. Они изготовлены из уникального сочетания вискозы и спандекса и созданы для идеальной посадки, доступны в темно-синем или светло-сером цвете.",
+        "Унісекс-штани Oodie є ідеальним супутником ковдри The Oodie - виготовленої з нашої унікальної суміші Rayon та Spandex і розробленої для ідеального посадки, вони доступні в темно-темно-синьому або світло-сірому кольорах.",
+        "The Oodie unisex pants are a perfect companion to The Oodie wearable blanket - made from our unique blend of Rayon and Spandex and designed for a perfect fit, they are available in dark navy blue or light grey."
+    ],
+    "OodieTrackiesBlack": [
+        "The Trackies black",
+        "The Trackies black",
+        "The Trackies black"
+    ],
+    "NavyOodieBootsDescription": [
+        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
+        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
+        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
     ]
 }

@@ -41,6 +41,7 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
         ProductImageInline,
         ProductAvailabilityInline
     ]
+    autocomplete_fields = ['title_locale', 'description_locale']
 
     def has_add_permission(cls, request):
         ''' remove add and save and add another button '''
@@ -161,6 +162,7 @@ class LocalizationAdmin(admin.ModelAdmin):
     list_display = ("key", "value", "value_ua", "value_en")
     list_filter = ("key",)
     ordering = ("key",)
+    search_fields = ("key",)
 
 
 class CategoryAdmin(admin.ModelAdmin):
