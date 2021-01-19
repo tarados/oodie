@@ -40,9 +40,22 @@ class TableOfSize(models.Model):
 		return self.name
 
 
+class Localization(models.Model):
+	key = models.CharField("Ключ текста", max_length=255, null=True, blank=True)
+	value = models.TextField("Значение на русском", null=True, blank=True)
+	value_ua = models.TextField("Значение на украинском", null=True, blank=True)
+	value_en = models.TextField("Значение на английском", null=True, blank=True)
+
+	class Meta:
+		verbose_name = "Локализация"
+		verbose_name_plural = "Локализации"
+
+
 class Product(models.Model):
 	title = models.CharField(max_length=255, verbose_name=u'название')
+	title_locale = models.ForeignKey(Localization, verbose_name=u'перевод названия', null=True, on_delete=models.CASCADE, related_name='title_translate')
 	description = models.TextField(verbose_name=u'описание')
+	description_locale = models.ForeignKey(Localization, verbose_name=u'перевод описания', null=True, on_delete=models.CASCADE, related_name='description_translate')
 	price = models.IntegerField(verbose_name=u'цена')
 	new_price = models.IntegerField(verbose_name=u'новая цена', null=True, blank=True)
 	category = models.ForeignKey(Category, verbose_name=u'категория', null=True, on_delete=models.CASCADE)
@@ -260,14 +273,3 @@ def update_calculated_fields(sender, instance, **kwargs):
 	order.preorder = instance.preorder
 	order.save()
 	sender.objects.filter(pk=instance.pk).update(cost_product=cost_product)
-
-
-class Localization(models.Model):
-	key = models.CharField("Ключ текста", max_length=255, null=True, blank=True)
-	value = models.TextField("Значение на русском", null=True, blank=True)
-	value_ua = models.TextField("Значение на украинском", null=True, blank=True)
-	value_en = models.TextField("Значение на английском", null=True, blank=True)
-
-	class Meta:
-		verbose_name = "Локализация"
-		verbose_name_plural = "Локализации"

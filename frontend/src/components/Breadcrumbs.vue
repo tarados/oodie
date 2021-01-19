@@ -2,9 +2,13 @@
     <ul class="breadcrumbs">
       <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
         <router-link
-            v-if="index < breadcrumbs.length - 1"
+            v-if="index === 0"
             :to="{name: item.routeName, params: item.routeParams}"
              class="breadcrumbs__link">{{ item.title | localize }}</router-link>
+        <router-link
+            v-if="index === 1"
+            :to="{name: item.routeName, params: item.routeParams}"
+             class="breadcrumbs__link">{{ item.title }}</router-link>
 
         <a v-if="index === breadcrumbs.length - 1" class="breadcrumbs__link breadcrumbs__link--active">{{ item.title}}</a>
       </li>
@@ -34,8 +38,6 @@ export default {
 
     },
     ...mapGetters(["breadcrumbs"])
-  },
-  mounted() {
   }
 }
 </script>
