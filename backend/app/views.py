@@ -40,7 +40,7 @@ def products(request):
             {
                 'id': prod.id,
                 'title': prod.title,
-                'title_translate': prod.title_locale,
+                'title_translate': str(prod.title_locale),
                 'category': prod.category_id,
                 'availability': prod.availability_dict(),
                 'table': prod.get_table_of_size(),
@@ -61,14 +61,14 @@ def product(request, product_id):
     product_case = {
         'id': prod.id,
         'title': prod.title,
-        'title_translate': prod.title_locale,
+        'title_translate': str(prod.title_locale),
         'price': prod.price,
         'category': prod.category_id,
         'availability': prod.availability_dict(),
         'table': prod.get_table_of_size(),
         'new_price': prod.new_price,
         'description': prod.description,
-        'description_locale': prod.description_locale,
+        'description_locale': str(prod.description_locale),
         'image_list': images_url
     }
     return JsonResponse({'product': product_case})

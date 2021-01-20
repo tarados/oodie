@@ -67,7 +67,7 @@
           <div class="preorder" v-if="statusProduct">{{ 'ProductStatusPreorderDescription' | localize }}</div>
           <div class="preorder" v-if="!statusProduct">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
-            <div class="description">{{ this.currentProduct.description }}</div>
+            <div class="description">{{ this.currentProduct.description_locale | localize }}</div>
           </div>
         </div>
       </div>
