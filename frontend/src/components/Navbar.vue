@@ -27,7 +27,6 @@
                   class="menu-item lang"
                   v-for="(item, index) in langList" :key="index"
                   @click="getLocale(index)"
-
               >
                 <flag :iso="item.slug"></flag>
                 <p>{{ item.title }}</p>
@@ -118,8 +117,8 @@ export default {
   data() {
     return {
       selected: "",
-      selectedLanguageIcon: "ru",
-      selectedLanguage: "RU",
+      selectedLanguageIcon: "",
+      selectedLanguage: "",
       isOpen: false,
       isOpenLang: false,
       options: [],
@@ -161,6 +160,9 @@ export default {
     getLinkList() {
       this.links = links();
       this.langList = langList();
+      this.selectedLanguage = window.navigator.language.slice(0, 2);
+      this.selectedLanguageIcon = window.navigator.language.slice(0, 2);
+      console.log(window.navigator.language.slice(0, 2));
     },
     getLocale(index) {
       const locale = this.langList[index].name;
