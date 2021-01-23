@@ -36,11 +36,15 @@ def products(request):
         })
 
     for prod in all_products:
+        if prod.title_locale is None:
+            title_translate = None
+        else:
+            title_translate = str(prod.title_locale)
         products_list.append(
             {
                 'id': prod.id,
                 'title': prod.title,
-                'title_translate': str(prod.title_locale),
+                'title_translate': title_translate,
                 'category': prod.category_id,
                 'availability': prod.availability_dict(),
                 'table': prod.get_table_of_size(),
@@ -58,17 +62,25 @@ def product(request, product_id):
     images_url = []
     for image in ProductImage.objects.filter(product=prod.id):
         images_url.append(os.environ['SITE_URL'] + image.image.url)
+    if prod.title_locale is None:
+        title_translate = None
+    else:
+        title_translate = str(prod.title_locale)
+    if prod.description_locale is None:
+        description_locale = None
+    else:
+        description_locale = str(prod.description_locale)
     product_case = {
         'id': prod.id,
         'title': prod.title,
-        'title_translate': str(prod.title_locale),
+        'title_translate': title_translate,
         'price': prod.price,
         'category': prod.category_id,
         'availability': prod.availability_dict(),
         'table': prod.get_table_of_size(),
         'new_price': prod.new_price,
         'description': prod.description,
-        'description_locale': str(prod.description_locale),
+        'description_locale': description_locale,
         'image_list': images_url
     }
     return JsonResponse({'product': product_case})

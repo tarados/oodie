@@ -23,7 +23,7 @@
         >
           {{ 'AvailabilityNo' | localize }}
         </div>
-        <h4>{{ product.title }}</h4>
+        <h4>{{ product.title_translate | localize(product.title) }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
           <span v-else>{{ product.price }} грн</span>
