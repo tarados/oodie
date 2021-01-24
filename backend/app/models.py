@@ -44,7 +44,7 @@ class Localization(models.Model):
 	key = models.CharField("Ключ текста", max_length=255, null=True, blank=True)
 	value = models.TextField("Значение на русском", null=True, blank=True)
 	value_ua = models.TextField("Значение на украинском", null=True, blank=True)
-	value_en = models.TextField("Значение на английском", null=True, blank=True)
+	# value_en = models.TextField("Значение на английском", null=True, blank=True)
 
 	class Meta:
 		verbose_name = "Локализация"

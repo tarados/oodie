@@ -159,9 +159,9 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
 
 
 class LocalizationAdmin(admin.ModelAdmin):
-    list_display = ("key", "value", "value_ua")
+    list_display = ("key", "value", "value_ua", "pk")
     list_filter = ("key",)
-    ordering = ("key",)
+    ordering = ("pk",)
     search_fields = ("key",)
 
 
