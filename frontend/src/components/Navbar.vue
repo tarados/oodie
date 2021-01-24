@@ -162,7 +162,6 @@ export default {
       this.langList = langList();
       this.selectedLanguage = window.navigator.language.slice(0, 2);
       this.selectedLanguageIcon = window.navigator.language.slice(0, 2);
-      console.log(window.navigator.language.slice(0, 2));
     },
     getLocale(index) {
       const locale = this.langList[index].name;

@@ -80,7 +80,6 @@
 import {VueperSlides, VueperSlide} from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import settings from "../settings";
 
 import {required} from "vuelidate/lib/validators";
 
@@ -112,16 +111,18 @@ export default {
   },
   computed: {
     currentProduct() {
-      try {
-        return this.$store.state.productsStore.currentProduct;
-      } catch (TypeError) {
+      const product = this.$store.state.productsStore.currentProduct;
+      if (product) {
+        return product;
+      } else {
         return {};
       }
     },
     currentCategory() {
-      try {
-        return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
-      } catch (TypeError) {
+      const category = this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category);
+      if (category && category.title) {
+        return category.title;
+      } else {
         return "";
       }
     },
@@ -129,14 +130,11 @@ export default {
       return this.imageIndex;
     },
     getStatusProduct() {
-      try {
-        if (this.statusProduct) {
-          return 'ProductStatusPreorder'
-        } else {
-          return 'ProductStatusBasket'
-        }
-      } catch (TypeError) {
-        return ''
+      const status = this.statusProduct;
+      if (status && (status !== 'undefined')) {
+        return 'ProductStatusPreorder'
+      } else {
+        return 'ProductStatusBasket'
       }
     }
   },
@@ -151,7 +149,7 @@ export default {
       });
       this.availabilities = this.currentProduct.availability;
 
-      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
+      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
       }
     },

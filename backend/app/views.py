@@ -179,14 +179,11 @@ def locales(request):
     locale = {}
     key_ru = {}
     key_ua = {}
-    key_en = {}
     for el in localizations:
         key_ru.update({el.key: el.value})
         key_ua.update({el.key: el.value_ua})
-        key_en.update({el.key: el.value_en})
     locale.update({
         'ru-RU': key_ru,
-        'ua-UA': key_ua,
-        'en-US': key_en
+        'ua-UA': key_ua
     })
     return JsonResponse(locale)

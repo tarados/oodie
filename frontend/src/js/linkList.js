@@ -16,11 +16,6 @@ export function langList() {
       'slug': 'ru'
     },
     {
-      'title': 'EN',
-      'name': 'en-US',
-      'slug': 'us'
-    },
-    {
       'title': 'UA',
       'name': 'ua-UA',
       'slug': 'ua'

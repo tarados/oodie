@@ -79,8 +79,6 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import settings from "@/settings";
-
 
 export default {
   name: "Card",
@@ -103,7 +101,10 @@ export default {
   },
   methods: {
     needShowSize(product) {
-      const result = product.size && product.size !== settings.hideSize;
+      let result = '';
+      if (product.size !== 'ONE SIZE') {
+        result = product.size;
+      }
       return result;
     },
     deleteOrder(index) {

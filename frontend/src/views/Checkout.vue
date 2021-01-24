@@ -345,13 +345,10 @@ export default {
       this.invalidAdress = !newValue;
     },
     city: function () {
-      try {
-        let cityId = this.allCities.find(city => city.name === this.city).id;
-        this.$store.dispatch('loadWarehouses', cityId);
-      } catch (TypeError) {
-        console.log('error in name city');
+      const city = this.allCities.find(city => city.name === this.city);
+      if (city && city.id) {
+        this.$store.dispatch('loadWarehouses', city.id);
       }
-
     },
     deliveryMethod: function (newValue) {
       this.invalidDelivery = !newValue;

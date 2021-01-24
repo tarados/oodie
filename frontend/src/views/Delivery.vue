@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="content-about">
       <div class="contact-item">
-        <h2>Доставка и оплата</h2>
+        <h2>{{ 'ShippingAndPayment' | localize }}</h2>
       </div>
 
       <div class="contact-item">

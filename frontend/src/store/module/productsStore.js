@@ -95,6 +95,9 @@ export default {
         locales: {}
     },
     getters: {
+        currentProduct(state) {
+            return state.currentProduct;
+        },
         allProducts(state) {
             return state.productsList;
         },
