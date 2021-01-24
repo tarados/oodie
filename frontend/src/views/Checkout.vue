@@ -156,7 +156,7 @@ export default {
     Autocomplete
   },
   data() {
-    return {
+    return { //TODO fix names
       "deliveryMethod": "",
       "selectDeliveryMethod": "",
       "delivery": null,
@@ -264,7 +264,7 @@ export default {
     toCard() {
       this.$router.push({name: "Card"})
     },
-    cardVisible() {
+    cardVisible() { //TODO remove
       this.$emit('cardVisible', false);
     },
     deliveryState() {

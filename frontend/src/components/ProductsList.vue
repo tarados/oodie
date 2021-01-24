@@ -78,7 +78,7 @@ export default {
     isPreorder(product) {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
-    isAvailability(product) {
+    isAvailability(product) { //TODO rename  isAvailable shoud return boolean
       try {
         return product.availability[0].quantity;
       } catch (TypeError) {

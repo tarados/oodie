@@ -63,9 +63,9 @@
           <div class="size-table" v-if="this.currentProduct.table">
             <a :href="this.currentProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
-          <div class="btn" @click="toCard">{{ getStatusProduct | localize }}</div>
-          <div class="preorder" v-if="statusProduct">{{ 'ProductStatusPreorderDescription' | localize }}</div>
-          <div class="preorder" v-if="!statusProduct">{{ 'ProductStatusBasketDescription' | localize }}</div>
+          <div class="btn" @click="toCard">{{ getPreorder | localize }}</div>
+          <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
+          <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
             <div class="description">{{ this.currentProduct.description_locale | localize(this.currentProduct.description) }}</div>
           </div>
@@ -90,7 +90,7 @@ export default {
       imageIndex: 0,
       size: 0,
       availabilities: [],
-      statusProduct: null,
+      preorder: null,
       visibleCard: true,
       slides: [],
       hideSize: false,
@@ -129,9 +129,9 @@ export default {
     selectedImage() {
       return this.imageIndex;
     },
-    getStatusProduct() {
-      const status = this.statusProduct;
-      if (status && (status !== 'undefined')) {
+    getPreorder() {
+      const status = this.preorder;
+      if (status) {
         return 'ProductStatusPreorder'
       } else {
         return 'ProductStatusBasket'
@@ -152,6 +152,7 @@ export default {
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
       }
+      // TODO preorder
     },
     showImage(index) {
       this.imageIndex = index;
@@ -167,7 +168,7 @@ export default {
         "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
-        "availability": availability.quantity,
+        "availability": availability.quantity, // TODO do not cache
         "preorder": availability.preorder,
         "size": availability.size,
         "image": this.currentProduct.image_list[this.imageIndex],
@@ -182,12 +183,12 @@ export default {
     },
     select(index) {
       this.size = index;
-      this.availabilities[index].preorder ? this.statusProduct = true : this.statusProduct = false;
+      this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred
     },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
         this.$store.dispatch("changeVisibleBasket");
-      }
+      } // TODO remove this method
     }
   },
   watch: {

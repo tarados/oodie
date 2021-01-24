@@ -126,7 +126,7 @@ export default {
         alert("В наличии только " + item.availability);
       }
     },
-    basketVisible() {
+    basketVisible() { // TODO remove this
       if (this.$store.state.productsStore.basketVisible) {
         this.$store.dispatch('changeVisibleBasket')
       }

@@ -162,7 +162,7 @@ class LocalizationAdmin(admin.ModelAdmin):
     list_display = ("key", "value", "value_ua", "pk")
     list_filter = ("key",)
     ordering = ("pk",)
-    search_fields = ("key",)
+    search_fields = ("key", "value",)
 
 
 class CategoryAdmin(admin.ModelAdmin):
