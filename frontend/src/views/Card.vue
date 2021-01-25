@@ -120,10 +120,10 @@ export default {
     plusQuantity(index) {
       const item = this.$store.state.productsStore.cardProducts[index];
       let newAvailability = item.quantity + 1;
-      if (newAvailability <= item.availability) {
+      if (newAvailability <= item.available) {
         this.$store.commit('increment', index);
       } else {
-        alert("В наличии только " + item.availability);
+        alert("В наличии только " + item.available);
       }
     },
     basketVisible() { // TODO remove this

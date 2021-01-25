@@ -148,11 +148,11 @@ export default {
         });
       });
       this.availabilities = this.currentProduct.availability;
-
+// if product have one size
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
-      }
-      // TODO preorder
+        this.preorder = this.availabilities[0].preorder;
+      } // TODO preorder ++
     },
     showImage(index) {
       this.imageIndex = index;
@@ -168,7 +168,7 @@ export default {
         "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
-        "availability": availability.quantity, // TODO do not cache
+        "available": availability.quantity, // TODO do not cache++
         "preorder": availability.preorder,
         "size": availability.size,
         "image": this.currentProduct.image_list[this.imageIndex],
@@ -183,7 +183,7 @@ export default {
     },
     select(index) {
       this.size = index;
-      this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred
+      this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred ++
     },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
