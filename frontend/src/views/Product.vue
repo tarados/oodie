@@ -91,7 +91,7 @@ export default {
       size: 0,
       availabilities: [],
       preorder: null,
-      visibleCard: true,
+      // visibleCard: true,
       slides: [],
       hideSize: false,
       breakpoints: {
@@ -184,11 +184,6 @@ export default {
     select(index) {
       this.size = index;
       this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred ++
-    },
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch("changeVisibleBasket");
-      } // TODO remove this method
     }
   },
   watch: {
@@ -202,7 +197,6 @@ export default {
   },
   mounted() {
     this.loadProduct();
-    this.basketVisible();
   },
 };
 </script>

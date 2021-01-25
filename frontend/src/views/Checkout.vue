@@ -264,9 +264,6 @@ export default {
     toCard() {
       this.$router.push({name: "Card"})
     },
-    cardVisible() { //TODO remove
-      this.$emit('cardVisible', false);
-    },
     deliveryState() {
       this.$store.dispatch('loadCities');
     },
@@ -369,7 +366,6 @@ export default {
     }
   },
   mounted() {
-    this.cardVisible();
     this.deliveryState();
   }
 }

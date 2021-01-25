@@ -22,7 +22,6 @@
     </div>
 
 
-
   </div>
 
 </template>
@@ -31,16 +30,12 @@
 export default {
   name: "Contacts",
   methods: {
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch("changeVisibleBasket");
-      }
-    },
-  },
-  mounted() {
-    this.basketVisible();
-  },
-};
+    // basketVisible() {
+    //   if (!this.$store.state.productsStore.basketVisible) {
+    //     this.$store.dispatch("changeVisibleBasket");
+    //   }
+  }
+}
 </script>
 
 <style scoped>

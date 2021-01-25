@@ -14,8 +14,9 @@
         >
           <div class="langSelector_item">
             <flag :iso="selectedLanguageIcon"></flag>
-            <span>{{selectedLanguage}}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+            <span>{{ selectedLanguage }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 fill="none"
                  stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z"/>
               <path d="M9 14l3 3l3 -3"/>
@@ -34,7 +35,7 @@
             </div>
           </transition>
         </div>
-        <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
+        <div class="basket" v-if="basketVisible">
           <router-link :to="{name: 'Card'}">
             <img src="../assets/cart.svg">
             <span
@@ -66,7 +67,7 @@
           <router-link
               :to="{name: 'Brands'}"
           >
-            <p>{{ links['3'] | localize  }}</p>
+            <p>{{ links['3'] | localize }}</p>
           </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -120,6 +121,7 @@ export default {
       selectedLanguageIcon: "",
       selectedLanguage: "",
       isOpen: false,
+      basketVisible: true,
       isOpenLang: false,
       options: [],
       links: {},
@@ -127,7 +129,16 @@ export default {
       hamburger: false,
     };
   },
-  computed: {...mapGetters(["getLocales",])},
+  computed: {
+    ...mapGetters(["getLocales",]),
+    getBasket() {
+      if (this.$router.currentRoute.name === 'Card') {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  },
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
@@ -168,6 +179,15 @@ export default {
       this.$store.commit('setLocale', locale);
       this.selectedLanguageIcon = this.langList[index].slug;
       this.selectedLanguage = this.langList[index].title;
+    }
+  },
+  watch: {
+    $route(to) {
+      if (to.name === 'Card' || to.name === 'Checkout') {
+        this.basketVisible = false;
+      } else {
+        this.basketVisible = true;
+      }
     }
   },
   mounted() {

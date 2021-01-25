@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <ProductsList :category-id="categoryId" />
+    <ProductsList :category-id="categoryId"/>
 
     <InstaWidget/>
   </div>
@@ -52,8 +52,7 @@ import InstaWidget from "../components/InstaWidget";
 export default {
   name: 'Home',
   data() {
-    return {
-    }
+    return {}
   },
   components: {
     ProductsList,
@@ -63,16 +62,6 @@ export default {
     categoryId() {
       return 1
     }
-  },
-  methods: {
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
-      }
-    }
-  },
-  mounted() {
-    this.basketVisible();
   }
 }
 </script>
@@ -216,6 +205,7 @@ h4 {
     margin: 0 auto;
   }
 }
+
 @media screen and (max-width: 1100px) {
   .info-content + .info-content {
     margin-left: 40px;

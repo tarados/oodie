@@ -60,6 +60,7 @@ export default {
   },
   mounted() {
     this.basketVisible();
+    console.log(this.$router.currentRoute.name);
   },
 };
 </script>

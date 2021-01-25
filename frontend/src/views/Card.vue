@@ -125,15 +125,15 @@ export default {
       } else {
         alert("В наличии только " + item.available);
       }
-    },
-    basketVisible() { // TODO remove this
-      if (this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
-      }
     }
+    // basketVisible() { // TODO remove this
+    //   if (this.$store.state.productsStore.basketVisible) {
+    //     this.$store.dispatch('changeVisibleBasket')
+    //   }
+    // }
   },
   mounted() {
-    this.basketVisible();
+
   }
 }
 </script>
