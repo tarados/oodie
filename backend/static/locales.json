@@ -1,487 +1,338 @@
 {
     "InfoSize": [
         "Один размер",
-        "Один розмір",
-        "One size"
+        "Один розмір"
     ],
     "InfoSizeDescription": [
         "ПОДХОДИТ ДЛЯ ВСЕХ",
-        "ПІДХОДИТЬ ДЛЯ ВСІХ",
-        "SUITABLE FOR ALL"
+        "ПІДХОДИТЬ ДЛЯ ВСІХ"
     ],
     "InfoCat": [
         "ТЕПЛОЕ И ОЧЕНЬ МЯГКОЕ",
-        "ТЕПЛЕ І ДУЖЕ М'ЯКЕ",
-        "WARM AND VERY SOFT"
+        "ТЕПЛЕ І ДУЖЕ М'ЯКЕ"
     ],
     "InfoCatDescription": [
         "КАК КОТИК",
-        "ЯК КОТИК",
-        "AS A CAT"
+        "ЯК КОТИК"
     ],
     "InfoDelivery": [
         "БЫСТРАЯ ДОСТАВКА",
-        "ШВИДКА ДОСТАВКА",
-        "FAST DELIVERY"
+        "ШВИДКА ДОСТАВКА"
     ],
     "InfoDeliveryDescription": [
         "1-2 ДНЯ ПО УКРАИНЕ",
-        "1-2 ДНЯ ПО УКРАЇНІ",
-        "1-2 DAYS ACROSS UKRAINE"
+        "1-2 ДНЯ ПО УКРАЇНІ"
     ],
     "FooterContacts": [
         "Контакты",
-        "Контакти",
-        "Contacts"
+        "Контакти"
     ],
     "FooterShipping": [
         "Доставка и оплата",
-        "Доставка і оплата",
-        "Shipping and payment"
+        "Доставка і оплата"
     ],
     "FooterCooperation": [
         "Сотрудничество",
-        "Співробітництво",
-        "Cooperation"
+        "Співробітництво"
     ],
     "FooterExchange": [
         "Обмен и возврат",
-        "Обмін і повернення",
-        "Exchange and return"
+        "Обмін і повернення"
     ],
     "ProductStatusPreorder": [
         "Предзаказ",
-        "Передзамовлення",
-        "Preorder"
+        "Передзамовлення"
     ],
     "FooterSocial": [
         "Мы в соцсетях",
-        "Ми в соцмережах",
-        "We are in social networks"
+        "Ми в соцмережах"
     ],
     "AvailabilityNo": [
         "Нет в наличии",
-        "Немає в наявності",
-        "Not available"
+        "Немає в наявності"
     ],
     "ProductBrand": [
         "Бренд",
-        "Бренд",
-        "Brand"
+        "Бренд"
     ],
     "ProductStatusBasket": [
         "В корзину",
-        "В кошик",
-        "Add to cart"
+        "В кошик"
     ],
     "CheckoutCity": [
         "Город",
-        "Місто",
-        "City"
+        "Місто"
     ],
     "ProductCard": [
         "Корзина",
-        "Кошик",
-        "Basket"
+        "Кошик"
     ],
     "ProductSizeTable": [
         "Таблица размеров",
-        "Таблиця розмірів",
-        "Size table"
+        "Таблиця розмірів"
     ],
     "ProductCardEmpty": [
         "Ваша корзина пуста!",
-        "Ваш кошик порожній!",
-        "Your basket is empty!"
+        "Ваш кошик порожній!"
     ],
     "ProductDelete": [
         "Удалить",
-        "Вилучити",
-        "Delete"
+        "Вилучити"
     ],
     "CheckoutSurnameError": [
         "Введите Вашу фамилию",
-        "Введіть Ваше прізвище",
-        "Enter your last name"
+        "Введіть Ваше прізвище"
     ],
     "BasketPreorderDescription": [
         "В Вашей корзине есть товар по предзаказу!\r\nОтправка этого товара будет в первой половине января. Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь",
-        "У Вашому кошику є товар за попереднім замовленням!\r\nВідправлення цього товару буде в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу",
-        "There is a pre-order item in your cart!\r\nThis item will ship in the first half of January. We will contact you when the product is in stock for confirmation and send your order first."
+        "У Вашому кошику є товар за попереднім замовленням!\r\nВідправлення цього товару буде в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу"
     ],
     "BasketTotalPrice": [
         "Итого",
-        "Разом",
-        "Total"
+        "Разом"
     ],
     "ContinueShopping": [
         "Продолжить покупки",
-        "Продовжити покупки",
-        "Continue shopping"
+        "Продовжити покупки"
     ],
     "BasketCheckout": [
         "Оформить заказ",
-        "Оформити замовлення",
-        "Checkout"
+        "Оформити замовлення"
     ],
     "CheckoutEnterYouName": [
         "Введите Ваше имя",
-        "Введіть ваше ім'я",
-        "Enter your name"
+        "Введіть ваше ім'я"
     ],
     "ChecoutPhone": [
         "Телефон",
-        "Телефон",
-        "Phone"
+        "Телефон"
     ],
     "CheckoutEnterPhone": [
         "Введите номер телефона",
-        "Введіть номер телефону",
-        "Enter your phone number"
+        "Введіть номер телефону"
     ],
     "CheckoutPhoneWarning": [
         "Номер включает в себя 12 цифр. Сейчас их",
-        "Номер включає в себе 12 цифр. зараз їх",
-        "The number includes 12 digits. Now their"
+        "Номер включає в себе 12 цифр. зараз їх"
     ],
     "CheckoutDeliveryMethod": [
         "Способ доставки",
-        "Спосіб доставки",
-        "Delivery method"
+        "Спосіб доставки"
     ],
     "CheckoutPickup": [
         "Самовывоз",
-        "Самовивіз",
-        "Pickup"
+        "Самовивіз"
     ],
     "CheckoutSelectDeliveryMethodError": [
         "Нужно выбрать способ доставки",
-        "Потрібно вибрати спосіб доставки",
-        "You need to choose a delivery method"
+        "Потрібно вибрати спосіб доставки"
     ],
     "CheckoutPostOffice": [
         "Отделение",
-        "Відділення",
-        "Postoffice"
+        "Відділення"
     ],
     "CheckoutSurname": [
         "Фамилия",
-        "Прізвище",
-        "Last name"
+        "Прізвище"
     ],
     "CheckoutName": [
         "Имя",
-        "Ім'я",
-        "First name"
+        "Ім'я"
     ],
     "CheckoutSelectCity": [
         "Выберите город",
-        "Виберіть місто",
-        "Select city"
+        "Виберіть місто"
     ],
     "CheckoutPostOfficeError": [
         "Нужно выбрать склад Новой Почты",
-        "Потрібно вибрати склад Нової Пошти",
-        "You need to choose a warehouse for Nova Poshta"
+        "Потрібно вибрати склад Нової Пошти"
     ],
     "CheckoutAddress": [
         "Адрес",
-        "Адреса",
-        "Address"
+        "Адреса"
     ],
     "CheckoutAddressError": [
         "Нужно указать адрес доставки",
-        "Потрібно вказати адресу доставки",
-        "You need to specify the delivery address"
+        "Потрібно вказати адресу доставки"
     ],
     "CheckoutPaymentMethod": [
         "Способ оплаты",
-        "Спосіб оплати",
-        "Payment method"
+        "Спосіб оплати"
     ],
     "CheckoutPaymentCard": [
         "На карту",
-        "На карту",
-        "To the card"
+        "На карту"
     ],
     "CheckoutComment": [
         "Комментарий",
-        "Коментар",
-        "Comment"
+        "Коментар"
     ],
     "ProductStatusPreorderDescription": [
         "Товар ожидается в наличии в первой половине января. Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь",
-        "Товар очікується в наявності в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу",
-        "The product is expected to be available in the first half of January. We will contact you when the product is in stock for confirmation and send your order first"
+        "Товар очікується в наявності в першій половині січня. Ми зв'яжемося з вами коли товар з'явиться в наявності для підтвердження і відправимо ваш замовлення в першу чергу"
     ],
     "ProductStatusBasketDescription": [
         "Доставка 1-2 дня",
-        "Доставка 1-2 дня",
-        "Delivery 1-2 days"
+        "Доставка 1-2 дня"
     ],
     "MenuBrandsFriends": [
         "Бренды друзья",
-        "Бренди друзі",
-        "Brands friends"
+        "Бренди друзі"
     ],
     "MenuHome": [
         "Главная",
-        "Головна",
-        "Home"
+        "Головна"
     ],
     "MenuAboutUs": [
         "О нас",
-        "Про нас",
-        "About us"
+        "Про нас"
     ],
     "MenuContacts": [
         "Контакты",
-        "Контакти",
-        "Contacts"
+        "Контакти"
     ],
     "CheckoutPaymentCOD": [
         "Наложенный платеж",
-        "Накладений платіж",
-        "C.O.D"
+        "Накладений платіж"
     ],
     "CheckoutPaymentCODError": [
         "Нужно выбрать способ оплаты",
-        "Потрібно вибрати спосіб оплати",
-        "You need to choose a payment method"
+        "Потрібно вибрати спосіб оплати"
     ],
     "CheckoutPickupDescription": [
         "Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с вами для уточнения деталей",
-        "Ви зможете забрати замовлення біля метро Контрактова. Після оформлення замовлення, наш менеджер зв'яжеться з вами для уточнення деталей",
-        "You can pick up your order near the Kontraktovaya metro station. After placing an order, our manager will contact you to clarify the details"
+        "Ви зможете забрати замовлення біля метро Контрактова. Після оформлення замовлення, наш менеджер зв'яжеться з вами для уточнення деталей"
     ],
     "CheckoutPay": [
         "К оплате",
-        "До оплати",
-        "To pay"
+        "До оплати"
     ],
     "CheckoutBack": [
         "Вернуться в корзину",
-        "Повернутися в кошик",
-        "Back to cart"
+        "Повернутися в кошик"
     ],
     "CheckoutBuy": [
         "Купить",
-        "Купити",
-        "Buy"
+        "Купити"
     ],
     "CheckoutSelectPaymentMethod": [
         "Выберите способ оплаты",
-        "Оберіть спосіб оплати",
-        "Select a payment method"
+        "Оберіть спосіб оплати"
     ],
     "CheckoutSelectDeliveryMethod": [
         "Выберите способ доставки",
-        "Виберіть спосіб доставки",
-        "Select delivery method"
+        "Виберіть спосіб доставки"
     ],
     "CheckoutCourier": [
         "Курьером Новой почты",
-        "Кур'єром Нової пошти",
-        "Courier Nova poshta"
+        "Кур'єром Нової пошти"
     ],
     "CheckoutNovaPoshta": [
         "Новая почта",
-        "Нова пошта",
-        "Nova poshta"
+        "Нова пошта"
     ],
     "CheckoutSelectCityInput": [
         "Начните вводить название города",
-        "Почніть вводити назву міста",
-        "Start typing the city name"
+        "Почніть вводити назву міста"
     ],
     "ChekoutSelectWarehouseInput": [
         "Начните вводить номер или адрес отделения",
-        "Почніть вводити номер або адресу відділення",
-        "Start typing the branch number or address"
+        "Почніть вводити номер або адресу відділення"
     ],
     "ContactsQuestions": [
         "Есть вопросы?",
-        "Є питання?",
-        "Have questions"
+        "Є питання?"
     ],
     "ContactsMessage": [
         "Мы будем рады получить твое сообщение:",
-        "Ми будемо раді отримати твоє повідомлення:",
-        "We will be glad to receive your message:"
+        "Ми будемо раді отримати твоє повідомлення:"
     ],
     "ContactsDescriptionOne": [
         "Возможен самовывоз возле метро Контрактовая площадь",
-        "Є можливість самовивозу біля метро Контрактова площа",
-        "Pickup possible near Kontraktova Ploshcha metro station"
+        "Є можливість самовивозу біля метро Контрактова площа"
     ],
     "ContactsDescriptionTwo": [
         "по предварительной договоренности.",
-        "за попередньою домовленістю.",
-        "by prior arrangement."
+        "за попередньою домовленістю."
     ],
     "ContactsSubscribe": [
         "Подписывайся на наши страницы:",
-        "Підписуйся на наші сторінки:",
-        "Subscribe to our pages:"
+        "Підписуйся на наші сторінки:"
     ],
     "SuccessfulMessageOne": [
         "Ваша заявка принята!",
-        "Ваша заявка прийнята!",
-        "Your application is accepted!"
+        "Ваша заявка прийнята!"
     ],
     "SuccessfulMessageTwo": [
         "Спасибо за покупку!",
-        "Дякую за покупку!",
-        "Thank you for your purchase!"
+        "Дякую за покупку!"
     ],
     "SuccessfulToHome": [
         "на главную",
-        "На головну",
-        "To home"
+        "На головну"
     ],
-    "PajamasPuma": [
-        "пижама \"Пума\"",
-        "піжама \"Пума\"",
-        "pajamas \"Puma\""
+    "ShippingAndPayment": [
+        "Доставка и оплата",
+        "Доставка і оплата"
     ],
-    "PajamasPumaDescription": [
-        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
-        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
-        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    "DeliveryInUkraine": [
+        "Доставка по Украине",
+        "Доставка по Україні"
     ],
-    "Oodie_Twin_Pack": [
-        "Oodie Twin Pack",
-        "Oodie Twin Pack",
-        "Oodie Twin Pack"
+    "ShippingAndPaymentDescriptionOne": [
+        "Новой Почтой до ближайшего отделения. Заказы оформленные до 17.00 отправляем в тот же день",
+        "Новою Поштою до найближчого відділення. Замовлення оформлені до 17.00 відправляємо в той же день"
     ],
-    "OodieTwinPackDescription": [
-        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
-        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
-        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
+    "ShippingAndPaymentDescriptionTwo": [
+        "Курьером Новой почты по адресу",
+        "Кур'єром Нової пошти за адресою"
     ],
-    "UnicornOodie": [
-        "Unicorn Oodie",
-        "Unicorn Oodie",
-        "Unicorn Oodie"
+    "DeliveryInKiev": [
+        "Доставка по Киеву",
+        "Доставка по Києву"
     ],
-    "CorgiOodieDescription": [
-        "Oodie - сверхмягкое одеяло с капюшоном, ПОДХОДЯЩИМ ДЛЯ САМЫХ РАЗМЕРОВ. В его основе худи 6XL.\r\n\r\nС мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!",
-        "- Oodie - це надзвичайно м’яке ковдру з ОДИН РОЗМІР, ЩО ВІДПОВІДАЄ БАГАТО капюшоном. Він створений на балахоні 6XL.\r\n\r\n- За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи зсередини, ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!",
-        "- The Oodie is a super soft ONE SIZE FITS MOST hooded blanket. It is based on a 6XL hoodie.\r\n\r\n- With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it!"
+    "ShippingAndPaymentDescriptionThree": [
+        "Новой почтой до ближайшего отделения",
+        "Новою поштою до найближчого відділення"
     ],
-    "OodieTrackiesBlackDescription": [
-        "Брюки-унисекс Oodie - идеальный компаньон для носимого одеяла Oodie. Они изготовлены из уникального сочетания вискозы и спандекса и созданы для идеальной посадки, доступны в темно-синем или светло-сером цвете.",
-        "Унісекс-штани Oodie є ідеальним супутником ковдри The Oodie - виготовленої з нашої унікальної суміші Rayon та Spandex і розробленої для ідеального посадки, вони доступні в темно-темно-синьому або світло-сірому кольорах.",
-        "The Oodie unisex pants are a perfect companion to The Oodie wearable blanket - made from our unique blend of Rayon and Spandex and designed for a perfect fit, they are available in dark navy blue or light grey."
+    "ShippingAndPaymentDescriptionFour": [
+        "Курьером Новой почты по адресу",
+        "Кур'єром Нової пошти за адресою"
     ],
-    "UnicornOodieDescription": [
-        "Что такое худиялко?\r\nЭто самая мягкая, теплая и уютная одежда, которая у вас когда-либо была.\r\n\r\nМы используем сверхмягкую ворсистую внешнюю ткань в сочетании с легким воздушным внутренним слоем, что дает ощущение как будто вы в облачке.\r\n\r\nИдеально подходит:\r\n-Холодным утром, когда так сложно выбраться из под одеяла\r\n-Для просмотра фильмов зимними вечерами\r\n-Во время пикников в прохладное время года\r\n-Для расслабления и отдыха\r\n-В качестве подарка\r\n\r\nОдин размер, который подходит всем от XXS до 6XL",
-        "Що таке худіялко?\r\nЦе сама м'яка, тепла і затишна одяг, яка у вас коли-небудь була.\r\n\r\nМи використовуємо надм'яку ворсисту зовнішню тканину в поєднанні з легким повітряним внутрішнім шаром, що дає відчуття, неначе ви в хмарці.\r\n\r\nІдеально підходить:\r\n-Холодна вранці, коли так складно вибратися з-під ковдри\r\n-Для перегляду фільмів зимовими вечорами\r\n-Під час пікніків в холодну пору року\r\n-Для розслаблення і відпочинку\r\n-В якості подарунка\r\n\r\nОдин розмір, який підходить всім від XXS до 6XL",
-        "What is a hoodie?\r\nThese are the softest, warmest and most comfortable clothes you will ever own.\r\n\r\nWe use an ultra-soft, fleecy outer fabric combined with a light, airy inner layer for a cloud-like feeling.\r\n\r\nPerfect fit:\r\n-Cold morning when it's so hard to get out of the blanket\r\n-For watching movies on winter evenings\r\n-During picnics during the cooler season\r\n-For relaxation and rest\r\n-As a present\r\n\r\nOne size that fits all from XXS to 6XL"
+    "ShippingAndPaymentDescriptionFive": [
+        "Самовывоз возле Контрактовой площади, по предварительной договорённости",
+        "Самовивезення біля Контрактової площі, за попередньою домовленістю"
     ],
-    "pajamasDogDescription": [
-        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
-        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
-        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    "ShippingAndPaymentDescriptionSix": [
+        "На такси (возможно только для предварительно оплаченных заказов)",
+        "На таксі (можливо тільки для попередньо оплачених замовлень)"
     ],
-    "PajamasCat": [
-        "пижама \"Кот\"",
-        "піжама \"Кот\"",
-        "pajamas \"Cat\""
+    "DeliveryInOtherCountry": [
+        "Доставка в другие страны:",
+        "Доставка в інші країни:"
     ],
-    "PajamasCatDescription": [
-        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
-        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
-        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    "ShippingAndPaymentDescriptionSeven": [
+        "Осуществляется по индивидуальному запросу. Свяжитесь с нами и мы просчитаем стоимость доставки вашего заказа в любой уголок мира.",
+        "Здійснюється за індивідуальним запитом. Зв'яжіться з нами і ми прорахуємо вартість доставки вашого замовлення в будь-який куточок світу."
     ],
-    "PajamasDog": [
-        "пижама \"Пес\"",
-        "піжама \"Пес\"",
-        "pajamas \"Dog\""
+    "DeliveryPayment": [
+        "Оплата",
+        "Оплата"
     ],
-    "PajamasAvocado": [
-        "пижама \"Авокадо\"",
-        "піжама \"Авокадо\"",
-        "pajamas \"Avocado\""
+    "DeliveryPrePayment": [
+        "Предоплата на карту (Приват, Моно)",
+        "Передоплата на карту (Приват, Моно)"
     ],
-    "PajamasAvocadoDescription": [
-        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
-        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
-        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars."
+    "DeliveryCashOn": [
+        "Наложенным платежом при получении",
+        "Післяплатою при отриманні"
     ],
-    "PajamasRaccoon": [
-        "Пижамы \"Енот\"",
-        "Піжами \"Єнот\"",
-        "Pajamas \"Raccoon\""
+    "DeliveryCashPickup": [
+        "Наличными при самовывозе",
+        "Готівкою при самовивозі"
     ],
-    "PajamasRaccoonDescription": [
-        "Высота блока с горизонтальной полосой прокрутки увеличивается на высоту скролбара, хотя по спецификации CSS заданные размеры должны включать в себя и полосы прокрутки.",
-        "Висота блоку з горизонтальною смугою прокрутки збільшується на висоту скролбара, хоча по специфікації CSS задані розміри повинні включати в себе і смуги прокрутки.",
-        "The height of a block with a horizontal scrollbar increases by the height of the scrollbar, although according to the CSS specification, the given dimensions should include scrollbars"
-    ],
-    "GermanShepherdOodie": [
-        "German Shepherd Oodie",
-        "German Shepherd Oodie",
-        "German Shepherd Oodie"
-    ],
-    "GermanShepherdOodieDescription": [
-        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
-        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
-        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
-    ],
-    "CorgiOodie": [
-        "Corgi Oodie",
-        "Corgi Oodie",
-        "Corgi Oodie"
-    ],
-    "CatOodie": [
-        "Cat Oodie",
-        "Cat Oodie",
-        "Cat Oodie"
-    ],
-    "CatOodieDescription": [
-        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
-        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
-        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it! \r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
-    ],
-    "BulldogOodie": [
-        "Bulldog Oodie",
-        "Bulldog Oodie",
-        "Bulldog Oodie"
-    ],
-    "BulldogOodieDescription": [
-        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
-        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
-        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it!\r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
-    ],
-    "AvocadoOodie": [
-        "Avocado Oodie",
-        "Avocado Oodie",
-        "Avocado Oodie"
-    ],
-    "AvocadoOodieDescription": [
-        "С мягким фланелевым флисом снаружи и теплым шерпа-флисом внутри вы почувствуете, что обнимаете овцу. Кроме того, он на 100% свободен от жестокости.\r\n\r\n- Машинная стирка и без суеты. Просто бросьте его в стиральную машину и готово!\r\n\r\n- Ваш идеальный компаньон практически в любом месте: летний кемпинг, вечерний сон на диване, времяпровождение с друзьями, объятия с вашим питомцем и многое другое ...",
-        "За допомогою м’якого фланелевого флісу зовні і теплого флісу шерпи всередині ви відчуєте, що обіймаєте вівцю. Крім того, це також 100% без жорстокості.\r\n\r\n- Можна прати в машині і без суєти. Просто киньте його в пральну машину і все!\r\n\r\n- Ваш ідеальний супутник практично куди завгодно: літні кемпінги, вечірні дрімоти на дивані, гуляння з друзями, обійми з вашим вихованцем та багато іншого ...",
-        "With soft flannel fleece on the outside and warm sherpa fleece on the inside, you're going to feel like you're hugging a sheep. Plus, it's also 100% cruelty-free.\r\n\r\n- Machine washable and no fuss. Just toss it in the washing machine and that’s it! \r\n\r\n- Your perfect companion to virtually anywhere: summer camping, evening naps on the couch, hanging out with friends, cuddling with your pet, and so much more…"
-    ],
-    "OodieTrackies": [
-        "The Oodie Trackies",
-        "The Oodie Trackies",
-        "The Oodie Trackies"
-    ],
-    "OodieTrackiesDescription": [
-        "Брюки-унисекс Oodie - идеальный компаньон для носимого одеяла Oodie. Они изготовлены из уникального сочетания вискозы и спандекса и созданы для идеальной посадки, доступны в темно-синем или светло-сером цвете.",
-        "Унісекс-штани Oodie є ідеальним супутником ковдри The Oodie - виготовленої з нашої унікальної суміші Rayon та Spandex і розробленої для ідеального посадки, вони доступні в темно-темно-синьому або світло-сірому кольорах.",
-        "The Oodie unisex pants are a perfect companion to The Oodie wearable blanket - made from our unique blend of Rayon and Spandex and designed for a perfect fit, they are available in dark navy blue or light grey."
-    ],
-    "OodieTrackiesBlack": [
-        "The Trackies black",
-        "The Trackies black",
-        "The Trackies black"
-    ],
-    "NavyOodieBootsDescription": [
-        "Мы используем сверхмягкий фланелевый флис в сочетании с теплым флисом из шерпы, поэтому вам не придется беспокоиться о холодах. Некоторые думают, что это одеяло. Некоторые думают, что это толстовка. В любом случае, мы знаем, что вам будет удобнее всего в The Oodie. * Теперь носимое одеяло с самым высоким рейтингом на Facebook и Product Review.",
-        "Ми використовуємо надміккий фланелевий фліс у поєднанні з теплим флісом шерпи, щоб вам не довелося турбуватися про холод. Деякі вважають, що це ковдра. Деякі вважають, що це балахон. У будь-якому випадку ми знаємо, що ви будете найзатишнішими в The Oodie. * Тепер найкраще носять ковдру на Facebook та огляді товарів.",
-        "We use ultra soft flannel fleece paired with warm sherpa fleece so you don't have to worry about the cold. Some think it's a blanket. Some think it's a hoodie. Either way we know you're going to be cosiest in The Oodie.* Now the top rated wearable blanket on Facebook and Product Review."
+    "ShippingAndPaymentDescriptionEight": [
+        "Обмен и возврат возможен в течении 14 дней после покупки",
+        "Обмін і повернення можливе протягом 14 днів після покупки"
     ]
 }

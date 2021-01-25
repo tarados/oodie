@@ -11,7 +11,7 @@ def export_locales():
     localizations = Localization.objects.all()
     locale = {}
     for el in localizations:
-        val_el = [el.value, el.value_ua, el.value_en]
+        val_el = [el.value, el.value_ua]
         locale.update({
             el.key: val_el
         })
@@ -31,8 +31,7 @@ def import_locales():
         locales = Localization(
             key=key,
             value=val[0],
-            value_ua=val[1],
-            value_en=val[2]
+            value_ua=val[1]
         )
         locales.save()
 
