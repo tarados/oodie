@@ -27,7 +27,7 @@
         </div>
         <div class="item right">
           <div class="product-category">
-            <span>бренд: </span>
+            <span>{{ 'ProductBrand' | localize }}: </span>
             <div>{{ this.currentCategory }}</div>
           </div>
           <div class="product-price">
@@ -61,18 +61,13 @@
             </div>
           </div>
           <div class="size-table" v-if="this.currentProduct.table">
-            <a :href="this.currentProduct.table" target="_blank">Таблица размеров</a>
+            <a :href="this.currentProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
-          <div class="btn" @click="toCard">{{ getStatusProduct }}</div>
-          <div class="preorder" v-if="statusProduct">
-            Товар ожидается в наличии через 2 недели.
-            Мы свяжемся с вами когда товар появится в наличии для подтверждения и отправим ваш заказ в первую очередь
-          </div>
-          <div class="preorder" v-if="!statusProduct">
-            Доставка 1-2 дня
-          </div>
+          <div class="btn" @click="toCard">{{ getPreorder | localize }}</div>
+          <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
+          <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
-            <div class="description">{{ this.currentProduct.description }}</div>
+            <div class="description">{{ this.currentProduct.description_locale | localize(this.currentProduct.description) }}</div>
           </div>
         </div>
       </div>
@@ -85,7 +80,6 @@
 import {VueperSlides, VueperSlide} from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import settings from "../settings";
 
 import {required} from "vuelidate/lib/validators";
 
@@ -96,8 +90,8 @@ export default {
       imageIndex: 0,
       size: 0,
       availabilities: [],
-      statusProduct: null,
-      visibleCard: true,
+      preorder: null,
+      // visibleCard: true,
       slides: [],
       hideSize: false,
       breakpoints: {
@@ -117,31 +111,30 @@ export default {
   },
   computed: {
     currentProduct() {
-      try {
-        return this.$store.state.productsStore.currentProduct;
-      } catch (TypeError) {
+      const product = this.$store.state.productsStore.currentProduct;
+      if (product) {
+        return product;
+      } else {
         return {};
       }
     },
     currentCategory() {
-      try {
-        return this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category).title;
-      } catch (TypeError) {
+      const category = this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category);
+      if (category && category.title) {
+        return category.title;
+      } else {
         return "";
       }
     },
     selectedImage() {
       return this.imageIndex;
     },
-    getStatusProduct() {
-      try {
-        if (this.statusProduct) {
-          return 'Предзаказ'
-        } else {
-          return 'В корзину'
-        }
-      } catch (TypeError) {
-        return ''
+    getPreorder() {
+      const status = this.preorder;
+      if (status) {
+        return 'ProductStatusPreorder'
+      } else {
+        return 'ProductStatusBasket'
       }
     }
   },
@@ -155,11 +148,11 @@ export default {
         });
       });
       this.availabilities = this.currentProduct.availability;
-      this.statusProduct = this.availabilities[0].preorder;
-
-      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === settings.hideSize)) {
+// if product have one size
+      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
-      }
+        this.preorder = this.availabilities[0].preorder;
+      } // TODO preorder ++
     },
     showImage(index) {
       this.imageIndex = index;
@@ -176,7 +169,7 @@ export default {
         "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
         "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
         "quantity": 1,
-        "availability": availability.quantity,
+        "available": availability.quantity, // TODO do not cache++
         "preorder": availability.preorder,
         "size": availability.size,
         "image": this.currentProduct.image_list[this.imageIndex],
@@ -191,12 +184,7 @@ export default {
     },
     select(index) {
       this.size = index;
-      this.availabilities[index].preorder ? this.statusProduct = true : this.statusProduct = false;
-    },
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch("changeVisibleBasket");
-      }
+      this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred ++
     }
   },
   watch: {
@@ -210,7 +198,6 @@ export default {
   },
   mounted() {
     this.loadProduct();
-    this.basketVisible();
   },
 };
 </script>

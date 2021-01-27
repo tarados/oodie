@@ -8,14 +8,15 @@
 export default {
   name: "About",
   methods: {
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
-      }
-    }
+    // basketVisible() {
+    //   if (!this.$store.state.productsStore.basketVisible) {
+    //     this.$store.dispatch('changeVisibleBasket')
+    //   }
+    // }
   },
   mounted() {
-    this.basketVisible();
+    // this.basketVisible();
+    console.log(this.$router.currentRoute.name);
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">Корзина</h1>
-      <h1 v-else>Ваша корзина пуста!</h1>
+      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
+      <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
     </div>
     <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
       <div class="grid-container second">
@@ -38,7 +38,7 @@
           <div class="total-val">{{ product.total }} грн</div>
         </div>
         <div class="mobile-edit">
-          <div class="remove-mobile" @click="deleteOrder(index)">Удалить</div>
+          <div class="remove-mobile" @click="deleteOrder(index)">{{ 'ProductDelete' | localize }}</div>
           <div class="quantity-val-mobile">
             <div class="down">
               <div class="quantity-button" @click="minusQuantity(index)">-</div>
@@ -55,35 +55,30 @@
       </div>
     </div>
     <div class="subtotal-mobile-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
-      <div class="subtotal-mobile-title">Итого:</div>
+      <div class="subtotal-mobile-title">{{ 'BasketTotalPrice' | localize }}:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
       <div class="subtotal-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
-        <span>Итого </span>
+        <span>{{ 'BasketTotalPrice' | localize }} </span>
         <span v-text="totalPrice"></span>
       </div>
     </div>
     <div class="container" v-if="isPreorder">
-      <p>В Вашей корзине есть товар по предзаказу!
-      Отправка этого товара будет через 2 недели. Мы свяжемся с вами когда товар появится
-        в наличии для подтверждения и отправим ваш заказ в первую очередь.</p>
+      <p>{{ 'BasketPreorderDescription' | localize }}</p>
     </div>
     <div class="container checkout-buttons">
-        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">Продолжить покупки</router-link>
+        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">{{ 'ContinueShopping' | localize }}</router-link>
         <router-link
             :to="{name: 'Checkout'}"
             class="checkout-button checkout button"
-            v-show="this.$store.state.productsStore.cardProducts.length > 0"
-        >Оформить заказ</router-link>
+            v-show="this.$store.state.productsStore.cardProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
     </div>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-import settings from "@/settings";
-
 
 export default {
   name: "Card",
@@ -106,7 +101,10 @@ export default {
   },
   methods: {
     needShowSize(product) {
-      const result = product.size && product.size !== settings.hideSize;
+      let result = '';
+      if (product.size !== 'ONE SIZE') {
+        result = product.size;
+      }
       return result;
     },
     deleteOrder(index) {
@@ -122,20 +120,20 @@ export default {
     plusQuantity(index) {
       const item = this.$store.state.productsStore.cardProducts[index];
       let newAvailability = item.quantity + 1;
-      if (newAvailability <= item.availability) {
+      if (newAvailability <= item.available) {
         this.$store.commit('increment', index);
       } else {
-        alert("В наличии только " + item.availability);
-      }
-    },
-    basketVisible() {
-      if (this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
+        alert("В наличии только " + item.available);
       }
     }
+    // basketVisible() { // TODO remove this
+    //   if (this.$store.state.productsStore.basketVisible) {
+    //     this.$store.dispatch('changeVisibleBasket')
+    //   }
+    // }
   },
   mounted() {
-    this.basketVisible();
+
   }
 }
 </script>

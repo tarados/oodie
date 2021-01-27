@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .novaposhta_api import invoice
-from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize, Localization
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
@@ -34,13 +34,14 @@ class ProductAvailabilityInline(admin.TabularInline):
 
 
 class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'get_price', 'category', 'get_image', 'admin_description', 'hidden', 'availability_info')
+    list_display = ('title', 'title_locale', 'get_price', 'category', 'get_image', 'admin_description', 'hidden', 'availability_info')
     list_filter = ['category']
     list_editable = ['hidden']
     inlines = [
         ProductImageInline,
         ProductAvailabilityInline
     ]
+    autocomplete_fields = ['title_locale', 'description_locale']
 
     def has_add_permission(cls, request):
         ''' remove add and save and add another button '''
@@ -157,9 +158,21 @@ class ProductAvailabilityAdmin(admin.ModelAdmin):
     list_filter = ("product",)
 
 
+class LocalizationAdmin(admin.ModelAdmin):
+    list_display = ("key", "value", "value_ua", "pk")
+    list_filter = ("key",)
+    ordering = ("pk",)
+    search_fields = ("key", "value",)
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "pk",)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(Category)
+admin.site.register(Localization, LocalizationAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(TableOfSize)
 admin.site.register(Size)
 admin.site.register(ProductAvailability, ProductAvailabilityAdmin)

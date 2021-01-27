@@ -9,9 +9,21 @@
             :src="product.image"
             :class="{black: isAvailability(product) <= 0}"
         >
-        <div class="preorder-mark" v-if="isPreorder(product)">предзаказ</div>
-        <div class="preorder-mark" v-if="isAvailability(product) <= 0">нет в наличии</div>
-        <h4>{{ product.title }}</h4>
+        <div
+            class="preorder-mark"
+            :class="{mark_large: large, mark_small: small}"
+            v-if="isPreorder(product)"
+        >
+          {{ 'ProductStatusPreorder' | localize }}
+        </div>
+        <div
+            class="preorder-mark"
+            :class="{mark_large: large, mark_small: small}"
+            v-if="isAvailability(product) <= 0"
+        >
+          {{ 'AvailabilityNo' | localize }}
+        </div>
+        <h4>{{ product.title_translate | localize(product.title) }}</h4>
         <div class="price-box">
           <span v-if="product.new_price" class="no-current">{{ product.price }} грн</span>
           <span v-else>{{ product.price }} грн</span>
@@ -66,9 +78,9 @@ export default {
     isPreorder(product) {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
-    isAvailability(product) {
+    isAvailability(product) { //TODO rename  isAvailable shoud return boolean
       try {
-        return product.availability[0].quantity
+        return product.availability[0].quantity;
       } catch (TypeError) {
         return 0
       }
@@ -109,6 +121,7 @@ h4 {
 }
 
 .brand {
+  position: relative;
   width: calc((100% / 12) * 4 - 20px);
   height: 100%;
   margin: 0 10px 0 10px;
@@ -159,7 +172,6 @@ h4 {
   width: 60%;
   padding-top: 8px;
   padding-bottom: 8px;
-  /*height: calc(5vmin + 10 * (100vw / 1838));*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,8 +180,15 @@ h4 {
   text-align: center;
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
-  top: 74%;
   left: 20%;
+}
+
+.mark_large {
+  top: 74%;
+}
+
+.mark_small {
+  top: 70%;
 }
 
 .availability {

@@ -1,12 +1,14 @@
-import Vue from 'vue'
-import Vuelidate from "vuelidate"
-import Autocomplete from '@trevoreyre/autocomplete-vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './style/index.css'
+import Vue from 'vue';
+import Vuelidate from "vuelidate";
+import Autocomplete from '@trevoreyre/autocomplete-vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import localizeFilter from "@/js/localize.filter";
+import './style/index.css';
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
+import FlagIcon from 'vue-flag-icon'
 
 Sentry.init({
   Vue,
@@ -24,7 +26,9 @@ Sentry.init({
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+Vue.use(FlagIcon);
 Vue.use(Autocomplete);
+Vue.filter('localize', localizeFilter);
 
 new Vue({
   router,
@@ -33,4 +37,5 @@ new Vue({
 }).$mount('#app');
 store.dispatch('loadFromCard');
 store.dispatch('loadProducts');
+store.dispatch('loadLocales');
 

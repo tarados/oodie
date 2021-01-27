@@ -9,6 +9,10 @@ export default {
             context.commit('addProducts', response.products);
             context.commit('addCategories', response.categories);
         },
+        async loadLocales(context) {
+            const response = await get('locales');
+            context.commit('addLocales', response);
+        },
         async loadProduct(context, id) {
             context.commit('setCurrentProduct', null);
             const response = await get('products/product' + '/' + id);
@@ -71,6 +75,12 @@ export default {
         },
         clearBasket(state) {
             state.cardProducts = [];
+        },
+        setLocale(state, locale) {
+            state.locale = locale;
+        },
+        addLocales(state, response) {
+            state.locales = response;
         }
     },
     state: {
@@ -80,9 +90,14 @@ export default {
         cardProducts: [],
         basketVisible: true,
         citiesList: [],
-        warehouseList: []
+        warehouseList: [],
+        locale: null,
+        locales: {}
     },
     getters: {
+        currentProduct(state) {
+            return state.currentProduct;
+        },
         allProducts(state) {
             return state.productsList;
         },
@@ -106,9 +121,9 @@ export default {
             const { currentProduct, categoriesList } = state;
             const result = [];
             if (currentProduct && currentProduct.category === 1) {
-                result.push({ title: "Главная", routeName: "Home" });
+                result.push({ title: "MenuHome", routeName: "Home" });
             } else {
-                result.push({ title: "Бренды друзья", routeName: "Brands" });
+                result.push({ title: "MenuBrandsFriends", routeName: "Brands" });
 
                 if (currentProduct) {
                     const category = categoriesList.find(category => category.id === currentProduct.category);
@@ -123,6 +138,12 @@ export default {
             }
 
             return result;
+        },
+        getLocale(state) {
+            return state.locale;
+        },
+        getLocales(state) {
+            return state.locales;
         }
     }
 }

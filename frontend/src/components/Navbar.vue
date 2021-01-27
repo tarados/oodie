@@ -8,7 +8,34 @@
         <div class="phone">
           <a href="tel:+380507204066"><img src="../assets/phone-receiver.svg"/>+380507204066</a>
         </div>
-        <div class="basket" v-show="this.$store.state.productsStore.basketVisible">
+        <div class="langSelector"
+             @mouseover="mouseoverLang"
+             @mouseleave="mouseleaveLang"
+        >
+          <div class="langSelector_item">
+            <flag :iso="selectedLanguageIcon"></flag>
+            <span>{{ selectedLanguage }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z"/>
+              <path d="M9 14l3 3l3 -3"/>
+            </svg>
+          </div>
+          <transition name="fade" appear>
+            <div class="sub-menu" v-if="isOpenLang">
+              <div
+                  class="menu-item lang"
+                  v-for="(item, index) in langList" :key="index"
+                  @click="getLocale(index)"
+              >
+                <flag :iso="item.slug"></flag>
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </transition>
+        </div>
+        <div class="basket" v-if="basketVisible">
           <router-link :to="{name: 'Card'}">
             <img src="../assets/cart.svg">
             <span
@@ -23,14 +50,14 @@
         <div class="linkList-item">
           <router-link :to="{name: 'Home'}" exact
           >
-            <p>{{ links['1'] }}</p>
+            <p>{{ links['1'] | localize }}</p>
           </router-link>
         </div>
         <div class="linkList-item">
           <router-link
               :to="{name: 'About'}"
           >
-            <p>{{ links['2'] }}</p>
+            <p>{{ links['2'] | localize }}</p>
           </router-link>
         </div>
         <div class="linkList-item"
@@ -40,7 +67,7 @@
           <router-link
               :to="{name: 'Brands'}"
           >
-            <p>{{ links['3'] }}</p>
+            <p>{{ links['3'] | localize }}</p>
           </router-link>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -67,7 +94,7 @@
           <router-link
               :to="{name: 'Contacts'}"
           >
-            <p>{{ links['4'] }}</p>
+            <p>{{ links['4'] | localize }}</p>
           </router-link>
         </div>
       </div>
@@ -78,7 +105,9 @@
 <script>
 import Hamburger from "./Hamburger";
 import Logo from "./Logo";
-import linkList from '../js/linkList'
+import links from '../js/linkList'
+import {langList} from '../js/linkList'
+import {mapGetters} from 'vuex'
 
 export default {
   name: "NavBar",
@@ -89,20 +118,32 @@ export default {
   data() {
     return {
       selected: "",
+      selectedLanguageIcon: "",
+      selectedLanguage: "",
       isOpen: false,
+      basketVisible: true,
+      isOpenLang: false,
       options: [],
       links: {},
+      langList: [],
       hamburger: false,
     };
   },
   computed: {
+    ...mapGetters(["getLocales",]),
+    getBasket() {
+      if (this.$router.currentRoute.name === 'Card') {
+        return false;
+      } else {
+        return true;
+      }
+    }
   },
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
       this.timer = -1;
     },
-
     mouseover: function () {
       this.clearTimer();
       this.isOpen = true;
@@ -115,8 +156,38 @@ export default {
       }, 500);
 
     },
+    mouseoverLang: function () {
+      this.clearTimer();
+      this.isOpenLang = true;
+    },
+    mouseleaveLang: function () {
+      this.clearTimer();
+
+      this.timer = setTimeout(() => {
+        this.isOpenLang = false;
+      }, 500);
+
+    },
     getLinkList() {
-      this.links = linkList();
+      this.links = links();
+      this.langList = langList();
+      this.selectedLanguage = window.navigator.language.slice(0, 2);
+      this.selectedLanguageIcon = window.navigator.language.slice(0, 2);
+    },
+    getLocale(index) {
+      const locale = this.langList[index].name;
+      this.$store.commit('setLocale', locale);
+      this.selectedLanguageIcon = this.langList[index].slug;
+      this.selectedLanguage = this.langList[index].title;
+    }
+  },
+  watch: {
+    $route(to) {
+      if (to.name === 'Card' || to.name === 'Checkout') {
+        this.basketVisible = false;
+      } else {
+        this.basketVisible = true;
+      }
     }
   },
   mounted() {
@@ -136,31 +207,56 @@ export default {
 
 
 .nav-header {
-  width: 100%;
   padding: 15px;
   height: 60px;
-
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 15fr 1fr 1fr;
   background-color: var(--overlay-color);
 }
 
 .hamburg {
   display: none;
-  flex:1 1 auto;
 }
 
 .phone {
-  flex:1 1 auto;
   height: 30px;
   line-height: 30px;
-  align-self: flex-start;
+  grid-column: 1 / 3;
+}
+
+.langSelector {
+  width: 70%;
+  grid-column: 3 / 4;
+  justify-self: end;
+  align-self: start;
+}
+
+.langSelector .langSelector_item {
+  margin-top: 8px;
+}
+
+.langSelector .langSelector_item span {
+  margin-left: 3px;
+}
+
+.nav-header .langSelector svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-header .langSelector .sub-menu .lang {
+  width: 70%;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  background-color: var(--overlay-color);
+  margin-top: 10px;
+  margin-left: 3px;
 }
 
 .basket {
-  flex:1 1 auto;
-  align-self: flex-end;
   line-height: 30px;
+  grid-column: 4 / 5;
 }
 
 .phone a,
@@ -222,14 +318,20 @@ span {
   font-weight: bold;
 }
 
-.linkList .linkList-item a:hover {
+.linkList .linkList-item a:hover,
+.linkList .linkList-item p:hover {
   font-weight: bold;
 }
 
-.linkList .linkList-item a {
+.linkList .linkList-item a,
+.linkList .linkList-item p {
   color: #3d4246;
   text-transform: uppercase;
   text-decoration: none;
+}
+
+.linkList .linkList-item p {
+  cursor: pointer;
 }
 
 .linkList .linkList-item svg {
@@ -251,11 +353,16 @@ span {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 3%;
+  padding-top: 3%;
 }
 
 .linkList-item .sub-menu .menu-item {
   margin: 3%;
+}
+
+.langSelector .sub-menu {
+  /*display: grid;*/
+  /*grid-template-columns: 1fr 1fr;*/
 }
 
 .linkList-item .sub-menu .menu-item:hover {
@@ -275,12 +382,11 @@ span {
 
 @media screen and (max-width: 750px) {
   .nav-header {
-    display: block;
-    text-align: center;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
   }
 
   .phone {
-    display: inline-block;
+    grid-column: 2 / 2;
   }
 
   .basket {
@@ -290,6 +396,7 @@ span {
   }
 
   .hamburg {
+    grid-column: 1 / 2;
     position: absolute;
     top: 15px;
     left: 10px;

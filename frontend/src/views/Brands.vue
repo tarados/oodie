@@ -1,7 +1,5 @@
 <template>
   <div class="wrapper-brands">
-<!--    <div class="brands-info">ТУТ БУДЕТ ТЕКСТ ПРО ОТБОР БРЕНДОВ ДРУЗЕЙ, КАКИЕ ОРИГИНАЛЬНЫЕ ТУТ ТОВАРЫ И КАК ОНИ ХОРОШИ НА ПОДАРОК-->
-<!--      ТЕКСТ ПРИМЕРНО НА 500 ЗНАКОВ, О ТВОРЧЕСТВЕ НЕБОЛЬШИХ КОМПАНИЙ И УНИКАЛЬНОСТИ, И ПРО ДОСТАВКУ В ОДНОЙ ПОСЫЛКЕ</div>-->
     <BrandsList/>
   </div>
 </template>
@@ -33,11 +31,11 @@ export default {
     }
   },
   methods: {
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
-      }
-    }
+    // basketVisible() {
+    //   if (!this.$store.state.productsStore.basketVisible) {
+    //     this.$store.dispatch('changeVisibleBasket')
+    //   }
+    // }
   },
   watch: {
     $route(to) {
@@ -45,8 +43,7 @@ export default {
     }
   },
   mounted() {
-    this.slug = this.$route.params.slug;3
-    this.basketVisible();
+    this.slug = this.$route.params.slug;
   }
 }
 </script>

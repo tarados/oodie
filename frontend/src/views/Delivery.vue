@@ -2,43 +2,43 @@
   <div class="wrapper">
     <div class="content-about">
       <div class="contact-item">
-        <h2>Доставка и оплата</h2>
+        <h2>{{ 'ShippingAndPayment' | localize }}</h2>
       </div>
 
       <div class="contact-item">
-        <p class="title">Доставка по Украине</p>
+        <p class="title">{{ 'DeliveryInUkraine' | localize }}</p>
         <ul>
-          <li>Новой Почтой до ближайшего отделения. Заказы оформленные до 17.00 отправляем в тот же день</li>
-          <li>Курьером Новой почты по адресу</li>
+          <li>{{ 'ShippingAndPaymentDescriptionOne' | localize }}</li>
+          <li>{{ 'ShippingAndPaymentDescriptionTwo' | localize }}</li>
         </ul>
       </div>
 
       <div class="contact-item">
-        <p class="title">Доставка по Киеву</p>
+        <p class="title">{{ 'DeliveryInKiev' | localize }}</p>
         <ul>
-          <li>Новой почтой до ближайшего отделения</li>
-          <li>Курьером Новой почты по адресу</li>
-          <li>Самовывоз возле Контрактовой площади, по предварительной договорённости</li>
-          <li>На такси (возможно только для предварительно оплаченных заказов)</li>
+          <li>{{ 'ShippingAndPaymentDescriptionThree' | localize }}</li>
+          <li>{{  'ShippingAndPaymentDescriptionFour' | localize }}</li>
+          <li>{{ 'ShippingAndPaymentDescriptionFive' | localize }}</li>
+          <li>{{ 'ShippingAndPaymentDescriptionSix' | localize }}</li>
         </ul>
       </div>
 
       <div class="contact-item">
-        <p class="title">Доставка в другие страны:</p>
-        <p>Осуществляется по индивидуальному запросу. Свяжитесь с нами и мы просчитаем стоимость доставки вашего заказа в любой уголок мира.</p>
+        <p class="title">{{ 'DeliveryInOtherCountry' | localize }}</p>
+        <p>{{ 'ShippingAndPaymentDescriptionSeven' | localize }}</p>
       </div>
 
       <div class="contact-item">
-        <p class="title">Оплата</p>
+        <p class="title">{{ 'DeliveryPayment' | localize }}</p>
         <ul>
-          <li>Предоплата на карту (Приват, Моно)</li>
-          <li>Наложенным платежом при получении</li>
-          <li>Наличными при самовывозе</li>
+          <li>{{ 'DeliveryPrePayment' | localize }}</li>
+          <li>{{ 'DeliveryCashOn' | localize }}</li>
+          <li>{{ 'DeliveryCashPickup' | localize }}</li>
         </ul>
       </div>
 
       <div class="contact-item">
-        <p class="title">Обмен и возврат возможен в течении 14 дней после покупки</p>
+        <p class="title">{{ 'ShippingAndPaymentDescriptionEight' | localize }}</p>
       </div>
     </div>
 
@@ -60,6 +60,7 @@ export default {
   },
   mounted() {
     this.basketVisible();
+    console.log(this.$router.currentRoute.name);
   },
 };
 </script>

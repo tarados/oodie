@@ -13,8 +13,8 @@
             <img src="../assets/size.png">
           </div>
           <div class="info-title">
-            <h4>Один размер</h4>
-            <span>Подходит для всех</span>
+            <h4>{{ 'InfoSize' | localize }}</h4>
+            <span>{{ 'InfoSizeDescription' | localize }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -22,8 +22,8 @@
             <img src="../assets/cat.png">
           </div>
           <div class="info-title">
-            <h4>теплое и очень мягкое</h4>
-            <span>как котик</span>
+            <h4>{{ 'InfoCat' | localize }}</h4>
+            <span>{{ 'InfoCatDescription' | localize }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -31,14 +31,14 @@
             <img src="../assets/delivery.png">
           </div>
           <div class="info-title">
-            <h4>быстрая доставка</h4>
-            <span>1-2 дня по Украине</span>
+            <h4>{{ 'InfoDelivery' | localize }}</h4>
+            <span>{{ 'InfoDeliveryDescription' | localize }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <ProductsList :category-id="categoryId" />
+    <ProductsList :category-id="categoryId"/>
 
     <InstaWidget/>
   </div>
@@ -52,8 +52,7 @@ import InstaWidget from "../components/InstaWidget";
 export default {
   name: 'Home',
   data() {
-    return {
-    }
+    return {}
   },
   components: {
     ProductsList,
@@ -63,16 +62,6 @@ export default {
     categoryId() {
       return 1
     }
-  },
-  methods: {
-    basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
-        this.$store.dispatch('changeVisibleBasket')
-      }
-    }
-  },
-  mounted() {
-    this.basketVisible();
   }
 }
 </script>
@@ -216,6 +205,7 @@ h4 {
     margin: 0 auto;
   }
 }
+
 @media screen and (max-width: 1100px) {
   .info-content + .info-content {
     margin-left: 40px;

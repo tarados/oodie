@@ -3,17 +3,17 @@
     <form @submit.prevent="submitHandler">
       <div class="submit-box">
         <div class="form-title required">
-          <span>Имя:</span>
+          <span>{{ 'CheckoutName' | localize }}:</span>
         </div>
         <div class="form-content username">
           <input
               v-model="userName"
               :class="{invalid: invalidName}"
           >
-          <small v-show="invalidName">Введите Ваше имя</small>
+          <small v-show="invalidName">{{ 'CheckoutEnterYouName' | localize }}</small>
         </div>
         <div class="form-title required">
-          <span>Фамилия:</span>
+          <span>{{ 'CheckoutSurname' | localize }}:</span>
         </div>
         <div class="form-content user-surname">
           <input
@@ -21,10 +21,10 @@
               v-model="userSurname"
               :class="{invalid: invalidSurname}"
           >
-          <small v-show="invalidSurname">Введите Вашу фамилию</small>
+          <small v-show="invalidSurname">{{ 'CheckoutSurnameError' | localize }}</small>
         </div>
         <div class="form-title required">
-          <span>Телефон:</span>
+          <span>{{ 'ChecoutPhone' | localize }}:</span>
         </div>
         <div class="form-content phone">
           <div class="form-content__phone">
@@ -43,10 +43,10 @@
             >
           </div>
           <small v-if="!$v.phone.required && $v.phone.minLength && invalidPhone">
-            Введите номер телефона
+            {{ 'CheckoutEnterPhone' | localize }}
           </small>
           <small v-show="$v.phone.required && !$v.phone.minLength">
-            Номер включает в себя 12 цифр. Сейчас их {{phone.length}}
+            {{ 'CheckoutPhoneWarning' | localize }} {{ phone.length }}
           </small>
         </div>
         <div class="form-title">
@@ -60,83 +60,82 @@
           <small v-if="!$v.email.email">Enter E-mail!</small>
         </div>
         <div class="form-title required">
-          <span>Способ доставки:</span>
+          <span>{{ 'CheckoutDeliveryMethod' | localize }}:</span>
         </div>
         <div class="form-content footer-content__item">
-          <select v-model="deliveryMethod" :class="{invalid: invalidDelivery}">
-            <option disabled value="">Выберите способ доставки</option>
-            <option>Новая почта</option>
-            <option>Курьером Новой почты</option>
-            <option>Самовывоз</option>
+          <select v-model="selectDeliveryMethod" :class="{invalid: invalidDelivery}">
+            <option disabled value="">{{ 'CheckoutSelectDeliveryMethod' | localize }}</option>
+            <option>{{ 'CheckoutNovaPoshta' | localize }}</option>
+            <option>{{ 'CheckoutCourier' | localize }}</option>
+            <option>{{ 'CheckoutPickup' | localize }}</option>
           </select>
-          <small v-if="invalidDelivery">Нужно выбрать способ доставки</small>
+          <small v-if="invalidDelivery">{{ 'CheckoutSelectDeliveryMethodError' | localize }}</small>
         </div>
         <div class="form-title required" v-if="deliveryMethod === 'Новая почта'">
-          <span>Город:</span>
+          <span>{{ 'CheckoutCity' | localize }}:</span>
         </div>
         <div class="" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidCity}">
           <autocomplete
-              placeholder="Начните вводить название города"
+              :placeholder="CheckoutSelectCityInput | localize"
               autocomplete="nope"
               :search="search"
               @submit="setCity"
           ></autocomplete>
-          <small v-if="invalidCity">Выберите город</small>
+          <small v-if="invalidCity">{{ 'CheckoutSelectCity' | localize }}</small>
         </div>
         <div class="form-title required" v-if="deliveryMethod === 'Новая почта'">
-          <span>Отделение:</span>
+          <span>{{ 'CheckoutPostOffice' | localize }}:</span>
         </div>
         <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
           <autocomplete
               class="autocomplete"
-              placeholder="Начните вводить номер или адрес отделения"
+              :placeholder="ChekoutSelectWarehouseInput | localize"
               autocomplete="nope"
               :search="searchWarehouse"
               @submit="setWarehouse"
           ></autocomplete>
-          <small v-if="invalidOffice">Нужно выбрать склад Новой Почты</small>
+          <small v-if="invalidOffice">{{ 'CheckoutPostOfficeError' | localize }}</small>
           <label data-first="Enter post address" data-second="Post address"></label>
         </div>
         <div class="form-title required" v-if="deliveryMethod === 'Курьером Новой почты'">
-          <span>Адрес:</span>
+          <span>{{ 'CheckoutAddress' | localize }}:</span>
         </div>
         <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAdress}">
           <textarea v-model="adress" rows="4"></textarea>
-          <small v-if="invalidAdress">Нужно указать адрес доставки</small>
+          <small v-if="invalidAdress">{{ 'CheckoutAddressError' | localize }}</small>
         </div>
         <div class="form-title required">
-          <span>Способ оплаты:</span>
+          <span>{{ 'CheckoutPaymentMethod' | localize }}:</span>
         </div>
         <div class="payment-content" :class="{invalid: invalidPayment}">
           <select v-model="selectedPayment">
-            <option disabled value="">Выберите способ оплаты</option>
-            <option>На карту</option>
-            <option>Наложенный платеж</option>
+            <option disabled value="">{{ 'CheckoutSelectPaymentMethod' | localize }}</option>
+            <option>{{ 'CheckoutPaymentCard' | localize }}</option>
+            <option>{{ 'CheckoutPaymentCOD' | localize }}</option>
           </select>
-          <small v-if="invalidPayment">Нужно выбрать способ оплаты</small>
+          <small v-if="invalidPayment">{{ 'CheckoutPaymentCODError' | localize }}</small>
         </div>
         <div class="form-title">
-          <span>Комментарий</span>
+          <span>{{ 'CheckoutComment' | localize }}</span>
         </div>
         <div class="description-content">
           <textarea v-model="comment" rows="4"></textarea>
         </div>
         <div class="button-block" v-if="deliveryMethod === 'Самовывоз'">
-          <strong>Вы сможете забрать заказ возле метро Контрактовая. После оформления заказа, наш менеджер свяжется с
-            вами для уточнения деталей.</strong>
+          <strong>{{ 'CheckoutPickupDescription' | localize }}</strong>
         </div>
       </div>
       <div class="subtotal">
-        <div class="subtotal-title">К оплате</div>
+        <div class="subtotal-title">{{ 'CheckoutPay' | localize }}</div>
         <div class="subtotal-val" v-text="totalPrice"></div>
       </div>
       <div class="submit-box">
         <div class="button-block">
           <button @click="toCard" class="continue-shopping">
-            <span>Вернуться в корзину</span>
+            <span>{{ 'CheckoutBack' | localize }}</span>
           </button>
           <button type="submit" class="continue-shipping">
-            <span> Купить</span>
+            <span> {{ 'CheckoutBuy' | localize }}</span>
           </button>
         </div>
       </div>
@@ -157,14 +156,18 @@ export default {
     Autocomplete
   },
   data() {
-    return {
+    return { //TODO fix names
       "deliveryMethod": "",
+      "selectDeliveryMethod": "",
+      "delivery": null,
       "selectedPayment": '',
       "isVisible": true,
       "userName": "",
       "userSurname": "",
       "adress": '',
       "city": '',
+      "CheckoutSelectCityInput": "CheckoutSelectCityInput",
+      "ChekoutSelectWarehouseInput": "ChekoutSelectWarehouseInput",
       "cityError": '',
       "country": '+(38)',
       "cityRef": '',
@@ -261,9 +264,6 @@ export default {
     toCard() {
       this.$router.push({name: "Card"})
     },
-    cardVisible() {
-      this.$emit('cardVisible', false);
-    },
     deliveryState() {
       this.$store.dispatch('loadCities');
     },
@@ -307,11 +307,11 @@ export default {
     handleUserInput(e) {
       let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
       this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
-          + (replacedInput[3] ? '-' + replacedInput[3]: '') + (replacedInput[4] ?'-' + replacedInput[4] : '');
+          + (replacedInput[3] ? '-' + replacedInput[3] : '') + (replacedInput[4] ? '-' + replacedInput[4] : '');
     },
     handleUserInputCountry(e) {
       let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})/);
-      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] +(replacedInput[3] ? replacedInput[3] +')' : '');
+      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] + (replacedInput[3] ? replacedInput[3] + ')' : '');
     }
   },
   watch: {
@@ -342,13 +342,10 @@ export default {
       this.invalidAdress = !newValue;
     },
     city: function () {
-      try {
-        let cityId = this.allCities.find(city => city.name === this.city).id;
-        this.$store.dispatch('loadWarehouses', cityId);
-      } catch (TypeError) {
-        console.log('error in name city');
+      const city = this.allCities.find(city => city.name === this.city);
+      if (city && city.id) {
+        this.$store.dispatch('loadWarehouses', city.id);
       }
-
     },
     deliveryMethod: function (newValue) {
       this.invalidDelivery = !newValue;
@@ -356,9 +353,19 @@ export default {
     selectedPayment: function (newValue) {
       this.invalidPayment = !newValue;
     },
+    selectDeliveryMethod(newValue) {
+      if (newValue === 'Новая почта' || newValue === 'Нова пошта' || newValue === 'Nova poshta') {
+        this.deliveryMethod = 'Новая почта';
+      }
+      if (newValue === 'Курьером Новой почты' || newValue === 'Кур\'єром Нової пошти' || newValue === 'Courier Nova poshta') {
+        this.deliveryMethod = 'Курьером Новой почты';
+      }
+      if (newValue === 'Самовывоз' || newValue === 'Самовивіз' || newValue === 'Pickup') {
+        this.deliveryMethod = 'Самовывоз';
+      }
+    }
   },
   mounted() {
-    this.cardVisible();
     this.deliveryState();
   }
 }
@@ -651,13 +658,13 @@ textarea {
   }
 }
 
-@media screen and (max-width: 360px){
+@media screen and (max-width: 360px) {
   .form-content__phone input.country {
     width: 30%;
   }
 }
 
-@media screen and (max-width: 300px){
+@media screen and (max-width: 300px) {
   .form-content__phone input.country {
     width: 40%;
   }
