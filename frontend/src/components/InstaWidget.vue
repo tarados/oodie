@@ -1,84 +1,167 @@
 <template>
-  <div class="wrapper-logo">
+  <div class="slider">
     <vueper-slides
+        class="no-shadow"
         :visible-slides="5"
-        slide-multiple
+        :arrows-outside="false"
         :bullets="false"
+        slide-multiple
         :gap="2"
         :slide-ratio="1 / 5"
-        >
-      <vueper-slide
-          v-for="(slide, i) in slides"
-          :key="i"
-          :image="slide.image"
-          :title="i.toString()"
-          >
+        :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+      <vueper-slide v-for="(slider, i) in slides" :key="i"
+                    :title="i.toString()"
+                    :image="slider.image"
+                    @mouseover="mouseover"
+                    @mouseleave="mouseleave"
+                    :style="setStyle(i)"
+      >
+        <template v-slot:content>
+          <div class="vueperslide__content-wrapper" style="flex-direction: row">
+            <span>{{ message }}</span>
+          </div>
+        </template>
       </vueper-slide>
     </vueper-slides>
   </div>
 </template>
 
 <script>
-import {VueperSlides, VueperSlide} from "vueperslides";
-// import "vueperslides/dist/vueperslides.css";
 import {mapGetters} from 'vuex'
+import {VueperSlides, VueperSlide} from "vueperslides";
 
 export default {
   name: "logo",
   data() {
     return {
+      imageIndex: 0,
+      message: '',
       slides: [
-        { image: 'http://localhost:8000/media/images/grey-oodie-boots.Australian_Slippers_and_Boots-11_Ass7Cxw_quByaMm.jpg'},
-        { image: 'http://localhost:8000/media/images/bulldog-oodie.BullDogOodieImage1_Pout0fd_6QZtP1n_KVYtAha.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.24_8721aa92-69b3-48ce-937d-31e293f38d55_sX1tKtZ_sXOmfeF.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.141_42ea8513-5f7f-4b0c-93f6-183482dd448b_IDza3NK_7diAtUm.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.Unicorn_Hooded_Blanket-4_b3cc43d0-a8ec-430e-933d-d41461754802_4zbi4_gZigFkd.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg'},
-        { image: 'http://localhost:8000/media/images/cat-oodie.14_ed67e41d-9f5c-4ed7-9656-817cd5372019_IOwLgbg_lAQ8eIV_2iCAZrX.jpg'},
-        { image: 'http://localhost:8000/media/images/avocado-oodie.AvocadoOodieImage1_cslcDGm_qDC45ya_bljyazl.jpg'},
-        { image: 'http://localhost:8000/media/images/unicorn-oodie.213_e0584fbb-e649-46e6-a7ff-ddf2a5acbf1c_TL4sBlW_8GCa4TO.jpg'},
+        {
+          image: 'http://localhost:8000/media/images/grey-oodie-boots.Australian_Slippers_and_Boots-11_Ass7Cxw_quByaMm.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/bulldog-oodie.BullDogOodieImage1_Pout0fd_6QZtP1n_KVYtAha.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.24_8721aa92-69b3-48ce-937d-31e293f38d55_sX1tKtZ_sXOmfeF.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.141_42ea8513-5f7f-4b0c-93f6-183482dd448b_IDza3NK_7diAtUm.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.Unicorn_Hooded_Blanket-4_b3cc43d0-a8ec-430e-933d-d41461754802_4zbi4_gZigFkd.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/cat-oodie.14_ed67e41d-9f5c-4ed7-9656-817cd5372019_IOwLgbg_lAQ8eIV_2iCAZrX.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/avocado-oodie.AvocadoOodieImage1_cslcDGm_qDC45ya_bljyazl.jpg',
+          title: '',
+          content: ''
+        },
+        {
+          image: 'http://localhost:8000/media/images/unicorn-oodie.213_e0584fbb-e649-46e6-a7ff-ddf2a5acbf1c_TL4sBlW_8GCa4TO.jpg',
+          title: '',
+          content: ''
+        },
       ]
     }
   },
   components: {
     VueperSlide,
-    VueperSlides,
+    VueperSlides
   },
   computed: {
     ...mapGetters(["allProducts"])
   },
   methods: {
-    toMain() {
-      this.$router.push({name: 'Home'})
+    setStyle(index) {
+      if (index % 2 === 0) {
+        return 'border: 20px solid #fff'
+      }
+    },
+    setHover() {
+      const sliderItems = [...document.querySelectorAll('.vueperslide--visible')];
+      const toggleActivity = function (index) {
+        for (let i = 0; i < sliderItems.length; i++) {
+          if (i === Number(index)) {
+            sliderItems[i].classList.add('hover-slider');
+          } else {
+            sliderItems[i].classList.remove('hover-slider');
+          }
+        }
+      };
+      document.querySelector('.vueperslides__track').addEventListener('mouseover', (event) => {
+        if (event.target.classList.contains('vueperslide--visible')) {
+          toggleActivity(event.target.dataset.index);
+        }
+      });
+    },
+    mouseover: function () {
+      this.message = 'Good!'
+      console.log(this.message);
+    },
+    mouseleave: function () {
+      this.message = 'Hover Me!'
     }
   },
-
   mounted() {
-    console.log(this.allProducts[0]);
   }
 };
 </script>
 
 <style>
-/*.vueperslides--fixed-height { height: 370px; }*/
-
-.wrapper-logo {
-  /*width: auto;*/
-  /*display: flex;*/
-  /*width: 90%;*/
-  /*margin: 0 auto;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*align-self: center;*/
-  /*margin-top: 50px;*/
-  /*margin-bottom: 40px;*/
-  /*cursor: pointer;*/
+.slider {
+  margin: 20px auto;
+  width: 90%;
 }
 
 .vueperslide {
@@ -167,8 +250,8 @@ export default {
 
 .vueperslides--3d .vueperslide--active,
 .vueperslides--3d .vueperslide--next-slide,
-.vueperslides--3d .vueperslide--previous-slide {
-  z-index:0;
+.vueperslides--3d .vueperslide--previous-slide
+{z-index:0;
 }
 
 .vueperslides--3d .vueperslide--active {
@@ -180,7 +263,7 @@ export default {
   transform:rotateY(90deg) translateX(-50%) rotateY(-90deg);
 }
 
-.vueperslides--3d .vueperslide[face=right]{
+.vueperslides--3d .vueperslide[face=right] {
   -webkit-transform:rotateY(90deg) translateX(50%);
   transform:rotateY(90deg) translateX(50%);
   -webkit-transform-origin:100% 0;
@@ -188,7 +271,8 @@ export default {
 }
 
 .vueperslides--3d .vueperslide[face=back] {
-  -webkit-transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);
+  -webkit-transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);
+  transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);
 }
 
 .vueperslides--3d .vueperslide[face=left] {
@@ -223,7 +307,6 @@ export default {
 .vueperslides__arrows--outside {
   color:currentColor;
 }
-
 .vueperslides__arrow {
   top:50%;
   background-color:transparent;
@@ -296,8 +379,7 @@ export default {
   border-width:6px;
 }
 
-.vueperslide,
-.vueperslide__image {
+.vueperslide,.vueperslide__image {
   background-position:50%;
 }
 
@@ -337,8 +419,6 @@ export default {
 }
 
 .vueperslides {
-  width: 80%;
-  margin: 0 auto;
   position:relative;
 }
 
@@ -364,8 +444,10 @@ export default {
   user-select:none;
 }
 
-.vueperslides__parallax-wrapper {position:relative;
+.vueperslides__parallax-wrapper {
+  position:relative;
   overflow:hidden;
+  height: 370px;
 }
 
 .vueperslides--3d .vueperslides__parallax-wrapper {
@@ -559,5 +641,6 @@ export default {
   -webkit-transition:.3s ease-in-out;
   transition:.3s ease-in-out;
 }
+
 
 </style>
