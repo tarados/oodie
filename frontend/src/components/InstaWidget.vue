@@ -1,157 +1,43 @@
 <template>
-  <div class="slider">
-    <vueper-slides
-        class="no-shadow"
-        :visible-slides="5"
-        :arrows-outside="false"
-        :bullets="false"
-        slide-multiple
-        :gap="2"
-        :slide-ratio="1 / 5"
-        :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-      <vueper-slide v-for="(slider, i) in slides" :key="i"
-                    :title="i.toString()"
-                    :image="slider.image"
-                    @mouseover="mouseover"
-                    @mouseleave="mouseleave"
-                    :style="setStyle(i)"
-      >
-        <template v-slot:content>
-          <div class="vueperslide__content-wrapper" style="flex-direction: row">
-            <span>{{ message }}</span>
-          </div>
-        </template>
-      </vueper-slide>
-    </vueper-slides>
+  <div class="slider-wrapper">
+    <div class="slider">
+      <div class="slider_item" v-for="(slider, index) in allProducts" :key="index">
+        <img :src="slider.image" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
-import {VueperSlides, VueperSlide} from "vueperslides";
 
 export default {
-  name: "logo",
+  name: "Slider",
   data() {
     return {
-      imageIndex: 0,
-      message: '',
-      slides: [
-        {
-          image: 'http://localhost:8000/media/images/grey-oodie-boots.Australian_Slippers_and_Boots-11_Ass7Cxw_quByaMm.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/bulldog-oodie.BullDogOodieImage1_Pout0fd_6QZtP1n_KVYtAha.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.24_8721aa92-69b3-48ce-937d-31e293f38d55_sX1tKtZ_sXOmfeF.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.141_42ea8513-5f7f-4b0c-93f6-183482dd448b_IDza3NK_7diAtUm.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.Unicorn_Hooded_Blanket-4_b3cc43d0-a8ec-430e-933d-d41461754802_4zbi4_gZigFkd.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.23_ec1d1eff-8d36-4a05-ab6a-4f1cf0374234_MhND9Hb_XT28XT1.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/cat-oodie.14_ed67e41d-9f5c-4ed7-9656-817cd5372019_IOwLgbg_lAQ8eIV_2iCAZrX.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/avocado-oodie.AvocadoOodieImage1_cslcDGm_qDC45ya_bljyazl.jpg',
-          title: '',
-          content: ''
-        },
-        {
-          image: 'http://localhost:8000/media/images/unicorn-oodie.213_e0584fbb-e649-46e6-a7ff-ddf2a5acbf1c_TL4sBlW_8GCa4TO.jpg',
-          title: '',
-          content: ''
-        },
-      ]
     }
-  },
-  components: {
-    VueperSlide,
-    VueperSlides
   },
   computed: {
     ...mapGetters(["allProducts"])
   },
   methods: {
-    setStyle(index) {
-      if (index % 2 === 0) {
-        return 'border: 20px solid #fff'
-      }
-    },
-    setHover() {
-      const sliderItems = [...document.querySelectorAll('.vueperslide--visible')];
-      const toggleActivity = function (index) {
-        for (let i = 0; i < sliderItems.length; i++) {
-          if (i === Number(index)) {
-            sliderItems[i].classList.add('hover-slider');
-          } else {
-            sliderItems[i].classList.remove('hover-slider');
-          }
-        }
-      };
-      document.querySelector('.vueperslides__track').addEventListener('mouseover', (event) => {
-        if (event.target.classList.contains('vueperslide--visible')) {
-          toggleActivity(event.target.dataset.index);
-        }
-      });
-    },
-    mouseover: function () {
-      this.message = 'Good!'
-      console.log(this.message);
-    },
-    mouseleave: function () {
-      this.message = 'Hover Me!'
-    }
+    // setHover() {
+    //   const sliderItems = [...document.querySelectorAll('.vueperslide--visible')];
+    //   const toggleActivity = function (index) {
+    //     for (let i = 0; i < sliderItems.length; i++) {
+    //       if (i === Number(index)) {
+    //         sliderItems[i].classList.add('hover-slider');
+    //       } else {
+    //         sliderItems[i].classList.remove('hover-slider');
+    //       }
+    //     }
+    //   };
+    //   document.querySelector('.vueperslides__track').addEventListener('mouseover', (event) => {
+    //     if (event.target.classList.contains('vueperslide--visible')) {
+    //       toggleActivity(event.target.dataset.index);
+    //     }
+    //   });
+    // }
   },
   mounted() {
   }
@@ -159,488 +45,27 @@ export default {
 </script>
 
 <style>
-.slider {
+.slider-wrapper {
   margin: 20px auto;
   width: 90%;
-}
-
-.vueperslide {
-  white-space:normal;
-  background-size:cover;
-  -ms-flex-negative:0;
-  flex-shrink:0;
-  display:block;
-  width:100%;
-  position:relative;
-}
-
-.vueperslide--clone-1 {
-  position:absolute;
-  top:0;
-  bottom:0;
-  right:100%;
-}
-
-.vueperslide[href] {
-  -webkit-user-drag:none;
-}
-
-.vueperslide__image {
-  background-size:cover;
-}
-
-.vueperslide__image,
-.vueperslide__loader {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-}
-
-.vueperslide__loader {
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-}
-
-.vueperslide__content-wrapper:not(.vueperslide__content-wrapper--outside-top):not(.vueperslide__content-wrapper--outside-bottom) {
-  height:100%;
-  margin:auto;
-}
-
-.vueperslides--fade .vueperslide {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  opacity:0;
-  -webkit-transition:opacity .8s ease-in-out;
-  transition:opacity .8s ease-in-out;
-  -webkit-transition-duration:inherit;
-  transition-duration:inherit;
-}
-
-.vueperslides--fade .vueperslide--active,
-.vueperslides--fade .vueperslide--visible {
-  z-index:1;
-  opacity:1;
-}
-
-.vueperslides--slide-image-inside .vueperslide {
-  overflow:hidden;
-}
-
-.vueperslides--3d .vueperslide {
-  position:absolute;
-  z-index:-1;
-  height:100%;
-}
-
-.vueperslides--3d .vueperslide--active,
-.vueperslides--3d .vueperslide--next-slide,
-.vueperslides--3d .vueperslide--previous-slide
-{z-index:0;
-}
-
-.vueperslides--3d .vueperslide--active {
-  z-index:1;
-}
-
-.vueperslides--3d .vueperslide[face=front] {
-  -webkit-transform:rotateY(90deg) translateX(-50%) rotateY(-90deg);
-  transform:rotateY(90deg) translateX(-50%) rotateY(-90deg);
-}
-
-.vueperslides--3d .vueperslide[face=right] {
-  -webkit-transform:rotateY(90deg) translateX(50%);
-  transform:rotateY(90deg) translateX(50%);
-  -webkit-transform-origin:100% 0;
-  transform-origin:100% 0;
-}
-
-.vueperslides--3d .vueperslide[face=back] {
-  -webkit-transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);
-  transform:rotateY(270deg) translateX(-50%) rotateY(-90deg);
-}
-
-.vueperslides--3d .vueperslide[face=left] {
-  -webkit-transform:rotateY(270deg) translateX(-50%);
-  transform:rotateY(270deg) translateX(-50%);
-  -webkit-transform-origin:0 0;
-  transform-origin:0 0;
-}
-
-.vueperslides:not(.no-shadow):not(.vueperslides--3d) .vueperslides__parallax-wrapper:after,
-.vueperslides:not(.no-shadow):not(.vueperslides--3d) .vueperslides__parallax-wrapper:before {
-  content:"";
-  position:absolute;
-  bottom:100%;
-  left:-1em;
-  right:-1em;
-  height:2em;
-  -webkit-box-shadow:0 0 20px rgba(0,0,0,.25);
-  box-shadow:0 0 20px rgba(0,0,0,.25);
-  z-index:2;
-}
-
-.vueperslides:not(.no-shadow):not(.vueperslides--3d) .vueperslides__parallax-wrapper:after {
-  top:100%;
-  bottom:auto;
-}
-
-.vueperslides__arrows {
-  color:#fff;
-}
-
-.vueperslides__arrows--outside {
-  color:currentColor;
-}
-.vueperslides__arrow {
-  top:50%;
-  background-color:transparent;
-  border:none;
-  opacity:.7;
-}
-
-.vueperslides__arrow--prev {
-  left:.5em;
-}
-
-.vueperslides__arrow--next {
-  right:.5em;
-}
-
-.vueperslides__arrow:hover {
-  opacity:1;
-}
-
-.vueperslides__arrows--outside .vueperslides__arrow--prev {
-  left:-3.5em;
-}
-
-.vueperslides__arrows--outside .vueperslides__arrow--next {
-  right:-3.5em;
-}
-
-.vueperslides__paused {
-  top:.7em;
-  right:.7em;
-  opacity:0;
-  text-shadow:0 0 3px rgba(0,0,0,.4);
-  z-index:1;
-}
-
-.vueperslides:hover .vueperslides__paused {
-  opacity:1;
-}
-
-.vueperslides__bullets:not(.vueperslides__bullets--outside) {
-  color:#fff;
-}
-
-.vueperslides__bullet {
-  margin:1.5em .6em;
-  padding:0;
-  border:none;
-  background:none;
-}
-
-.vueperslides__bullet .default {
-  width:12px;
-  height:12px;
-  border-radius:12px;
-  border:1px solid currentColor;
-  background-color:transparent;
-  -webkit-box-shadow:0 0 1px rgba(0,0,0,.5),0 0 3px rgba(0,0,0,.3);
-  box-shadow:0 0 1px rgba(0,0,0,.5),0 0 3px rgba(0,0,0,.3);
-  -webkit-transition:.4s ease-in-out;
-  transition:.4s ease-in-out;
-  -webkit-box-sizing:border-box;
-  box-sizing:border-box;
-}
-
-.vueperslides__bullet .default span {
-  display:none;
-}
-
-.vueperslides__bullet--active .default {
-  border-width:6px;
-}
-
-.vueperslide,.vueperslide__image {
-  background-position:50%;
-}
-
-.vueperslide__content-wrapper:not(.vueperslide__content-wrapper--outside-top):not(.vueperslide__content-wrapper--outside-bottom) {
-  -webkit-box-flex:1;
-  -ms-flex:1 1 auto;
-  flex:1 1 auto;
-  flex-direction:column;
-  text-align:center;
-}
-
-.vueperslide__content-wrapper.parallax-fixed-content,
-.vueperslide__content-wrapper:not(.vueperslide__content-wrapper--outside-top):not(.vueperslide__content-wrapper--outside-bottom) {
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  -ms-flex-direction:column;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-}
-
-.vueperslide__content-wrapper.parallax-fixed-content {
-  position:absolute;
-  z-index:2;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  flex-direction:column;
-  pointer-events:none;
-}
-
-.vueperslides {
-  position:relative;
-}
-
-.vueperslides--fixed-height .vueperslide,
-.vueperslides--fixed-height .vueperslides__inner,
-.vueperslides--fixed-height .vueperslides__parallax-wrapper {
-  height:inherit;
-}
-
-.vueperslides--fixed-height .vueperslides__parallax-wrapper {
-  padding-bottom:0!important;
-}
-
-.vueperslides--fixed-height.vueperslides--bullets-outside {
-  margin-bottom:4em;
-}
-
-.vueperslides__inner {
-  position:relative;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-}
-
-.vueperslides__parallax-wrapper {
-  position:relative;
-  overflow:hidden;
   height: 370px;
 }
 
-.vueperslides--3d .vueperslides__parallax-wrapper {
-  overflow:visible;
+.slider {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
-.vueperslides__track {
-  position:absolute;
-  top:0;
-  height:100%;
-  left:0;
-  right:0;
-  overflow:hidden;
-  z-index:1;
+.slider .slider_item {
+  flex-grow: 1;
 }
 
-.vueperslides--parallax .vueperslides__track {
-  height:200%;
-  -webkit-transform:translateY(0);
-  transform:translateY(0);
+.slider .slider_item img {
+  width: 360px;
+  height: 100%;
 }
-
-.vueperslides--touchable .vueperslides__track {
-  cursor:ew-resize;
-  cursor:-webkit-grab;
-  cursor:grab;
-}
-
-.vueperslides--touchable .vueperslides__track--dragging,
-.vueperslides--touchable .vueperslides__track--mousedown {
-  cursor:-webkit-grabbing;
-  cursor:grabbing;
-}
-
-.vueperslides--3d .vueperslides__track {
-  overflow:visible;
-  -webkit-perspective:100em;
-  perspective:100em;
-}
-
-.vueperslides__track-inner {
-  white-space:nowrap;
-  -webkit-transition:transform .5s ease-in-out;
-  transition:transform .5s ease-in-out;
-  height:100%;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-}
-
-.vueperslides--no-animation .vueperslides__track-inner {
-  -webkit-transition-duration:0s!important;
-  transition-duration:0s!important;
-}
-
-.vueperslides--fade .vueperslides__track-inner {
-  white-space:normal;
-  -webkit-transition:none;
-  transition:none;
-}
-
-.vueperslides--3d .vueperslides__track-inner {
-  -webkit-transform-style:preserve-3d;
-  transform-style:preserve-3d;
-}
-
-.vueperslides__track--mousedown .vueperslides__track-inner {
-  -webkit-transition:transform .25s ease-in-out!important;
-  transition:transform .25s ease-in-out!important;
-}
-
-.vueperslides__track--dragging .vueperslides__track-inner {
-  -webkit-transition:none;
-  transition:none;
-}
-
-.vueperslides__arrow {
-  position:absolute;
-  font-size:inherit;
-  color:inherit;
-  text-align:center;
-  -webkit-transform:translateY(-50%);
-  transform:translateY(-50%);
-  cursor:pointer;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  outline:none;
-  z-index:2;
-  line-height:1;
-}
-
-.vueperslides__arrow,
-.vueperslides__arrow svg {
-  -webkit-transition:.3s ease-in-out;
-  transition:.3s ease-in-out;
-}
-
-.vueperslides__arrow svg {
-  vertical-align:middle;
-  stroke:currentColor;
-  fill:none;
-  width:3.5em;
-  padding:1em;
-  stroke-width:1;
-  -webkit-box-sizing:border-box;
-  box-sizing:border-box;
-}
-
-.vueperslides__arrow svg:hover {
-  stroke-width:1.3;
-}
-
-.vueperslides__paused {
-  position:absolute;
-  -webkit-transition:.3s ease-in-out;
-  transition:.3s ease-in-out;
-}
-
-.vueperslides__bullets {
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-}
-
-.vueperslides__bullets--outside {
-  position:relative;
-}
-
-.vueperslides__bullet,
-.vueperslides__bullets button {
-  cursor:pointer;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  outline:none;
-  z-index:2;
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex;
-  -webkit-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center;
-  -webkit-box-align:center;
-  -ms-flex-align:center;
-  align-items:center;
-}
-
-.vueperslides__bullet::-moz-focus-inner,
-.vueperslides__bullets button::-moz-focus-inner {
-  border:0;
-}
-
-.vueperslides__fractions {
-  position:absolute;
-  top:.8em;
-  left:.5em;
-  z-index:2;
-  padding:.2em 1em;
-  border:1px solid hsla(0,0%,100%,.5);
-  border-radius:2em;
-  background:hsla(0,0%,100%,.2);
-  color:#fff;
-}
-
-.vueperslides__progress {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  z-index:2;
-  height:6px;
-  color:rgba(0,0,0,.7);
-}
-
-.vueperslides__progress>* {
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  background:currentColor;
-  -webkit-transition:.3s ease-in-out;
-  transition:.3s ease-in-out;
-}
-
 
 </style>
