@@ -1,10 +1,15 @@
 <template>
   <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slider_item" v-for="(slider, index) in allProducts" :key="index">
-        <img :src="slider.image" alt="">
+    <div class="slider" :style="{'margin-left': '-' + 100.17 * currentSlideIndex + '%'}">
+      <div class="slider_item"
+           v-for="(slider, index) in allProducts"
+           :key="index"
+      >
+        <img :src="slider.image" width="340px">
       </div>
     </div>
+    <button @click="prevSlide">Prev</button>
+    <button @click="nextSlide">Next</button>
   </div>
 </template>
 
@@ -15,29 +20,26 @@ export default {
   name: "Slider",
   data() {
     return {
+      currentSlideIndex: 0,
+      isOffSet: false
     }
   },
   computed: {
     ...mapGetters(["allProducts"])
   },
   methods: {
-    // setHover() {
-    //   const sliderItems = [...document.querySelectorAll('.vueperslide--visible')];
-    //   const toggleActivity = function (index) {
-    //     for (let i = 0; i < sliderItems.length; i++) {
-    //       if (i === Number(index)) {
-    //         sliderItems[i].classList.add('hover-slider');
-    //       } else {
-    //         sliderItems[i].classList.remove('hover-slider');
-    //       }
-    //     }
-    //   };
-    //   document.querySelector('.vueperslides__track').addEventListener('mouseover', (event) => {
-    //     if (event.target.classList.contains('vueperslide--visible')) {
-    //       toggleActivity(event.target.dataset.index);
-    //     }
-    //   });
-    // }
+    prevSlide() {
+      if (this.currentSlideIndex > 0) {
+        this.currentSlideIndex--;
+      }
+    },
+    nextSlide() {
+      if (this.currentSlideIndex >= (this.allProducts.length - 1) / 5) {
+        this.currentSlideIndex = 0;
+      } else {
+        this.currentSlideIndex++;
+      }
+    }
   },
   mounted() {
   }
@@ -46,26 +48,34 @@ export default {
 
 <style>
 .slider-wrapper {
-  margin: 20px auto;
-  width: 90%;
-  height: 370px;
+  margin: 0 auto;
+  width: 95%;
+  overflow: hidden;
 }
 
 .slider {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-wrap: nowrap;
   justify-content: space-between;
   overflow: hidden;
+
 }
 
 .slider .slider_item {
-  flex-grow: 1;
+  width: 340px;
+  height: 340px;
+  margin-right: 10px;
 }
 
 .slider .slider_item img {
-  width: 360px;
-  height: 100%;
+  display: block;
+  transform: scale(1);
+  height: auto;
+  object-fit: cover;
+}
+
+.offset {
+  margin-left: -100%;
 }
 
 </style>
