@@ -1,11 +1,11 @@
 <template>
   <div class="slider-wrapper">
-    <div class="slider" :style="{'margin-left': '-' + 1660 * currentSlideIndex + 'px'}">
+    <div class="slider">
       <div class="slider_item"
            v-for="(slider, index) in allProducts"
            :key="index"
+           :style="`background-image: url(${slider.image})`"
       >
-        <img :src="slider.image" width="332px">
       </div>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
@@ -75,21 +75,26 @@ export default {
 }
 
 .slider .slider_item {
-  width: 332px;
+  flex: 1 0 auto;
+  width: 20%;
   height: 331px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*border: 1px solid red;*/
 }
 
-.slider .slider_item img:nth-child(2n) {
+.slider .slider_item:nth-child(2n) {
   border: 15px solid white;
 }
 
-.slider .slider_item img {
-  display: block;
-  transform: scale(1);
-  height: auto;
-  object-fit: cover;
-  border: 1px solid red;
-}
+/*.slider .slider_item img {*/
+/*  display: block;*/
+/*  transform: scale(1);*/
+/*  height: auto;*/
+/*  object-fit: cover;*/
+/*  border: 1px solid red;*/
+/*}*/
 
 .slider-wrapper .next svg {
   z-index: 1;
