@@ -1,11 +1,11 @@
 <template>
   <div class="slider-wrapper">
-    <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
+    <div class="slider" :style="{'margin-left': '-' + 1660 * currentSlideIndex + 'px'}">
       <div class="slider_item"
            v-for="(slider, index) in allProducts"
            :key="index"
       >
-        <img :src="slider.image" width="335px">
+        <img :src="slider.image" width="332px">
       </div>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
@@ -75,8 +75,8 @@ export default {
 }
 
 .slider .slider_item {
-  width: 335px;
-  height: 335px;
+  width: 332px;
+  height: 331px;
 }
 
 .slider .slider_item img:nth-child(2n) {
@@ -88,6 +88,7 @@ export default {
   transform: scale(1);
   height: auto;
   object-fit: cover;
+  border: 1px solid red;
 }
 
 .slider-wrapper .next svg {
