@@ -1,6 +1,6 @@
 <template>
   <div class="slider-wrapper">
-    <div class="slider">
+    <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
       <div class="slider_item"
            v-for="(slider, index) in allProducts"
            :key="index"
@@ -68,9 +68,8 @@ export default {
 }
 
 .slider {
+  width: 100%;
   display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
 
 }
 
@@ -78,23 +77,13 @@ export default {
   flex: 1 0 auto;
   width: 20%;
   height: 331px;
-  overflow: hidden;
   background-repeat: no-repeat;
   background-size: cover;
-  /*border: 1px solid red;*/
 }
 
 .slider .slider_item:nth-child(2n) {
   border: 15px solid white;
 }
-
-/*.slider .slider_item img {*/
-/*  display: block;*/
-/*  transform: scale(1);*/
-/*  height: auto;*/
-/*  object-fit: cover;*/
-/*  border: 1px solid red;*/
-/*}*/
 
 .slider-wrapper .next svg {
   z-index: 1;
