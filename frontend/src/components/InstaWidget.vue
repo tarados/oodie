@@ -2,9 +2,9 @@
   <div class="slider-wrapper">
     <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
       <div class="slider_item"
-           v-for="(slider, index) in allProducts"
+           v-for="(slider, index) in slides"
            :key="index"
-           :style="`background-image: url(${slider.image})`"
+           :style="`background-image: url(${slider})`"
       >
         <div class="slider_item__background"></div>
       </div>
@@ -35,13 +35,18 @@ export default {
   data() {
     return {
       currentSlideIndex: 0,
-      isOffSet: false
+      slides: []
     }
   },
   computed: {
     ...mapGetters(["allProducts"])
   },
   methods: {
+    loadSlides() {
+      this.allProducts.forEach(item => {
+        this.slides.push(item.image);
+      });
+    },
     prevSlide() {
       if (this.currentSlideIndex > 0) {
         this.currentSlideIndex--;
@@ -57,6 +62,8 @@ export default {
     }
   },
   mounted() {
+    this.loadSlides();
+    console.log(this.slides[0]);
   }
 };
 </script>
