@@ -45,20 +45,26 @@ export default {
         slides.push(item.image);
       });
       return slides;
+    },
+    sectionCount() {
+      let screenWidth = window.screen.width;
+      if (screenWidth > 760) {
+        return 5
+      } else if (screenWidth > 450) {
+        return 4
+      } else {
+        return 2
+      }
     }
   },
   methods: {
-    loadSlides() {
-      console.log(this.allProducts);
-
-    },
     prevSlide() {
       if (this.currentSlideIndex > 0) {
         this.currentSlideIndex--;
       }
     },
     nextSlide() {
-      let slideCount = Math.ceil(this.allProducts.length / 5);
+      let slideCount = Math.ceil(this.allProducts.length / this.sectionCount);
       if (this.currentSlideIndex >= slideCount) {
         this.currentSlideIndex = 0;
       } else {
