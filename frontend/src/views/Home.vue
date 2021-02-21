@@ -37,10 +37,8 @@
         </div>
       </div>
     </div>
-
     <ProductsList :category-id="categoryId" />
-
-    <InstaWidget/>
+    <InstaWidget />
   </div>
 </template>
 
