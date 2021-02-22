@@ -38,14 +38,14 @@
       </div>
     </div>
     <ProductsList :category-id="categoryId" />
-    <InstaWidget />
+    <InstaWidget :slides="slides"/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
 import InstaWidget from "../components/InstaWidget";
-
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Home',
@@ -58,6 +58,18 @@ export default {
     InstaWidget
   },
   computed: {
+    ...mapGetters(["allProducts"]),
+    slides() {
+      const slides = [];
+      this.allProducts.forEach(item => {
+        slides.push({
+          image: item.image,
+          title: item.id,
+          smile: ''
+        });
+      });
+      return slides;
+    },
     categoryId() {
       return 1
     }

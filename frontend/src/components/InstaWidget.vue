@@ -28,28 +28,21 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+
 
 export default {
   name: "Slider",
+  props: {
+    slides: {
+      type: Array
+    }
+  },
   data() {
     return {
       currentSlideIndex: 0
     }
   },
   computed: {
-    ...mapGetters(["allProducts"]),
-    slides() {
-      const slides = [];
-      this.allProducts.forEach(item => {
-        slides.push({
-          image: item.image,
-          title: item.id,
-          smile: ''
-        });
-      });
-      return slides;
-    },
     sectionCount() {
       let screenWidth = window.screen.width;
       if (screenWidth > 760) {
@@ -68,15 +61,13 @@ export default {
       }
     },
     nextSlide() {
-      let slideCount = Math.ceil(this.allProducts.length / this.sectionCount);
+      let slideCount = Math.ceil(this.slides.length / this.sectionCount);
       if (this.currentSlideIndex >= slideCount) {
         this.currentSlideIndex = 0;
       } else {
         this.currentSlideIndex++;
       }
     }
-  },
-  mounted() {
   }
 };
 </script>
@@ -208,8 +199,5 @@ export default {
     flex-basis: 50%;
     height: 50vw;
   }
-
 }
-
-
 </style>
