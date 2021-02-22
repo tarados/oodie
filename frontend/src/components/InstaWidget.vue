@@ -4,9 +4,9 @@
       <div class="slider_item"
            v-for="(slider, index) in slides"
            :key="index"
-           :style="`background-image: url(${slider})`"
+           :style="`background-image: url(${slider.image})`"
       >
-        <div class="slider_item__background"></div>
+        <div class="slider_item__background">{{slider.title}}</div>
       </div>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
@@ -42,7 +42,11 @@ export default {
     slides() {
       const slides = [];
       this.allProducts.forEach(item => {
-        slides.push(item.image);
+        slides.push({
+          image: item.image,
+          title: item.id,
+          smile: ''
+        });
       });
       return slides;
     },
@@ -105,6 +109,11 @@ export default {
   height: 100%;
   opacity: 0;
   background-color: #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .slider .slider_item .slider_item__background:hover {
