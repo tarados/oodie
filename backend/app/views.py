@@ -2,17 +2,15 @@ import os
 import json
 import datetime
 from itertools import groupby
-
 from django.conf import settings
-
 from django.contrib import messages
-
 from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
 from .novaposhta_api import invoice, get_errors
+# from .insta_parse import parse_insta
 
 
 def products(request):
@@ -182,3 +180,8 @@ def report(request):
 			name: item_quantity
 		})
 	return JsonResponse(products_sale)
+
+
+def insta(request):
+	orders_list = {}
+	return JsonResponse(orders_list)

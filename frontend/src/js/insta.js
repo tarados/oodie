@@ -14,7 +14,8 @@ const client = new Instagram({username: 'zvada53', password: 'root2827'});
       comment: item.node.edge_media_to_caption.edges[0].node.text
     });
   });
-  let file = fs.createWriteStream('../../public/photosFromInstagram.json');
+  const pathFile = '/home/sergey/projects/oodie/backend/static/';
+  let file = fs.createWriteStream(pathFile + 'photosFromInstagram.json');
   file.on('error', function (err) { /* error handling */ });
   let jsonData = JSON.stringify(photosList);
   file.write(jsonData);

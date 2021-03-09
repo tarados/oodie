@@ -46,7 +46,7 @@
 import ProductsList from "../components/ProductsList";
 import InstaWidget from "../components/InstaWidget";
 import {mapGetters} from "vuex";
-import {publicList} from '../js/imageListFromInstagram';
+// import * as publicList from '../../public/photosFromInstagram.json';
 
 export default {
   name: 'Home',
@@ -62,8 +62,8 @@ export default {
     ...mapGetters(["allProducts"]),
     slides() {
       const slides = [];
-      let data = publicList;
-      console.log(data);
+      // let data = JSON.parse(publicList);
+      // console.log(data);
       return slides;
     },
     categoryId() {

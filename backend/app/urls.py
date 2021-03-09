@@ -9,4 +9,5 @@ urlpatterns = [
 	path('order', order),
 	path('report', report),
 	path('invoice', novaposhta_api_invoice),
+	path('insta', insta),
 ]
