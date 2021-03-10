@@ -46,12 +46,13 @@
 import ProductsList from "../components/ProductsList";
 import InstaWidget from "../components/InstaWidget";
 import {mapGetters} from "vuex";
-// import * as publicList from '../../public/photosFromInstagram.json';
+import {get} from "@/js/send";
 
 export default {
   name: 'Home',
   data() {
     return {
+      slides: []
     }
   },
   components: {
@@ -60,17 +61,19 @@ export default {
   },
   computed: {
     ...mapGetters(["allProducts"]),
-    slides() {
-      const slides = [];
-      // let data = JSON.parse(publicList);
-      // console.log(data);
-      return slides;
-    },
     categoryId() {
       return 1
     }
   },
   methods: {
+    getPublics () {
+      (async () => {
+        const response = await get('insta');
+        response.public_list.forEach(item => {
+          this.slides.push(item);
+        })
+      })();
+    },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
         this.$store.dispatch('changeVisibleBasket')
@@ -79,6 +82,7 @@ export default {
   },
   mounted() {
     this.basketVisible();
+    this.getPublics();
   }
 }
 </script>

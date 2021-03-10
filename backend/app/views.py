@@ -10,7 +10,7 @@ from django.http import JsonResponse, HttpResponse
 from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size
 from .novaposhta_api import invoice, get_errors
-# from .insta_parse import parse_insta
+from .insta_parse import parse_insta
 
 
 def products(request):
@@ -183,5 +183,5 @@ def report(request):
 
 
 def insta(request):
-	orders_list = {}
-	return JsonResponse(orders_list)
+	public_list = parse_insta()
+	return JsonResponse({"public_list": public_list})

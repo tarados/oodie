@@ -6,7 +6,9 @@
            :key="index"
            :style="`background-image: url(${slider.image})`"
       >
-        <div class="slider_item__background">{{slider.title}}</div>
+        <div class="slider_item__background">
+          <span>{{slider.comment}}</span>
+        </div>
       </div>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
@@ -68,6 +70,9 @@ export default {
         this.currentSlideIndex++;
       }
     }
+  },
+  mounted() {
+    console.log(this.slides);
   }
 };
 </script>
@@ -108,13 +113,7 @@ export default {
 }
 
 .slider .slider_item .slider_item__background:hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   opacity: 0.8;
-  background-color: #000000;
 }
 
 .slider .slider_item:nth-child(2n) {
