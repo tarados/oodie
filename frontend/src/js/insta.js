@@ -5,7 +5,6 @@ const client = new Instagram({username: 'zvada53', password: 'root2827'});
 (async () => {
   await client.login();
   const photos = await client.getPhotosByUsername({username: 'hoodiyalko'});
-
   const publicList = photos.user.edge_owner_to_timeline_media.edges;
   let photosList = [];
   publicList.forEach(item => {

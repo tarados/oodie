@@ -1,5 +1,6 @@
 <template>
   <div class="slider-wrapper">
+    <div class="slider-title">Мы в Instagram</div>
     <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
       <div class="slider_item"
            v-for="(slider, index) in slides"
@@ -7,7 +8,7 @@
            :style="`background-image: url(${slider.image})`"
       >
         <div class="slider_item__background">
-          <span>{{slider.comment}}</span>
+          <span>{{ slider.comment }}</span>
         </div>
       </div>
     </div>
@@ -70,9 +71,6 @@ export default {
         this.currentSlideIndex++;
       }
     }
-  },
-  mounted() {
-    console.log(this.slides);
   }
 };
 </script>
@@ -82,6 +80,14 @@ export default {
   margin: 30px auto;
   overflow: hidden;
   position: relative;
+}
+
+.slider-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 32px;
+  padding: 24px 10px;
 }
 
 .slider {
@@ -140,7 +146,7 @@ export default {
 }
 
 .slider-wrapper .radius-next {
-  width: 1.5vw;  /* ширина в два раза меньше высоты, иначе получится полуовал */
+  width: 1.5vw; /* ширина в два раза меньше высоты, иначе получится полуовал */
   height: 3vw;
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
   background: #000000;
@@ -163,7 +169,7 @@ export default {
 }
 
 .slider-wrapper .radius-prev {
-  width: 1.5vw;  /* ширина в два раза меньше высоты, иначе получится полуовал */
+  width: 1.5vw; /* ширина в два раза меньше высоты, иначе получится полуовал */
   height: 3vw;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
   background: #000000;
@@ -175,7 +181,7 @@ export default {
     height: 30vw;
   }
 
-  .slider .slider_item  {
+  .slider .slider_item {
     flex-basis: 25%;
     height: 25vw;
   }
