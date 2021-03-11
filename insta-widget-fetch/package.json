@@ -1,0 +1,15 @@
+{
+  "name": "insta-widget-fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "insta.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "export FILE=\"/home/sergey/projects/oodie/backend/static/\" && node insta.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "instagram-web-api": "^2.2.2"
+  }
+}
