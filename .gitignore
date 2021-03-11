@@ -3,3 +3,4 @@
 /env
 media
 *.sqlite
+/insta-widget-fetch/node_modules/
