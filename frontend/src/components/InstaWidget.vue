@@ -2,15 +2,17 @@
   <div class="slider-wrapper">
     <div class="slider-title">Мы в Instagram</div>
     <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
-      <div class="slider_item"
-           v-for="(slider, index) in slides"
-           :key="index"
-           :style="`background-image: url(${slider.image})`"
+      <a :href="`https://www.instagram.com/p/${slider.shortcode}`"
+         target="_blank"
+         class="slider_item"
+         v-for="(slider, index) in slides"
+         :key="index"
+         :style="`background-image: url(${slider.image})`"
       >
         <div class="slider_item__background">
           <span>{{ slider.comment }}</span>
         </div>
-      </div>
+      </a>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
          @click="prevSlide">
@@ -64,7 +66,7 @@ export default {
       }
     },
     nextSlide() {
-      let slideCount = Math.ceil(this.slides.length / this.sectionCount);
+      let slideCount = Math.ceil(this.slides.length / this.sectionCount - 1);
       if (this.currentSlideIndex >= slideCount) {
         this.currentSlideIndex = 0;
       } else {
