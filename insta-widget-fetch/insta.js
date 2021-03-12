@@ -14,8 +14,7 @@ const client = new Instagram({username: 'zvada53', password: 'root2827'});
             shortcode: item.node.shortcode
         });
     });
-    const pathFile = process.env.FILE;
-    let file = fs.createWriteStream(pathFile + 'photosFromInstagram.json');
+    let file = fs.createWriteStream(process.env.RESULT_FILE);
     file.on('error', function (err) { /* error handling */
     });
     let jsonData = JSON.stringify(photosList);

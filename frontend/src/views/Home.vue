@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <ProductsList :category-id="categoryId" />
+    <ProductsList :category-id="categoryId"/>
     <InstaWidget :slides="slides"/>
   </div>
 </template>
@@ -46,7 +46,7 @@
 import ProductsList from "../components/ProductsList";
 import InstaWidget from "../components/InstaWidget";
 import {mapGetters} from "vuex";
-import {get} from "@/js/send";
+import axios from "axios";
 
 export default {
   name: 'Home',
@@ -66,13 +66,11 @@ export default {
     }
   },
   methods: {
-    getPublics () {
-      (async () => {
-        const response = await get('insta');
-        response.public_list.forEach(item => {
-          this.slides.push(item);
-        })
-      })();
+    async getPublics() {
+      const response = await axios.get(process.env.VUE_APP_INSTA);
+      response.data.forEach(item => {
+        this.slides.push(item);
+      })
     },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
@@ -226,6 +224,7 @@ h4 {
     margin: 0 auto;
   }
 }
+
 @media screen and (max-width: 1100px) {
   .info-content + .info-content {
     margin-left: 40px;

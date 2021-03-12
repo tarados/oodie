@@ -81,7 +81,7 @@ export default {
 .slider-wrapper {
   margin: 30px auto;
   overflow: hidden;
-  position: relative;
+
 }
 
 .slider-title {
@@ -93,6 +93,7 @@ export default {
 }
 
 .slider {
+  position: relative;
   width: 100%;
   height: 20vw;
   display: flex;
@@ -134,7 +135,7 @@ export default {
 
 .slider-wrapper .next {
   position: absolute;
-  top: 43%;
+  top: 50%;
   right: 0;
 }
 
@@ -157,7 +158,7 @@ export default {
 
 .slider-wrapper .prev {
   position: absolute;
-  top: 43%;
+  top: 50%;
   left: 0;
 }
 
