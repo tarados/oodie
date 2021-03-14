@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      currentSlideIndex: 0
+      currentSlideIndex: 0,
     }
   },
   computed: {
@@ -66,19 +66,23 @@ export default {
       }
     },
     nextSlide() {
-      let slideCount = Math.ceil(this.slides.length / this.sectionCount - 1);
+      let slideCount = this.slides.length / this.sectionCount -1;
       if (this.currentSlideIndex >= slideCount) {
         this.currentSlideIndex = 0;
       } else {
         this.currentSlideIndex++;
       }
     }
+  },
+  mounted() {
+    this.sectionCount;
   }
 };
 </script>
 
 <style>
 .slider-wrapper {
+  position: relative;
   margin: 30px auto;
   overflow: hidden;
 
@@ -93,13 +97,13 @@ export default {
 }
 
 .slider {
-  position: relative;
   width: 100%;
-  height: 20vw;
+  height: 100%;
   display: flex;
 }
 
 .slider .slider_item {
+  height: calc(9vw + 197 * (100vw / 1838));
   position: relative;
   flex: 1 0 20%;
   background-repeat: no-repeat;
@@ -126,7 +130,7 @@ export default {
 }
 
 .slider .slider_item:nth-child(2n) {
-  border: 15px solid white;
+  border: 12px solid white;
 }
 
 .slider .slider_item:nth-child(2n):hover {
@@ -141,16 +145,16 @@ export default {
 
 .slider-wrapper .next svg {
   position: absolute;
-  width: 0.6vw;
-  height: 0.8vw;
-  top: 37%;
-  left: 0.6vw;
+  width: 12px;
+  height: 15px;
+  top: 23px;
+  left: 12px;
   fill: rgb(255, 255, 255);
 }
 
 .slider-wrapper .radius-next {
-  width: 1.5vw; /* ширина в два раза меньше высоты, иначе получится полуовал */
-  height: 3vw;
+  width: 30px; /* ширина в два раза меньше высоты, иначе получится полуовал */
+  height: 60px;
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
   background: #000000;
   cursor: pointer;
@@ -164,44 +168,42 @@ export default {
 
 .slider-wrapper .prev svg {
   position: absolute;
-  width: 0.6vw;
-  height: 0.8vw;
-  top: 37%;
-  right: 0.6vw;
+  width: 12px;
+  height: 15px;
+  top: 23px;
+  right: 12px;
   fill: rgb(255, 255, 255);
 }
 
 .slider-wrapper .radius-prev {
-  width: 1.5vw; /* ширина в два раза меньше высоты, иначе получится полуовал */
-  height: 3vw;
+  width: 30px; /* ширина в два раза меньше высоты, иначе получится полуовал */
+  height: 60px;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
   background: #000000;
   cursor: pointer;
 }
 
-@media screen and (max-width: 760px) {
-  .slider-wrapper {
-    height: 30vw;
+@media screen and (max-width: 767px) {
+  .slider {
+    /*scroll-snap-type: x mandatory;*/
+    /*overflow-x: auto;*/
   }
 
   .slider .slider_item {
+    height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
     flex-basis: 25%;
-    height: 25vw;
+    /*scroll-snap-align: start;*/
   }
 }
 
 @media screen and (max-width: 450px) {
-  .slider-wrapper {
-    height: 50vw;
-  }
-
   .slider .slider_item:nth-child(2n) {
     border: 2px solid white;
   }
 
-  .slider .slider_item:nth-child(2n+1) {
-    border: 2px solid white;
-  }
+  /*.slider .slider_item:nth-child(2n+1) {*/
+  /*  border: 2px solid white;*/
+  /*}*/
 
   .slider .slider_item {
     flex-basis: 50%;
