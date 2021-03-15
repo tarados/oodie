@@ -85,7 +85,8 @@ export default {
   position: relative;
   margin: 30px auto;
   overflow: hidden;
-
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
 }
 
 .slider-title {
@@ -97,6 +98,8 @@ export default {
 }
 
 .slider {
+
+  /*transition: all 1s ease 0s;*/
   width: 100%;
   height: 100%;
   display: flex;
@@ -108,6 +111,7 @@ export default {
   flex: 1 0 20%;
   background-repeat: no-repeat;
   background-size: cover;
+  scroll-snap-align: start;
 }
 
 .slider .slider_item .slider_item__background {
@@ -118,6 +122,7 @@ export default {
   height: 100%;
   opacity: 0;
   background-color: #000000;
+  transition: all 1s ease 0s;
   color: white;
   display: flex;
   align-items: center;
@@ -134,7 +139,7 @@ export default {
 }
 
 .slider .slider_item:nth-child(2n):hover {
-  border: 0;
+  /*border: 0;*/
 }
 
 .slider-wrapper .next {
@@ -185,14 +190,12 @@ export default {
 
 @media screen and (max-width: 767px) {
   .slider {
-    /*scroll-snap-type: x mandatory;*/
-    /*overflow-x: auto;*/
+
   }
 
   .slider .slider_item {
     height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
     flex-basis: 25%;
-    /*scroll-snap-align: start;*/
   }
 }
 
