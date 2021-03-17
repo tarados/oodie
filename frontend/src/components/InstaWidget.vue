@@ -98,8 +98,7 @@ export default {
 }
 
 .slider {
-
-  /*transition: all 1s ease 0s;*/
+  transition: all 1s ease 0s;
   width: 100%;
   height: 100%;
   display: flex;
