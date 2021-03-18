@@ -130,6 +130,7 @@ export default {
 }
 
 .footer-content__item span {
+  padding: 0;
   text-decoration: none;
   cursor: pointer;
   color: black;
