@@ -135,6 +135,10 @@ export default {
   cursor: pointer;
 }
 
+span {
+  padding: 1.5rem;
+}
+
 .slider-wrapper .slider-content .slider .slider_item .slider_item__background:hover {
   opacity: 0.8;
 }
