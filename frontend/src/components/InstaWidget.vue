@@ -1,18 +1,20 @@
 <template>
   <div class="slider-wrapper">
     <div class="slider-title">Мы в Instagram</div>
-    <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
-      <a :href="`https://www.instagram.com/p/${slider.shortcode}`"
-         target="_blank"
-         class="slider_item"
-         v-for="(slider, index) in slides"
-         :key="index"
-         :style="`background-image: url(${slider.image})`"
-      >
-        <div class="slider_item__background">
-          <span>{{ slider.comment }}</span>
-        </div>
-      </a>
+    <div class="slider-content">
+      <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
+        <a :href="`https://www.instagram.com/p/${slider.shortcode}`"
+           target="_blank"
+           class="slider_item"
+           v-for="(slider, index) in slides"
+           :key="index"
+           :style="`background-image: url(${slider.image})`"
+        >
+          <div class="slider_item__background">
+            <span>{{ slider.comment }}</span>
+          </div>
+        </a>
+      </div>
     </div>
     <div class="prev" v-if="currentSlideIndex >= 1"
          @click="prevSlide">
@@ -66,7 +68,7 @@ export default {
       }
     },
     nextSlide() {
-      let slideCount = this.slides.length / this.sectionCount -1;
+      let slideCount = this.slides.length / this.sectionCount - 1;
       if (this.currentSlideIndex >= slideCount) {
         this.currentSlideIndex = 0;
       } else {
@@ -85,11 +87,15 @@ export default {
   position: relative;
   margin: 30px auto;
   overflow: hidden;
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
 }
 
-.slider-title {
+.slider-wrapper .slider-content {
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.slider-wrapper .slider-title {
   font-size: 24px;
   font-weight: 600;
   text-align: center;
@@ -97,14 +103,14 @@ export default {
   padding: 24px 10px;
 }
 
-.slider {
+.slider-wrapper .slider-content .slider {
   transition: all 1s ease 0s;
   width: 100%;
   height: 100%;
   display: flex;
 }
 
-.slider .slider_item {
+.slider-wrapper .slider-content .slider .slider_item {
   height: calc(9vw + 197 * (100vw / 1838));
   position: relative;
   flex: 1 0 20%;
@@ -113,7 +119,7 @@ export default {
   scroll-snap-align: start;
 }
 
-.slider .slider_item .slider_item__background {
+.slider-wrapper .slider-content .slider .slider_item .slider_item__background {
   position: absolute;
   top: 0;
   left: 0;
@@ -129,16 +135,12 @@ export default {
   cursor: pointer;
 }
 
-.slider .slider_item .slider_item__background:hover {
+.slider-wrapper .slider-content .slider .slider_item .slider_item__background:hover {
   opacity: 0.8;
 }
 
-.slider .slider_item:nth-child(2n) {
+.slider-wrapper .slider-content .slider .slider_item:nth-child(2n) {
   border: 12px solid white;
-}
-
-.slider .slider_item:nth-child(2n):hover {
-  /*border: 0;*/
 }
 
 .slider-wrapper .next {
@@ -192,22 +194,18 @@ export default {
 
   }
 
-  .slider .slider_item {
+  .slider-wrapper .slider-content .slider .slider_item {
     height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
     flex-basis: 25%;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .slider .slider_item:nth-child(2n) {
+  .slider-wrapper .slider-content .slider .slider_item:nth-child(2n) {
     border: 2px solid white;
   }
 
-  /*.slider .slider_item:nth-child(2n+1) {*/
-  /*  border: 2px solid white;*/
-  /*}*/
-
-  .slider .slider_item {
+  .slider-wrapper .slider-content .slider .slider_item {
     flex-basis: 50%;
     height: 50vw;
   }
