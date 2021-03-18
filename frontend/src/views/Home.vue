@@ -38,15 +38,14 @@
       </div>
     </div>
     <ProductsList :category-id="categoryId"/>
-    <InstaWidget :slides="slides"/>
+    <Instagram/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
-import InstaWidget from "../components/InstaWidget";
+import Instagram from "../components/Instagram";
 import {mapGetters} from "vuex";
-import axios from "axios";
 
 export default {
   name: 'Home',
@@ -57,7 +56,7 @@ export default {
   },
   components: {
     ProductsList,
-    InstaWidget
+    Instagram
   },
   computed: {
     ...mapGetters(["allProducts"]),
@@ -66,12 +65,6 @@ export default {
     }
   },
   methods: {
-    async getPublics() {
-      const response = await axios.get(process.env.VUE_APP_INSTA);
-      response.data.forEach(item => {
-        this.slides.push(item);
-      })
-    },
     basketVisible() {
       if (!this.$store.state.productsStore.basketVisible) {
         this.$store.dispatch('changeVisibleBasket')
@@ -80,7 +73,6 @@ export default {
   },
   mounted() {
     this.basketVisible();
-    this.getPublics();
   }
 }
 </script>

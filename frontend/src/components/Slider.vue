@@ -1,6 +1,5 @@
 <template>
   <div class="slider-wrapper">
-    <div class="slider-title">Мы в Instagram</div>
     <div class="slider-content">
       <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
         <a :href="`https://www.instagram.com/p/${slider.shortcode}`"
@@ -95,14 +94,6 @@ export default {
   overflow-y: hidden;
 }
 
-.slider-wrapper .slider-title {
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 32px;
-  padding: 24px 10px;
-}
-
 .slider-wrapper .slider-content .slider {
   transition: all 1s ease 0s;
   width: 100%;
@@ -149,7 +140,7 @@ span {
 
 .slider-wrapper .next {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 0;
 }
 
@@ -172,7 +163,7 @@ span {
 
 .slider-wrapper .prev {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 0;
 }
 
