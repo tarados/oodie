@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import * as card from '../../js/card'
 import {get} from "@/js/send";
+import defaultLocales from "@/assets/defaultLocales.json";
 
 export default {
     actions: {
@@ -11,7 +12,8 @@ export default {
         },
         async loadLocales(context) {
             const response = await get('locales');
-            context.commit('addLocales', response);
+
+            context.commit('addLocales', processLocalization(response));
         },
         async loadProduct(context, id) {
             context.commit('setCurrentProduct', null);
@@ -91,8 +93,8 @@ export default {
         basketVisible: true,
         citiesList: [],
         warehouseList: [],
-        locale: null,
-        locales: {}
+        locale: window.navigator.language || 'ua',
+        locales: processLocalization(defaultLocales)
     },
     getters: {
         currentProduct(state) {
@@ -153,6 +155,16 @@ function changeQuantity(array, index, number) {
     item.quantity = item.quantity + number;
     item.total = parseFloat((item.price * item.quantity).toFixed(1));
     Vue.set(array.cardProducts, index, item);
+}
+
+function processLocalization(data) {
+    const result = {};
+
+    for (let localeKey in data) {
+        result[localeKey.slice(0, 2)] = data[localeKey];
+    }
+
+    return result;
 }
 
 

@@ -175,7 +175,7 @@ export default {
       this.selectedLanguageIcon = window.navigator.language.slice(0, 2);
     },
     getLocale(index) {
-      const locale = this.langList[index].name;
+      const locale = this.langList[index].slug;
       this.$store.commit('setLocale', locale);
       this.selectedLanguageIcon = this.langList[index].slug;
       this.selectedLanguage = this.langList[index].title;

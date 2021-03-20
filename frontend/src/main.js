@@ -35,7 +35,7 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+store.dispatch('loadLocales');
 store.dispatch('loadFromCard');
 store.dispatch('loadProducts');
-store.dispatch('loadLocales');
 
