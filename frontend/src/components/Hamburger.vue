@@ -8,17 +8,11 @@
       <div>
         <div>
           <ul>
-            <li @click="closeHamburger" class="menu-item">
-              <router-link :to="{name: 'Home'}">{{ links['1'] }}</router-link>
-            </li>
-            <li @click="closeHamburger" class="menu-item">
-              <router-link :to="{name: 'About'}">{{ links['2'] }}</router-link>
-            </li>
-            <li @click="closeHamburger" class="menu-item">
-              <router-link :to="{name: 'Brands'}">{{ links['3'] }}</router-link>
-            </li>
-            <li @click="closeHamburger" class="menu-item">
-              <router-link :to="{name: 'Contacts'}">{{ links['4'] }}</router-link>
+            <li class="menu-item"
+                v-for="item in links" :key="item.route"
+                @click="closeHamburger"
+            >
+              <router-link :to="item.route">{{ item.title | localize }}</router-link>
             </li>
           </ul>
         </div>
@@ -28,14 +22,14 @@
 </template>
 
 <script>
-import linkList from '../js/linkList';
+import links from '../js/linkList';
 
 export default {
   name: "Hamburger",
   data() {
     return {
       checked: false,
-      links: {}
+      links: []
     };
   },
   methods: {
@@ -43,12 +37,12 @@ export default {
       this.checked = false;
     },
     getLinkList() {
-      this.links = linkList();
+      this.links = links();
     }
   },
   mounted() {
     this.getLinkList();
-  },
+  }
 };
 </script>
 
@@ -63,8 +57,6 @@ export default {
 
 .menu-wrap .toggler {
   position: fixed;
-  /*top: 1.55vw;*/
-  /*left: 1vw;*/
   z-index: 2;
   cursor: pointer;
   width: 50px;
@@ -74,7 +66,6 @@ export default {
 
 .menu-wrap .hamburger {
   position: fixed;
-  /*top: 1.55vw;*/
   left: 1vw;
   z-index: 1;
   width: 50px;
@@ -86,7 +77,6 @@ export default {
   justify-content: center;
 }
 
-/* Hamburger line*/
 .menu-wrap .hamburger > div {
   position: relative;
   width: 100%;
@@ -205,36 +195,4 @@ export default {
 
 }
 
-@media screen and (max-width: 640px) {
-
-}
-
-@media screen and (max-width: 540px) {
-
-}
-
-@media screen and (max-width: 450px) {
-
-}
-
-@media screen and (max-width: 420px) {
-
-}
-
-@media screen and (max-width: 375px) {
-
-}
-
-@media screen and (max-width: 360px) {
-
-}
-
-@media screen and (max-width: 325px) {
-
-
-}
-
-@media screen and (max-width: 285px) {
-
-}
 </style>

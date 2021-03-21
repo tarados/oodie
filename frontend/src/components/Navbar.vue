@@ -21,55 +21,38 @@
       </div>
       <Logo/>
       <div class="linkList">
-        <div class="linkList-item">
-          <router-link :to="{name: 'Home'}" exact
-          >
-            <p>{{ links['1'] | localize }}</p>
-          </router-link>
-        </div>
-        <div class="linkList-item">
-          <router-link
-              :to="{name: 'About'}"
-          >
-            <p>{{ links['2'] | localize }}</p>
-          </router-link>
-        </div>
         <div class="linkList-item"
-             @mouseover="mouseover"
-             @mouseleave="mouseleave"
-        >
-          <router-link
-              :to="{name: 'Brands'}"
-          >
-            <p>{{ links['3'] | localize }}</p>
+             v-for="(item, index) in links" :key="item.route">
+          <router-link :to="item.route">
+            <p>{{ item.title | localize }}</p>
           </router-link>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z"/>
-            <path d="M9 14l3 3l3 -3"/>
-          </svg>
-          <transition name="fade" appear>
-            <div class="sub-menu" v-if="isOpen">
+          <div class="linkList-item__brands" v-if="links[index].nestedRoutes"
+               @mouseover="mouseover"
+               @mouseleave="mouseleave"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z"/>
+              <path d="M9 14l3 3l3 -3"/>
+            </svg>
+            <div
+                class="linkList-item__sub-menu"
+                v-if="isOpen"
+            >
               <div
                   class="menu-item"
-                  v-for="(item, index) in this.$store.getters.allCategories" :key="index"
-                  v-show="item.slug !== 'hoodiyalko'"
+                  v-for="(category, i) in categories" :key="i"
+                  v-show="category.slug !== 'hoodiyalko'"
               >
                 <router-link
-                    :to="{name: 'Brand', params: {slug: item.slug}}"
+                    :to="{name: 'Brand', params: {slug: category.slug}}"
                 >
-                  <p>{{ item.title }}</p>
+                  <p>{{ category.title }}</p>
                 </router-link>
               </div>
             </div>
-          </transition>
-        </div>
-        <div class="linkList-item">
-          <router-link
-              :to="{name: 'Contacts'}"
-          >
-            <p>{{ links['4'] | localize }}</p>
-          </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -78,7 +61,7 @@
 
 <script>
 import Hamburger from "@/components/Hamburger";
-import Dropdown from "@/components/Dropdown";
+import Dropdown from "@/components/LangSelection";
 import Logo from "./Logo";
 import links from '@/js/linkList'
 import {mapGetters} from 'vuex'
@@ -94,14 +77,16 @@ export default {
     return {
       selected: "",
       isOpen: false,
+      isDropdown: false,
       basketVisible: true,
       options: [],
-      links: {},
+      links: [],
+      categories: [],
       hamburger: false,
     };
   },
   computed: {
-    ...mapGetters(["getLocales",]),
+    ...mapGetters(["getLocales", "allCategories"]),
     getBasket() {
       if (this.$router.currentRoute.name === 'Card') {
         return false;
@@ -128,6 +113,9 @@ export default {
     },
     getLinkList() {
       this.links = links();
+    },
+    getCategories() {
+      this.categories = this.allCategories;
     }
   },
   watch: {
@@ -142,6 +130,7 @@ export default {
   mounted() {
     this.$store.dispatch('changeVisibleBasket');
     this.getLinkList();
+    this.getCategories();
   }
 }
 
@@ -159,7 +148,7 @@ export default {
   padding: 15px;
   height: 60px;
   display: grid;
-  grid-template-columns: 1fr 15fr 1fr 1fr;
+  grid-template-columns: 1fr 15fr 2fr 1fr;
   background-color: var(--overlay-color);
 }
 
@@ -264,10 +253,11 @@ span {
   transition: all .5s ease-out;
 }
 
-.linkList-item .sub-menu {
+.linkList-item .linkList-item__brands .linkList-item__sub-menu {
   position: absolute;
   background-color: var(--overlay-color);
   top: calc(100% + 0.5rem);
+  left: 0;
   width: 80%;
   display: flex;
   align-items: center;
@@ -275,20 +265,15 @@ span {
   padding-top: 3%;
 }
 
-.linkList-item .sub-menu .menu-item {
+.linkList-item .linkList-item__brands .linkList-item__sub-menu .menu-item {
   margin: 3%;
 }
 
-.langSelector .sub-menu {
-  /*display: grid;*/
-  /*grid-template-columns: 1fr 1fr;*/
-}
-
-.linkList-item .sub-menu .menu-item:hover {
+.linkList-item .linkList-item__brands .linkList-item__sub-menu .menu-item:hover {
   opacity: 0.5;
 }
 
-.linkList-item .sub-menu .menu-item a {
+.linkList-item .linkList-item__brands .linkList-item__sub-menu .menu-item a {
   color: black;
 }
 

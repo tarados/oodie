@@ -1,21 +1,14 @@
 export default function links() {
-  /** TODO
-   const list = [
+   const links = [
      {route: "/", title: "MenuHome"},
      {route: "/about", title: "MenuAboutUs"},
      {route: "/brands", title: "MenuBrandsFriends", nestedRoutes: [
         {route: "/some-route-1", title: "SomeRoute1"},
         {route: "/some-route-1", title: "SomeRoute2"},
     ]},
+     {route: "/contacts", title: "MenuContacts"}
    ];
-   */
 
-  const links = {
-    '1': 'MenuHome',
-    '2': 'MenuAboutUs',
-    '3': 'MenuBrandsFriends',
-    '4': 'MenuContacts'
-  }
   return links
 }
 
