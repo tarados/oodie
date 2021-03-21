@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import * as card from '../../js/card'
-import {get} from "@/js/send";
+import {get} from "@/js/api";
 import defaultLocales from "@/assets/defaultLocales.json";
 
 export default {
@@ -93,7 +93,8 @@ export default {
         basketVisible: true,
         citiesList: [],
         warehouseList: [],
-        locale: window.navigator.language || 'ua',
+        locale: 'ru',
+        // locale: window.navigator.language || 'ua',
         locales: processLocalization(defaultLocales)
     },
     getters: {
