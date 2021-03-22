@@ -13,8 +13,8 @@
           <router-link :to="{name: 'Card'}">
             <img src="../assets/cart.svg">
             <span
-                v-show="this.$store.state.productsStore.cardProducts.length > 0"
-            >{{ this.$store.state.productsStore.cardProducts.length }}
+                v-show="this.$store.state.cardProducts.length > 0"
+            >{{ this.$store.state.cardProducts.length }}
             </span>
           </router-link>
         </div>

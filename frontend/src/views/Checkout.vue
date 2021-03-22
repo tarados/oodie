@@ -217,7 +217,7 @@ export default {
 
       const productsList = [];
 
-      this.$store.state.productsStore.cardProducts.forEach(product => {
+      this.$store.state.cardProducts.forEach(product => {
         productsList.push({
           'id': product.id,
           'price': product.price,

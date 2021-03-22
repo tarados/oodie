@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1 v-if="this.$store.state.productsStore.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
+      <h1 v-if="this.$store.state.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
       <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
     </div>
-    <div v-for="(product, index) in this.$store.state.productsStore.cardProducts" :key="index">
+    <div v-for="(product, index) in this.$store.state.cardProducts" :key="index">
       <div class="grid-container second">
         <div class="item image">
           <img :src="product.image">
@@ -54,12 +54,12 @@
         </div>
       </div>
     </div>
-    <div class="subtotal-mobile-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
+    <div class="subtotal-mobile-box" v-show="this.$store.state.cardProducts.length > 0">
       <div class="subtotal-mobile-title">{{ 'BasketTotalPrice' | localize }}:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
-      <div class="subtotal-box" v-show="this.$store.state.productsStore.cardProducts.length > 0">
+      <div class="subtotal-box" v-show="this.$store.state.cardProducts.length > 0">
         <span>{{ 'BasketTotalPrice' | localize }} </span>
         <span v-text="totalPrice"></span>
       </div>
@@ -72,7 +72,7 @@
         <router-link
             :to="{name: 'Checkout'}"
             class="checkout-button checkout button"
-            v-show="this.$store.state.productsStore.cardProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
+            v-show="this.$store.state.cardProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
     </div>
   </div>
 </template>
@@ -91,7 +91,7 @@ export default {
     ...mapGetters(["totalPrice"]),
     isPreorder() {
       let el = false
-      this.$store.state.productsStore.cardProducts.forEach(product => {
+      this.$store.state.cardProducts.forEach(product => {
         if (product.preorder) {
           el = true
         }
@@ -111,14 +111,14 @@ export default {
       this.$store.commit('delProduct', index);
     },
     minusQuantity(index) {
-      const item = this.$store.state.productsStore.cardProducts[index];
+      const item = this.$store.state.cardProducts[index];
       let newAvailability = item.quantity - 1;
       if (newAvailability > 0) {
         this.$store.commit('decrement', index);
       }
     },
     plusQuantity(index) {
-      const item = this.$store.state.productsStore.cardProducts[index];
+      const item = this.$store.state.cardProducts[index];
       let newAvailability = item.quantity + 1;
       if (newAvailability <= item.available) {
         this.$store.commit('increment', index);
@@ -126,11 +126,6 @@ export default {
         alert("В наличии только " + item.available);
       }
     }
-    // basketVisible() { // TODO remove this
-    //   if (this.$store.state.productsStore.basketVisible) {
-    //     this.$store.dispatch('changeVisibleBasket')
-    //   }
-    // }
   },
   mounted() {
 
