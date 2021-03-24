@@ -96,27 +96,12 @@ export default new Vuex.Store({
     cardProducts: [],
     basketVisible: true,
     citiesList: [],
-    warehouseList: [],
+    warehousesList: [],
     locale: 'ru',
     // locale: window.navigator.language || 'ua',
     locales: processLocalization(defaultLocales)
   },
   getters: {
-    currentProduct(state) {
-      return state.currentProduct;
-    },
-    allProducts(state) {
-      return state.productsList;
-    },
-    allCategories(state) {
-      return state.categoriesList;
-    },
-    allCities(state) {
-      return state.citiesList;
-    },
-    allWarehouses(state) {
-      return state.warehouseList;
-    },
     totalPrice(state) {
       let sum = 0;
       state.cardProducts.forEach(function (item) {

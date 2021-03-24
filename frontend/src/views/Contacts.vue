@@ -28,13 +28,7 @@
 
 <script>
 export default {
-  name: "Contacts",
-  methods: {
-    // basketVisible() {
-    //   if (!this.$store.state.productsStore.basketVisible) {
-    //     this.$store.dispatch("changeVisibleBasket");
-    //   }
-  }
+  name: "Contacts"
 }
 </script>
 
@@ -47,11 +41,6 @@ export default {
 }
 
 .content-about {
-  /*margin: 6vmin;*/
-  /*display: grid;*/
-  /*grid-template: repeat(8, auto) / 1fr;*/
-  /*grid-row-gap: 3vmin;*/
-
   font-size: 16px;
 }
 

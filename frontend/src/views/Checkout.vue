@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapState} from 'vuex';
 import {required, email, minLength} from 'vuelidate/lib/validators';
 import {clearLocalStorage} from "@/js/card";
 import {post} from '../js/api';
@@ -197,7 +197,8 @@ export default {
     email: {email}
   },
   computed: {
-    ...mapGetters(["totalPrice", "allCities", "allWarehouses"]),
+    ...mapGetters(["totalPrice"]),
+    ...mapState(["citiesList", "warehousesList", "cardProducts"])
   },
   methods: {
     async submitHandler() {
@@ -217,7 +218,7 @@ export default {
 
       const productsList = [];
 
-      this.$store.state.cardProducts.forEach(product => {
+      this.cardProducts.forEach(product => {
         productsList.push({
           'id': product.id,
           'price': product.price,
@@ -268,7 +269,7 @@ export default {
       this.$store.dispatch('loadCities');
     },
     search(input) {
-      let cityList = this.allCities.map(city => {
+      let cityList = this.citiesList.map(city => {
         return city.name
       });
       if (input.length < 1) {
@@ -285,7 +286,7 @@ export default {
         return [];
       }
 
-      let warehouseList = this.allWarehouses.map(warehouse => {
+      let warehouseList = this.warehousesList.map(warehouse => {
         return warehouse.warehouse
       });
       this.postOfficeError = input;
@@ -342,7 +343,7 @@ export default {
       this.invalidAdress = !newValue;
     },
     city: function () {
-      const city = this.allCities.find(city => city.name === this.city);
+      const city = this.citiesList.find(city => city.name === this.city);
       if (city && city.id) {
         this.$store.dispatch('loadWarehouses', city.id);
       }

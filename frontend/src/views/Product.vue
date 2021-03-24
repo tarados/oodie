@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="wrapper-product" v-if="this.currentProduct">
+    <div class="wrapper-product" v-if="this.selectedProduct">
       <div class="breadcrumbs-wrapper">
         <Breadcrumbs/>
       </div>
 
-      <div class="row" v-if="this.currentProduct">
+      <div class="row" v-if="this.selectedProduct">
         <div class="item left">
           <div class="item-left">
             <vueper-slides
@@ -20,7 +20,7 @@
           </div>
 
           <div class="item-left-slider">
-            <div class="slider" v-for="(image, index) in currentProduct.image_list" :key="image">
+            <div class="slider" v-for="(image, index) in selectedProduct.image_list" :key="image">
               <img :src="image" @click="$refs.vueperslides1.goToSlide(index)">
             </div>
           </div>
@@ -32,22 +32,22 @@
           </div>
           <div class="product-price">
             <div class="price">
-              <div class="current" v-if="this.currentProduct.new_price">
-                {{ this.currentProduct.price }} грн
+              <div class="current" v-if="this.selectedProduct.new_price">
+                {{ this.selectedProduct.price }} грн
               </div>
               <div v-else>
-                {{ this.currentProduct.price }} грн
+                {{ this.selectedProduct.price }} грн
               </div>
               <div
-                  :class="{ markdown: !currentProduct.new_price}"
+                  :class="{ markdown: !selectedProduct.new_price}"
                   class="red"
               >
-                {{ this.currentProduct.new_price }} грн
+                {{ this.selectedProduct.new_price }} грн
               </div>
             </div>
           </div>
           <div class="product-title">
-            <div>{{ this.currentProduct.title }}</div>
+            <div>{{ this.selectedProduct.title }}</div>
           </div>
           <div class="size-block" v-if="!this.hideSize">
             <div
@@ -60,14 +60,14 @@
               {{ availability.size }}
             </div>
           </div>
-          <div class="size-table" v-if="this.currentProduct.table">
-            <a :href="this.currentProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
+          <div class="size-table" v-if="this.selectedProduct.table">
+            <a :href="this.selectedProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
           <div class="btn" @click="toCard">{{ getPreorder | localize }}</div>
           <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
           <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
-            <div class="description">{{ this.currentProduct.description_locale | localize(this.currentProduct.description) }}</div>
+            <div class="description">{{ this.selectedProduct.description_locale | localize(this.selectedProduct.description) }}</div>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
 import {VueperSlides, VueperSlide} from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import Breadcrumbs from "@/components/Breadcrumbs";
-
+import {mapState} from "vuex";
 import {required} from "vuelidate/lib/validators";
 
 export default {
@@ -91,7 +91,6 @@ export default {
       size: 0,
       availabilities: [],
       preorder: null,
-      // visibleCard: true,
       slides: [],
       hideSize: false,
       breakpoints: {
@@ -110,8 +109,9 @@ export default {
     Breadcrumbs,
   },
   computed: {
-    currentProduct() {
-      const product = this.$store.state.productsStore.currentProduct;
+    ...mapState(["currentProduct", "categoriesList"]),
+    selectedProduct() {
+      const product = this.currentProduct;
       if (product) {
         return product;
       } else {
@@ -119,7 +119,7 @@ export default {
       }
     },
     currentCategory() {
-      const category = this.$store.getters.allCategories.find(category => category.id === this.currentProduct.category);
+      const category = this.categoriesList.find(category => category.id === this.selectedProduct.category);
       if (category && category.title) {
         return category.title;
       } else {
@@ -141,13 +141,13 @@ export default {
   methods: {
     async loadProduct() {
       await this.$store.dispatch("loadProduct", this.$route.params.id);
-      const images = this.currentProduct.image_list;
+      const images = this.selectedProduct.image_list;
       images.forEach(image => {
         this.slides.push({
           "image": image,
         });
       });
-      this.availabilities = this.currentProduct.availability;
+      this.availabilities = this.selectedProduct.availability;
 // if product have one size
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
@@ -165,14 +165,14 @@ export default {
       };
 
       const productToCard = {
-        "id": this.currentProduct.id,
-        "title": this.statusProduct ? this.currentProduct.title + ' (предзаказ!)' : this.currentProduct.title,
-        "price": this.currentProduct.new_price ? this.currentProduct.new_price : this.currentProduct.price,
+        "id": this.selectedProduct.id,
+        "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
+        "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
         "quantity": 1,
         "available": availability.quantity, // TODO do not cache++
         "preorder": availability.preorder,
         "size": availability.size,
-        "image": this.currentProduct.image_list[this.imageIndex],
+        "image": this.selectedProduct.image_list[this.imageIndex],
       };
       if (productToCard.size === "") {
         delete productToCard.size;

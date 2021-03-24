@@ -6,6 +6,7 @@
 
 <script>
 import BrandsList from "@/components/BrandsList";
+import {mapState} from 'vuex';
 
 export default {
   name: "Brands",
@@ -19,23 +20,17 @@ export default {
     BrandsList
   },
   computed: {
+    ...mapState(["categoriesList"]),
     activeCategoryId() {
       let a = 0;
       const b = this.slug;
-      this.$store.getters.allCategories.forEach(function (item) {
+      this.categoriesList.forEach(function (item) {
         if (item.slug === b) {
           a = item.id
         }
       });
       return a
     }
-  },
-  methods: {
-    // basketVisible() {
-    //   if (!this.$store.state.productsStore.basketVisible) {
-    //     this.$store.dispatch('changeVisibleBasket')
-    //   }
-    // }
   },
   watch: {
     $route(to) {

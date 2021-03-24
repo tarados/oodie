@@ -30,8 +30,6 @@ export default {
   text-align: center;
   margin: 20px 0;
   padding: 15px;
-  /*border: 1px solid green;*/
-  /*background-color: #f2f2f2;*/
   border-radius: 3px;
 }
 

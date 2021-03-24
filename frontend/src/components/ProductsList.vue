@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="row">
       <router-link :to="{name: 'Product', params: {id: product.id} }"
-                   v-for="(product, index) in prodList" :key="index"
+                   v-for="product in prodList" :key="product.id"
                    :class="{product: large, brand: small}"
       >
         <img
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   name: "Collections",
@@ -55,12 +55,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["allProducts", "allCategories"]),
+    ...mapState(["productsList"]),
     prodList() {
       if (this.categoryId) {
-        return this.allProducts.filter(product => product.category === this.categoryId);
+        return this.productsList.filter(product => product.category === this.categoryId);
       } else {
-        return this.allProducts;
+        return this.productsList;
       }
     }
   },

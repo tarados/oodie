@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   name: "Brands",
   computed: {
-    ...mapGetters(["allProducts", "allCategories"]),
+    ...mapState(["productsList", "categoriesList"]),
     brands() {
       let brandsList = [];
-      this.allCategories.forEach(item => {
-        const firstProduct = this.allProducts.find(product => product.category === item.id);
+      this.categoriesList.forEach(item => {
+        const firstProduct = this.productsList.find(product => product.category === item.id);
 
         if (!firstProduct) return;
 
@@ -37,10 +37,6 @@ export default {
       });
       return brandsList;
     }
-  },
-  methods: {},
-  mounted() {
-    // this.$store.dispatch('loadProducts');
   }
 }
 </script>

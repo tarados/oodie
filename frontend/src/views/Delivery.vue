@@ -49,19 +49,23 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
   name: "Contacts",
+  computed: {
+    ...mapState(["basketVisible"])
+  },
   methods: {
     basketVisible() {
-      if (!this.$store.state.productsStore.basketVisible) {
+      if (!this.basketVisible) {
         this.$store.dispatch("changeVisibleBasket");
       }
-    },
+    }
   },
   mounted() {
     this.basketVisible();
-    console.log(this.$router.currentRoute.name);
-  },
+  }
 };
 </script>
 

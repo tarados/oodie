@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1 v-if="this.$store.state.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
+      <h1 v-if="this.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
       <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
     </div>
-    <div v-for="(product, index) in this.$store.state.cardProducts" :key="index">
+    <div v-for="(product, index) in this.cardProducts" :key="index">
       <div class="grid-container second">
         <div class="item image">
           <img :src="product.image">
@@ -54,12 +54,12 @@
         </div>
       </div>
     </div>
-    <div class="subtotal-mobile-box" v-show="this.$store.state.cardProducts.length > 0">
+    <div class="subtotal-mobile-box" v-show="this.cardProducts.length > 0">
       <div class="subtotal-mobile-title">{{ 'BasketTotalPrice' | localize }}:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
-      <div class="subtotal-box" v-show="this.$store.state.cardProducts.length > 0">
+      <div class="subtotal-box" v-show="this.cardProducts.length > 0">
         <span>{{ 'BasketTotalPrice' | localize }} </span>
         <span v-text="totalPrice"></span>
       </div>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapState} from 'vuex';
 
 export default {
   name: "Card",
@@ -89,9 +89,10 @@ export default {
   },
   computed: {
     ...mapGetters(["totalPrice"]),
+    ...mapState(["cardProducts"]),
     isPreorder() {
       let el = false
-      this.$store.state.cardProducts.forEach(product => {
+      this.cardProducts.forEach(product => {
         if (product.preorder) {
           el = true
         }
@@ -118,7 +119,7 @@ export default {
       }
     },
     plusQuantity(index) {
-      const item = this.$store.state.cardProducts[index];
+      const item = this.cardProducts[index];
       let newAvailability = item.quantity + 1;
       if (newAvailability <= item.available) {
         this.$store.commit('increment', index);
@@ -126,9 +127,6 @@ export default {
         alert("В наличии только " + item.available);
       }
     }
-  },
-  mounted() {
-
   }
 }
 </script>

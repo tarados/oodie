@@ -42,7 +42,7 @@
             >
               <div
                   class="menu-item"
-                  v-for="(category, i) in categories" :key="i"
+                  v-for="category in categoriesList" :key="category.id"
                   v-show="category.slug !== 'hoodiyalko'"
               >
                 <router-link
@@ -64,7 +64,7 @@ import Hamburger from "@/components/Hamburger";
 import Dropdown from "@/components/LangSelection";
 import Logo from "./Logo";
 import links from '@/js/linkList'
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   name: "NavBar",
@@ -86,7 +86,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLocales", "allCategories"]),
+    ...mapState(["categoriesList"]),
     getBasket() {
       if (this.$router.currentRoute.name === 'Card') {
         return false;
@@ -113,9 +113,6 @@ export default {
     },
     getLinkList() {
       this.links = links();
-    },
-    getCategories() {
-      this.categories = this.allCategories;
     }
   },
   watch: {
@@ -130,7 +127,6 @@ export default {
   mounted() {
     this.$store.dispatch('changeVisibleBasket');
     this.getLinkList();
-    this.getCategories();
   }
 }
 
