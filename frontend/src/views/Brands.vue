@@ -58,41 +58,10 @@ export default {
   padding: 6px;
 }
 
-/*media queries******************************************************************************************************/
-@media screen and (max-width: 1200px) {
-
-}
-
-@media screen and (max-width: 960px) {
-
-}
-
-
 @media screen and (max-width: 750px) {
   .brands-info {
     font-size: calc(1vw + 10 * (100vw / 750));
     font-family: 'Roboto', sans-serif;
   }
 }
-
-@media screen and (max-width: 420px) {
-
-}
-
-@media screen and (max-width: 375px) {
-
-}
-
-@media screen and (max-width: 360px) {
-
-}
-
-@media screen and (max-width: 320px) {
-
-}
-
-@media screen and (max-width: 280px) {
-
-}
-
 </style>

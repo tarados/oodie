@@ -89,7 +89,7 @@
         <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
           <autocomplete
               class="autocomplete"
-              :placeholder="ChekoutSelectWarehouseInput | localize"
+              :placeholder="CheckoutSelectWarehouseInput | localize"
               autocomplete="nope"
               :search="searchWarehouse"
               @submit="setWarehouse"
@@ -100,9 +100,9 @@
         <div class="form-title required" v-if="deliveryMethod === 'Курьером Новой почты'">
           <span>{{ 'CheckoutAddress' | localize }}:</span>
         </div>
-        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAdress}">
-          <textarea v-model="adress" rows="4"></textarea>
-          <small v-if="invalidAdress">{{ 'CheckoutAddressError' | localize }}</small>
+        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAddress}">
+          <textarea v-model="address" rows="4"></textarea>
+          <small v-if="invalidAddress">{{ 'CheckoutAddressError' | localize }}</small>
         </div>
         <div class="form-title required">
           <span>{{ 'CheckoutPaymentMethod' | localize }}:</span>
@@ -156,7 +156,7 @@ export default {
     Autocomplete
   },
   data() {
-    return { //TODO fix names
+    return {
       "deliveryMethod": "",
       "selectDeliveryMethod": "",
       "delivery": null,
@@ -164,10 +164,10 @@ export default {
       "isVisible": true,
       "userName": "",
       "userSurname": "",
-      "adress": '',
+      "address": '',
       "city": '',
       "CheckoutSelectCityInput": "CheckoutSelectCityInput",
-      "ChekoutSelectWarehouseInput": "ChekoutSelectWarehouseInput",
+      "CheckoutSelectWarehouseInput": "CheckoutSelectWarehouseInput",
       "cityError": '',
       "country": '+(38)',
       "cityRef": '',
@@ -185,7 +185,7 @@ export default {
       "invalidPhone": false,
       "invalidDelivery": false,
       "invalidPayment": false,
-      "invalidAdress": false
+      "invalidAddress": false
     }
   },
   validations: {
@@ -209,11 +209,11 @@ export default {
       this.invalidDelivery = this.$v.deliveryMethod.$invalid;
       this.invalidPayment = this.$v.selectedPayment.$invalid;
       if (this.deliveryMethod === 'Новая почта') {
-        this.invalidAdress = false;
-      } else if (this.adress === '') {
-        this.invalidAdress = true;
+        this.invalidAddress = false;
+      } else if (this.address === '') {
+        this.invalidAddress = true;
       } else {
-        this.invalidAdress = false;
+        this.invalidAddress = false;
       }
 
       const productsList = [];
@@ -243,12 +243,12 @@ export default {
         'city-ref': this.cityRef,
         'post-office': this.postOffice,
         'post-office-ref': this.postOfficeRef,
-        'others': this.adress,
+        'others': this.address,
         'comment': this.comment
       };
 
       if (!this.$v.$invalid) {
-        if (!this.invalidAdress || this.deliveryMethod === 'Самовывоз') {
+        if (!this.invalidAddress || this.deliveryMethod === 'Самовывоз') {
           const response = await post("order", order);
           if (response) {
             await this.$router.push({name: 'Successful'});
@@ -296,12 +296,12 @@ export default {
       });
     },
     setCity(city) {
-      this.cityRef = this.allCities.find(el => el.name === city).id;
+      this.cityRef = this.citiesList.find(el => el.name === city).id;
       this.city = city;
       this.invalidCity = false;
     },
     setWarehouse(warehouse) {
-      this.postOfficeRef = this.allWarehouses.find(el => el.warehouse === warehouse).warehouseRef;
+      this.postOfficeRef = this.warehousesList.find(el => el.warehouse === warehouse).warehouseRef;
       this.postOffice = warehouse;
       this.invalidOffice = false;
     },
@@ -339,8 +339,8 @@ export default {
         this.invalidEmail = !this.$v.email.required;
       }
     },
-    adress: function (newValue) {
-      this.invalidAdress = !newValue;
+    address: function (newValue) {
+      this.invalidAddress = !newValue;
     },
     city: function () {
       const city = this.citiesList.find(city => city.name === this.city);
@@ -376,9 +376,7 @@ export default {
 .wrapper-checkout {
   max-width: 600px;
   margin: 0 auto;
-  padding: 0px 16px;
-  padding-bottom: 64px;
-
+  padding: 0 16px 64px 16px;
 }
 
 .subtotal {
@@ -389,8 +387,6 @@ export default {
   padding-top: 8px;
 
   border-top: 1px solid black;
-  /*margin: 30px 0 30px;*/
-  /*grid-template: 1fr / 1fr 1fr;*/
 }
 
 .header {
@@ -434,7 +430,6 @@ select {
   letter-spacing: 0.8px;
 }
 
-/*Contact information*************************************************************************/
 .submit-box {
   display: grid;
   grid-template: repeat(auto-fit, minmax(35px, auto)) / 0.7fr 2fr;
@@ -450,10 +445,6 @@ h2 {
 
 .form-title {
   align-self: center;
-}
-
-.form-title.required {
-  /*font-weight: bold;*/
 }
 
 .form-content {
@@ -591,12 +582,10 @@ textarea {
   margin: 0 5px
 }
 
-/*autocomplete*****************************************************************************/
 .new-post-city div {
   width: 100%;
 }
 
-/*media queries*****************************************************************************/
 @media screen and (max-width: 1200px) {
   .submit-box {
     /*margin: 0 10%;*/
@@ -604,10 +593,6 @@ textarea {
 }
 
 @media screen and (max-width: 960px) {
-  .submit-box {
-    /*margin: 0 8%;*/
-  }
-
   select {
     width: 100%;
   }
@@ -625,11 +610,6 @@ textarea {
     font-size: calc(12px + (4 * 0.7) * ((100vw - 320px) / 1835));
   }
 
-  select {
-    /*font-size: calc(8px + (2 * 0.7) * ((100vw - 320px) / 1835));*/
-  }
-
-
   header h1 {
     font-size: calc(22px + 7 * ((100vw - 320px) / 1835));
   }
@@ -642,10 +622,6 @@ textarea {
 }
 
 @media (max-width: 450px) {
-  .submit-box {
-    /*margin: 0 5%;*/
-  }
-
   .form-title {
     font-size: 14px;
   }
@@ -670,6 +646,4 @@ textarea {
     width: 40%;
   }
 }
-
-
 </style>

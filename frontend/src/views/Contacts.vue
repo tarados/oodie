@@ -36,8 +36,7 @@ export default {
 .wrapper {
   margin: 0 auto;
   max-width: 800px;
-  padding: 16px;
-  padding-bottom: 40px;
+  padding: 16px 16px 40px 16px;
 }
 
 .content-about {

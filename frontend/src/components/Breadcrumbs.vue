@@ -2,7 +2,7 @@
     <ul class="breadcrumbs">
       <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
         <router-link
-            v-if="index < breadcrumbList"
+            v-if="index < breadcrumbCount"
             :to="{name: item.routeName, params: item.routeParams}"
              class="breadcrumbs__link"
         >
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: "Breadcrumbs",
@@ -28,15 +28,16 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["breadcrumbs"]),
+    ...mapState(["categoriesList"]),
     slug() {
       try {
-        return this.$store.getters.allCategories.find(item => item.title === this.currentCategory).slug;
+        return this.categoriesList.find(item => item.title === this.currentCategory).slug;
       } catch (TypeError) {
         return ''
       }
     },
-    ...mapGetters(["breadcrumbs"]),
-    breadcrumbList() {
+    breadcrumbCount() {
       return this.breadcrumbs.length - 1
     }
   }

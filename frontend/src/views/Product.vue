@@ -148,7 +148,6 @@ export default {
         });
       });
       this.availabilities = this.selectedProduct.availability;
-// if product have one size
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
         this.preorder = this.availabilities[0].preorder;
@@ -214,10 +213,6 @@ export default {
   height: 570px;
 }
 
-.vueperslides--fixed-height {
-  /*height: calc(100vh - 76px);*/
-}
-
 .breadcrumbs-wrapper {
   padding-left: 15px;
   max-width: 1200px;
@@ -269,26 +264,16 @@ export default {
 .item-left-slider {
   display: flex;
   flex-wrap: wrap;
-  /*justify-content: space-between;*/
   margin-top: 0.25rem;
 }
 
 .slider {
-  /*width: calc((100% / 12) * 3 - 10px);*/
-  /*height: calc((100% / 12) * 3 - 10px);*/
   width: 120px;
   height: 120px;
   overflow: hidden;
   margin-right: 8px;
   margin-bottom: 12px;
-  /*margin: 0 2% 1% 0;*/
 }
-
-/*.slider:nth-child(even) {*/
-/*  margin-left: 8px;*/
-/*  margin-right: 8px;*/
-/*}*/
-
 
 .slider img:hover {
   border: 1px solid black;
@@ -305,14 +290,6 @@ export default {
   letter-spacing: 0.08em;
 }
 
-.red {
-  /*color: #eb6f6e;*/
-}
-
-.left {
-
-}
-
 .right {
   display: flex;
   flex-direction: column;
@@ -320,7 +297,6 @@ export default {
 }
 
 .description {
-  /*margin-top: 3rem;*/
   line-height: 1.5rem;
   white-space: pre-wrap;
 }
@@ -371,7 +347,6 @@ export default {
   border: 1px solid grey;
   padding: 0px 5px;
   line-height: 3rem;
-  /*margin: 1% 2.5% 1% 1%;*/
 }
 
 .square + .square {
@@ -406,7 +381,6 @@ export default {
 .product-category {
   display: inline-flex;
   align-items: baseline;
-  /*justify-content: start;*/
   text-transform: uppercase;
   letter-spacing: 0.08em;
 
@@ -467,7 +441,6 @@ export default {
   text-transform: uppercase;
 }
 
-/*media queries**************************************************************************/
 @media screen and (max-width: 2800px) {
   .viewer {
     display: none;
@@ -537,10 +510,6 @@ export default {
   .vueperslides--fixed-height {
     height: calc(100vh - 324px);
   }
-}
-
-@media screen and (max-width: 360px) {
-
 }
 
 @media screen and (max-width: 320px) {

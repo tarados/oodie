@@ -73,8 +73,7 @@ export default {
 .wrapper {
   margin: 0 auto;
   max-width: 800px;
-  padding: 16px;
-  padding-bottom: 40px;
+  padding: 16px 16px 40px 16px;
 }
 
 .contact-item {
@@ -90,11 +89,6 @@ export default {
   padding-left: 24px;
 }
 .content-about {
-  /*margin: 6vmin;*/
-  /*display: grid;*/
-  /*grid-template: repeat(8, auto) / 1fr;*/
-  /*grid-row-gap: 3vmin;*/
-
   font-size: 16px;
 }
 

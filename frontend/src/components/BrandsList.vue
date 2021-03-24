@@ -2,7 +2,7 @@
   <div class="wrapper-brandlist">
     <div class="row">
       <router-link :to="{name: 'Brand', params: {slug: brand.slug} }"
-                   v-for="(brand, index) in brands" :key="index"
+                   v-for="brand in brands" :key="brand.id"
                    :style="{'background': 'url(' + brand.images + ') center no-repeat', 'background-size': 'cover'}"
                    class="brand"
       >
@@ -28,6 +28,7 @@ export default {
 
         if (item.title !== 'hoodiyalko') {
           const brand = {
+            'id': item.id,
             'title': item.title,
             'images': firstProduct.image,
             'slug': item.slug

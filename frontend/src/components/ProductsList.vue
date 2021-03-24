@@ -7,19 +7,19 @@
       >
         <img
             :src="product.image"
-            :class="{black: isAvailability(product) <= 0}"
+            :class="{black: productAvailability(product) <= 0}"
         >
         <div
             class="preorder-mark"
             :class="{mark_large: large, mark_small: small}"
-            v-if="isPreorder(product)"
+            v-if="productPreorder(product)"
         >
           {{ 'ProductStatusPreorder' | localize }}
         </div>
         <div
             class="preorder-mark"
             :class="{mark_large: large, mark_small: small}"
-            v-if="isAvailability(product) <= 0"
+            v-if="productAvailability(product) <= 0"
         >
           {{ 'AvailabilityNo' | localize }}
         </div>
@@ -75,10 +75,10 @@ export default {
       }
     },
 
-    isPreorder(product) {
+    productPreorder(product) {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
-    isAvailability(product) { //TODO rename  isAvailable shoud return boolean
+    productAvailability(product) {
       try {
         return product.availability[0].quantity;
       } catch (TypeError) {
@@ -88,7 +88,6 @@ export default {
   },
   mounted() {
     this.loadSize();
-    console.log(this.category);
   }
 }
 </script>
@@ -140,10 +139,8 @@ h4 {
 .product img.black {
   -webkit-filter: grayscale(100%);
   -moz-filter: grayscale(100%);
-  /*-ms-filter: grayscale(100%);*/
   -o-filter: grayscale(100%);
   filter: grayscale(100%);
-  /*filter: gray; !* IE 6-9 *!*/
 }
 
 .price-box {

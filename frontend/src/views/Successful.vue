@@ -18,8 +18,6 @@ export default {
     backToMain() {
       this.$router.push('/');
     }
-  },
-  mounted() {
   }
 }
 </script>

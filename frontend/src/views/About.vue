@@ -6,10 +6,7 @@
 
 <script>
 export default {
-  name: "About",
-  mounted() {
-    console.log(this.$router.currentRoute.name);
-  }
+  name: "About"
 }
 </script>
 
