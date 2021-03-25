@@ -183,7 +183,7 @@ export default {
     },
     select(index) {
       this.size = index;
-      this.preorder = this.availabilities[index].preorder; // TODO rename statusProduct to preodred ++
+      this.preorder = this.availabilities[index].preorder;
     }
   },
   watch: {

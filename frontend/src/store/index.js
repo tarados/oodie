@@ -63,7 +63,7 @@ export default new Vuex.Store({
     setCurrentProduct(state, product) {
       state.currentProduct = product;
     },
-    addProduct(state, product) {
+    addProduct(state, product) { //TODO rename as addProductToCart
       state.cardProducts.push(product);
       card.setItems(state.cardProducts);
     },
@@ -97,8 +97,7 @@ export default new Vuex.Store({
     basketVisible: true,
     citiesList: [],
     warehousesList: [],
-    locale: 'ru',
-    // locale: window.navigator.language || 'ua',
+    locale: getDefaultLocale(),
     locales: processLocalization(defaultLocales)
   },
   getters: {
@@ -155,4 +154,13 @@ function processLocalization(data) {
   }
 
   return result;
+}
+
+function getDefaultLocale() {
+  const lang = window.navigator.language;
+  if (lang) {
+    return lang.slice(0, 2);
+  } else {
+    return 'ua'
+  }
 }
