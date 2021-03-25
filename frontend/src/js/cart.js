@@ -1,5 +1,5 @@
 export function getItems() {
-    let items = localStorage.getItem('card');
+    let items = localStorage.getItem('cart');
     if (items) {
         items = JSON.parse(items);
     } else {
@@ -9,10 +9,10 @@ export function getItems() {
 }
 
 export function clearLocalStorage() {
-    localStorage.removeItem("card");
+    localStorage.removeItem("cart");
 }
 
 export function setItems(items) {
     items = JSON.stringify(items);
-    localStorage.setItem('card', items);
+    localStorage.setItem('cart', items);
 }

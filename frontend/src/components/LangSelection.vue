@@ -31,6 +31,7 @@
 <script>
 
 import {langList} from '@/js/linkList';
+import { mapState } from 'vuex';
 
 export default {
   name: "Dropdown",
@@ -41,6 +42,9 @@ export default {
       selectedLanguage: "",
       isOpenLang: false
     }
+  },
+  computed: {
+    ...mapState(['locale'])
   },
   methods: {
     clearTimer: function () {
@@ -60,14 +64,12 @@ export default {
     },
     getlangList() {
       this.langList = langList();
-      this.selectedLanguage = window.navigator.language.slice(0, 2).toUpperCase();
-      this.selectedLanguageIcon = window.navigator.language.slice(0, 2);
+      this.selectedLanguage = this.selectedLanguageIcon = this.locale.toUpperCase();
     },
     setLocale(index) {
       const locale = this.langList[index].slug;
       this.$store.commit('setLocale', locale);
-      this.selectedLanguageIcon = this.langList[index].slug;
-      this.selectedLanguage = this.langList[index].title;
+      this.selectedLanguageIcon = this.selectedLanguage = locale.toUpperCase();
     }
   },
   mounted() {
@@ -78,7 +80,6 @@ export default {
 
 <style scoped>
 .langSelector {
-  /*width: 70%;*/
   grid-column: 3 / 4;
   justify-self: end;
   align-self: start;

@@ -63,7 +63,7 @@
           <div class="size-table" v-if="this.selectedProduct.table">
             <a :href="this.selectedProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
-          <div class="btn" @click="toCard">{{ getPreorder | localize }}</div>
+          <div class="btn" @click="toCart">{{ getPreorder | localize }}</div>
           <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
           <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
@@ -156,7 +156,7 @@ export default {
     showImage(index) {
       this.imageIndex = index;
     },
-    toCard() {
+    toCart() {
       const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
         "size": "",
         "quantity": "0",
@@ -179,7 +179,7 @@ export default {
       const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
       productToCard.total = total;
       this.$store.commit("addProduct", productToCard);
-      this.$router.push({name: "Card"});
+      this.$router.push({name: "Cart"});
     },
     select(index) {
       this.size = index;

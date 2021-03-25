@@ -10,7 +10,7 @@
         </div>
         <Dropdown/>
         <div class="basket" v-if="basketVisible">
-          <router-link :to="{name: 'Card'}">
+          <router-link :to="{name: 'Cart'}">
             <img src="../assets/cart.svg">
             <span
                 v-show="this.cardProducts.length > 0"
@@ -88,7 +88,7 @@ export default {
   computed: {
     ...mapState(["categoriesList", "cardProducts"]),
     getBasket() {
-      if (this.$router.currentRoute.name === 'Card') {
+      if (this.$router.currentRoute.name === 'Cart') {
         return false;
       } else {
         return true;
@@ -117,7 +117,7 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.name === 'Card' || to.name === 'Checkout') {
+      if (to.name === 'Cart' || to.name === 'Checkout') {
         this.basketVisible = false;
       } else {
         this.basketVisible = true;

@@ -131,7 +131,7 @@
       </div>
       <div class="submit-box">
         <div class="button-block">
-          <button @click="toCard" class="continue-shopping">
+          <button @click="toCart" class="continue-shopping">
             <span>{{ 'CheckoutBack' | localize }}</span>
           </button>
           <button type="submit" class="continue-shipping">
@@ -262,8 +262,8 @@ export default {
         return
       }
     },
-    toCard() {
-      this.$router.push({name: "Card"})
+    toCart() {
+      this.$router.push({name: "Cart"})
     },
     deliveryState() {
       this.$store.dispatch('loadCities');

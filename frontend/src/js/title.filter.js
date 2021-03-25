@@ -8,7 +8,6 @@ export default function titleFilter(key) {
     const products = store.getters.allProducts
     products.forEach(product => {
       if (product.title_translate === null) {
-        console.log(product.title)
         return product.title
       }
     })

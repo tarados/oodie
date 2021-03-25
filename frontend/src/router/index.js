@@ -41,10 +41,10 @@ const routes = [
         component: () => import('../views/Brands')
     },
     {
-        path: '/products/card',
-        name: 'Card',
+        path: '/products/cart',
+        name: 'Cart',
         meta: {layout: 'main'},
-        component: () => import('../views/Card')
+        component: () => import('../views/Cart')
     },
     {
         path: '/products/checkout',
