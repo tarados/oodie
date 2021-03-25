@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {get} from "@/js/api";
-import * as card from "@/js/card";
+import * as cart from "@/js/cart";
 import defaultLocales from "@/assets/defaultLocales.json";
 
 
@@ -49,26 +49,26 @@ export default new Vuex.Store({
     },
     increment(state, index) {
       changeQuantity(state, index, 1);
-      card.setItems(state.cardProducts);
+      cart.setItems(state.cardProducts);
     },
     decrement(state, index) {
       changeQuantity(state, index, -1);
-      card.setItems(state.cardProducts);
+      cart.setItems(state.cardProducts);
 
     },
     delProduct(state, index) {
       state.cardProducts.splice(index, 1);
-      card.setItems(state.cardProducts);
+      cart.setItems(state.cardProducts);
     },
     setCurrentProduct(state, product) {
       state.currentProduct = product;
     },
     addProduct(state, product) { //TODO rename as addProductToCart
       state.cardProducts.push(product);
-      card.setItems(state.cardProducts);
+      cart.setItems(state.cardProducts);
     },
     addProductFromCard(state) {
-      state.cardProducts = card.getItems();
+      state.cardProducts = cart.getItems();
     },
     loadCities(state, response) {
       state.citiesList = response

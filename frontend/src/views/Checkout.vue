@@ -146,8 +146,8 @@
 <script>
 import {mapGetters, mapState} from 'vuex';
 import {required, email, minLength} from 'vuelidate/lib/validators';
-import {clearLocalStorage} from "@/js/card";
-import {post} from '../js/api';
+import {clearLocalStorage} from "@/js/cart";
+import {post} from '@/js/api';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
 
 export default {
