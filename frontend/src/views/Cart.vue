@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     ...mapGetters(["totalPrice"]),
-    ...mapState(["cartProducts"]),
+    ...mapState(["cartProducts", "productsList"]),
     isPreorder() {
       let el = false
       this.cartProducts.forEach(product => {
@@ -120,11 +120,21 @@ export default {
     },
     plusQuantity(index) {
       const item = this.cartProducts[index];
+      let currentProductAvailable = 0;
+      this.productsList.forEach(product => {
+        if (product.id === item.id) {
+          product.availability.forEach(el => {
+            if (el.size === item.size) {
+              currentProductAvailable = el.quantity;
+            }
+          });
+        }
+      });
       let newAvailability = item.quantity + 1;
-      if (newAvailability <= item.available) {
+      if (newAvailability <= currentProductAvailable) {
         this.$store.commit('increment', index);
       } else {
-        alert("В наличии только " + item.available);
+        alert("В наличии только " + currentProductAvailable);
       }
     }
   }

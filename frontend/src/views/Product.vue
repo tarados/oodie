@@ -151,7 +151,7 @@ export default {
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
         this.preorder = this.availabilities[0].preorder;
-      } // TODO preorder ++
+      }
     },
     showImage(index) {
       this.imageIndex = index;
@@ -168,7 +168,6 @@ export default {
         "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
         "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
         "quantity": 1,
-        "available": availability.quantity, // TODO do not cache++
         "preorder": availability.preorder,
         "size": availability.size,
         "image": this.selectedProduct.image_list[this.imageIndex],
