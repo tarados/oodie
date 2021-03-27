@@ -129,12 +129,6 @@ export default new Vuex.Store({
       }
 
       return result;
-    },
-    getLocale(state) {
-      return state.locale;
-    },
-    getLocales(state) {
-      return state.locales;
     }
   }
 })
