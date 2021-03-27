@@ -63,7 +63,7 @@ export default new Vuex.Store({
     setCurrentProduct(state, product) {
       state.currentProduct = product;
     },
-    addProduct(state, product) { //TODO rename as addProductToCart
+    addProductToCart(state, product) {
       state.cartProducts.push(product);
       cart.setItems(state.cartProducts);
     },
