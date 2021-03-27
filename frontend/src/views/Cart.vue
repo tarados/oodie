@@ -112,7 +112,7 @@ export default {
       this.$store.commit('delProduct', index);
     },
     minusQuantity(index) {
-      const item = this.$store.state.cardProducts[index];
+      const item = this.cardProducts[index];
       let newAvailability = item.quantity - 1;
       if (newAvailability > 0) {
         this.$store.commit('decrement', index);
