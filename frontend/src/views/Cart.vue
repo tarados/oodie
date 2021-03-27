@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-card" ref="card">
+  <div class="wrapper-cart">
     <div class="header">
       <h1 v-if="this.cartProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
       <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
@@ -81,7 +81,7 @@
 import {mapGetters, mapState} from 'vuex';
 
 export default {
-  name: "Card",
+  name: "Cart",
   data() {
     return {
       availability: null,
@@ -133,7 +133,7 @@ export default {
 
 <style scoped>
 
-.wrapper-card {
+.wrapper-cart {
   margin: 5vw;
 }
 
@@ -417,7 +417,7 @@ p {
 /*media queries*************************************************************************************/
 
 @media screen and (max-width: 680px) {
-  .wrapper-card {
+  .wrapper-cart {
     margin: 5vw;
   }
 

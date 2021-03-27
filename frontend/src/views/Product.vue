@@ -163,7 +163,7 @@ export default {
         "preorder": false
       };
 
-      const productToCard = {
+      const productToCart = {
         "id": this.selectedProduct.id,
         "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
         "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
@@ -173,12 +173,12 @@ export default {
         "size": availability.size,
         "image": this.selectedProduct.image_list[this.imageIndex],
       };
-      if (productToCard.size === "") {
-        delete productToCard.size;
+      if (productToCart.size === "") {
+        delete productToCart.size;
       }
-      const total = parseFloat(productToCard.price).toFixed(1) * parseFloat(productToCard.quantity).toFixed(1);
-      productToCard.total = total;
-      this.$store.commit("addProduct", productToCard);
+      const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
+      productToCart.total = total;
+      this.$store.commit("addProduct", productToCart);
       this.$router.push({name: "Cart"});
     },
     select(index) {

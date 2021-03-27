@@ -218,7 +218,7 @@ export default {
 
       const productsList = [];
 
-      this.cardProducts.forEach(product => {
+      this.cartProducts.forEach(product => {
         productsList.push({
           'id': product.id,
           'price': product.price,

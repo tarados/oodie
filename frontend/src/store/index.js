@@ -33,8 +33,8 @@ export default new Vuex.Store({
       const response = await get(endpoint);
       context.commit('loadWarehouses', response);
     },
-    loadFromCard({commit}) {
-      commit('addProductFromCard');
+    loadFromCart({commit}) {
+      commit('addProductFromCart');
     },
     changeVisibleBasket({commit}) {
       commit('isVisible');
@@ -67,7 +67,7 @@ export default new Vuex.Store({
       state.cartProducts.push(product);
       cart.setItems(state.cartProducts);
     },
-    addProductFromCard(state) {
+    addProductFromCart(state) {
       state.cartProducts = cart.getItems();
     },
     loadCities(state, response) {
