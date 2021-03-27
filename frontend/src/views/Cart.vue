@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper-card" ref="card">
     <div class="header">
-      <h1 v-if="this.cardProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
+      <h1 v-if="this.cartProducts.length > 0">{{ 'ProductCard' | localize }}</h1>
       <h1 v-else>{{ 'ProductCardEmpty' | localize }}</h1>
     </div>
-    <div v-for="(product, index) in this.cardProducts" :key="index">
+    <div v-for="(product, index) in this.cartProducts" :key="index">
       <div class="grid-container second">
         <div class="item image">
           <img :src="product.image">
@@ -54,12 +54,12 @@
         </div>
       </div>
     </div>
-    <div class="subtotal-mobile-box" v-show="this.cardProducts.length > 0">
+    <div class="subtotal-mobile-box" v-show="this.cartProducts.length > 0">
       <div class="subtotal-mobile-title">{{ 'BasketTotalPrice' | localize }}:</div>
       <div class="item subtotal-mobile" v-text="totalPrice"></div>
     </div>
     <div class="container container-border">
-      <div class="subtotal-box" v-show="this.cardProducts.length > 0">
+      <div class="subtotal-box" v-show="this.cartProducts.length > 0">
         <span>{{ 'BasketTotalPrice' | localize }} </span>
         <span v-text="totalPrice"></span>
       </div>
@@ -72,7 +72,7 @@
         <router-link
             :to="{name: 'Checkout'}"
             class="checkout-button checkout button"
-            v-show="this.$store.state.cardProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
+            v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
     </div>
   </div>
 </template>
@@ -89,10 +89,10 @@ export default {
   },
   computed: {
     ...mapGetters(["totalPrice"]),
-    ...mapState(["cardProducts"]),
+    ...mapState(["cartProducts"]),
     isPreorder() {
       let el = false
-      this.cardProducts.forEach(product => {
+      this.cartProducts.forEach(product => {
         if (product.preorder) {
           el = true
         }
@@ -112,14 +112,14 @@ export default {
       this.$store.commit('delProduct', index);
     },
     minusQuantity(index) {
-      const item = this.cardProducts[index];
+      const item = this.cartProducts[index];
       let newAvailability = item.quantity - 1;
       if (newAvailability > 0) {
         this.$store.commit('decrement', index);
       }
     },
     plusQuantity(index) {
-      const item = this.cardProducts[index];
+      const item = this.cartProducts[index];
       let newAvailability = item.quantity + 1;
       if (newAvailability <= item.available) {
         this.$store.commit('increment', index);

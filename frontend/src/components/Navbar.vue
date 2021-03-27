@@ -13,8 +13,8 @@
           <router-link :to="{name: 'Cart'}">
             <img src="../assets/cart.svg">
             <span
-                v-show="this.cardProducts.length > 0"
-            >{{ this.cardProducts.length }}
+                v-show="cartProducts.length > 0"
+            >{{ cartProducts.length }}
             </span>
           </router-link>
         </div>
@@ -86,7 +86,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["categoriesList", "cardProducts"]),
+    ...mapState(["categoriesList", "cartProducts"]),
     getBasket() {
       if (this.$router.currentRoute.name === 'Cart') {
         return false;

@@ -49,26 +49,26 @@ export default new Vuex.Store({
     },
     increment(state, index) {
       changeQuantity(state, index, 1);
-      cart.setItems(state.cardProducts);
+      cart.setItems(state.cartProducts);
     },
     decrement(state, index) {
       changeQuantity(state, index, -1);
-      cart.setItems(state.cardProducts);
+      cart.setItems(state.cartProducts);
 
     },
     delProduct(state, index) {
-      state.cardProducts.splice(index, 1);
-      cart.setItems(state.cardProducts);
+      state.cartProducts.splice(index, 1);
+      cart.setItems(state.cartProducts);
     },
     setCurrentProduct(state, product) {
       state.currentProduct = product;
     },
     addProduct(state, product) { //TODO rename as addProductToCart
-      state.cardProducts.push(product);
-      cart.setItems(state.cardProducts);
+      state.cartProducts.push(product);
+      cart.setItems(state.cartProducts);
     },
     addProductFromCard(state) {
-      state.cardProducts = cart.getItems();
+      state.cartProducts = cart.getItems();
     },
     loadCities(state, response) {
       state.citiesList = response
@@ -80,7 +80,7 @@ export default new Vuex.Store({
       state.basketVisible = !state.basketVisible;
     },
     clearBasket(state) {
-      state.cardProducts = [];
+      state.cartProducts = [];
     },
     setLocale(state, locale) {
       state.locale = locale;
@@ -93,7 +93,7 @@ export default new Vuex.Store({
     productsList: [],
     categoriesList: [],
     currentProduct: null,
-    cardProducts: [],
+    cartProducts: [],
     basketVisible: true,
     citiesList: [],
     warehousesList: [],
@@ -103,7 +103,7 @@ export default new Vuex.Store({
   getters: {
     totalPrice(state) {
       let sum = 0;
-      state.cardProducts.forEach(function (item) {
+      state.cartProducts.forEach(function (item) {
         sum += item.total;
       });
       return sum + ' грн';
@@ -140,10 +140,10 @@ export default new Vuex.Store({
 })
 
 function changeQuantity(array, index, number) {
-  const item = array.cardProducts[index];
+  const item = array.cartProducts[index];
   item.quantity = item.quantity + number;
   item.total = parseFloat((item.price * item.quantity).toFixed(1));
-  Vue.set(array.cardProducts, index, item);
+  Vue.set(array.cartProducts, index, item);
 }
 
 function processLocalization(data) {

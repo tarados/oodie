@@ -198,7 +198,7 @@ export default {
   },
   computed: {
     ...mapGetters(["totalPrice"]),
-    ...mapState(["citiesList", "warehousesList", "cardProducts"])
+    ...mapState(["citiesList", "warehousesList", "cartProducts"])
   },
   methods: {
     async submitHandler() {
