@@ -1,12 +1,11 @@
 <template>
   <div class="slider-wrapper">
     <div class="slider-content">
-      <div class="slider" :style="{'margin-left': '-' + 100 * currentSlideIndex + '%'}">
+      <div class="slider">
         <a :href="`https://www.instagram.com/p/${slider.shortcode}`"
            target="_blank"
            class="slider_item"
-           v-for="(slider, index) in slides"
-           :key="index"
+           v-for="(slider, index) in slides" :key="index"
            :style="`background-image: url(${slider.image})`"
         >
           <div class="slider_item__background">
@@ -15,7 +14,7 @@
         </a>
       </div>
     </div>
-    <div class="prev" v-if="currentSlideIndex >= 1"
+    <div class="prev"
          @click="prevSlide">
       <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
         <path d="M4.3,8.7l6,5.9c0.4,0.4,1.1,0.4,1.5,0c0.4-0.4,0.4-1.1,0-1.5L6.5,8l5.2-5.2c0.4-0.4,0.4-1.1,0-1.5
@@ -62,16 +61,17 @@ export default {
   },
   methods: {
     prevSlide() {
-      if (this.currentSlideIndex > 0) {
-        this.currentSlideIndex--;
+      for (let i =0; i < this.sectionCount; i++) {
+        let last = this.slides.pop();
+        this.slides.splice(0, 0, last);
       }
     },
     nextSlide() {
-      let slideCount = this.slides.length / this.sectionCount - 1;
-      if (this.currentSlideIndex >= slideCount) {
-        this.currentSlideIndex = 0;
-      } else {
-        this.currentSlideIndex++;
+      const sliderBlock = document.querySelector('.slider');
+      sliderBlock.style.margin += '0 0 0 -100%';
+      for (let i =0; i < this.sectionCount; i++) {
+        let first = this.slides.shift();
+        this.slides.push(first);
       }
     }
   },
