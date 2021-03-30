@@ -47,6 +47,12 @@ const routes = [
         component: () => import('../views/Cart')
     },
     {
+        path: '/products/cart/modal',
+        name: 'Modal',
+        meta: {layout: 'empty'},
+        component: () => import('../views/Modal')
+    },
+    {
         path: '/products/checkout',
         name: 'Checkout',
         meta: {layout: 'main'},

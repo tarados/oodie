@@ -1,16 +1,16 @@
 <template>
   <div class="wrapper">
-    <Table/>
+    <Modal />
   </div>
 </template>
 
 <script>
-import Table from "@/views/Table";
+import Modal from "@/views/Modal";
 
 export default {
   name: "EmptyLayout",
   components: {
-    Table
+    Modal
   }
 }
 </script>

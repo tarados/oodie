@@ -69,27 +69,28 @@
     </div>
     <div class="container checkout-buttons">
         <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">{{ 'ContinueShopping' | localize }}</router-link>
-        <router-link
-            :to="{name: 'Checkout'}"
+        <div
+            @click="toCheckout"
             class="checkout-button checkout button"
-            v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}</router-link>
+            v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}</div>
     </div>
   </div>
 </template>
 
 <script>
 import {mapGetters, mapState} from 'vuex';
+import * as cart from "@/js/cart";
 
 export default {
   name: "Cart",
   data() {
     return {
-      availability: null,
+      availabilities: [],
     }
   },
   computed: {
     ...mapGetters(["totalPrice"]),
-    ...mapState(["cartProducts", "productsList"]),
+    ...mapState(["cartProducts", "productsList", "productsList"]),
     isPreorder() {
       let el = false
       this.cartProducts.forEach(product => {
@@ -136,7 +137,27 @@ export default {
       } else {
         alert("В наличии только " + currentProductAvailable);
       }
+    },
+    getAvailabilityProductsInCart() {
+      this.cartProducts.forEach(product => {
+        this.productsList.forEach(item => {
+          if (product.id === item.id) {
+            this.availabilities.push({
+              'id': item.id,
+              'title': item.title,
+              'availability': item.availability
+            })
+          }
+        })
+      })
+    },
+    toCheckout() {
+      const localStorageAvailability = cart.getItems();
+      console.log(localStorageAvailability);
     }
+  },
+  mounted() {
+    this.getAvailabilityProductsInCart();
   }
 }
 </script>
