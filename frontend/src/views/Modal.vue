@@ -2,37 +2,18 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <div class="modal">
-        <header class="modal-header">
-          <slot name="header">
-            This is the default tile!
-
-            <button
-                type="button"
-                class="btn-close"
-                @click="close"
-            >
-              x
-            </button>
-          </slot>
-        </header>
-        <section class="modal-body">
-          <slot name="body">
-            I'm the default body!
-          </slot>
-        </section>
-        <footer class="modal-footer">
-          <slot name="footer">
-            I'm the default footer!
-
-            <button
-                type="button"
-                class="btn-green"
-                @click="close"
-            >
-              Close me!
-            </button>
-          </slot>
-        </footer>
+        <div class="modal_item" v-for="(warning, index) in warningList" :key="index">
+          {{warning.title}}
+          <div class="modal_item__title">{{ warning.title }}</div>
+          <div class="modal_item__title">{{ warning.currentAvailability }}</div>
+        </div>
+        <button
+            type="button"
+            class="btn-green"
+            @click="close"
+        >
+          Close me!
+        </button>
       </div>
     </div>
   </transition>
@@ -41,12 +22,20 @@
 <script>
 export default {
   name: 'modal',
-
+  props: {
+    warningList: {
+      type: Array
+    }
+  },
   methods: {
     close() {
-      this.$emit('close');
+      this.$router.go(-1);
     },
   },
+  mounted() {
+    this.warningList;
+    console.log('modal: ', this.warningList);
+  }
 };
 </script>
 
@@ -71,18 +60,13 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .modal-header,
 .modal-footer {
   padding: 15px;
   display: flex;
-}
-
-.modal-header {
-  border-bottom: 1px solid #eeeeee;
-  color: #4AAE9B;
-  justify-content: space-between;
 }
 
 .modal-footer {
@@ -95,17 +79,10 @@ export default {
   padding: 20px 10px;
 }
 
-.btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4AAE9B;
-  background: transparent;
-}
-
 .btn-green {
+  margin: 2rem;
+  width: 12vw;
+  height: 2rem;
   color: white;
   background: #4AAE9B;
   border: 1px solid #4AAE9B;

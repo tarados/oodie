@@ -74,15 +74,29 @@
             class="checkout-button checkout button"
             v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}</div>
     </div>
+    <div class="modal" v-show="isVisible">
+      <Modal :warning-list="warningList"/>
+    </div>
+
   </div>
 </template>
 
 <script>
 import {mapGetters, mapState} from 'vuex';
 import * as cart from "@/js/cart";
+import Modal from "@/views/Modal";
 
 export default {
   name: "Cart",
+  data() {
+    return {
+      isVisible: false,
+      warningList: []
+    }
+  },
+  components: {
+    Modal
+  },
   computed: {
     ...mapGetters(["totalPrice"]),
     ...mapState(["cartProducts", "productsList", "productsList"]),
@@ -134,22 +148,24 @@ export default {
       }
     },
     toCheckout() {
-      let warningList = [];
       const localStorageAvailability = cart.getItems();
-      this.cartProducts.forEach(item => {
+      this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {
           if (el.id === item.id) {
-            if (el.quantity > item.availability) {
-              warningList.push({
-                'title': el.title,
-                'currentAvailability': item.availability
-              })
-            }
+            item.availability.forEach(size => {
+              if (el.quantity > size.quantity) {
+                this.warningList.push({
+                  'title': el.title,
+                  'currentAvailability': size.quantity
+                });
+                this.$router.push('/products/cart/modal');
+                this.isVisible = !this.isVisible;
+              }
+            });
           }
         });
       });
-      console.log('localStorageAvailability: ', localStorageAvailability);
-      console.log('warningList: ',warningList );
+      console.log('catr: ', this.warningList);
     }
   }
 }
