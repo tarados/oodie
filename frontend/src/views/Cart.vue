@@ -83,11 +83,6 @@ import * as cart from "@/js/cart";
 
 export default {
   name: "Cart",
-  data() {
-    return {
-      availabilities: [],
-    }
-  },
   computed: {
     ...mapGetters(["totalPrice"]),
     ...mapState(["cartProducts", "productsList", "productsList"]),
@@ -138,23 +133,10 @@ export default {
         alert("В наличии только " + currentProductAvailable);
       }
     },
-    getAvailabilityProductsInCart() {
-      this.cartProducts.forEach(product => {
-        this.productsList.forEach(item => {
-          if (product.id === item.id) {
-            this.availabilities.push({
-              'id': item.id,
-              'title': item.title,
-              'availability': item.availability
-            })
-          }
-        })
-      })
-    },
     toCheckout() {
       let warningList = [];
       const localStorageAvailability = cart.getItems();
-      this.availabilities.forEach(item => {
+      this.cartProducts.forEach(item => {
         localStorageAvailability.forEach(el => {
           if (el.id === item.id) {
             if (el.quantity > item.availability) {
@@ -166,15 +148,9 @@ export default {
           }
         });
       });
-
-      console.log(localStorageAvailability);
-      console.log(this.availabilities);
-      console.log(warningList);
+      console.log('localStorageAvailability: ', localStorageAvailability);
+      console.log('warningList: ',warningList );
     }
-  },
-  mounted() {
-    this.getAvailabilityProductsInCart();
-    console.log('mounted: ', this.availabilities);
   }
 }
 </script>
