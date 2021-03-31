@@ -152,12 +152,29 @@ export default {
       })
     },
     toCheckout() {
+      let warningList = [];
       const localStorageAvailability = cart.getItems();
+      this.availabilities.forEach(item => {
+        localStorageAvailability.forEach(el => {
+          if (el.id === item.id) {
+            if (el.quantity > item.availability) {
+              warningList.push({
+                'title': el.title,
+                'currentAvailability': item.availability
+              })
+            }
+          }
+        });
+      });
+
       console.log(localStorageAvailability);
+      console.log(this.availabilities);
+      console.log(warningList);
     }
   },
   mounted() {
     this.getAvailabilityProductsInCart();
+    console.log('mounted: ', this.availabilities);
   }
 }
 </script>
