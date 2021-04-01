@@ -1,14 +1,15 @@
-import Vue from 'vue';
+import Vue from "vue";
 import Vuelidate from "vuelidate";
-import Autocomplete from '@trevoreyre/autocomplete-vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import Autocomplete from "@trevoreyre/autocomplete-vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 import localizeFilter from "@/js/localize.filter";
-import './style/index.css';
+import "./style/index.css";
 import * as Sentry from "@sentry/browser";
 import { Integrations } from "@sentry/tracing";
-import FlagIcon from 'vue-flag-icon'
+import FlagIcon from "vue-flag-icon"
+import Modal from "@burhanahmeed/vue-modal-2";
 
 Sentry.init({
   Vue,
@@ -18,24 +19,25 @@ Sentry.init({
     new Integrations.BrowserTracing(),
   ],
 
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
   tracesSampleRate: 1.0,
 });
-
-Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(FlagIcon);
 Vue.use(Autocomplete);
-Vue.filter('localize', localizeFilter);
+Vue.filter("localize", localizeFilter);
+Vue.use(Modal, {
+  componentName: "ModalVue"
+});
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app');
-store.dispatch('loadLocales');
-store.dispatch('loadFromCart');
-store.dispatch('loadProducts');
+}).$mount("#app");
+store.dispatch("loadLocales");
+store.dispatch("loadFromCart");
+store.dispatch("loadProducts");
 

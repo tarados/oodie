@@ -27,14 +27,18 @@
           </div>
         </div>
         <div class="item total-val">{{ product.total }} грн</div>
-        <div class="item close"><button @click="deleteOrder(index)">X</button></div>
+        <div class="item close">
+          <button @click="deleteOrder(index)">X</button>
+        </div>
       </div>
       <div class="mobile">
         <div class="mobile-content">
           <div class="image">
             <img :src="product.image">
           </div>
-          <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{ product.size }}</span></div>
+          <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{
+              product.size
+            }}</span></div>
           <div class="total-val">{{ product.total }} грн</div>
         </div>
         <div class="mobile-edit">
@@ -68,15 +72,16 @@
       <p>{{ 'BasketPreorderDescription' | localize }}</p>
     </div>
     <div class="container checkout-buttons">
-        <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">{{ 'ContinueShopping' | localize }}</router-link>
-        <div
-            @click="toCheckout"
-            class="checkout-button checkout button"
-            v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}</div>
+      <router-link :to="{name: 'Home'}" class="checkout-button continue-shopping button">
+        {{ 'ContinueShopping' | localize }}
+      </router-link>
+      <div
+          @click="toCheckout"
+          class="checkout-button checkout button"
+          v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}
+      </div>
     </div>
-    <div class="modal" v-show="isVisible">
-      <Modal :warning-list="warningList"/>
-    </div>
+    <Modal :warningList="warningList"/>
 
   </div>
 </template>
@@ -158,8 +163,9 @@ export default {
                   'title': el.title,
                   'currentAvailability': size.quantity
                 });
-                this.$router.push('/products/cart/modal');
-                this.isVisible = !this.isVisible;
+                this.$vm2.open('modal-4');
+              } else {
+                this.$route.go(-1);
               }
             });
           }
@@ -409,7 +415,6 @@ p {
 }
 
 
-
 .subtotal-box {
   margin-top: 20px;
   font-weight: bold;
@@ -590,6 +595,7 @@ p {
     text-align: center;
     line-height: 24px;
   }
+
   .subtotal-mobile-box {
     display: flex;
     flex-wrap: wrap;
