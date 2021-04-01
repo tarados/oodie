@@ -164,8 +164,8 @@ export default {
                   'currentAvailability': size.quantity
                 });
                 this.$vm2.open('modal-4');
-              } else {
-                this.$route.go(-1);
+              } else if (this.warningList.length === 0) {
+                this.$router.push({ name: 'Checkout' }).catch(() => {});
               }
             });
           }
