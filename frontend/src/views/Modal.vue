@@ -15,7 +15,7 @@
     >
       <template v-slot:header>
         <div class="modal_title">
-          Указанные количества неактуальны!
+          {{ 'ModalTitleForCheckout' | localize }}
         </div>
       </template>
       <section>
@@ -23,11 +23,11 @@
              v-for="(warning, index) in warningList" :key="index"
         >
           <p>{{ warning.title }}</p>
-          <p>В наличии - {{ warning.currentAvailability }}</p>
+          <p>{{ 'InStock' | localize }} - {{ warning.currentAvailability }}</p>
         </div>
       </section>
       <div class="modal_petition">
-        <span>Пожалуйста, удалите данный товар из корзины и закажите что-нибудь, что есть в наличии!</span>
+        <span>{{ 'ModalCommentForCheckout' | localize }}</span>
       </div>
     </modal-vue>
   </div>
@@ -58,14 +58,13 @@ export default {
 }
 
 .container-modal {
-  padding: 10px;
+  padding: 1rem;
   display: grid;
   grid-template-columns: 55% 45%;
   grid-template-rows: 2rem;
 }
 
 .container-modal p {
-  padding-left: 1rem;
   text-transform: uppercase;
 }
 
@@ -73,9 +72,10 @@ div > div > div#vm2_box_modal-4.vm2_modal-content {
   padding: 10px;
 }
 
-.modal_petition span {
-  text-transform: uppercase;
+.modal_petition {
+  /*text-transform: uppercase;*/
   text-align: justify;
-  color: green;
+  padding: 1rem;
+  /*color: green;*/
 }
 </style>
