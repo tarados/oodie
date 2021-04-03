@@ -15,7 +15,7 @@
     >
       <template v-slot:header>
         <div class="modal_title">
-          {{ 'ModalTitleForCheckout' | localize }}
+          {{ headerText | localize }}
         </div>
       </template>
       <section>
@@ -27,7 +27,7 @@
         </div>
       </section>
       <div class="modal_petition">
-        <span>{{ 'ModalCommentForCheckout' | localize }}</span>
+        <span>{{ commitText | localize }}</span>
       </div>
     </modal-vue>
   </div>
@@ -39,6 +39,12 @@ export default {
   props: {
     warningList: {
       type: Array
+    },
+    headerText: {
+      type: String
+    },
+    commitText: {
+      type: String
     }
   },
   methods: {

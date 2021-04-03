@@ -81,7 +81,11 @@
           v-show="this.$store.state.cartProducts.length > 0">{{ 'BasketCheckout' | localize }}
       </div>
     </div>
-    <Modal :warningList="warningList"/>
+    <Modal
+        :warningList="warningList"
+        :header-text="headerText"
+        :commit-text="commitText"
+    />
 
   </div>
 </template>
@@ -96,7 +100,9 @@ export default {
   data() {
     return {
       isVisible: false,
-      warningList: []
+      warningList: [],
+      headerText: null,
+      commitText: null
     }
   },
   components: {
@@ -153,6 +159,9 @@ export default {
       }
     },
     toCheckout() {
+      this.warningList.length = 0;
+      this.headerText = 'ModalTitleForCheckout';
+      this.commitText = 'ModalCommentForCheckout';
       const localStorageAvailability = cart.getItems();
       this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {
