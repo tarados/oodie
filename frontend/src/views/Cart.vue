@@ -85,6 +85,7 @@
         :warningList="warningList"
         :header-text="headerText"
         :commit-text="commitText"
+        :in-stock="inStock"
     />
 
   </div>
@@ -102,7 +103,8 @@ export default {
       isVisible: false,
       warningList: [],
       headerText: null,
-      commitText: null
+      commitText: null,
+      inStock: null
     }
   },
   components: {
@@ -140,8 +142,10 @@ export default {
       }
     },
     plusQuantity(index) {
+      this.warningList.length = 0;
       const item = this.cartProducts[index];
       let currentProductAvailable = 0;
+      let currentProductTitle = '';
       this.productsList.forEach(product => {
         if (product.id === item.id) {
           product.availability.forEach(el => {
@@ -149,19 +153,29 @@ export default {
               currentProductAvailable = el.quantity;
             }
           });
+          currentProductTitle = product.title;
         }
       });
       let newAvailability = item.quantity + 1;
       if (newAvailability <= currentProductAvailable) {
         this.$store.commit('increment', index);
       } else {
-        alert("В наличии только " + currentProductAvailable);
+        this.warningList.push({
+          'title': currentProductTitle,
+          'currentAvailability': currentProductAvailable
+        });
+        let commit = document.querySelector('.modal_petition');
+        commit.style.display = 'none';
+        this.headerText = 'ModalTitleForQuantity';
+        this.inStock = 'InStockOnly';
+        this.$vm2.open('modal-4');
       }
     },
     toCheckout() {
       this.warningList.length = 0;
       this.headerText = 'ModalTitleForCheckout';
       this.commitText = 'ModalCommentForCheckout';
+      this.inStock = 'InStock'
       const localStorageAvailability = cart.getItems();
       this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {

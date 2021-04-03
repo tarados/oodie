@@ -10,7 +10,8 @@
         btn1OnClick: () => {
           $vm2.close('modal-4');
         },
-        justify: 'center'
+        justify: 'center',
+        btn1Style: {width: '15vh', textTransform: 'uppercase'}
       }"
     >
       <template v-slot:header>
@@ -23,7 +24,7 @@
              v-for="(warning, index) in warningList" :key="index"
         >
           <p>{{ warning.title }}</p>
-          <p>{{ 'InStock' | localize }} - {{ warning.currentAvailability }}</p>
+          <p>{{ inStock | localize }} - {{ warning.currentAvailability }}</p>
         </div>
       </section>
       <div class="modal_petition">
@@ -45,6 +46,9 @@ export default {
     },
     commitText: {
       type: String
+    },
+    inStock: {
+      type: String
     }
   },
   methods: {
@@ -58,7 +62,7 @@ export default {
 <style>
 #app .modal_title {
   text-align: center;
-  margin-top: 10px;
+  margin: 10px;
   font-weight: 600;
   text-transform: uppercase;
 }
