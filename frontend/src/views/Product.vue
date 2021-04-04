@@ -63,7 +63,7 @@
           <div class="size-table" v-if="this.selectedProduct.table">
             <a :href="this.selectedProduct.table" target="_blank">{{ 'ProductSizeTable' | localize }}</a>
           </div>
-          <div class="btn" @click="toCart">{{ getPreorder | localize }}</div>
+          <div class="btn" @click="toCart">{{ getStatus | localize }}</div>
           <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
           <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
@@ -91,6 +91,7 @@ export default {
       size: 0,
       availabilities: [],
       preorder: null,
+      inStockNo: null,
       slides: [],
       hideSize: false,
       breakpoints: {
@@ -129,10 +130,11 @@ export default {
     selectedImage() {
       return this.imageIndex;
     },
-    getPreorder() {
-      const status = this.preorder;
-      if (status) {
+    getStatus() {
+      if (this.preorder) {
         return 'ProductStatusPreorder'
+      } else if (this.inStockNo) {
+        return 'InStockNo'
       } else {
         return 'ProductStatusBasket'
       }
@@ -151,6 +153,13 @@ export default {
       if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
         this.hideSize = true;
         this.preorder = this.availabilities[0].preorder;
+        if (this.availabilities[0].quantity === 0) {
+          this.inStockNo = true;
+          let buttonToCart = document.querySelector('.btn');
+          buttonToCart.style.color = 'black';
+          buttonToCart.style.backgroundColor = 'white';
+          buttonToCart.style.border = '1px solid black';
+        }
       }
     },
     showImage(index) {
@@ -183,7 +192,7 @@ export default {
     select(index) {
       this.size = index;
       this.preorder = this.availabilities[index].preorder;
-    }
+    },
   },
   watch: {
     size: function () {
@@ -196,6 +205,7 @@ export default {
   },
   mounted() {
     this.loadProduct();
+
   },
 };
 </script>
@@ -307,7 +317,7 @@ export default {
 .btn {
   display: flex;
   justify-content: center;
-  max-width: 200px;
+  max-width: 240px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;

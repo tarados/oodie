@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <div v-for="product in prodList" :key="product.id"
-           @click="toProduct(product)"
+      <router-link v-for="product in prodList" :key="product.id"
+           :to="{name: 'Product', params: {id: product.id}}"
            :class="{product: large, brand: small}"
       >
         <img
@@ -30,7 +30,7 @@
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
 
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -83,11 +83,6 @@ export default {
         return product.availability[0].quantity;
       } catch (TypeError) {
         return 0
-      }
-    },
-    toProduct(product) {
-      if (this.productAvailability(product) > 0) {
-        this.$router.push({name: 'Product', params: {id: product.id}});
       }
     }
   },
