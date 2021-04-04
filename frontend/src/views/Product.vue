@@ -67,7 +67,7 @@
           <div class="preorder" v-if="preorder">{{ 'ProductStatusPreorderDescription' | localize }}</div>
           <div class="preorder" v-if="!preorder">{{ 'ProductStatusBasketDescription' | localize }}</div>
           <div class="product-description">
-            <div class="description">{{ this.selectedProduct.description_locale | localize(this.selectedProduct.description) }}</div>
+            <div class="description">{{ 'ProductDescription' | localize }}</div>
           </div>
         </div>
       </div>
@@ -112,9 +112,8 @@ export default {
   computed: {
     ...mapState(["currentProduct", "categoriesList"]),
     selectedProduct() {
-      const product = this.currentProduct;
-      if (product) {
-        return product;
+      if (this.currentProduct) {
+        return this.currentProduct;
       } else {
         return {};
       }
@@ -192,7 +191,7 @@ export default {
     select(index) {
       this.size = index;
       this.preorder = this.availabilities[index].preorder;
-    },
+    }
   },
   watch: {
     size: function () {
