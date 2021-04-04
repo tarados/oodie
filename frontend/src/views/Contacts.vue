@@ -11,14 +11,14 @@
 
       <div class="contact-row">
         <img class="contact-icon" src="../assets/email.svg">
-        <a href="mailto:hoodiyalko@gmail.com">hoodiyalko@gmail.com</a>
+        <a href="mailto:hoodiyalko@gmail.com" rel="noopener">hoodiyalko@gmail.com</a>
       </div>
       <br>
       <p><strong>{{ 'ContactsDescriptionOne' | localize }}<br> {{ 'ContactsDescriptionTwo' | localize }}</strong></p>
       <br>
       <p>{{ 'ContactsSubscribe' | localize }}</p>
-      <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/">facebook.com/hoodiyalko</a></p>
-      <p><a target="_blank" href="https://www.instagram.com/hoodiyalko/">instagram.com/hoodiyalko</a></p>
+      <p><a target="_blank" href="https://www.facebook.com/hoodiyalko/" rel="noopener">facebook.com/hoodiyalko</a></p>
+      <p><a target="_blank" href="https://www.instagram.com/hoodiyalko/" rel="noopener">instagram.com/hoodiyalko</a></p>
     </div>
 
 

@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <router-link :to="{name: 'Product', params: {id: product.id} }"
-                   v-for="product in prodList" :key="product.id"
-                   :class="{product: large, brand: small}"
+      <div v-for="product in prodList" :key="product.id"
+           @click="toProduct(product)"
+           :class="{product: large, brand: small}"
       >
         <img
             :src="product.image"
@@ -30,13 +30,14 @@
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
 
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+// import router from "@/router";
 
 export default {
   name: "Collections",
@@ -74,7 +75,6 @@ export default {
         this.large = true;
       }
     },
-
     productPreorder(product) {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
@@ -83,6 +83,11 @@ export default {
         return product.availability[0].quantity;
       } catch (TypeError) {
         return 0
+      }
+    },
+    toProduct(product) {
+      if (this.productAvailability(product) > 0) {
+        this.$router.push({name: 'Product', params: {id: product.id}});
       }
     }
   },

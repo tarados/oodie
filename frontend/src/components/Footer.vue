@@ -14,7 +14,7 @@
           </div>
           <div class="footer-content__item--contacts">
             <img src="../assets/email.svg">
-            <a href="mailto:hoodiyalko@gmail.com">
+            <a href="mailto:hoodiyalko@gmail.com" rel="noopener">
               <span>hoodiyalko@gmail.com</span>
             </a>
           </div>
@@ -42,21 +42,21 @@
           <div class="footer-content__item--social">
             <div class="icon">
               <div class="icon__circl">
-                <a target="_blank" href="https://www.facebook.com/hoodiyalko/">
+                <a target="_blank" href="https://www.facebook.com/hoodiyalko/" rel="noopener">
                   <img src="../assets/facebook.png">
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
-                <a target="_blank" href="https://www.instagram.com/hoodiyalko/">
+                <a target="_blank" href="https://www.instagram.com/hoodiyalko/" rel="noopener">
                   <img src="../assets/instagram.png">
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
-                <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/">
+                <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/" rel="noopener">
                   <img src="../assets/tik-tok.png">
                 </a>
               </div>
