@@ -80,7 +80,8 @@ export default {
 
 <style scoped>
 .langSelector {
-  grid-column: 3 / 4;
+  position: relative;
+  margin-right: calc(0rem + 20 * ((100vw - 320px) / 1518));
   justify-self: end;
   align-self: start;
 }
@@ -94,8 +95,12 @@ export default {
   height: 18px;
 }
 
-.langSelector .sub-menu .lang {
+.langSelector .sub-menu {
+  position: absolute;
   width: 70%;
+}
+
+.langSelector .sub-menu .lang {
   display: flex;
   align-self: center;
   justify-content: space-between;

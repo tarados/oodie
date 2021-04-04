@@ -1,61 +1,62 @@
 <template>
   <div class="navbar">
     <div class="container-nav">
+      <div class="hamburg">
+        <Hamburger/>
+      </div>
       <div class="nav-header">
-        <div class="hamburg">
-          <Hamburger/>
-        </div>
-        <div class="phone">
-          <a href="tel:+380507204066"><img src="../assets/phone-receiver.svg"/>+380507204066</a>
-        </div>
-        <Dropdown/>
-        <div class="basket" v-if="basketVisible">
-          <router-link :to="{name: 'Cart'}">
-            <img src="../assets/cart.svg">
-            <span
-                v-show="cartProducts.length > 0"
-            >{{ cartProducts.length }}
+        <a href="tel:+380507204066" class="phone"><img src="../assets/phone-receiver.svg"/>+380507204066</a>
+        <div class="nav-header__lang_basket">
+          <Dropdown/>
+          <div class="basket" v-if="basketVisible">
+            <router-link :to="{name: 'Cart'}">
+              <img src="../assets/cart.svg">
+              <span
+                  v-show="cartProducts.length > 0"
+              >{{ cartProducts.length }}
             </span>
-          </router-link>
+            </router-link>
+          </div>
         </div>
       </div>
-      <Logo/>
-      <div class="linkList">
-        <div class="linkList-item"
-             v-for="(item, index) in links" :key="item.route">
-          <router-link :to="item.route">
-            <p>{{ item.title | localize }}</p>
-          </router-link>
-          <div class="linkList-item__brands" v-if="links[index].nestedRoutes"
-               @mouseover="mouseover"
-               @mouseleave="mouseleave"
+    </div>
+    <Logo/>
+    <div class="linkList">
+      <div class="linkList-item"
+           v-for="(item, index) in links" :key="item.route">
+        <router-link :to="item.route">
+          <p>{{ item.title | localize }}</p>
+        </router-link>
+        <div class="linkList-item__brands" v-if="links[index].nestedRoutes"
+             @mouseover="mouseover"
+             @mouseleave="mouseleave"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+               fill="none"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <path d="M9 14l3 3l3 -3"/>
+          </svg>
+          <div
+              class="linkList-item__sub-menu"
+              v-if="isOpen"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                 fill="none"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z"/>
-              <path d="M9 14l3 3l3 -3"/>
-            </svg>
             <div
-                class="linkList-item__sub-menu"
-                v-if="isOpen"
+                class="menu-item"
+                v-for="category in categoriesList" :key="category.id"
+                v-show="category.slug !== 'hoodiyalko'"
             >
-              <div
-                  class="menu-item"
-                  v-for="category in categoriesList" :key="category.id"
-                  v-show="category.slug !== 'hoodiyalko'"
+              <router-link
+                  :to="{name: 'Brand', params: {slug: category.slug}}"
               >
-                <router-link
-                    :to="{name: 'Brand', params: {slug: category.slug}}"
-                >
-                  <p>{{ category.title }}</p>
-                </router-link>
-              </div>
+                <p>{{ category.title }}</p>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -136,48 +137,53 @@ export default {
 
 .navbar {
   position: relative;
-  z-index: 2;
+  /*z-index: 2;*/
 }
 
+.container-nav {
+  display:inline-block;
+  width: 100%
+
+}
 
 .nav-header {
   padding: 15px;
   height: 60px;
-  display: grid;
-  grid-template-columns: 1fr 15fr 2fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--overlay-color);
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
 }
 
 .hamburg {
   display: none;
 }
 
+.nav-header__lang_basket {
+  display: flex;
+  justify-content: space-between;
+}
+
 .phone {
-  height: 30px;
-  line-height: 30px;
-  grid-column: 1 / 3;
+  margin-left: 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+
 }
 
-.basket {
-  line-height: 30px;
-  grid-column: 4 / 5;
-}
-
-.phone a,
 .basket a {
   display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
   color: black;
 }
 
-.basket a {
-  justify-content: flex-end;
-}
-
-.phone a img {
-  margin-top: 6px;
-  height: 16px;
+.basket a span {
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
 }
 
 .phone img {
@@ -186,7 +192,7 @@ export default {
 }
 
 .basket a img {
-  height: 30px;
+  height: 1.5rem;
 }
 
 .basket a img {
@@ -282,21 +288,21 @@ span {
 
 @media screen and (max-width: 750px) {
   .nav-header {
-    grid-template-columns: 1fr 3fr 2fr 1fr;
+    /*grid-template-columns: 3fr 2fr 1fr;*/
   }
 
   .phone {
-    grid-column: 2 / 2;
+    /*grid-column: 2 / 2;*/
   }
 
   .basket {
-    position: absolute;
-    top: 15px;
-    right: 10px;
+    /*position: absolute;*/
+    /*top: 15px;*/
+    /*right: 10px;*/
   }
 
   .hamburg {
-    grid-column: 1 / 2;
+    /*grid-column: 1 / 2;*/
     position: absolute;
     top: 15px;
     left: 10px;
@@ -312,6 +318,12 @@ span {
 
   .linkList {
     display: none;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .nav-header {
+    font-size: 10px;
   }
 }
 </style>
