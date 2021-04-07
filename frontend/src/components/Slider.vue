@@ -6,52 +6,50 @@
         :bullets="false"
         :visible-slides="5"
         :slide-multiple="true"
-        :dragging-distance="70"
-
     >
       <vueper-slide
           v-for="(slide, i) in slides" :key="i"
           :image="slide.image"
       >
         <template v-slot:content>
-          <div class="slide-content">{{slide.comment}}</div>
+          <div class="slide-content">{{ slide.comment }}</div>
         </template>
       </vueper-slide>
     </vueper-slides>
-<!--    <div class="slider-content">-->
-<!--      <div class="slider">-->
-<!--        <a :href="`https://www.instagram.com/p/${slider.shortcode}`"-->
-<!--           target="_blank"-->
-<!--           class="slider_item"-->
-<!--           v-for="(slider, index) in slides" :key="index"-->
-<!--           :style="`background-image: url(${slider.image})`"-->
-<!--        >-->
-<!--          <div class="slider_item__background">-->
-<!--            <span>{{ slider.comment }}</span>-->
-<!--          </div>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="prev"-->
-<!--         @click="prevSlide">-->
-<!--      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">-->
-<!--        <path d="M4.3,8.7l6,5.9c0.4,0.4,1.1,0.4,1.5,0c0.4-0.4,0.4-1.1,0-1.5L6.5,8l5.2-5.2c0.4-0.4,0.4-1.1,0-1.5-->
-<!--        c-0.4-0.4-1.1-0.4-1.5,0l-6,6C3.9,7.7,3.9,8.3,4.3,8.7z"></path>-->
-<!--      </svg>-->
-<!--      <div class="radius-prev"></div>-->
-<!--    </div>-->
-<!--    <div class="next" @click="nextSlide">-->
-<!--      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">-->
-<!--        <path d="M11.7,7.3l-6-5.9c-0.4-0.4-1.1-0.4-1.5,0c-0.4,0.4-0.4,1.1,0,1.5L9.5,8l-5.2,5.2-->
-<!--        c-0.4,0.4-0.4,1.1,0,1.5c0.4,0.4,1.1,0.4,1.5,0l6-6C12.1,8.3,12.1,7.7,11.7,7.3z"></path>-->
-<!--      </svg>-->
-<!--      <div class="radius-next"></div>-->
-<!--    </div>-->
+    <!--    <div class="slider-content">-->
+    <!--      <div class="slider">-->
+    <!--        <a :href="`https://www.instagram.com/p/${slider.shortcode}`"-->
+    <!--           target="_blank"-->
+    <!--           class="slider_item"-->
+    <!--           v-for="(slider, index) in slides" :key="index"-->
+    <!--           :style="`background-image: url(${slider.image})`"-->
+    <!--        >-->
+    <!--          <div class="slider_item__background">-->
+    <!--            <span>{{ slider.comment }}</span>-->
+    <!--          </div>-->
+    <!--        </a>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="prev"
+         @click="prevSlide">
+      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
+        <path d="M4.3,8.7l6,5.9c0.4,0.4,1.1,0.4,1.5,0c0.4-0.4,0.4-1.1,0-1.5L6.5,8l5.2-5.2c0.4-0.4,0.4-1.1,0-1.5
+        c-0.4-0.4-1.1-0.4-1.5,0l-6,6C3.9,7.7,3.9,8.3,4.3,8.7z"></path>
+      </svg>
+      <div class="radius-prev"></div>
+    </div>
+    <div class="next" @click="nextSlide">
+      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
+        <path d="M11.7,7.3l-6-5.9c-0.4-0.4-1.1-0.4-1.5,0c-0.4,0.4-0.4,1.1,0,1.5L9.5,8l-5.2,5.2
+        c-0.4,0.4-0.4,1.1,0,1.5c0.4,0.4,1.1,0.4,1.5,0l6-6C12.1,8.3,12.1,7.7,11.7,7.3z"></path>
+      </svg>
+      <div class="radius-next"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { VueperSlides, VueperSlide } from 'vueperslides'
+import {VueperSlides, VueperSlide} from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
 
 export default {
@@ -64,6 +62,7 @@ export default {
   data() {
     return {
       currentSlideIndex: 0,
+      gallery: []
     }
   },
   components: {
@@ -71,37 +70,51 @@ export default {
     VueperSlide
   },
   computed: {
-    // sectionCount() {
-    //   let screenWidth = window.screen.width;
-    //   if (screenWidth > 760) {
-    //     return 5
-    //   } else if (screenWidth > 450) {
-    //     return 4
-    //   } else {
-    //     return 2
-    //   }
-    // }
+    sectionCount() {
+      let screenWidth = window.screen.width;
+      if (screenWidth > 760) {
+        return 5
+      } else if (screenWidth > 450) {
+        return 4
+      } else {
+        return 2
+      }
+    }
   },
   methods: {
-    // prevSlide() {
-    //   for (let i =0; i < this.sectionCount; i++) {
-    //     let last = this.slides.pop();
-    //     this.slides.splice(0, 0, last);
-    //   }
-    // },
-    // nextSlide() {
-    //   // const sliderBlock = document.querySelector('.slider');
-    //   // sliderBlock.style.margin += '0 0 0 -100%';
-    //   for (let i =0; i < this.sectionCount; i++) {
-    //     let first = this.slides.shift();
-    //     this.slides.push(first);
-    //   }
-    // }
+    getGallery() {
+      let galleryItem = [];
+      for (let i = 0; i < this.slides.length; i++) {
+        if (galleryItem.length < this.sectionCount) {
+          galleryItem.push(this.slides[i]);
+        } else {
+          this.gallery.push(galleryItem);
+          // galleryItem.length = 0;
+        }
+      }
+      console.log(this.gallery.length);
+    },
+    prevSlide() {
+      for (let i = 0; i < this.sectionCount; i++) {
+        let last = this.slides.pop();
+        this.slides.splice(0, 0, last);
+      }
+    },
+    nextSlide() {
+      // const sliderBlock = document.querySelector('.slider');
+      // sliderBlock.style.margin += '0 0 0 -100%';
+      for (let i = 0; i < this.sectionCount; i++) {
+        let first = this.slides.shift();
+        this.slides.push(first);
+      }
+    }
   },
   mounted() {
-    // this.sectionCount;
+    this.sectionCount;
+    this.getGallery();
   }
-};
+}
+;
 </script>
 
 <style>
