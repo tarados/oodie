@@ -1,22 +1,21 @@
 <template>
-  <div class="slider">
-    <transition name="carousel">
-      <div class="slider-inner" ref="inner">
-        <div
-            class="slider_item"
-            :class="{isNext: isNext, isPrev: isPrev}"
-            ref="item"
-            v-for="(slider, index) in slides" :key="index"
-            :style="`background-image: url(${slider.image})`"
-        >
-          <div class="slider_item__background">
-            <span>{{ slider.comment }}</span>
-          </div>
+  <div class="slider-wrapper">
+    <div
+        class="slider-inner"
+        ref="inner"
+    >
+      <div
+          class="slider_item"
+          ref="item"
+          v-for="(slider, index) in slides" :key="index"
+          :style="`background-image: url(${slider.image})`"
+      >
+        <div class="slider_item__background">
+          <span>{{ slider.comment }}</span>
         </div>
-
       </div>
-    </transition>
 
+    </div>
     <div class="prev"
          @click="prevSlide">
       <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
@@ -45,13 +44,14 @@ export default {
   },
   data() {
     return {
-      currentSlideIndex: 0,
-      margin: 0,
-      isNext: false,
-      isPrev: false
+      currentSlideIndex: 0
     }
   },
   computed: {
+    bias() {
+      const x = '-' + 100 * this.currentSlideIndex + '%';
+      return x;
+    },
     sectionCount() {
       let screenWidth = window.screen.width;
       if (screenWidth > 760) {
@@ -71,7 +71,6 @@ export default {
       }
     },
     nextSlide() {
-      this.isNext = !this.isNext;
       for (let i = 0; i < this.sectionCount; i++) {
         let first = this.slides.shift();
         this.slides.push(first);
@@ -86,44 +85,30 @@ export default {
 </script>
 
 <style scoped>
-.slider {
+.slider-wrapper {
   position: relative;
-  margin: 30px auto;
   overflow: hidden;
-  height: 370px;
-}
-
-.isNext {
-  transition: all 1s;
-  transform: translateX(-100%);
-}
-
-
-.carousel-enter-active,
-.carousel-leave-active {
-
-}
-
-.slider .slider-inner {
-  /*transition: all 1s ease 0s;*/
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.slider .slider-inner .slider_item {
-  position: relative;
   height: calc(9vw + 197 * (100vw / 1838));
-  flex: 1 0 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 1rem;
+  background-color: yellow;
+}
+
+.slider-inner {
+
+}
+
+.slider-inner .slider_item {
+  position: relative;
+  width: calc(9vw + 200 * (100vw / 1838));
+  height: calc(9vw + 200 * (100vw / 1838));
+  display: inline-block;
+  vertical-align: middle;
+  border: 5px solid white;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.slider .slider-inner .slider_item .slider_item__background {
+.slider-inner .slider_item .slider_item__background {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,7 +121,7 @@ export default {
   background-color: black;
 }
 
-.slider .slider-inner .slider_item .slider_item__background:hover {
+.slider-inner .slider_item .slider_item__background:hover {
   opacity: 0.8;
 }
 
@@ -144,13 +129,13 @@ span {
   padding: 2rem;
 }
 
-.slider .next {
+.next {
   position: absolute;
   top: 40%;
   right: 0;
 }
 
-.slider .next svg {
+.next svg {
   position: absolute;
   width: 12px;
   height: 15px;
@@ -159,7 +144,7 @@ span {
   fill: rgb(255, 255, 255);
 }
 
-.slider .radius-next {
+.radius-next {
   width: 30px; /* ширина в два раза меньше высоты, иначе получится полуовал */
   height: 60px;
   border-radius: 100% 0 0 100% / 50% 0 0 50%;
@@ -167,13 +152,13 @@ span {
   cursor: pointer;
 }
 
-.slider .prev {
+.prev {
   position: absolute;
   top: 40%;
   left: 0;
 }
 
-.slider .prev svg {
+.prev svg {
   position: absolute;
   width: 12px;
   height: 15px;
@@ -182,7 +167,7 @@ span {
   fill: rgb(255, 255, 255);
 }
 
-.slider .radius-prev {
+.radius-prev {
   width: 30px; /* ширина в два раза меньше высоты, иначе получится полуовал */
   height: 60px;
   border-radius: 0 100% 100% 0 / 0 50% 50% 0;
@@ -190,24 +175,23 @@ span {
   cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
-  .slider {
-
+@media screen and (max-width: 760px) {
+  .slider-wrapper {
+    height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
   }
 
-  .slider .slider-inner .slider_item {
+  .slider-inner .slider_item {
     height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
-    flex-basis: 25%;
+
   }
 }
 
 @media screen and (max-width: 450px) {
-  .slider .slider-inner .slider_item :nth-child(2n) {
-    border: 2px solid white;
-  }
+  /*.slider-inner .slider_item :nth-child(2n) {*/
+  /*  border: 2px solid white;*/
+  /*}*/
 
-  .slider .slider-inner .slider_item {
-    flex-basis: 50%;
+  .slider-inner .slider_item {
     height: 50vw;
   }
 }
