@@ -91,27 +91,24 @@ export default {
   text-align: center;
   margin-bottom: 1rem;
   background-color: yellow;
-  height: 322px;
+  height: calc(10vw + 170 * (100vw / 1838));
 }
 
 .slider-inner {
-
+  transition: all 1s linear 0s;
 }
 
 .slider-inner .slider_item {
-  position: relative;
+  /*position: relative;*/
   display: inline-block;
   vertical-align: middle;
   border: 5px solid white;
-  /*background-repeat: no-repeat;*/
-  /*background-size: cover;*/
-
 }
 
 img {
   object-fit: cover;
-  width: 322px;
-  height: 322px;
+  width: calc(10vw + 170 * (100vw / 1838));
+  height: calc(10vw + 170 * (100vw / 1838));
 }
 
 .slider-inner .slider_item .slider_item__background {
@@ -184,14 +181,97 @@ span {
   cursor: pointer;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1329px) {
   .slider-wrapper {
-    height: calc(35vw + 200 * (100vw / 1838));
+    height: calc(10vw + 202 * ((100vw - 638px) / 1838));
   }
 
   img {
-    width: calc(35vw + 200 * (100vw / 1838));
-    height: calc(35vw + 200 * (100vw / 1838));
+    width: calc(10vw + 202 * ((100vw - 638px) / 1838));
+    height: calc(10vw + 202 * ((100vw - 638px) / 1838));
+
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .slider-wrapper {
+    height: calc(19vw + 200 * ((100vw - 638px) / 1838));
+  }
+
+  img {
+    width: calc(19vw + 200 * ((100vw - 638px) / 1838));
+    height: calc(19vw + 200 * ((100vw - 638px) / 1838));
+
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .slider-wrapper {
+    height: calc(21vw + 200 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(21vw + 200 * (100vw / 1838));
+    height: calc(21vw + 200 * (100vw / 1838));
+
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .slider-wrapper {
+    height: calc(20vw + 215 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(20vw + 215 * (100vw / 1838));
+    height: calc(20vw + 215 * (100vw / 1838));
+
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .slider-wrapper {
+    height: calc(33vw + 270 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(33vw + 270 * (100vw / 1838));
+    height: calc(33vw + 270 * (100vw / 1838));
+
+  }
+}
+
+@media screen and (max-width: 450px){
+  .slider-wrapper {
+    height: calc(32vw + 270 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(32vw + 270 * (100vw / 1838));
+    height: calc(32vw + 270 * (100vw / 1838));
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .slider-wrapper {
+    height: calc(32vw + 244 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(32vw + 244 * (100vw / 1838));
+    height: calc(32vw + 244 * (100vw / 1838));
+
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .slider-wrapper {
+    height: calc(33vw + 244 * (100vw / 1838));
+  }
+
+  img {
+    width: calc(33vw + 244 * (100vw / 1838));
+    height: calc(33vw + 244 * (100vw / 1838));
 
   }
 }
