@@ -8,8 +8,8 @@
           class="slider_item"
           ref="item"
           v-for="(slider, index) in slides" :key="index"
-          :style="`background-image: url(${slider.image})`"
       >
+        <img :src="slider.image">
         <div class="slider_item__background">
           <span>{{ slider.comment }}</span>
         </div>
@@ -88,9 +88,10 @@ export default {
 .slider-wrapper {
   position: relative;
   overflow: hidden;
-  height: calc(9vw + 197 * (100vw / 1838));
+  text-align: center;
   margin-bottom: 1rem;
   background-color: yellow;
+  height: 322px;
 }
 
 .slider-inner {
@@ -99,16 +100,24 @@ export default {
 
 .slider-inner .slider_item {
   position: relative;
-  width: calc(9vw + 200 * (100vw / 1838));
-  height: calc(9vw + 200 * (100vw / 1838));
   display: inline-block;
   vertical-align: middle;
   border: 5px solid white;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
+
+}
+
+img {
+  object-fit: cover;
+  width: 322px;
+  height: 322px;
 }
 
 .slider-inner .slider_item .slider_item__background {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,22 +186,13 @@ span {
 
 @media screen and (max-width: 760px) {
   .slider-wrapper {
-    height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
+    height: calc(35vw + 200 * (100vw / 1838));
   }
 
-  .slider-inner .slider_item {
-    height: calc(9vw + (300 + 300 * 0.7) * ((100vw - 320px) / 1838));
+  img {
+    width: calc(35vw + 200 * (100vw / 1838));
+    height: calc(35vw + 200 * (100vw / 1838));
 
-  }
-}
-
-@media screen and (max-width: 450px) {
-  /*.slider-inner .slider_item :nth-child(2n) {*/
-  /*  border: 2px solid white;*/
-  /*}*/
-
-  .slider-inner .slider_item {
-    height: 50vw;
   }
 }
 </style>
