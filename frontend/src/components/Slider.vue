@@ -1,20 +1,18 @@
 <template>
-  <div class="slider-wrapper">
-    <div
-        class="slider-inner"
-        ref="inner"
-    >
-      <div
-          class="slider_item"
-          ref="item"
-          v-for="(slider, index) in slides" :key="index"
-      >
-        <img :src="slider.image">
-        <div class="slider_item__background">
-          <span>{{ slider.comment }}</span>
+  <div class="slider" ref="slider">
+    <div class="slider-list" ref="slider_list">
+      <div class="slider-track" ref="slider_track">
+        <div
+            class="slider-item"
+            ref="slider_item"
+            v-for="(slider, index) in slides" :key="index"
+            :style="{backgroundImage: `url(${slider.image})`}"
+        >
+          <div class="slider-item__background">
+            <span>{{ slider.comment }}</span>
+          </div>
         </div>
       </div>
-
     </div>
     <div class="prev"
          @click="prevSlide">
@@ -44,14 +42,26 @@ export default {
   },
   data() {
     return {
-      currentSlideIndex: 0
+      currentSlideIndex: 0,
+      posInit: 0,
+      posX1: 0,
+      posX2: 0,
+      posY1: 0,
+      posY2: 0,
+      posFinal: 0,
+      isSwipe: false,
+      isScroll: false,
+      allowSwipe: true,
+      transition: true,
+      slideIndex: 0,
+      slider: this.$refs.slider,
+      sliderTrack: this.$refs.slider_track,
+      sliderItems: this.$refs.slider_item,
+      slideWidth: this.slides[0].offsetWidth,
+      trfRegExp: /([-0-9.]+(?=px))/
     }
   },
   computed: {
-    bias() {
-      const x = '-' + 100 * this.currentSlideIndex + '%';
-      return x;
-    },
     sectionCount() {
       let screenWidth = window.screen.width;
       if (screenWidth > 760) {
@@ -64,6 +74,30 @@ export default {
     }
   },
   methods: {
+    touchScrolling() {
+      let sliderList = this.$refs.slider_list;
+      sliderList.addEventListener('mousedown', (e) => {
+        this.posInit = e.clientX;
+        sliderList.style.cursor = 'grabbing';
+      });
+      sliderList.addEventListener('mouseup', (e) => {
+        this.posFinal = e.clientX;
+        sliderList.style.cursor = 'pointer';
+        let interval = this.posFinal - this.posInit;
+        if (interval < 0) {
+
+          for (let i = 0; i < this.sectionCount; i++) {
+            let first = this.slides.shift();
+            this.slides.push(first);
+          }
+        } else {
+          for (let i = 0; i < this.sectionCount; i++) {
+            let last = this.slides.pop();
+            this.slides.unshift(last);
+          }
+        }
+      });
+    },
     prevSlide() {
       for (let i = 0; i < this.sectionCount; i++) {
         let last = this.slides.pop();
@@ -79,39 +113,53 @@ export default {
   },
   mounted() {
     this.sectionCount;
+    this.touchScrolling();
   }
 }
 ;
 </script>
 
 <style scoped>
-.slider-wrapper {
+.slider {
   position: relative;
-  overflow: hidden;
-  text-align: center;
+  user-select: none;
   margin-bottom: 1rem;
   background-color: yellow;
-  height: calc(10vw + 170 * (100vw / 1838));
+  height: calc(10vw + 180 * (100vw / 1838));
+
 }
 
-.slider-inner {
-  transition: all 1s linear 0s;
+.slider-list {
+  width: 100%;
+  height: calc(10vw + 180 * (100vw / 1838));
+  pointer-events: all;
+  cursor: pointer;
 }
 
-.slider-inner .slider_item {
-  /*position: relative;*/
-  display: inline-block;
-  vertical-align: middle;
-  border: 5px solid white;
+.slider-list.grab {
+  cursor: grab;
 }
 
-img {
-  object-fit: cover;
-  width: calc(10vw + 170 * (100vw / 1838));
-  height: calc(10vw + 170 * (100vw / 1838));
+.slider-list.grabbing {
+  cursor: grabbing;
 }
 
-.slider-inner .slider_item .slider_item__background {
+.slider-track {
+  display: flex;
+}
+
+.slider-item {
+  position: relative;
+  width: calc(10vw + 180 * (100vw / 1838));
+  height: calc(10vw + 180 * (100vw / 1838));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.slider-item .slider-item__background {
   position: absolute;
   top: 0;
   left: 0;
@@ -127,7 +175,7 @@ img {
   background-color: black;
 }
 
-.slider-inner .slider_item .slider_item__background:hover {
+.slider-item .slider-item__background:hover {
   opacity: 0.8;
 }
 
@@ -181,98 +229,20 @@ span {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1329px) {
-  .slider-wrapper {
-    height: calc(10vw + 202 * ((100vw - 638px) / 1838));
-  }
-
-  img {
-    width: calc(10vw + 202 * ((100vw - 638px) / 1838));
-    height: calc(10vw + 202 * ((100vw - 638px) / 1838));
-
-  }
-}
 
 @media screen and (max-width: 1200px) {
-  .slider-wrapper {
-    height: calc(19vw + 200 * ((100vw - 638px) / 1838));
-  }
 
-  img {
-    width: calc(19vw + 200 * ((100vw - 638px) / 1838));
-    height: calc(19vw + 200 * ((100vw - 638px) / 1838));
-
-  }
 }
 
-@media screen and (max-width: 1000px) {
-  .slider-wrapper {
-    height: calc(21vw + 200 * (100vw / 1838));
-  }
+@media screen and (max-width: 450px) {
 
-  img {
-    width: calc(21vw + 200 * (100vw / 1838));
-    height: calc(21vw + 200 * (100vw / 1838));
-
-  }
-}
-
-@media screen and (max-width: 690px) {
-  .slider-wrapper {
-    height: calc(20vw + 215 * (100vw / 1838));
-  }
-
-  img {
-    width: calc(20vw + 215 * (100vw / 1838));
-    height: calc(20vw + 215 * (100vw / 1838));
-
-  }
-}
-
-@media screen and (max-width: 610px) {
-  .slider-wrapper {
-    height: calc(33vw + 270 * (100vw / 1838));
-  }
-
-  img {
-    width: calc(33vw + 270 * (100vw / 1838));
-    height: calc(33vw + 270 * (100vw / 1838));
-
-  }
-}
-
-@media screen and (max-width: 450px){
-  .slider-wrapper {
-    height: calc(32vw + 270 * (100vw / 1838));
-  }
-
-  img {
-    width: calc(32vw + 270 * (100vw / 1838));
-    height: calc(32vw + 270 * (100vw / 1838));
-  }
 }
 
 @media screen and (max-width: 375px) {
-  .slider-wrapper {
-    height: calc(32vw + 244 * (100vw / 1838));
-  }
 
-  img {
-    width: calc(32vw + 244 * (100vw / 1838));
-    height: calc(32vw + 244 * (100vw / 1838));
-
-  }
 }
 
 @media screen and (max-width: 320px) {
-  .slider-wrapper {
-    height: calc(33vw + 244 * (100vw / 1838));
-  }
 
-  img {
-    width: calc(33vw + 244 * (100vw / 1838));
-    height: calc(33vw + 244 * (100vw / 1838));
-
-  }
 }
 </style>
