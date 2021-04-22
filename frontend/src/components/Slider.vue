@@ -8,6 +8,7 @@
             v-for="(slider, index) in slides" :key="index"
             :style="{backgroundImage: `url(${slider.image})`}"
         >
+          {{slider.index}}
           <div class="slider-item__background">
             <span>{{ slider.comment }}</span>
           </div>
@@ -42,7 +43,7 @@ export default {
   },
   data() {
     return {
-      currentSlideIndex: 0,
+      counter: 1,
       posInit: 0,
       posX1: 0,
       posX2: 0,
@@ -55,8 +56,6 @@ export default {
       transition: true,
       slideIndex: 0,
       slider: this.$refs.slider,
-      sliderTrack: this.$refs.slider_track,
-      sliderItems: this.$refs.slider_item,
       slideWidth: this.slides[0].offsetWidth,
       trfRegExp: /([-0-9.]+(?=px))/
     }
@@ -76,6 +75,8 @@ export default {
   methods: {
     touchScrolling() {
       let sliderList = this.$refs.slider_list;
+      // let  sliderTrack = this.$refs.slider_track;
+      let sliderItems = this.$refs.slider_item;
       sliderList.addEventListener('mousedown', (e) => {
         this.posInit = e.clientX;
         sliderList.style.cursor = 'grabbing';
@@ -85,11 +86,17 @@ export default {
         sliderList.style.cursor = 'pointer';
         let interval = this.posFinal - this.posInit;
         if (interval < 0) {
-
+          let widthItem = 0;
           for (let i = 0; i < this.sectionCount; i++) {
             let first = this.slides.shift();
             this.slides.push(first);
+            widthItem += sliderItems[i].clientWidth;
           }
+          let bias = '-' + widthItem + 'px';
+          sliderList.style.transform = `translateX(-${widthItem * this.counter}px)`;
+          console.log(bias);
+          console.log(sliderList.style.transform);
+          this.counter++;
         } else {
           for (let i = 0; i < this.sectionCount; i++) {
             let last = this.slides.pop();
@@ -134,6 +141,7 @@ export default {
   height: calc(10vw + 180 * (100vw / 1838));
   pointer-events: all;
   cursor: pointer;
+  transition: all 2s ease 0s;
 }
 
 .slider-list.grab {
@@ -157,6 +165,8 @@ export default {
   align-items: center;
   justify-content: center;
   background-size: cover;
+  color: white;
+  font-size: 40px;
 }
 
 .slider-item .slider-item__background {
