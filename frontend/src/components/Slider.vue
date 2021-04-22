@@ -3,14 +3,51 @@
     <div class="slider-list" ref="slider_list">
       <div class="slider-track" ref="slider_track">
         <div
-            class="slider-item"
-            ref="slider_item"
-            v-for="(slider, index) in slides" :key="index"
-            :style="{backgroundImage: `url(${slider.image})`}"
+            class="slider-track_section item1"
+            ref="slider-track_section__item1"
         >
-          {{slider.index}}
-          <div class="slider-item__background">
-            <span>{{ slider.comment }}</span>
+          <div
+              class="slider-item"
+              ref="slider_item"
+              v-for="(slider, index) in sections[0]" :key="index"
+              :style="{backgroundImage: `url(${slider.image})`}"
+          >
+            {{ slider.index }}
+            <div class="slider-item__background">
+              <span>{{ slider.comment }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+            class="slider-track_section item2"
+            ref="slider-track_section__item2"
+        >
+          <div
+              class="slider-item"
+              ref="slider_item"
+              v-for="(slider, index) in sections[1]" :key="index"
+              :style="{backgroundImage: `url(${slider.image})`}"
+          >
+            {{ slider.index }}
+            <div class="slider-item__background">
+              <span>{{ slider.comment }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+            class="slider-track_section item3"
+            ref="slider-track_section__item3"
+        >
+          <div
+              class="slider-item"
+              ref="slider_item"
+              v-for="(slider, index) in sections[2]" :key="index"
+              :style="{backgroundImage: `url(${slider.image})`}"
+          >
+            {{ slider.index }}
+            <div class="slider-item__background">
+              <span>{{ slider.comment }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -43,21 +80,11 @@ export default {
   },
   data() {
     return {
-      counter: 1,
+      counter: 0,
       posInit: 0,
-      posX1: 0,
-      posX2: 0,
-      posY1: 0,
-      posY2: 0,
       posFinal: 0,
-      isSwipe: false,
-      isScroll: false,
-      allowSwipe: true,
-      transition: true,
       slideIndex: 0,
-      slider: this.$refs.slider,
-      slideWidth: this.slides[0].offsetWidth,
-      trfRegExp: /([-0-9.]+(?=px))/
+      sections: []
     }
   },
   computed: {
@@ -74,9 +101,17 @@ export default {
   },
   methods: {
     touchScrolling() {
+      this.counter = Math.ceil(this.slides.length / this.sectionCount);
+      function splitArrayIntoChunksOfLen(arr, len) {
+        let chunks = [], i = 0, n = arr.length;
+        while (i < n) {
+          chunks.push(arr.slice(i, i += len));
+        }
+        return chunks;
+      }
+      this.sections = splitArrayIntoChunksOfLen(this.slides, this.sectionCount);
+      console.log(this.sections);
       let sliderList = this.$refs.slider_list;
-      // let  sliderTrack = this.$refs.slider_track;
-      let sliderItems = this.$refs.slider_item;
       sliderList.addEventListener('mousedown', (e) => {
         this.posInit = e.clientX;
         sliderList.style.cursor = 'grabbing';
@@ -85,37 +120,25 @@ export default {
         this.posFinal = e.clientX;
         sliderList.style.cursor = 'pointer';
         let interval = this.posFinal - this.posInit;
+        let item1 = this.$refs["slider-track_section__item1"];
+        let item2 = this.$refs["slider-track_section__item2"];
+        let item3 = this.$refs["slider-track_section__item3"];
         if (interval < 0) {
-          let widthItem = 0;
-          for (let i = 0; i < this.sectionCount; i++) {
-            let first = this.slides.shift();
-            this.slides.push(first);
-            widthItem += sliderItems[i].clientWidth;
-          }
-          let bias = '-' + widthItem + 'px';
-          sliderList.style.transform = `translateX(-${widthItem * this.counter}px)`;
-          console.log(bias);
-          console.log(sliderList.style.transform);
-          this.counter++;
+          item1.style.opacity = '0';
+          item2.style.opacity = '1';
+          item3.style.opacity = '0';
         } else {
-          for (let i = 0; i < this.sectionCount; i++) {
-            let last = this.slides.pop();
-            this.slides.unshift(last);
-          }
+          item1.style.opacity = '0';
+          item2.style.opacity = '0';
+          item3.style.opacity = '1';
         }
       });
     },
     prevSlide() {
-      for (let i = 0; i < this.sectionCount; i++) {
-        let last = this.slides.pop();
-        this.slides.unshift(last);
-      }
+
     },
     nextSlide() {
-      for (let i = 0; i < this.sectionCount; i++) {
-        let first = this.slides.shift();
-        this.slides.push(first);
-      }
+
     }
   },
   mounted() {
@@ -137,6 +160,7 @@ export default {
 }
 
 .slider-list {
+  position: relative;
   width: 100%;
   height: calc(10vw + 180 * (100vw / 1838));
   pointer-events: all;
@@ -156,9 +180,23 @@ export default {
   display: flex;
 }
 
+.slider-track_section {
+  transition: all 2s ease 0s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.slider-track_section.item2,
+.slider-track_section.item3 {
+  opacity: 0;
+}
+
+
 .slider-item {
   position: relative;
-  width: calc(10vw + 180 * (100vw / 1838));
+  width: calc(10vw + 180 * (100vw /  1838));
   height: calc(10vw + 180 * (100vw / 1838));
   flex-shrink: 0;
   display: flex;
