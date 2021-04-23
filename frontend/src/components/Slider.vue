@@ -3,45 +3,15 @@
     <div class="slider-list" ref="slider_list">
       <div class="slider-track" ref="slider_track">
         <div
-            class="slider-track_section item1"
-            ref="slider-track_section__item1"
+            class="slider-track_section"
+            ref="slider-track_section"
+            v-for="(section, index) in sections" :key="index"
+            :style="{opacity: index === 0 ? 1 : 0}"
         >
           <div
               class="slider-item"
               ref="slider_item"
-              v-for="(slider, index) in sections[0]" :key="index"
-              :style="{backgroundImage: `url(${slider.image})`}"
-          >
-            {{ slider.index }}
-            <div class="slider-item__background">
-              <span>{{ slider.comment }}</span>
-            </div>
-          </div>
-        </div>
-        <div
-            class="slider-track_section item2"
-            ref="slider-track_section__item2"
-        >
-          <div
-              class="slider-item"
-              ref="slider_item"
-              v-for="(slider, index) in sections[1]" :key="index"
-              :style="{backgroundImage: `url(${slider.image})`}"
-          >
-            {{ slider.index }}
-            <div class="slider-item__background">
-              <span>{{ slider.comment }}</span>
-            </div>
-          </div>
-        </div>
-        <div
-            class="slider-track_section item3"
-            ref="slider-track_section__item3"
-        >
-          <div
-              class="slider-item"
-              ref="slider_item"
-              v-for="(slider, index) in sections[2]" :key="index"
+              v-for="(slider, index) in section" :key="index"
               :style="{backgroundImage: `url(${slider.image})`}"
           >
             {{ slider.index }}
@@ -81,6 +51,7 @@ export default {
   data() {
     return {
       counter: 0,
+      defaultOpacity: 0,
       posInit: 0,
       posFinal: 0,
       slideIndex: 0,
@@ -100,8 +71,7 @@ export default {
     }
   },
   methods: {
-    touchScrolling() {
-      this.counter = Math.ceil(this.slides.length / this.sectionCount);
+    getSections() {
       function splitArrayIntoChunksOfLen(arr, len) {
         let chunks = [], i = 0, n = arr.length;
         while (i < n) {
@@ -110,28 +80,28 @@ export default {
         return chunks;
       }
       this.sections = splitArrayIntoChunksOfLen(this.slides, this.sectionCount);
-      console.log(this.sections);
+    },
+    touchScrolling() {
       let sliderList = this.$refs.slider_list;
       sliderList.addEventListener('mousedown', (e) => {
         this.posInit = e.clientX;
         sliderList.style.cursor = 'grabbing';
       });
+
       sliderList.addEventListener('mouseup', (e) => {
         this.posFinal = e.clientX;
         sliderList.style.cursor = 'pointer';
-        let interval = this.posFinal - this.posInit;
-        let item1 = this.$refs["slider-track_section__item1"];
-        let item2 = this.$refs["slider-track_section__item2"];
-        let item3 = this.$refs["slider-track_section__item3"];
-        if (interval < 0) {
-          item1.style.opacity = '0';
-          item2.style.opacity = '1';
-          item3.style.opacity = '0';
-        } else {
-          item1.style.opacity = '0';
-          item2.style.opacity = '0';
-          item3.style.opacity = '1';
-        }
+        // let interval = this.posFinal - this.posInit;
+
+
+        // if (interval < 0) {
+        //   for (let i = 0; i < this.sections.length; i++) {
+        //
+        //   }
+        //
+        // } else {
+        //
+        // }
       });
     },
     prevSlide() {
@@ -143,6 +113,7 @@ export default {
   },
   mounted() {
     this.sectionCount;
+    this.getSections();
     this.touchScrolling();
   }
 }
@@ -165,7 +136,6 @@ export default {
   height: calc(10vw + 180 * (100vw / 1838));
   pointer-events: all;
   cursor: pointer;
-  transition: all 2s ease 0s;
 }
 
 .slider-list.grab {
@@ -181,18 +151,13 @@ export default {
 }
 
 .slider-track_section {
-  transition: all 2s ease 0s;
+  transition: all 1s ease 1s;
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
-}
-
-.slider-track_section.item2,
-.slider-track_section.item3 {
   opacity: 0;
 }
-
 
 .slider-item {
   position: relative;
