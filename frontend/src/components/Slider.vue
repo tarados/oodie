@@ -6,7 +6,7 @@
             class="slider-track_section"
             ref="slider-track_section"
             v-for="(section, index) in sections" :key="index"
-            :style="{opacity: index === 0 ? 1 : 0}"
+            :style="{opacity: index === currentSection ? 1 : 0, transform: index === prevSection ? `translateX(${direction}%)` : ''}"
         >
           <div
               class="slider-item"
@@ -51,7 +51,10 @@ export default {
   data() {
     return {
       counter: 0,
-      defaultOpacity: 0,
+      currentSection: 0,
+      prevSection: -1,
+      direction: -1,
+      animationTimer: -1,
       posInit: 0,
       posFinal: 0,
       slideIndex: 0,
@@ -79,6 +82,7 @@ export default {
         }
         return chunks;
       }
+
       this.sections = splitArrayIntoChunksOfLen(this.slides, this.sectionCount);
     },
     touchScrolling() {
@@ -87,26 +91,31 @@ export default {
         this.posInit = e.clientX;
         sliderList.style.cursor = 'grabbing';
       });
-
       sliderList.addEventListener('mouseup', (e) => {
+        if (this.animationTimer) {
+              clearTimeout(this.animationTimer);
+            }
         this.posFinal = e.clientX;
         sliderList.style.cursor = 'pointer';
-        // let interval = this.posFinal - this.posInit;
-
-
-        // if (interval < 0) {
-        //   for (let i = 0; i < this.sections.length; i++) {
-        //
-        //   }
-        //
-        // } else {
-        //
-        // }
+        let interval = this.posFinal - this.posInit;
+        this.prevSection = this.currentSection;
+        if (interval < 0) {
+          this.direction = -100;
+          if (this.currentSection < this.sections.length - 1) {
+            this.currentSection++;
+          } else {
+            this.currentSection = 0;
+          }
+          this.animationTimer = setTimeout(() => {
+            this.prevSection = -1;
+          }, 1000)
+        }
       });
     },
     prevSlide() {
 
-    },
+    }
+    ,
     nextSlide() {
 
     }
@@ -125,7 +134,7 @@ export default {
   position: relative;
   user-select: none;
   margin-bottom: 1rem;
-  background-color: yellow;
+  /*background-color: yellow;*/
   height: calc(10vw + 180 * (100vw / 1838));
 
 }
@@ -151,7 +160,7 @@ export default {
 }
 
 .slider-track_section {
-  transition: all 1s ease 1s;
+  transition: all 1s ease 0s;
   position: absolute;
   top: 0;
   left: 0;
@@ -161,7 +170,7 @@ export default {
 
 .slider-item {
   position: relative;
-  width: calc(10vw + 180 * (100vw /  1838));
+  width: calc(10vw + 180 * (100vw / 1838));
   height: calc(10vw + 180 * (100vw / 1838));
   flex-shrink: 0;
   display: flex;
