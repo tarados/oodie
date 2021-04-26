@@ -106,10 +106,18 @@ export default {
           } else {
             this.currentSection = 0;
           }
-          this.animationTimer = setTimeout(() => {
-            this.prevSection = -1;
-          }, 1000)
+        } else {
+          this.direction = 100;
+          let maxLength = this.sections.length - 1;
+          if (this.currentSection === 0) {
+            this.currentSection = maxLength;
+          } else {
+            this.currentSection--;
+          }
         }
+        this.animationTimer = setTimeout(() => {
+          this.prevSection = -1;
+        }, 1000)
       });
     },
     prevSlide() {
