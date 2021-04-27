@@ -170,6 +170,7 @@ export default {
   height: calc(10vw + 180 * (100vw / 1838));
   pointer-events: all;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .slider-list.grab {
