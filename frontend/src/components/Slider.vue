@@ -121,11 +121,8 @@ export default {
       });
     },
     prevSlide() {
-
-    }
-    ,
+    },
     nextSlide() {
-
     }
   },
   mounted() {
