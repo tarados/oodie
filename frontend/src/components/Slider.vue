@@ -121,6 +121,14 @@ export default {
       });
     },
     prevSlide() {
+      this.prevSection = this.currentSection;
+      this.direction = 100;
+      let maxLength = this.sections.length - 1;
+      if (this.currentSection === 0) {
+        this.currentSection = maxLength;
+      } else {
+        this.currentSection--;
+      }
     },
     nextSlide() {
       this.prevSection = this.currentSection;
