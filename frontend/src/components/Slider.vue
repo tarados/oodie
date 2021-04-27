@@ -129,6 +129,9 @@ export default {
       } else {
         this.currentSection--;
       }
+      this.animationTimer = setTimeout(() => {
+        this.prevSection = -1;
+      }, 1000);
     },
     nextSlide() {
       this.prevSection = this.currentSection;
@@ -138,6 +141,9 @@ export default {
       } else {
         this.currentSection = 0;
       }
+      this.animationTimer = setTimeout(() => {
+        this.prevSection = -1;
+      }, 1000);
     }
   },
   mounted() {
