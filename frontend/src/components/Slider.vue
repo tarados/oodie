@@ -91,12 +91,42 @@ export default {
         this.posInit = e.clientX;
         sliderList.style.cursor = 'grabbing';
       });
+      sliderList.addEventListener('touchstart', (e) => {
+        this.posInit = e.targetTouches[0].clientX;
+      });
       sliderList.addEventListener('mouseup', (e) => {
         if (this.animationTimer) {
               clearTimeout(this.animationTimer);
             }
         this.posFinal = e.clientX;
         sliderList.style.cursor = 'pointer';
+        let interval = this.posFinal - this.posInit;
+        this.prevSection = this.currentSection;
+        if (interval < 0) {
+          this.direction = -100;
+          if (this.currentSection < this.sections.length - 1) {
+            this.currentSection++;
+          } else {
+            this.currentSection = 0;
+          }
+        } else {
+          this.direction = 100;
+          let maxLength = this.sections.length - 1;
+          if (this.currentSection === 0) {
+            this.currentSection = maxLength;
+          } else {
+            this.currentSection--;
+          }
+        }
+        this.animationTimer = setTimeout(() => {
+          this.prevSection = -1;
+        }, 1000)
+      });
+      sliderList.addEventListener('touchend', (e) => {
+        if (this.animationTimer) {
+              clearTimeout(this.animationTimer);
+            }
+        this.posFinal = e.changedTouches[0].clientX;
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
         if (interval < 0) {
