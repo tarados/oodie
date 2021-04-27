@@ -64,12 +64,12 @@ export default {
   computed: {
     sectionCount() {
       let screenWidth = window.screen.width;
-      if (screenWidth > 760) {
+      if (screenWidth > 768) {
         return 5
       } else if (screenWidth > 450) {
         return 4
       } else {
-        return 2
+        return 3
       }
     }
   },
@@ -160,7 +160,6 @@ export default {
   position: relative;
   user-select: none;
   margin-bottom: 1rem;
-  /*background-color: yellow;*/
   height: calc(10vw + 180 * (100vw / 1838));
 
 }
@@ -278,19 +277,34 @@ span {
 }
 
 
-@media screen and (max-width: 1200px) {
-
-}
-
-@media screen and (max-width: 450px) {
-
+@media screen and (max-width: 768px) {
+  .slider,
+  .slider-list {
+    height: calc(10vw + 180 * (100vw / 1200));
+  }
+  .slider-item {
+    width: calc(10vw + 180 * (100vw / 1200));
+    height: calc(10vw + 180 * (100vw / 1200));
+  }
+  .next,
+  .prev {
+    top: calc(5vw + 20 * (100vw / 770));
+  }
 }
 
 @media screen and (max-width: 375px) {
-
+  .slider,
+  .slider-list {
+    height: calc(10vw + 180 * (100vw / 770));
+  }
+  .slider-item {
+    width: calc(10vw + 180 * (100vw / 770));
+    height: calc(10vw + 180 * (100vw / 770));
+  }
+  .next,
+  .prev {
+    top: calc(5vw + 20 * (100vw / 770));
+  }
 }
 
-@media screen and (max-width: 320px) {
-
-}
 </style>
