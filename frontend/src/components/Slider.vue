@@ -123,6 +123,13 @@ export default {
     prevSlide() {
     },
     nextSlide() {
+      this.prevSection = this.currentSection;
+      this.direction = -100;
+      if (this.currentSection < this.sections.length - 1) {
+        this.currentSection++;
+      } else {
+        this.currentSection = 0;
+      }
     }
   },
   mounted() {
