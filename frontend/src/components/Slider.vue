@@ -14,7 +14,6 @@
               v-for="(slider, index) in section" :key="index"
               :style="{backgroundImage: `url(${slider.image})`}"
           >
-            {{ slider.index }}
             <div class="slider-item__background">
               <span>{{ slider.comment }}</span>
             </div>
@@ -82,7 +81,6 @@ export default {
         }
         return chunks;
       }
-
       this.sections = splitArrayIntoChunksOfLen(this.slides, this.sectionCount);
     },
     touchScrolling() {
@@ -180,6 +178,8 @@ export default {
     this.sectionCount;
     this.getSections();
     this.touchScrolling();
+    console.log(this.slides);
+
   }
 }
 ;

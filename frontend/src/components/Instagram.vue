@@ -1,7 +1,7 @@
 <template>
   <div class="instagram-wrapper">
     <div class="slider-title">Мы в Instagram</div>
-    <Slider :slides="gallery"/>
+    <Slider :slides="slides"/>
   </div>
 </template>
 
@@ -74,10 +74,11 @@ export default {
   methods: {
     async getInstagramImages() {
       const response = await axios.get(process.env.VUE_APP_INSTA);
-      response.data.forEach(item => {
+      const data = response.data.public_list;
+      data.forEach(item => {
         this.slides.push(item);
       });
-    },
+    }
   },
   mounted() {
     this.getInstagramImages();
