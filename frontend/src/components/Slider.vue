@@ -56,8 +56,7 @@ export default {
       animationTimer: -1,
       posInit: 0,
       posFinal: 0,
-      slideIndex: 0,
-      sections: []
+      slideIndex: 0
     }
   },
   computed: {
@@ -70,19 +69,16 @@ export default {
       } else {
         return 3
       }
+    },
+    sections() {
+      let chunks = [], i = 0, n = this.slides.length;
+      while (i < n) {
+        chunks.push(this.slides.slice(i, i += this.sectionCount))
+      }
+      return chunks
     }
   },
   methods: {
-    getSections() {
-      function splitArrayIntoChunksOfLen(arr, len) {
-        let chunks = [], i = 0, n = arr.length;
-        while (i < n) {
-          chunks.push(arr.slice(i, i += len));
-        }
-        return chunks;
-      }
-      this.sections = splitArrayIntoChunksOfLen(this.slides, this.sectionCount);
-    },
     touchScrolling() {
       let sliderList = this.$refs.slider_list;
       sliderList.addEventListener('mousedown', (e) => {
@@ -175,11 +171,7 @@ export default {
     }
   },
   mounted() {
-    this.sectionCount;
-    this.getSections();
     this.touchScrolling();
-    console.log(this.slides);
-
   }
 }
 ;

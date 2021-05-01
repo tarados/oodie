@@ -1,7 +1,9 @@
 <template>
   <div class="instagram-wrapper">
     <div class="slider-title">Мы в Instagram</div>
-    <Slider :slides="slides"/>
+    <section v-if="gallery">
+      <Slider :slides="gallery"/>
+    </section>
   </div>
 </template>
 
@@ -14,7 +16,7 @@ export default {
 
   data() {
     return {
-      slides: [],
+      slides: null,
       gallery: [
         {
           'image': 'https://avatars.mds.yandex.net/get-zen_doc/4364496/pub_6065ee3e6b0f875cb5d158f6_6065eea09f06e15305628b68/scale_1200',
@@ -74,10 +76,7 @@ export default {
   methods: {
     async getInstagramImages() {
       const response = await axios.get(process.env.VUE_APP_INSTA);
-      const data = response.data.public_list;
-      data.forEach(item => {
-        this.slides.push(item);
-      });
+      this.slides = response.data.public_list;
     }
   },
   mounted() {
