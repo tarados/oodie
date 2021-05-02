@@ -225,8 +225,6 @@ export default {
   align-items: center;
   justify-content: center;
   background-size: cover;
-  color: white;
-  font-size: 40px;
 }
 
 .slider-item .slider-item__background {
