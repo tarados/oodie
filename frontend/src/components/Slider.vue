@@ -103,7 +103,7 @@ export default {
           } else {
             this.currentSection = 0;
           }
-        } else {
+        } else if (interval > 0) {
           this.direction = 100;
           let maxLength = this.sections.length - 1;
           if (this.currentSection === 0) {
@@ -111,6 +111,8 @@ export default {
           } else {
             this.currentSection--;
           }
+        } else {
+          this.direction = 0;
         }
         this.animationTimer = setTimeout(() => {
           this.prevSection = -1;
@@ -130,7 +132,7 @@ export default {
           } else {
             this.currentSection = 0;
           }
-        } else {
+        } else if (interval > 0) {
           this.direction = 100;
           let maxLength = this.sections.length - 1;
           if (this.currentSection === 0) {
@@ -138,6 +140,8 @@ export default {
           } else {
             this.currentSection--;
           }
+        } else {
+          this.direction = 0;
         }
         this.animationTimer = setTimeout(() => {
           this.prevSection = -1;
