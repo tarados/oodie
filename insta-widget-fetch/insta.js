@@ -14,6 +14,7 @@ const client = new Instagram({username: 'zvada53', password: 'root2827'});
     await client.login();
     const photos = await client.getPhotosByUsername({username: 'hoodiyalko'});
     const publicList = photos.user.edge_owner_to_timeline_media.edges;
+    console.log(publicList);
     let photosList = [];
     publicList.forEach((item, index) => {
         const url = item.node.thumbnail_src;

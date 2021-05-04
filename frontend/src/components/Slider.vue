@@ -1,6 +1,11 @@
 <template>
   <div class="slider" ref="slider">
-    <div class="slider-list" ref="slider_list">
+    <div class="slider-list"
+         ref="slider_list"
+         v-on:mousedown="mousedown"
+         v-on:mouseup="mouseup"
+         v-on:scroll="mouseup"
+    >
       <div class="slider-track" ref="slider_track">
         <div
             class="slider-track_section"
@@ -14,7 +19,9 @@
               v-for="(slider, index) in section" :key="index"
               :style="{backgroundImage: `url(${slider.image})`}"
           >
-            <div class="slider-item__background">
+            <!--            <a :href="`https://instagram.com/p/${slider.shortcode}`" target="_blank"></a>-->
+            <div
+                class="slider-item__background">
               <span>{{ slider.comment }}</span>
             </div>
           </div>
@@ -79,20 +86,21 @@ export default {
     }
   },
   methods: {
-    touchScrolling() {
+    mousedown(event) {
       let sliderList = this.$refs.slider_list;
-      sliderList.addEventListener('mousedown', (e) => {
-        this.posInit = e.clientX;
+      if (event) {
+        this.posInit = event.screenX;
         sliderList.style.cursor = 'grabbing';
-      });
-      sliderList.addEventListener('touchstart', (e) => {
-        this.posInit = e.targetTouches[0].clientX;
-      });
-      sliderList.addEventListener('mouseup', (e) => {
+        console.log(this.posInit);
+      }
+    },
+    mouseup(event) {
+      let sliderList = this.$refs.slider_list;
+      if (event) {
         if (this.animationTimer) {
-              clearTimeout(this.animationTimer);
-            }
-        this.posFinal = e.clientX;
+          clearTimeout(this.animationTimer);
+        }
+        this.posFinal = event.screenX;
         sliderList.style.cursor = 'pointer';
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
@@ -117,36 +125,77 @@ export default {
         this.animationTimer = setTimeout(() => {
           this.prevSection = -1;
         }, 1000)
-      });
-      sliderList.addEventListener('touchend', (e) => {
-        if (this.animationTimer) {
-              clearTimeout(this.animationTimer);
-            }
-        this.posFinal = e.changedTouches[0].clientX;
-        let interval = this.posFinal - this.posInit;
-        this.prevSection = this.currentSection;
-        if (interval < 0) {
-          this.direction = -100;
-          if (this.currentSection < this.sections.length - 1) {
-            this.currentSection++;
-          } else {
-            this.currentSection = 0;
-          }
-        } else if (interval > 0) {
-          this.direction = 100;
-          let maxLength = this.sections.length - 1;
-          if (this.currentSection === 0) {
-            this.currentSection = maxLength;
-          } else {
-            this.currentSection--;
-          }
-        } else {
-          this.direction = 0;
-        }
-        this.animationTimer = setTimeout(() => {
-          this.prevSection = -1;
-        }, 1000)
-      });
+      }
+    },
+    touchScrolling() {
+      // let sliderList = this.$refs.slider_list;
+      // console.log(sliderList)
+      // sliderList.addEventListener('mousedown', (e) => {
+      //   this.posInit = e.clientX;
+      //   sliderList.style.cursor = 'grabbing';
+      // });
+      // sliderList.addEventListener('touchstart', (e) => {
+      //   this.posInit = e.targetTouches[0].clientX;
+      // });
+      // sliderList.addEventListener('mouseup', (e) => {
+      //   if (this.animationTimer) {
+      //     clearTimeout(this.animationTimer);
+      //   }
+      //   this.posFinal = e.clientX;
+      //   sliderList.style.cursor = 'pointer';
+      //   let interval = this.posFinal - this.posInit;
+      //   this.prevSection = this.currentSection;
+      //   if (interval < 0) {
+      //     this.direction = -100;
+      //     if (this.currentSection < this.sections.length - 1) {
+      //       this.currentSection++;
+      //     } else {
+      //       this.currentSection = 0;
+      //     }
+      //   } else if (interval > 0) {
+      //     this.direction = 100;
+      //     let maxLength = this.sections.length - 1;
+      //     if (this.currentSection === 0) {
+      //       this.currentSection = maxLength;
+      //     } else {
+      //       this.currentSection--;
+      //     }
+      //   } else {
+      //     this.direction = 0;
+      //   }
+      //   this.animationTimer = setTimeout(() => {
+      //     this.prevSection = -1;
+      //   }, 1000)
+      // });
+      // sliderList.addEventListener('touchend', (e) => {
+      //   if (this.animationTimer) {
+      //     clearTimeout(this.animationTimer);
+      //   }
+      //   this.posFinal = e.changedTouches[0].clientX;
+      //   let interval = this.posFinal - this.posInit;
+      //   this.prevSection = this.currentSection;
+      //   if (interval < 0) {
+      //     this.direction = -100;
+      //     if (this.currentSection < this.sections.length - 1) {
+      //       this.currentSection++;
+      //     } else {
+      //       this.currentSection = 0;
+      //     }
+      //   } else if (interval > 0) {
+      //     this.direction = 100;
+      //     let maxLength = this.sections.length - 1;
+      //     if (this.currentSection === 0) {
+      //       this.currentSection = maxLength;
+      //     } else {
+      //       this.currentSection--;
+      //     }
+      //   } else {
+      //     this.direction = 0;
+      //   }
+      //   this.animationTimer = setTimeout(() => {
+      //     this.prevSection = -1;
+      //   }, 1000)
+      // });
     },
     prevSlide() {
       this.prevSection = this.currentSection;
@@ -194,18 +243,18 @@ export default {
   position: relative;
   width: 100%;
   height: calc(10vw + 180 * (100vw / 1838));
-  pointer-events: all;
+  /*pointer-events: all;*/
   cursor: pointer;
   overflow: hidden;
 }
 
-.slider-list.grab {
-  cursor: grab;
-}
+/*.slider-list.grab {*/
+/*  cursor: grab;*/
+/*}*/
 
-.slider-list.grabbing {
-  cursor: grabbing;
-}
+/*.slider-list.grabbing {*/
+/*  cursor: grabbing;*/
+/*}*/
 
 .slider-track {
   display: flex;
@@ -231,7 +280,20 @@ export default {
   background-size: cover;
 }
 
+.slider-item a {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
 .slider-item .slider-item__background {
+  z-index: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -307,10 +369,12 @@ span {
   .slider-list {
     height: calc(10vw + 180 * (100vw / 1200));
   }
+
   .slider-item {
     width: calc(10vw + 180 * (100vw / 1200));
     height: calc(10vw + 180 * (100vw / 1200));
   }
+
   .next,
   .prev {
     top: calc(5vw + 20 * (100vw / 770));
@@ -322,10 +386,12 @@ span {
   .slider-list {
     height: calc(10vw + 180 * (100vw / 770));
   }
+
   .slider-item {
     width: calc(10vw + 180 * (100vw / 770));
     height: calc(10vw + 180 * (100vw / 770));
   }
+
   .next,
   .prev {
     top: calc(5vw + 20 * (100vw / 770));
