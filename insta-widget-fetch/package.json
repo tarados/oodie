@@ -5,11 +5,12 @@
   "main": "insta.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "RESULT_FILE=/home/sergey/projects/oodie/backend/static/photosFromInstagram.json PATH_FILE_IMAGE=/home/sergey/projects/oodie/backend/media/images/insta/ PATH_MEDIA=/media/images/insta/ node insta.js"
+    "start": "node insta.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^9.0.0",
     "instagram-web-api": "^2.2.2",
     "request": "^2.88.2"
   }
