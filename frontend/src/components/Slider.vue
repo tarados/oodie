@@ -127,76 +127,6 @@ export default {
         }, 1000)
       }
     },
-    touchScrolling() {
-      // let sliderList = this.$refs.slider_list;
-      // console.log(sliderList)
-      // sliderList.addEventListener('mousedown', (e) => {
-      //   this.posInit = e.clientX;
-      //   sliderList.style.cursor = 'grabbing';
-      // });
-      // sliderList.addEventListener('touchstart', (e) => {
-      //   this.posInit = e.targetTouches[0].clientX;
-      // });
-      // sliderList.addEventListener('mouseup', (e) => {
-      //   if (this.animationTimer) {
-      //     clearTimeout(this.animationTimer);
-      //   }
-      //   this.posFinal = e.clientX;
-      //   sliderList.style.cursor = 'pointer';
-      //   let interval = this.posFinal - this.posInit;
-      //   this.prevSection = this.currentSection;
-      //   if (interval < 0) {
-      //     this.direction = -100;
-      //     if (this.currentSection < this.sections.length - 1) {
-      //       this.currentSection++;
-      //     } else {
-      //       this.currentSection = 0;
-      //     }
-      //   } else if (interval > 0) {
-      //     this.direction = 100;
-      //     let maxLength = this.sections.length - 1;
-      //     if (this.currentSection === 0) {
-      //       this.currentSection = maxLength;
-      //     } else {
-      //       this.currentSection--;
-      //     }
-      //   } else {
-      //     this.direction = 0;
-      //   }
-      //   this.animationTimer = setTimeout(() => {
-      //     this.prevSection = -1;
-      //   }, 1000)
-      // });
-      // sliderList.addEventListener('touchend', (e) => {
-      //   if (this.animationTimer) {
-      //     clearTimeout(this.animationTimer);
-      //   }
-      //   this.posFinal = e.changedTouches[0].clientX;
-      //   let interval = this.posFinal - this.posInit;
-      //   this.prevSection = this.currentSection;
-      //   if (interval < 0) {
-      //     this.direction = -100;
-      //     if (this.currentSection < this.sections.length - 1) {
-      //       this.currentSection++;
-      //     } else {
-      //       this.currentSection = 0;
-      //     }
-      //   } else if (interval > 0) {
-      //     this.direction = 100;
-      //     let maxLength = this.sections.length - 1;
-      //     if (this.currentSection === 0) {
-      //       this.currentSection = maxLength;
-      //     } else {
-      //       this.currentSection--;
-      //     }
-      //   } else {
-      //     this.direction = 0;
-      //   }
-      //   this.animationTimer = setTimeout(() => {
-      //     this.prevSection = -1;
-      //   }, 1000)
-      // });
-    },
     prevSlide() {
       this.prevSection = this.currentSection;
       this.direction = 100;
@@ -224,7 +154,6 @@ export default {
     }
   },
   mounted() {
-    this.touchScrolling();
   }
 }
 ;
@@ -243,18 +172,9 @@ export default {
   position: relative;
   width: 100%;
   height: calc(10vw + 180 * (100vw / 1838));
-  /*pointer-events: all;*/
   cursor: pointer;
   overflow: hidden;
 }
-
-/*.slider-list.grab {*/
-/*  cursor: grab;*/
-/*}*/
-
-/*.slider-list.grabbing {*/
-/*  cursor: grabbing;*/
-/*}*/
 
 .slider-track {
   display: flex;
