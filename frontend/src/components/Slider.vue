@@ -133,13 +133,11 @@ export default {
       }
     },
     touchend(event) {
-      let sliderList = this.$refs.slider_list;
       if (event) {
         if (this.animationTimer) {
           clearTimeout(this.animationTimer);
         }
         this.posFinal = event.changedTouches[0].screenX;
-        sliderList.style.cursor = 'pointer';
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
         if (interval < 0) {
