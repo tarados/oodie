@@ -14,15 +14,13 @@
             v-for="(section, index) in sections" :key="index"
             :style="{opacity: index === currentSection ? 1 : 0, transform: index === prevSection ? `translateX(${direction}%)` : ''}"
         >
-          <div
-              class="slider-item"
-              ref="slider_item"
-              v-for="(slider, index) in section" :key="index"
-              :style="{backgroundImage: `url(${slider.image})`}"
+          <div class="slider-item"
+               ref="slider_item"
+               v-for="(slider, index) in section" :key="index"
+               @click="instagram(slider.shortcode)"
+               :style="{backgroundImage: `url(${slider.image})`}"
           >
-            <div
-               class="slider-item__background"
-            >
+            <div class="slider-item__background">
               <span>{{ slider.comment }}</span>
             </div>
           </div>
@@ -187,6 +185,10 @@ export default {
       this.animationTimer = setTimeout(() => {
         this.prevSection = -1;
       }, 1000);
+    },
+    instagram(code) {
+      // window.location.href = `https://instagram.com/p/${code}`;
+      window.open(`https://instagram.com/p/${code}`, '_blank');
     }
   },
   mounted() {
@@ -338,6 +340,10 @@ span {
 
   span {
     font-size: calc(10px + 4 * 4 * 0.7 * ((100vw - 320px) / 1838));
+  }
+
+  .slider-item .slider-item__background {
+    z-index: 0;
   }
 
 }
