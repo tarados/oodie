@@ -20,9 +20,9 @@
               v-for="(slider, index) in section" :key="index"
               :style="{backgroundImage: `url(${slider.image})`}"
           >
-            <!--            <a :href="`https://instagram.com/p/${slider.shortcode}`" target="_blank"></a>-->
             <div
-                class="slider-item__background">
+               class="slider-item__background"
+            >
               <span>{{ slider.comment }}</span>
             </div>
           </div>
@@ -237,7 +237,7 @@ export default {
 }
 
 .slider-item a {
-  z-index: 10;
+  z-index: 1;
   position: absolute;
   left: 0;
   top: 0;
@@ -249,7 +249,7 @@ export default {
 }
 
 .slider-item .slider-item__background {
-  z-index: 0;
+  z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
@@ -270,7 +270,7 @@ export default {
 }
 
 span {
-  padding: 2rem;
+  font-size: calc(10px + 4 * (100vw / 1838));
 }
 
 .next {
@@ -335,6 +335,11 @@ span {
   .prev {
     top: calc(5vw + 20 * (100vw / 770));
   }
+
+  span {
+    font-size: calc(10px + 4 * 4 * 0.7 * ((100vw - 320px) / 1838));
+  }
+
 }
 
 @media screen and (max-width: 375px) {
