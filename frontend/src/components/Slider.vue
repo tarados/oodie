@@ -2,9 +2,10 @@
   <div class="slider" ref="slider">
     <div class="slider-list"
          ref="slider_list"
-         v-on:mousedown="mousedown"
-         v-on:mouseup="mouseup"
-         v-on:scroll="mouseup"
+         @mousedown="mousedown"
+         @mouseup="mouseup"
+         v-touchstart="touchstart"
+         v-touchend="touchend"
     >
       <div class="slider-track" ref="slider_track">
         <div
@@ -91,7 +92,6 @@ export default {
       if (event) {
         this.posInit = event.screenX;
         sliderList.style.cursor = 'grabbing';
-        console.log(this.posInit);
       }
     },
     mouseup(event) {
@@ -101,6 +101,44 @@ export default {
           clearTimeout(this.animationTimer);
         }
         this.posFinal = event.screenX;
+        sliderList.style.cursor = 'pointer';
+        let interval = this.posFinal - this.posInit;
+        this.prevSection = this.currentSection;
+        if (interval < 0) {
+          this.direction = -100;
+          if (this.currentSection < this.sections.length - 1) {
+            this.currentSection++;
+          } else {
+            this.currentSection = 0;
+          }
+        } else if (interval > 0) {
+          this.direction = 100;
+          let maxLength = this.sections.length - 1;
+          if (this.currentSection === 0) {
+            this.currentSection = maxLength;
+          } else {
+            this.currentSection--;
+          }
+        } else {
+          this.direction = 0;
+        }
+        this.animationTimer = setTimeout(() => {
+          this.prevSection = -1;
+        }, 1000)
+      }
+    },
+    touchstart(event) {
+      if (event) {
+        this.posInit = event.touches[0].screenX;
+      }
+    },
+    touchend(event) {
+      let sliderList = this.$refs.slider_list;
+      if (event) {
+        if (this.animationTimer) {
+          clearTimeout(this.animationTimer);
+        }
+        this.posFinal = event.changedTouches[0].screenX;
         sliderList.style.cursor = 'pointer';
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
