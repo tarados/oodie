@@ -12,7 +12,10 @@
             class="slider-track_section"
             ref="slider-track_section"
             v-for="(section, index) in sections" :key="index"
-            :style="{opacity: index === currentSection ? 1 : 0, transform: index === prevSection ? `translateX(${direction}%)` : ''}"
+            :style="{opacity: index === currentSection ? 1 : 0,
+             transform: index === prevSection ? `translateX(${direction}%)` : '',
+             zIndex: index === currentSection ? 3 : 1
+            }"
         >
           <div class="slider-item"
                ref="slider_item"
@@ -215,6 +218,7 @@ export default {
 }
 
 .slider-track {
+  transition: all 1s ease 0s;
   display: flex;
 }
 
@@ -225,6 +229,7 @@ export default {
   left: 0;
   display: flex;
   opacity: 0;
+  z-index: 0;
 }
 
 .slider-item {
@@ -236,18 +241,6 @@ export default {
   align-items: center;
   justify-content: center;
   background-size: cover;
-}
-
-.slider-item a {
-  z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-items: center;
 }
 
 .slider-item .slider-item__background {
