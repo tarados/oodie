@@ -190,7 +190,6 @@ export default {
       }, 1000);
     },
     instagram(code) {
-      // window.location.href = `https://instagram.com/p/${code}`;
       window.open(`https://instagram.com/p/${code}`, '_blank');
     }
   },
@@ -270,12 +269,14 @@ span {
 
 .next {
   position: absolute;
+  z-index: 4;
   top: 40%;
   right: 0;
 }
 
 .next svg {
   position: absolute;
+  z-index: 4;
   width: 12px;
   height: 15px;
   top: 23px;
@@ -293,12 +294,14 @@ span {
 
 .prev {
   position: absolute;
+  z-index: 4;
   top: 40%;
   left: 0;
 }
 
 .prev svg {
   position: absolute;
+  z-index: 4;
   width: 12px;
   height: 15px;
   top: 23px;
