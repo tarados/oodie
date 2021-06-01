@@ -2,6 +2,7 @@ require('dotenv').config();
 const Instagram = require('instagram-web-api');
 const fs = require('fs');
 const request = require('request');
+
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
         request(url)
@@ -9,7 +10,9 @@ const download = (url, path, callback) => {
             .on('close', callback)
     })
 };
+
 const client = new Instagram({username: 'zvada53', password: 'root2827'});
+
 (async () => {
     await client.login();
     const photos = await client.getPhotosByUsername({username: 'hoodiyalko'});
