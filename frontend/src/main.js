@@ -32,6 +32,27 @@ Vue.use(Modal, {
 
 Vue.config.productionTip = false;
 
+Vue.directive('touchstart', {
+  inserted: function (el, binding) {
+    let f = function (evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('touchstart', f)
+      }
+    }
+    window.addEventListener('touchstart', f)
+  }
+});
+Vue.directive('touchend', {
+  inserted: function (el, binding) {
+    let f = function (evt) {
+      if (binding.value(evt, el)) {
+        window.removeEventListener('touchend', f)
+      }
+    }
+    window.addEventListener('touchend', f)
+  }
+});
+
 new Vue({
   router,
   store,

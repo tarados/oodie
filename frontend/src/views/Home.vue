@@ -39,15 +39,14 @@
     </div>
 
     <ProductsList :category-id="categoryId"/>
-
-    <InstaWidget/>
+    <Instagram/>
   </div>
 </template>
 
 <script>
 import ProductsList from "../components/ProductsList";
-import InstaWidget from "../components/InstaWidget";
-
+import Instagram from "../components/Instagram";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Home',
@@ -56,9 +55,10 @@ export default {
   },
   components: {
     ProductsList,
-    InstaWidget
+    Instagram
   },
   computed: {
+    ...mapGetters(["allProducts"]),
     categoryId() {
       return 1
     }

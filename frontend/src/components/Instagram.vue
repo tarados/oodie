@@ -1,33 +1,48 @@
 <template>
-  <div>
-    <h1> ты с нами в instagram?</h1>
-    <div class="hello-instagram">
-      <img src="../assets/insta.jpg">
-    </div>
+  <div class="instagram-wrapper">
+    <div class="slider-title">Мы в Instagram</div>
+    <section v-if="slides">
+      <Slider :slides="slides"/>
+    </section>
   </div>
 </template>
 
 <script>
+import Slider from "../components/Slider";
+import axios from "axios";
+
 export default {
-  name: "Instagram"
-}
+  name: "Instagram",
+
+  data() {
+    return {
+      slides: null,
+    }
+  },
+  components: {
+    Slider
+  },
+  computed: {},
+  methods: {
+    async getInstagramImages() {
+      const response = await axios.get(process.env.VUE_APP_INSTA);
+      this.slides = response.data;
+    }
+  },
+  mounted() {
+    this.getInstagramImages();
+  }
+};
 </script>
 
-<style scoped>
-.hello-instagram {
-  margin-bottom: 5vmin;
- }
-
-h1 {
-  margin: 2vmin 0;
+<style>
+.instagram-wrapper .slider-title {
+  font-size: 24px;
+  font-weight: 600;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 100;
-  font-size: 5vmin;
+  line-height: 32px;
+  padding: 24px 10px;
 }
 
-img {
-  width: 100%;
-}
+
 </style>

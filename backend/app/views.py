@@ -3,17 +3,15 @@ import os
 import json
 import datetime
 from itertools import groupby
-
 from django.conf import settings
-
 from django.contrib import messages
-
 from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
 from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size, Localization
 from .novaposhta_api import invoice, get_errors
+from .insta_parse import parse_insta
 
 
 def products(request):
@@ -181,7 +179,6 @@ def report(request):
         })
     return JsonResponse(products_sale)
 
-
 def novaposhta_api_invoice(request):
     order_id = int(request.GET.get('order_id', ''))
     result = invoice(order_id)
@@ -213,3 +210,33 @@ def locales(request):
         'ua-UA': key_ua
     })
     return JsonResponse(locale)
+
+def report(request):
+	orders_list = list(Order.objects.filter(status="3"))
+	sales = []
+	for el in orders_list:
+		order_items = OrderItem.objects.filter(order=el.id)
+		for order_item in order_items:
+			if order_item.product is None:
+				continue
+			sales.append({
+				'name': order_item.product.title,
+				'quantity': order_item.quantity
+			})
+	sales = sorted(sales, key=lambda x: x['name'])
+	products_sale = {}
+	for group in groupby(sales, key=lambda x: x['name']):
+		name = group[0]
+		items = group[1]
+		item_quantity = 0
+		for item in items:
+			item_quantity += item['quantity']
+		products_sale.update({
+			name: item_quantity
+		})
+	return JsonResponse(products_sale)
+
+
+def insta(request):
+	public_list = parse_insta()
+	return JsonResponse({"public_list": public_list})

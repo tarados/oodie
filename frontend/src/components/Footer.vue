@@ -130,12 +130,13 @@ export default {
 }
 
 .footer-content__item span {
+  padding: 0;
   text-decoration: none;
   cursor: pointer;
   color: black;
 }
 
-.footer-content__item--contacts img{
+.footer-content__item--contacts img {
   margin-right: 15px;
 }
 
@@ -188,6 +189,12 @@ export default {
   }
 }
 
+@media screen and (max-width: 375px) {
+  .wrapper-footer {
+    padding: 32px 0;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .footer-content__item {
     padding: 10px 0;
@@ -203,7 +210,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 280px){
+@media screen and (max-width: 280px) {
   .footer-content__item:nth-child(3) {
     min-width: 120px;
   }
