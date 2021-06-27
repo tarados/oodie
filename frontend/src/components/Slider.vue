@@ -192,11 +192,8 @@ export default {
     instagram(code) {
       window.open(`https://instagram.com/p/${code}`, '_blank');
     }
-  },
-  mounted() {
   }
 }
-;
 </script>
 
 <style scoped>

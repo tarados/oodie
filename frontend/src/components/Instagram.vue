@@ -26,7 +26,7 @@ export default {
   methods: {
     async getInstagramImages() {
       const response = await axios.get(process.env.VUE_APP_INSTA);
-      this.slides = response.data;
+      this.slides = response.data.public_list;
     }
   },
   mounted() {

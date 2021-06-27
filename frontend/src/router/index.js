@@ -42,9 +42,9 @@ const routes = [
   },
   {
     path: '/products/card',
-    name: 'Card',
+    name: 'Cart',
     meta: {layout: 'main'},
-    component: () => import('../views/Card')
+    component: () => import('../views/Cart')
   },
   {
     path: '/products/checkout',

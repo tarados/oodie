@@ -170,23 +170,24 @@ export default {
         "quantity": "0",
         "preorder": false
       };
-
-      const productToCart = {
-        "id": this.selectedProduct.id,
-        "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
-        "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
-        "quantity": 1,
-        "preorder": availability.preorder,
-        "size": availability.size,
-        "image": this.selectedProduct.image_list[this.imageIndex],
-      };
-      if (productToCart.size === "") {
-        delete productToCart.size;
+      if (availability.quantity > 0) {
+        const productToCart = {
+          "id": this.selectedProduct.id,
+          "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
+          "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
+          "quantity": 1,
+          "preorder": availability.preorder,
+          "size": availability.size,
+          "image": this.selectedProduct.image_list[this.imageIndex],
+        };
+        if (productToCart.size === "") {
+          delete productToCart.size;
+        }
+        const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
+        productToCart.total = total;
+        this.$store.commit("addProductToCart", productToCart);
+        this.$router.push({name: "Cart"});
       }
-      const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
-      productToCart.total = total;
-      this.$store.commit("addProductToCart", productToCart);
-      this.$router.push({name: "Cart"});
     },
     select(index) {
       this.size = index;
