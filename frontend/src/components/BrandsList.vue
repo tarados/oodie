@@ -16,7 +16,7 @@
 import {mapState} from 'vuex'
 
 export default {
-  name: "Brands",
+  name: "Brandlist",
   computed: {
     ...mapState(["productsList", "categoriesList"]),
     brands() {

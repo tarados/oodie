@@ -6,39 +6,11 @@
 
 <script>
 import BrandsList from "@/components/BrandsList";
-import {mapState} from 'vuex';
 
 export default {
   name: "Brands",
-  data() {
-    return {
-      categoryId: null,
-      slug: ''
-    }
-  },
   components: {
     BrandsList
-  },
-  computed: {
-    ...mapState(["categoriesList"]),
-    activeCategoryId() {
-      let a = 0;
-      const b = this.slug;
-      this.categoriesList.forEach(function (item) {
-        if (item.slug === b) {
-          a = item.id
-        }
-      });
-      return a
-    }
-  },
-  watch: {
-    $route(to) {
-      this.slug = to.params.slug;
-    }
-  },
-  mounted() {
-    this.slug = this.$route.params.slug;
   }
 }
 </script>
