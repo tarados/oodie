@@ -21,22 +21,11 @@ export default {
   computed: {
     ...mapState(["categoriesList"]),
     activeCategoryId() {
-      let a = 0;
-      const b = this.slug;
       this.categoriesList.forEach(function (item) {
-        if (item.slug === b) {
-          a = item.id
+        if (item.slug === this.slug) {
+          return item.id
         }
       });
-      return a
-    },
-    activeCategoryTitle() {
-      try {
-        return this.categoriesList.find(item => item.id === this.activeCategoryId).title
-      } catch (TypeError) {
-        return ''
-      }
-
     }
   },
   watch: {
@@ -56,5 +45,4 @@ export default {
   flex-direction: column;
   align-self: center;
 }
-
 </style>

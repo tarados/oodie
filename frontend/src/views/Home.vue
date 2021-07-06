@@ -46,22 +46,17 @@
 <script>
 import ProductsList from "../components/ProductsList";
 import Instagram from "../components/Instagram";
-import {mapGetters} from "vuex";
 
 export default {
   name: 'Home',
   data() {
-    return {}
+    return {
+      categoryId: 1
+    }
   },
   components: {
     ProductsList,
     Instagram
-  },
-  computed: {
-    ...mapGetters(["allProducts"]),
-    categoryId() {
-      return 1
-    }
   }
 }
 </script>
