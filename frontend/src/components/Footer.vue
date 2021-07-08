@@ -71,20 +71,10 @@
 <script>
 export default {
   name: "Footer",
-  data() {
-    return {
-      iconList: [
-        "../assets/instagram.png",
-        "../assets/instagram.png"
-      ]
-    }
-  },
   methods: {
     errorForSentry() {
       throw Error('123');
     }
-  },
-  mounted() {
   }
 }
 </script>
@@ -176,8 +166,6 @@ export default {
 .footer-content__item a:hover {
   text-decoration: underline;
 }
-
-/*media queries*****************************************/
 
 @media screen and (max-width: 750px) {
   .footer-content__item:nth-child(1) {
