@@ -21,21 +21,14 @@ export default {
   computed: {
     ...mapState(["categoriesList"]),
     activeCategoryId() {
-      let a = 0;
-      const b = this.slug;
+      let categoryId = 0;
+      const slug = this.slug;
       this.categoriesList.forEach(function (item) {
-        if (item.slug === b) {
-          a = item.id;
+        if (item.slug === slug) {
+          categoryId = item.id;
         }
       });
-      return a
-    },
-    activeCategoryTitle() {
-      try {
-        return this.categoriesList.find(item => item.id === this.activeCategoryId).title
-      } catch (TypeError) {
-        return ''
-      }
+      return categoryId
     }
   },
   watch: {
