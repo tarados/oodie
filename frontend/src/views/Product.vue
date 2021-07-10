@@ -94,11 +94,6 @@ export default {
       inStockNo: null,
       slides: [],
       hideSize: false,
-      breakpoints: {
-        420: {
-          disable: false,
-        },
-      },
     };
   },
   validations: {
