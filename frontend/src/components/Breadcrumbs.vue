@@ -8,7 +8,6 @@
         >
          {{ item.title | localize }}
         </router-link>
-
         <a v-if="index === breadcrumbs.length - 1" class="breadcrumbs__link breadcrumbs__link--active">{{ item.title}}</a>
       </li>
     </ul>
@@ -46,9 +45,8 @@ export default {
 
 <style scoped>
 .breadcrumbs {
-  ;
   display: inline-block;
-  padding: 0px 0px 15px;
+  padding: 0 0 15px;
 }
 
 .breadcrumbs__item {
