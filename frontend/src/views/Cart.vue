@@ -194,7 +194,6 @@ export default {
           }
         });
       });
-      console.log('catr: ', this.warningList);
     }
   }
 }
