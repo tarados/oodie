@@ -89,11 +89,7 @@ export default {
   computed: {
     ...mapState(["categoriesList", "cartProducts"]),
     getBasket() {
-      if (this.$router.currentRoute.name === 'Cart') {
-        return false;
-      } else {
-        return true;
-      }
+      return this.$router.currentRoute.name !== 'Cart';
     }
   },
   methods: {
