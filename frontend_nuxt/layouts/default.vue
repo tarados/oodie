@@ -1,5 +1,8 @@
 <template>
-  <div>22</div>
+  <div>
+    <Navbar/>
+    <nuxt/>
+  </div>
 </template>
 
 <script>
