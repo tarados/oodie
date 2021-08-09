@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-  </div>
+<div class="about">
+  <h1>About</h1>
+</div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: "about"
+}
 </script>
+
 <style scoped>
-.home {
+.about {
   width: 600px;
   margin: 0 auto;
   text-align: center;
   padding-top: 4rem;
 }
-</style>
 
+</style>
