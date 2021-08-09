@@ -3,6 +3,7 @@
     <Navbar/>
     <nuxt/>
   </div>
+<<<<<<< HEAD
 
 </template>
 
@@ -15,3 +16,10 @@ export default {
 <style scoped>
 
 </style>
+=======
+</template>
+
+<script>
+export default {}
+</script>
+>>>>>>> cd875938ac057d37e4e6cd323ef6fc935d5fe3c4
