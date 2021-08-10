@@ -18,9 +18,6 @@ export default {
       await store.dispatch('products/fetch')
     }
   },
-  data: () => ({
-    // products:[]
-  }),
   computed: {
     products() {
       return this.$store.getters['products/products']

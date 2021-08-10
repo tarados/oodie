@@ -2,7 +2,7 @@
   <div class="product">
     <h1>{{ product.title }}</h1>
     <div class="product-content">
-      <img :src="product.image">
+      <img :src="product.image_list[0]">
       <div class="product-content_price">Price {{product.price}}</div>
       <div class="product-content_size">New price {{product.new_price}}</div>
     </div>
@@ -19,13 +19,8 @@ export default {
     return /^\d+$/.test(params.id)
   },
   async asyncData({$axios, params}) {
-    const data = await $axios.$get('https://hoodiyalko.avallon.im/app/products');
-    let product = {}
-    data.products.forEach(item => {
-      if (item.id == params.id) {
-        product = item;
-      }
-    });
+    const data = await $axios.$get('https://hoodiyalko.avallon.im/app/products/product/' + params.id);
+    const product = data.product;
     return {product}
   },
 }
