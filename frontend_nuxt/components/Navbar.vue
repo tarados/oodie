@@ -3,13 +3,14 @@
     <div class="navbar_header">
       <div class="navbar_header__hamburg"></div>
       <div class="navbar_header__phone">
+        <img src="~/assets/img/phone-receiver.svg" alt=""/>
         <a href="#" class="phone">
-          <img src="static/phone-receiver.svg">
-          +380507204066
+          <span>+380507204066</span>
         </a>
       </div>
-      <div class="navbar_header__basket"></div>
-
+      <div class="navbar_header__basket">
+<!--        <flag iso="it" />-->
+      </div>
     </div>
     <div class="navbar_logo">
 
@@ -61,6 +62,7 @@ export default {
   font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
   border: 1px solid black;
 }
+
 .navbar_header__hamburg {
   width: 50px;
   height: 40px;
@@ -68,15 +70,33 @@ export default {
   background-color: yellow;
   display: none;
 }
+
 .navbar_header__phone {
-  border: 1px solid black;
-  background-color: #00ffcc;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.navbar_header__phone img {
+  height: 16px;
+}
+
+.navbar_header__phone a {
+  font-size: 16px;
+  margin-left: 5px;
+  text-decoration: none;
+  color: #000000;
+}
+
 .navbar_header__basket {
   border: 1px solid black;
   background-color: green;
 }
-.navbar_logo {}
-.navbar_items {}
 
+.navbar_logo {
+}
+
+.navbar_items {
+}
 </style>

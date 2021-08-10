@@ -3,8 +3,8 @@
     <h1>{{ product.title }}</h1>
     <div class="product-content">
       <img :src="product.image_list[0]">
-      <div class="product-content_price">Price {{product.price}}</div>
-      <div class="product-content_size">New price {{product.new_price}}</div>
+      <div class="product-content_price">Price {{ product.price }}</div>
+      <div class="product-content_size">New price {{ product.new_price }}</div>
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
 .product-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -42,18 +43,22 @@ export default {
     "sidebar price"
     "sidebar new-price"
 }
+
 .product-content img {
   grid-area: sidebar;
   width: 100%;
 }
+
 .product-content .product-content_title {
   grid-area: header;
 }
+
 .product-content .product-content_price {
   grid-area: price;
   align-self: center;
   justify-self: center;
 }
+
 .product-content .product-content_size {
   grid-area: new-price;
   align-self: center;
