@@ -2,9 +2,7 @@
   <div class="wrapper-products">
     <div class="products">
       <div class="product" v-for="product of products" :key="product.id">
-        <a href="#" @click.prevent="openProduct(product)">
-          <img :src="product.image">
-        </a>
+        <a href="#" @click.prevent="openProduct(product)">{{product.title}}</a>
       </div>
     </div>
   </div>
@@ -13,16 +11,14 @@
 <script>
 export default {
   name: "index",
-  async fetch({store}) {
-    if (store.getters['products/products'].length === 0) {
-      await store.dispatch('products/fetch')
-    }
+  async asyncData({$axios}) {
+    const data = await $axios.$get('https://hoodiyalko.avallon.im/app/products');
+    const products = data.products;
+    return {products}
   },
-  computed: {
-    products() {
-      return this.$store.getters['products/products']
-    }
-  },
+  data: () => ({
+    products:[]
+  }),
   methods: {
     openProduct(product) {
       this.$router.push('/products/' + product.id);
@@ -43,9 +39,8 @@ export default {
   grid-gap: 20px;
 }
 .product {
-  overflow: hidden;
-}
-.product img {
+  height: 100%;
   width: 100%;
+  background-color: yellowgreen;
 }
 </style>

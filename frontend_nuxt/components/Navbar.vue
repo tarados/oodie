@@ -57,14 +57,12 @@ export default {
 
 <style scoped>
 .navbar {
-  width: 1660px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 }
 
 .navbar_header {
-  width: 95%;
-  margin-left: 3rem;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -80,6 +78,7 @@ export default {
 }
 
 .navbar_header__phone {
+  padding-left: 3.5rem;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -98,7 +97,7 @@ export default {
 }
 
 .navbar_header__basket {
-
+  padding-right: 3rem;
 }
 
 .navbar_header__basket img {
@@ -106,7 +105,7 @@ export default {
 }
 
 .navbar_header__lang {
-  width: 5rem;
+  position: relative;
 }
 
 .navbar_logo {

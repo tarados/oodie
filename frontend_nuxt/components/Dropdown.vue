@@ -1,11 +1,10 @@
 <template>
   <div class="langSelector"
        @mouseover="mouseoverLang"
-       @mouseleave="mouseleaveLang"
-  >
-    <flag iso="ru"/>
+       @mouseleave="mouseleaveLang">
+    <flag :iso="selectedLanguageIcon"/>
+    <span>{{ selectedLanguage }}</span>
     <div class="langSelector_item">
-      <span>{{ selectedLanguage }}</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
            fill="none"
            stroke-linecap="round" stroke-linejoin="round">
@@ -16,9 +15,9 @@
     <transition name="fade" appear>
       <div class="sub-menu" v-if="isOpenLang">
         <div
-            class="menu-item lang"
-            v-for="(item, index) in langList" :key="index"
-            @click="setLocale(index)"
+          class="menu-item lang"
+          v-for="(item, index) in langList" :key="index"
+          @click="setLocale(index)"
         >
           <flag :iso="item.slug"/>
           <p>{{ item.title }}</p>
@@ -45,8 +44,8 @@ export default {
           'name': 'ua-UA',
           'slug': 'ua'
         }],
-      selectedLanguageIcon: "",
-      selectedLanguage: 'ru',
+      selectedLanguageIcon: "ru",
+      selectedLanguage: "RU",
       isOpenLang: false
     }
   },
@@ -68,7 +67,8 @@ export default {
     },
     setLocale(index) {
       const locale = this.langList[index];
-      this.selectedLanguageIcon = this.selectedLanguage = locale.toUpperCase();
+      this.selectedLanguageIcon = locale.slug
+      this.selectedLanguage = locale.title;
     }
   }
 }
@@ -76,14 +76,13 @@ export default {
 
 <style scoped>
 .langSelector {
+  width: 3.5rem;
   position: relative;
-  margin-right: calc(0rem + 20 * ((100vw - 320px) / 1518));
-  justify-self: end;
-  align-self: start;
-}
-
-.langSelector .langSelector_item span {
-  margin-left: 3px;
+  padding-left: 85rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1.1rem);
+  grid-template-rows: 1.5rem;
+  grid-gap: 1%;
 }
 
 .langSelector svg {
@@ -92,17 +91,18 @@ export default {
 }
 
 .langSelector .sub-menu {
+  padding-left: 85rem;
   position: absolute;
-  width: 70%;
+  width: 100%;
+  top: calc(60% + 18px);
+
 }
 
 .langSelector .sub-menu .lang {
-  display: flex;
-  align-self: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1.1rem);
+  grid-auto-rows: auto;
   background-color: var(--overlay-color);
-  margin-top: 10px;
-  margin-left: 3px;
 }
 
 </style>
