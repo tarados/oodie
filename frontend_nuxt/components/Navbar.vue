@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="navbar_header rows">
+    <div class="navbar_header">
       <div class="navbar_header__hamburg"></div>
       <div class="navbar_header__phone">
         <img src="~/assets/img/phone-receiver.svg" alt=""/>
@@ -8,14 +8,17 @@
           <span>+380507204066</span>
         </a>
       </div>
+      <div class="navbar_header__lang">
+        <Dropdown/>
+      </div>
       <div class="navbar_header__basket">
-<!--        <flag iso="it" />-->
+        <img src="~/assets/img/cart.svg">
       </div>
     </div>
-    <div class="navbar_logo rows">
+    <div class="navbar_logo">
       <img src="~/assets/img/logo2.png">
     </div>
-    <div class="navbar_items rows">
+    <div class="navbar_items">
       <div class="navbar-item">
         <nuxt-link to="/">
           Home
@@ -39,8 +42,16 @@
 </template>
 
 <script>
+
+
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  data: () => ({
+    arrayOfObjects: ['ru', 'ua'],
+    object: {
+      name: 'Object Name',
+    }
+  }),
 }
 </script>
 
@@ -51,11 +62,9 @@ export default {
   position: relative;
 }
 
-.navbar .rows {
-  width: 100%;
-}
-
 .navbar_header {
+  width: 95%;
+  margin-left: 3rem;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -89,8 +98,15 @@ export default {
 }
 
 .navbar_header__basket {
-  border: 1px solid black;
-  background-color: green;
+
+}
+
+.navbar_header__basket img {
+  height: 1.5rem;
+}
+
+.navbar_header__lang {
+  width: 5rem;
 }
 
 .navbar_logo {
