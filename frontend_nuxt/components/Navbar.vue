@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="navbar_header">
+    <div class="navbar_header rows">
       <div class="navbar_header__hamburg"></div>
       <div class="navbar_header__phone">
         <img src="~/assets/img/phone-receiver.svg" alt=""/>
@@ -12,10 +12,10 @@
 <!--        <flag iso="it" />-->
       </div>
     </div>
-    <div class="navbar_logo">
-
+    <div class="navbar_logo rows">
+      <img src="~/assets/img/logo2.png">
     </div>
-    <div class="navbar_items">
+    <div class="navbar_items rows">
       <div class="navbar-item">
         <nuxt-link to="/">
           Home
@@ -46,28 +46,27 @@ export default {
 
 <style scoped>
 .navbar {
-  width: 100%;
+  width: 1660px;
+  margin: 0 auto;
   position: relative;
-  display: flex;
-  flex-direction: column;
+}
+
+.navbar .rows {
+  width: 100%;
 }
 
 .navbar_header {
-  padding: 15px;
-  height: 60px;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f5f5f5;
   font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
-  border: 1px solid black;
 }
 
 .navbar_header__hamburg {
   width: 50px;
   height: 40px;
-  border: 1px solid black;
-  background-color: yellow;
   display: none;
 }
 
@@ -79,7 +78,7 @@ export default {
 }
 
 .navbar_header__phone img {
-  height: 16px;
+  height: 1rem;
 }
 
 .navbar_header__phone a {
@@ -95,8 +94,32 @@ export default {
 }
 
 .navbar_logo {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+
+}
+
+.navbar_logo img {
+  width: 80%;
+  max-width: 400px;
 }
 
 .navbar_items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navbar_items .navbar-item {
+  padding: 0 calc(3vw + 12 * (100vw / 1838));
+  position: relative;
+  display: flex;
+  transition: 0.4s;
+}
+
+.navbar_items .navbar-item a {
+  text-decoration: none;
+  text-transform: uppercase;
 }
 </style>
