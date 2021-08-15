@@ -140,6 +140,7 @@ function changeQuantity(array, index, number) {
   Vue.set(array.cartProducts, index, item);
 }
 
+
 function processLocalization(data) {
   const result = {};
 

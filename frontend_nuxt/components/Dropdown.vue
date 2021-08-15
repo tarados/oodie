@@ -78,7 +78,7 @@ export default {
 .langSelector {
   width: 3.5rem;
   position: relative;
-  padding-left: 85rem;
+  /*padding-left: 85rem;*/
   display: grid;
   grid-template-columns: repeat(3, 1.1rem);
   grid-template-rows: 1.5rem;

@@ -1,7 +1,9 @@
 <template>
   <div class="navbar">
     <div class="navbar_header">
-      <div class="navbar_header__hamburg"></div>
+      <div class="navbar_header__hamburg">
+        <Hamburger/>
+      </div>
       <div class="navbar_header__phone">
         <img src="~/assets/img/phone-receiver.svg" alt=""/>
         <a href="#" class="phone">
@@ -78,7 +80,7 @@ export default {
 }
 
 .navbar_header__phone {
-  padding-left: 3.5rem;
+  padding-left: calc(60 * ((100vw - 500px) / 1837));
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -97,7 +99,7 @@ export default {
 }
 
 .navbar_header__basket {
-  padding-right: 3rem;
+  padding-right: calc(16px + 32 * ((100vw - 375px) / 1837));
 }
 
 .navbar_header__basket img {
@@ -112,6 +114,7 @@ export default {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
+  max-height: 3rem;
 
 }
 
@@ -136,5 +139,19 @@ export default {
 .navbar_items .navbar-item a {
   text-decoration: none;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 750px) {
+  .navbar_items {
+    display: none;
+  }
+  .navbar_header__hamburg {
+    display: inline;
+  }
+  .navbar_header__phone {
+    padding-left: 0;
+    padding-right: calc(0.7 * 60 * ((100vw + 375px) / 1838));
+  }
+
 }
 </style>
