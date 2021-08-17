@@ -13,8 +13,8 @@
             <img src="~/assets/img/size.png">
           </div>
           <div class="info-title">
-<!--            <h4>{{ 'InfoSize' | localize }}</h4>-->
-<!--            <span>{{ 'InfoSizeDescription' | localize }}</span>-->
+            <h4>{{ $t('InfoSize') }}</h4>
+            <span>{{ $t('InfoSizeDescription') }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -22,8 +22,8 @@
             <img src="~/assets/img/cat.png">
           </div>
           <div class="info-title">
-<!--            <h4>{{ 'InfoCat' | localize }}</h4>-->
-<!--            <span>{{ 'InfoCatDescription' | localize }}</span>-->
+            <h4>{{ $t('InfoCat') }}</h4>
+            <span>{{ $t('InfoCatDescription') }}</span>
           </div>
         </div>
         <div class="info-content">
@@ -31,8 +31,8 @@
             <img src="~/assets/img/delivery.png">
           </div>
           <div class="info-title">
-<!--            <h4>{{ 'InfoDelivery' | localize }}</h4>-->
-<!--            <span>{{ 'InfoDeliveryDescription' | localize }}</span>-->
+            <h4>{{ $t('InfoDelivery') }}</h4>
+            <span>{{ $t('InfoDeliveryDescription') }}</span>
           </div>
         </div>
       </div>
@@ -42,12 +42,7 @@
 
 <script>
 export default {
-  // async asyncData({$axios}) {
-  //   const data = await $axios.$get('https://hoodiyalko.avallon.im/app/locales');
-  //   console.log(Object.keys(data));
-  //   const locales = data;
-  //   return {locales}
-  // },
+  name: "Home",
   async fetch({store}) {
     if (store.getters['locales/locales'].length === 0) {
       await store.dispatch('locales/fetch')
@@ -55,11 +50,19 @@ export default {
   },
   computed: {
     locales() {
-      return this.$store.getters['locales/locales']
+      return this.$store.getters['locales/locales'];
+    },
+    messages() {
+      return this.$store.getters['locales/messages'];
+    }
+  },
+  methods: {
+    setLocales() {
+      this.$i18n._vm.messages = this.messages;
     }
   },
   mounted() {
-    console.log(this.locales);
+    this.setLocales();
   }
 }
 </script>

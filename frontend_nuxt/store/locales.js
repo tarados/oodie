@@ -27,7 +27,8 @@ export const actions = {
 }
 
 export const getters = {
-  locales: s => s.locales
+  locales: s => s.locales,
+  messages: s => s.messages
 }
 
 function processLocalization(data) {

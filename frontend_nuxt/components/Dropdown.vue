@@ -19,8 +19,8 @@
           v-for="(item, index) in langList" :key="index"
           @click="setLocale(index)"
         >
-          <flag :iso="item.slug"/>
-          <p>{{ item.title }}</p>
+          <flag :iso="item"/>
+          <p>{{ item | capitalize}}</p>
         </div>
       </div>
     </transition>
@@ -34,19 +34,17 @@ export default {
   name: "Dropdown",
   data() {
     return {
-      langList: [{
-        'title': 'RU',
-        'name': 'ru-RU',
-        'slug': 'ru'
-      },
-        {
-          'title': 'UA',
-          'name': 'ua-UA',
-          'slug': 'ua'
-        }],
-      selectedLanguageIcon: "ru",
-      selectedLanguage: "RU",
+      langList: this.$i18n.locales,
+      selectedLanguageIcon: this.$i18n.locale,
+      selectedLanguage: this.$i18n.locale.toUpperCase(),
       isOpenLang: false
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString();
+      return value.toUpperCase();
     }
   },
   methods: {
@@ -67,8 +65,10 @@ export default {
     },
     setLocale(index) {
       const locale = this.langList[index];
-      this.selectedLanguageIcon = locale.slug
-      this.selectedLanguage = locale.title;
+      this.$i18n.locale = locale;
+      this.$i18n.defaultLocale = locale;
+      this.selectedLanguageIcon = locale;
+      this.selectedLanguage = locale.toUpperCase();
     }
   }
 }
@@ -78,7 +78,6 @@ export default {
 .langSelector {
   width: 3.5rem;
   position: relative;
-  /*padding-left: 85rem;*/
   display: grid;
   grid-template-columns: repeat(3, 1.1rem);
   grid-template-rows: 1.5rem;
@@ -91,7 +90,6 @@ export default {
 }
 
 .langSelector .sub-menu {
-  padding-left: 85rem;
   position: absolute;
   width: 100%;
   top: calc(60% + 18px);

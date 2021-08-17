@@ -23,21 +23,21 @@
     <div class="navbar_items">
       <div class="navbar-item">
         <nuxt-link to="/">
-          Home
+          {{ $t('MenuHome') }}
         </nuxt-link>
       </div>
       <div class="navbar-item">
         <nuxt-link to="/products">
-          Products
+          {{ $t('ProductBrand') }}
         </nuxt-link>
       </div>
       <div class="navbar-item">
         <nuxt-link to="/about">
-          About
+          {{ $t('MenuAboutUs') }}
         </nuxt-link>
       </div>
       <div class="navbar-item">
-        <nuxt-link to="/Contacts">Contacts</nuxt-link>
+        <nuxt-link to="/Contacts">{{ $t('MenuContacts') }}</nuxt-link>
       </div>
     </div>
   </div>
@@ -47,20 +47,14 @@
 
 
 export default {
-  name: "Navbar",
-  data: () => ({
-    arrayOfObjects: ['ru', 'ua'],
-    object: {
-      name: 'Object Name',
-    }
-  }),
+  name: "Navbar"
 }
 </script>
 
 <style scoped>
 .navbar {
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   position: relative;
 }
 
