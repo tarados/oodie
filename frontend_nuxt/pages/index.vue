@@ -62,11 +62,12 @@ export default {
   },
   methods: {
     setLocales() {
-      this.$i18n._vm.messages = this.messages;
+      this.$i18n.c = this.messages;
     }
   },
   mounted() {
     this.setLocales();
+    console.log("index");
   }
 }
 </script>

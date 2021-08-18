@@ -44,12 +44,17 @@
 </template>
 
 <script>
-
+import moment from 'moment';
 
 export default {
   name: "Navbar",
+  computed: {
+    date() {
+      return moment().format('MMMM Do YYYY, h:mm:ss a');
+    }
+  },
   mounted() {
-    console.log('navbar', this.$i18n.locale)
+    console.log('navbar', this.$i18n.locale, this.$i18n._vm.messages);
   }
 }
 </script>

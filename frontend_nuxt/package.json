@@ -12,7 +12,9 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/i18n": "^7.0.2",
     "core-js": "^3.15.1",
+    "moment": "^2.29.1",
     "nuxt": "^2.15.7",
+    "nuxt-client-init-module": "^0.3.0",
     "vue-flag-icon": "^1.0.6"
   },
   "devDependencies": {

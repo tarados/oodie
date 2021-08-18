@@ -37,7 +37,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    'nuxt-client-init-module'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -54,5 +55,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/flag/]
+  },
+
+  middleware: ['localization'],
+
+  router: {
+    middleware: 'localization'
   }
 }
