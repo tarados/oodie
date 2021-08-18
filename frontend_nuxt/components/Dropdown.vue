@@ -16,7 +16,7 @@
       <div class="sub-menu" v-if="isOpenLang">
         <div
           class="menu-item lang"
-          v-for="(item, index) in langList" :key="index"
+          v-for="(item, index) in $i18n.locales" :key="index"
           @click="setLocale(index)"
         >
           <flag :iso="item"/>
@@ -34,7 +34,6 @@ export default {
   name: "Dropdown",
   data() {
     return {
-      langList: this.$i18n.locales,
       selectedLanguageIcon: this.$i18n.locale,
       selectedLanguage: this.$i18n.locale.toUpperCase(),
       isOpenLang: false
@@ -64,9 +63,12 @@ export default {
       }, 500);
     },
     setLocale(index) {
-      const locale = this.langList[index];
+      let locale = '';
+      locale = this.$i18n.locales[index] ;
+      console.log(locale);
       this.$i18n.locale = locale;
       this.$i18n.defaultLocale = locale;
+      this.$i18n.fallbackLocale = locale;
       this.selectedLanguageIcon = locale;
       this.selectedLanguage = locale.toUpperCase();
     }

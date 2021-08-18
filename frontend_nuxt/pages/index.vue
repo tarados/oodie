@@ -5,7 +5,6 @@
         <img src="~/assets/img/banner4.jpg"/>
       </div>
     </header>
-
     <div class="content-wrapper">
       <div class="info">
         <div class="info-content">
@@ -47,13 +46,18 @@ export default {
     if (store.getters['locales/locales'].length === 0) {
       await store.dispatch('locales/fetch')
     }
+
+    if (store.getters['messages/locales'] === undefined) {
+
+      await store.dispatch('messages/fetch')
+    }
   },
   computed: {
     locales() {
       return this.$store.getters['locales/locales'];
     },
     messages() {
-      return this.$store.getters['locales/messages'];
+      return this.$store.getters['messages/messages'];
     }
   },
   methods: {

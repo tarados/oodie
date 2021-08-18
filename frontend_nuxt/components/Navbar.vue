@@ -47,7 +47,10 @@
 
 
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  mounted() {
+    console.log('navbar', this.$i18n.locale)
+  }
 }
 </script>
 

@@ -44,6 +44,7 @@ export default {
   axios: {},
   i18n: {
     locales: ['ru', 'ua'],
+    strategy: 'no_prefix',
     defaultLocale: 'ru',
     vueI18n: {
       fallbackLocale: 'ru',
