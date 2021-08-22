@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <h1>Contacts</h1>
+    <h1>Contacts {{ $t('MenuHome') }}</h1>
   </div>
 </template>
 

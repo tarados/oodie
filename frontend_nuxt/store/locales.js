@@ -9,12 +9,6 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit ({ commit }, { req }) {
-    // console.log("nuxtServerInit!!")
-    // if (req.session.user) {
-    //   commit('user', req.session.user)
-    // }
-  },
   async fetch({commit}) {
     const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/locales');
     let localesKey = Object.keys(data);

@@ -16,7 +16,7 @@
       <div class="sub-menu" v-if="isOpenLang">
         <div
           class="menu-item lang"
-          v-for="(item, index) in $i18n.locales" :key="index"
+          v-for="(item, index) in availableLocales" :key="index"
           @click="setLocale(index)"
         >
           <flag :iso="item"/>
@@ -46,6 +46,11 @@ export default {
       return value.toUpperCase();
     }
   },
+  computed: {
+    availableLocales () {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+    }
+  },
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
@@ -65,11 +70,7 @@ export default {
     setLocale(index) {
       let locale = '';
       locale = this.$i18n.locales[index] ;
-      console.log(locale);
-      this.$i18n.locale = locale;
-      this.$i18n.defaultLocale = locale;
-      this.$i18n.fallbackLocale = locale;
-      this.selectedLanguageIcon = locale;
+      this.$i18n.locale = this.$i18n.defaultLocale = this.$i18n.fallbackLocale = this.selectedLanguageIcon = locale;
       this.selectedLanguage = locale.toUpperCase();
     }
   }

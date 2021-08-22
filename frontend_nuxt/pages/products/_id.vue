@@ -1,7 +1,7 @@
 <template>
   <div class="product">
     <img :src="product.image_list[0]">
-    <h1>{{ product.title }}</h1>
+    <h1>{{ product.title }} {{ $t('MenuHome') }}</h1>
     <h2>price ${{ product.price }} </h2>
     <h3>new_price ${{ product.new_price }}</h3>
   </div>
@@ -16,7 +16,6 @@ export default {
   async asyncData({$axios, params}) {
     const data = await $axios.$get('https://hoodiyalko.avallon.im/app/products/product/' + params.id);
     const product = data.product;
-    console.log(product.image);
     return {product}
   }
 }

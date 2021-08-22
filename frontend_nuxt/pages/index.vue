@@ -42,16 +42,6 @@
 <script>
 export default {
   name: "Home",
-  async fetch({store}) {
-    if (store.getters['locales/locales'].length === 0) {
-      await store.dispatch('locales/fetch')
-    }
-
-    if (store.getters['messages/locales'] === undefined) {
-
-      await store.dispatch('messages/fetch')
-    }
-  },
   computed: {
     locales() {
       return this.$store.getters['locales/locales'];
@@ -62,12 +52,11 @@ export default {
   },
   methods: {
     setLocales() {
-      this.$i18n.c = this.messages;
+      this.$i18n._vm.messages = this.messages;
     }
   },
   mounted() {
     this.setLocales();
-    console.log("index");
   }
 }
 </script>
