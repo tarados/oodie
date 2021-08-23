@@ -10,11 +10,13 @@
           <span>+380507204066</span>
         </a>
       </div>
-      <div class="navbar_header__lang">
-        <Dropdown/>
-      </div>
-      <div class="navbar_header__basket">
-        <img src="~/assets/img/cart.svg">
+      <div class="navbar_header__lang-basket">
+        <div class="navbar_header__lang">
+          <Dropdown/>
+        </div>
+        <div class="navbar_header__basket">
+          <img src="~/assets/img/cart.svg">
+        </div>
       </div>
     </div>
     <div class="navbar_logo">
@@ -89,6 +91,12 @@ export default {
   margin-left: 5px;
   text-decoration: none;
   color: #000000;
+}
+
+.navbar_header__lang-basket {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
 }
 
 .navbar_header__basket {

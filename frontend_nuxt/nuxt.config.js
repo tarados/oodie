@@ -23,7 +23,6 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/flag.js',
     '~/plugins/myplugin.js'
   ],
 
@@ -55,7 +54,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/flag/, /myplugin/]
+    transpile: [/myplugin/]
   },
 
   middleware: ['localization'],

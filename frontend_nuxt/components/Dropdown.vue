@@ -2,7 +2,7 @@
   <div class="langSelector"
        @mouseover="mouseoverLang"
        @mouseleave="mouseleaveLang">
-    <flag :iso="selectedLanguageIcon"/>
+    <img :src="require(`~/assets/img/${selectedLanguageIcon}.svg`)"/>
     <span>{{ selectedLanguage }}</span>
     <div class="langSelector_item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -19,8 +19,8 @@
           v-for="(item, index) in availableLocales" :key="index"
           @click="setLocale(index)"
         >
-          <flag :iso="item"/>
-          <p>{{ item | capitalize}}</p>
+          <img :src="require(`~/assets/img/${item}.svg`)"/>
+          <span>{{ item | capitalize}}</span>
         </div>
       </div>
     </transition>
@@ -36,7 +36,8 @@ export default {
     return {
       selectedLanguageIcon: this.$i18n.locale,
       selectedLanguage: this.$i18n.locale.toUpperCase(),
-      isOpenLang: false
+      isOpenLang: false,
+      flag: ''
     }
   },
   filters: {
@@ -79,12 +80,16 @@ export default {
 
 <style scoped>
 .langSelector {
-  width: 3.5rem;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1.1rem);
-  grid-template-rows: 1.5rem;
-  grid-gap: 1%;
+  grid-template-columns: 1rem 2rem auto;
+  grid-template-rows: 2rem;
+  align-items: baseline;
+  justify-items: center;
+}
+
+.langSelector img {
+  width: 100%;
 }
 
 .langSelector svg {
@@ -96,14 +101,18 @@ export default {
   position: absolute;
   width: 100%;
   top: calc(60% + 18px);
-
 }
 
 .langSelector .sub-menu .lang {
   display: grid;
-  grid-template-columns: repeat(2, 1.1rem);
-  grid-auto-rows: auto;
-  background-color: var(--overlay-color);
+  grid-template-columns: 1rem 2rem;
+  grid-template-rows: 2rem;
+  align-items: baseline;
+  justify-items: center;
+}
+
+.langSelector .sub-menu .lang img {
+  width: 100%;
 }
 
 </style>
