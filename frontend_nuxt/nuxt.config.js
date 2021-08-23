@@ -1,11 +1,3 @@
-import axios from "axios";
-
-async function messagesS() {
-  const data = await axios.get('https://hoodiyalko.avallon.im/app/locales');
-  const msg = data.data;
-  return msg
-}
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -31,7 +23,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/flag.js'
+    '~/plugins/flag.js',
+    '~/plugins/myplugin.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,8 +38,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/i18n',
-    'nuxt-client-init-module'
+    '@nuxtjs/i18n'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -58,12 +50,12 @@ export default {
     defaultLocale: 'ru',
     vueI18n: {
       fallbackLocale: 'ru',
-      messages: messagesS()
+      messages: {}
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/flag/]
+    transpile: [/flag/, /myplugin/]
   },
 
   middleware: ['localization'],

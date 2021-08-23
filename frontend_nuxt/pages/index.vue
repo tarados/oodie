@@ -41,23 +41,7 @@
 
 <script>
 export default {
-  name: "Home",
-  computed: {
-    locales() {
-      return this.$store.getters['locales/locales'];
-    },
-    messages() {
-      return this.$store.getters['messages/messages'];
-    }
-  },
-  methods: {
-    setLocales() {
-      this.$i18n._vm.messages = this.messages;
-    }
-  },
-  mounted() {
-    this.setLocales();
-  }
+  name: "Home"
 }
 </script>
 <style scoped>
