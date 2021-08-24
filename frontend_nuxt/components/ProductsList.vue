@@ -1,25 +1,26 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <nuxt-link v-for="product in prodList" :key="product.id"
-           to="/"
-           :class="{product: large, brand: small}"
+      <a to="#"
+                 v-for="product in prodList" :key="product.id"
+                 @click.prevent="openProduct(product)"
+                 :class="{product: large, brand: small}"
       >
         <img
-            :src="product.image"
-            :class="{black: productAvailability(product) <= 0}"
+          :src="product.image"
+          :class="{black: productAvailability(product) <= 0}"
         >
         <div
-            class="preorder-mark"
-            :class="{mark_large: large, mark_small: small}"
-            v-if="productPreorder(product)"
+          class="preorder-mark"
+          :class="{mark_large: large, mark_small: small}"
+          v-if="productPreorder(product)"
         >
           {{ $t('ProductStatusPreorder') }}
         </div>
         <div
-            class="preorder-mark"
-            :class="{mark_large: large, mark_small: small}"
-            v-if="productAvailability(product) <= 0"
+          class="preorder-mark"
+          :class="{mark_large: large, mark_small: small}"
+          v-if="productAvailability(product) <= 0"
         >
           {{ $t('AvailabilityNo') }}
         </div>
@@ -30,7 +31,7 @@
           <span class="old" v-show="product.new_price">{{ product.new_price }} грн</span>
         </div>
 
-      </nuxt-link>
+      </a>
     </div>
   </div>
 </template>
@@ -38,8 +39,10 @@
 <script>
 
 
+import About from "@/pages/about";
 export default {
   name: "Collections",
+  components: {About},
   props: {
     ctg: {
       type: Number
@@ -84,6 +87,9 @@ export default {
       } catch (TypeError) {
         return 0
       }
+    },
+    openProduct(product) {
+      this.$router.push('/products/' + product.id);
     }
   },
   mounted() {

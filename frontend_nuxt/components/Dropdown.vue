@@ -47,12 +47,6 @@ export default {
       return value.toUpperCase();
     }
   },
-  computed: {
-    // availableLocales () {
-    //   console.log(this.$i18n.locales)
-    //   return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
-    // }
-  },
   methods: {
     clearTimer: function () {
       if (this.timer) clearTimeout(this.timer);
