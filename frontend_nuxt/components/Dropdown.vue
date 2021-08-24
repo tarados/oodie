@@ -16,7 +16,7 @@
       <div class="sub-menu" v-if="isOpenLang">
         <div
           class="menu-item lang"
-          v-for="(item, index) in availableLocales" :key="index"
+          v-for="(item, index) in this.$i18n.locales" :key="index"
           @click="setLocale(index)"
         >
           <img :src="require(`~/assets/img/${item}.svg`)"/>
@@ -48,9 +48,10 @@ export default {
     }
   },
   computed: {
-    availableLocales () {
-      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
-    }
+    // availableLocales () {
+    //   console.log(this.$i18n.locales)
+    //   return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+    // }
   },
   methods: {
     clearTimer: function () {
