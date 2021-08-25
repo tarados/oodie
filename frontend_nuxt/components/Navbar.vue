@@ -23,32 +23,84 @@
       <img src="~/assets/img/logo2.png">
     </div>
     <div class="navbar_items">
-      <div class="navbar-item">
-        <nuxt-link to="/">
-          {{ $t('MenuHome') }}
+      <div class="navbar-item"
+           v-for="(item, index) in links" :key="index">
+        <nuxt-link :to="item.route">
+          <p>{{ $t(`${item.title}`) }}</p>
         </nuxt-link>
+        <div class="navbar-item__brands" v-if="links[index].nestedRoutes"
+             @mouseover="mouseover"
+             @mouseleave="mouseleave"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+               fill="none"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <path d="M9 14l3 3l3 -3"/>
+          </svg>
+          <div
+            class="navbar-item__sub-menu"
+            v-if="isOpen"
+          >
+            <div
+              class="menu-item"
+              v-for="category in categories" :key="category.id"
+              v-show="category.slug !== 'hoodiyalko'"
+            >
+              <nuxt-link
+                to="/"
+              >
+                <p>{{ category.title }}</p>
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="navbar-item">
-        <nuxt-link to="/products">
-          {{ $t('ProductBrand') }}
-        </nuxt-link>
-      </div>
-      <div class="navbar-item">
-        <nuxt-link to="/about">
-          {{ $t('MenuAboutUs') }}
-        </nuxt-link>
-      </div>
-      <div class="navbar-item">
-        <nuxt-link to="/Contacts">{{ $t('MenuContacts') }}</nuxt-link>
-      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-
+import links from '~/assets/js/linkList'
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  data() {
+    return {
+      selected: "",
+      isOpen: false,
+      basketVisible: false
+    };
+  },
+  computed: {
+    links() {
+      const lnk = links();
+      return lnk
+    },
+    categories() {
+      return this.$store.getters['categories/categories']
+    }
+  },
+  methods: {
+    clearTimer: function () {
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = -1;
+    },
+    mouseover: function () {
+      this.clearTimer();
+      this.isOpen = true;
+    },
+    mouseleave: function () {
+      this.clearTimer();
+
+      this.timer = setTimeout(() => {
+        this.isOpen = false;
+      }, 500);
+    }
+  },
+  mounted() {
+    // console.log(this.categories)
+  }
 }
 </script>
 
@@ -134,6 +186,7 @@ export default {
   padding: 0 calc(3vw + 12 * (100vw / 1838));
   position: relative;
   display: flex;
+  align-items: baseline;
   transition: 0.4s;
 }
 
@@ -141,6 +194,41 @@ export default {
   text-decoration: none;
   text-transform: uppercase;
 }
+
+.navbar_items .navbar-item a:hover {
+  font-weight: bold;
+}
+
+.navbar_items .navbar-item .nuxt-link-exact-active {
+  font-weight: bold;
+}
+
+.navbar_items .navbar-item svg {
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+}
+
+.navbar-item .navbar-item__brands .navbar-item__sub-menu {
+  position: absolute;
+  background-color: white;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 calc(3vw + 12 * (100vw / 1838));
+}
+
+.navbar-item .navbar-item__brands .navbar-item__sub-menu p {
+  font-weight: normal;
+}
+
+.navbar-item .navbar-item__brands .navbar-item__sub-menu p:hover {
+  font-weight: bold;
+}
+
 
 @media screen and (max-width: 750px) {
   .navbar_items {
