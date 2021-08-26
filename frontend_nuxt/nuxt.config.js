@@ -23,7 +23,10 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/myplugin.js'
+    '~/plugins/myplugin.js',
+    '~/plugins/vueperslides.js',
+    '~/plugins/vueperslide.js',
+    '~/plugins/vuelidate.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,7 +57,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/myplugin/]
+    transpile: [/myplugin/, /vueperslides/, /vueperslide/, /vuelidate/]
   },
 
   middleware: ['localization'],

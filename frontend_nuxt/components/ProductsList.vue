@@ -88,8 +88,9 @@ export default {
         return 0
       }
     },
-    openProduct(product) {
+    async openProduct(product) {
       this.$router.push('/products/' + product.id);
+      await this.$store.dispatch('product/fetch', product.id);
     }
   },
   mounted() {
@@ -112,6 +113,10 @@ h4 {
 .row {
   display: flex;
   flex-wrap: wrap;
+}
+
+.row a {
+  cursor: pointer;
 }
 
 .product {
