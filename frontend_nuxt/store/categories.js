@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setProducts(state, categories) {
+  setCategories(state, categories) {
     state.categories = categories
   }
 }
@@ -11,8 +11,9 @@ export const mutations = {
 export const actions = {
   async fetch({commit}) {
     const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/products');
+    console.log(data.categories);
     const categories = data.categories;
-    commit('setProducts', categories);
+    commit('setCategories', categories);
   }
 }
 

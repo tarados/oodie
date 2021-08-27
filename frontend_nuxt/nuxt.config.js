@@ -24,8 +24,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/myplugin.js',
-    '~/plugins/vueperslides.js',
-    '~/plugins/vueperslide.js',
+    // '~/plugins/vueperslides.js',
+    // '~/plugins/vueperslide.js',
     '~/plugins/vuelidate.js'
   ],
 
