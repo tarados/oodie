@@ -11,7 +11,6 @@ export const mutations = {
 export const actions = {
   async fetch({commit}) {
     const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/products');
-    console.log(data.categories);
     const categories = data.categories;
     commit('setCategories', categories);
   }

@@ -50,7 +50,7 @@
         <div class="size-block" v-if="!this.hideSize">
           <div
             class="square"
-            v-for="(availability, index) in availabilities"
+            v-for="(availability, index) in selectedProduct.availability"
             :class="{selected: index === size, notActive: availability.quantity <= 0 && !availability.preorder}"
             :key="index"
             @click="select(index)"
@@ -79,6 +79,14 @@ import {required} from "vuelidate/lib/validators";
 
 export default {
   name: "Product",
+  validate({params}) {
+    return /^\d+$/.test(params.id);
+  },
+  async asyncData({$axios, params}) {
+    const data = await $axios.get('https://hoodiyalko.avallon.im/app/products/product/' + params.id);
+    const product = data.data.product;
+    return {product}
+  },
   data() {
     return {
       imageIndex: 0,
@@ -95,8 +103,8 @@ export default {
   },
   computed: {
     selectedProduct() {
-      if (this.$store.getters['product/product']) {
-        return this.$store.getters['product/product'];
+      if (this.product) {
+        return this.product;
       } else {
         return {};
       }
@@ -123,19 +131,21 @@ export default {
     }
   },
   methods: {
-    async loadProduct() {
-      await this.$store.dispatch("loadProduct", this.$route.params.id);
-      const images = this.selectedProduct.image_list;
+    loadProduct() {
+      let images = [];
+      if (this.selectedProduct.image_list) {
+        images = this.selectedProduct.image_list;
+      }
+
       images.forEach(image => {
         this.slides.push({
           "image": image,
         });
       });
-      this.availabilities = this.selectedProduct.availability;
-      if (!this.availabilities.length || (this.availabilities.length === 1 && this.availabilities[0].size === "ONE SIZE")) {
+      if (!this.product.availability || (this.product.availability.length === 1 && this.product.availability[0].size === "ONE SIZE")) {
         this.hideSize = true;
-        this.preorder = this.availabilities[0].preorder;
-        if (this.availabilities[0].quantity === 0) {
+        this.preorder = this.product.availability[0].preorder;
+        if (this.product.availability[0].quantity === 0) {
           this.inStockNo = true;
           let buttonToCart = document.querySelector('.btn');
           buttonToCart.style.color = 'black';
@@ -148,7 +158,7 @@ export default {
       this.imageIndex = index;
     },
     toCart() {
-      const availability = this.availabilities.length > 0 ? this.availabilities[this.size] : {
+      const availability = this.selectedProduct.availability.length > 0 ? this.selectedProduct.availability[this.size] : {
         "size": "",
         "quantity": "0",
         "preorder": false
@@ -168,18 +178,18 @@ export default {
         }
         const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
         productToCart.total = total;
-        this.$store.commit("addProductToCart", productToCart);
+        // this.$store.commit("addProductToCart", productToCart);
         this.$router.push({name: "Cart"});
       }
     },
     select(index) {
       this.size = index;
-      this.preorder = this.availabilities[index].preorder;
+      this.preorder = this.selectedProduct.availability[index].preorder;
     }
   },
   watch: {
     size: function () {
-      if (this.availabilities[this.size].preorder) {
+      if (this.selectedProduct.availability[this.size].preorder) {
         this.statusProduct = true
       } else {
         this.statusProduct = false
@@ -188,8 +198,7 @@ export default {
   },
   mounted() {
     this.loadProduct();
-
-  },
+  }
 };
 </script>
 

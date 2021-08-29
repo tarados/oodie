@@ -2,9 +2,9 @@
   <div class="wrapper">
     <div class="row">
       <a to="#"
-                 v-for="product in prodList" :key="product.id"
-                 @click.prevent="openProduct(product)"
-                 :class="{product: large, brand: small}"
+         v-for="product in prodList" :key="product.id"
+         @click.prevent="openProduct(product)"
+         :class="{product: large, brand: small}"
       >
         <img
           :src="product.image"
@@ -40,6 +40,7 @@
 
 
 import About from "@/pages/about";
+
 export default {
   name: "Collections",
   components: {About},
@@ -82,15 +83,15 @@ export default {
       return product.availability && product.availability[0] && product.availability[0].preorder;
     },
     productAvailability(product) {
-      try {
+      if (product.availability.length >= 0) {
         return product.availability[0].quantity;
-      } catch (TypeError) {
+      } else {
         return 0
       }
     },
-    async openProduct(product) {
+    openProduct(product) {
       this.$router.push('/products/' + product.id);
-      await this.$store.dispatch('product/fetch', product.id);
+      // await this.$store.dispatch('product/fetch', product.id);
     }
   },
   mounted() {
