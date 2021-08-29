@@ -1,28 +1,28 @@
 <template>
   <div class="wrapper-product" v-if="this.selectedProduct">
-<!--    <div class="breadcrumbs-wrapper">-->
-<!--      <Breadcrumbs/>-->
-<!--    </div>-->
+    <div class="breadcrumbs-wrapper">
+      <Breadcrumbs :current-product="selectedProduct"/>
+    </div>
     <div class="row" v-if="this.selectedProduct">
-<!--      <div class="item left">-->
-<!--        <div class="item-left">-->
-<!--          <vueper-slides-->
-<!--            :touchable="false"-->
-<!--            :bullets="false"-->
-<!--            :slide-ratio="841 / 561"-->
-<!--            :initSlide="imageIndex"-->
-<!--            ref="vueperslides1"-->
-<!--          >-->
-<!--            <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>-->
-<!--          </vueper-slides>-->
-<!--        </div>-->
+      <div class="item left">
+        <div class="item-left">
+          <vueper-slides
+            :touchable="false"
+            :bullets="false"
+            :slide-ratio="841 / 561"
+            :initSlide="imageIndex"
+            ref="vueperslides1"
+          >
+            <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
+          </vueper-slides>
+        </div>
 
-<!--        <div class="item-left-slider">-->
-<!--          <div class="slider" v-for="(image, index) in selectedProduct.image_list" :key="image">-->
-<!--            <img :src="image" @click="$refs.vueperslides1.goToSlide(index)">-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+        <div class="item-left-slider">
+          <div class="slider" v-for="(image, index) in selectedProduct.image_list" :key="image">
+            <img :src="image" @click="$refs.vueperslides1.goToSlide(index)">
+          </div>
+        </div>
+      </div>
       <div class="item right">
         <div class="product-category">
           <span>{{ $t('ProductBrand') }}: </span>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { VueperSlides, VueperSlide } from 'vueperslides'
 import "vueperslides/dist/vueperslides.css";
 import {required} from "vuelidate/lib/validators";
 
@@ -100,6 +101,10 @@ export default {
   },
   validations: {
     size: {required},
+  },
+  components: {
+    VueperSlides,
+    VueperSlide
   },
   computed: {
     selectedProduct() {

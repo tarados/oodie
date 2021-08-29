@@ -1,13 +1,13 @@
 <template>
     <ul class="breadcrumbs">
       <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
-        <router-link
+        <nuxt-link
             v-if="index < breadcrumbCount"
-            :to="{name: item.routeName, params: item.routeParams}"
+            to="/"
              class="breadcrumbs__link"
         >
          {{ $t(`${item.title}`) }}
-        </router-link>
+        </nuxt-link>
         <a v-if="index === breadcrumbs.length - 1" class="breadcrumbs__link breadcrumbs__link--active">{{ item.title}}</a>
       </li>
     </ul>
@@ -22,29 +22,28 @@ export default {
       type: String
     },
     currentProduct: {
-      type: String
+      type: Object
     }
   },
   computed: {
     breadcrumbs() {
-      const currentProduct = this.$store.getters['product/product'];
       const categoriesList = this.$store.getters['categories/categories'];
       const result = [];
-      if (currentProduct && currentProduct.category === 1) {
+      if (this.currentProduct && this.currentProduct.category === 1) {
         result.push({ title: "MenuHome", routeName: "Home" });
       } else {
         result.push({ title: "MenuBrandsFriends", routeName: "Brands" });
 
-        if (currentProduct) {
-          const category = categoriesList.find(category => category.id === currentProduct.category);
+        if (this.currentProduct) {
+          const category = categoriesList.find(category => category.id === this.currentProduct.category);
           if (category) {
             result.push({ title: category.title, routeName: "Brand", routeParams: { slug: category.slug } });
           }
         }
       }
 
-      if (currentProduct) {
-        result.push({ title: currentProduct.title });
+      if (this.currentProduct) {
+        result.push({ title: this.currentProduct.title });
       }
 
       return result;
