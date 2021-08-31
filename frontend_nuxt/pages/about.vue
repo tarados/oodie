@@ -1,23 +1,23 @@
 <template>
-
-<div class="about">
-  <h1>About {{ $t('MenuHome') }}</h1>
-</div>
+  <div class="wrapper">
+    <img src="~/static/sewer_cat.gif"/>
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: "about"
+  name: "About"
 }
 </script>
 
 <style scoped>
-.about {
-  width: 600px;
-  margin: 0 auto;
+.wrapper {
   text-align: center;
-  padding-top: 4rem;
+  padding-bottom: 40px;
 }
 
+img {
+  width: 100%;
+  max-width: 500px;
+}
 </style>
