@@ -28,7 +28,7 @@
         <nuxt-link :to="item.route">
           <p>{{ $t(`${item.title}`) }}</p>
         </nuxt-link>
-        <div class="navbar-item__brands" v-if="links[index].nestedRoutes"
+        <div class="navbar-item__brands" v-if="item.nestedRoutes"
              @mouseover="mouseover"
              @mouseleave="mouseleave"
         >
@@ -48,7 +48,7 @@
               v-show="category.slug !== 'hoodiyalko'"
             >
               <nuxt-link
-                :to="/brands/ + category.id"
+                :to="item.nestedRoutes.route + category.id"
               >
                 <p>{{ category.title }}</p>
               </nuxt-link>
