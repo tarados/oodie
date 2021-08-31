@@ -38,12 +38,8 @@
 
 <script>
 
-
-import About from "@/pages/about";
-
 export default {
   name: "Collections",
-  components: {About},
   props: {
     ctg: {
       type: Number
@@ -91,7 +87,6 @@ export default {
     },
     openProduct(product) {
       this.$router.push('/products/' + product.id);
-      // await this.$store.dispatch('product/fetch', product.id);
     }
   },
   mounted() {

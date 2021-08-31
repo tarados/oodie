@@ -48,7 +48,7 @@
               v-show="category.slug !== 'hoodiyalko'"
             >
               <nuxt-link
-                to="/"
+                :to="/brands/ + category.id"
               >
                 <p>{{ category.title }}</p>
               </nuxt-link>
@@ -56,7 +56,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -67,7 +66,6 @@ export default {
   name: "Navbar",
   data() {
     return {
-      selected: "",
       isOpen: false,
       basketVisible: false
     };
@@ -97,9 +95,6 @@ export default {
         this.isOpen = false;
       }, 500);
     }
-  },
-  mounted() {
-    // console.log(this.categories)
   }
 }
 </script>
@@ -210,6 +205,7 @@ export default {
 }
 
 .navbar-item .navbar-item__brands .navbar-item__sub-menu {
+  z-index: 1;
   position: absolute;
   background-color: white;
   top: calc(100% + 0.5rem);
