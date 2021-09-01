@@ -24,7 +24,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/myplugin.js',
-    '~/plugins/vuelidate.js'
+    '~/plugins/vuelidate.js',
+    '~/plugins/autocomplite.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,7 +56,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/myplugin/, /vuelidate/]
+    transpile: [/myplugin/, /vuelidate/, /autocomplite/]
   },
 
   middleware: ['localization'],

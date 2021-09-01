@@ -21,7 +21,6 @@ export default {
     brands() {
       let brandsList = [];
       const categoriesList = this.$store.getters['categories/categories'];
-      // const productList = this.$store.getters['products/products'];
       categoriesList.forEach(item => {
         const firstProduct = this.$store.getters['products/products'].find(product => product.category === item.id);
 

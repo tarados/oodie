@@ -183,8 +183,8 @@ export default {
         }
         const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
         productToCart.total = total;
-        // this.$store.commit("addProductToCart", productToCart);
-        this.$router.push({name: "Cart"});
+        this.$store.commit("cart/setCartProducts", productToCart);
+        this.$router.push("/cart");
       }
     },
     select(index) {

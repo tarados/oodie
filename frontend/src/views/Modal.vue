@@ -16,7 +16,7 @@
     >
       <template v-slot:header>
         <div class="modal_title">
-          {{ headerText | localize }}
+          {{ $t(headerText) }}
         </div>
       </template>
       <section>
@@ -24,11 +24,11 @@
              v-for="(warning, index) in warningList" :key="index"
         >
           <p>{{ warning.title }}</p>
-          <p>{{ inStock | localize }} - {{ warning.currentAvailability }}</p>
+          <p>{{ $t(inStock) }} - {{ warning.currentAvailability }}</p>
         </div>
       </section>
       <div class="modal_petition">
-        <span>{{ commitText | localize }}</span>
+        <span>{{ $t(commitText) }}</span>
       </div>
     </modal-vue>
   </div>
