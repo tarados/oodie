@@ -76,7 +76,7 @@
         </div>
         <div class="" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidCity}">
           <autocomplete
-            :placeholder="CheckoutSelectCityInput | localize"
+            :placeholder="$t(CheckoutSelectCityInput)"
             autocomplete="nope"
             :search="search"
             @submit="setCity"
@@ -149,6 +149,12 @@ import {post} from '~/assets/js/api';
 
 export default {
   name: "Checkout",
+  // async asyncData({$axios}) {
+  //   const data = await $axios.get('https://hoodiyalko.avallon.im/app/cities');
+  //   const product = data.data;
+  //   console.log(product);
+  //   return {product}
+  // },
   data() {
     return {
       "deliveryMethod": "",
@@ -198,6 +204,7 @@ export default {
       return this.$store.getters['cart/cartProducts'];
     },
     citiesList() {
+      console.log(this.$store.getters['cities/cities']);
       return this.$store.getters['cities/cities'];
     },
     warehousesList() {
@@ -267,10 +274,10 @@ export default {
       }
     },
     toCart() {
-      this.$router.push({name: "Cart"})
+      this.$router.push('/cart')
     },
     deliveryState() {
-      this.$store.dispatch('loadCities');
+      this.$store.dispatch('cities/fetch');
     },
     search(input) {
       let cityList = this.citiesList.map(city => {
@@ -349,7 +356,7 @@ export default {
     city: function () {
       const city = this.citiesList.find(city => city.name === this.city);
       if (city && city.id) {
-        this.$store.dispatch('loadWarehouses', city.id);
+        this.$store.dispatch('warehouses/fetch', city.id);
       }
     },
     deliveryMethod: function (newValue) {

@@ -190,7 +190,7 @@ export default {
                 });
                 // this.$vm2.open('modal-4');
               } else if (this.warningList.length === 0) {
-                this.$router.push('/checkout').catch(() => {});
+                this.$router.push('/checkout');
               }
             });
           }

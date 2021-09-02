@@ -5,6 +5,7 @@ export default async function ({ context, store, i18n, route }) {
     await store.dispatch('messages/fetch');
     await store.dispatch('products/fetch');
     await store.dispatch('categories/fetch');
+    await store.dispatch('cities/fetch');
     i18n._vm.messages = store.getters['messages/messages'];
   } else {
     i18n._vm.messages = store.getters['messages/messages'];

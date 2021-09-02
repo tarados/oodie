@@ -12,8 +12,8 @@ export const mutations = {
 
 export const actions = {
   async fetch({commit}, cityId) {
-    const endpoint = 'warehouse' + '?city_id=' + cityId;
-    const warehouses = await get(endpoint);
+    const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/warehouse?city_id=' + cityId);
+    const warehouses = data.data;
     commit('setWarehouses', warehouses);
   }
 }

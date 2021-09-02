@@ -213,32 +213,6 @@ def locales(request):
 	return JsonResponse(locale)
 
 
-def report(request):
-	orders_list = list(Order.objects.filter(status="3"))
-	sales = []
-	for el in orders_list:
-		order_items = OrderItem.objects.filter(order=el.id)
-		for order_item in order_items:
-			if order_item.product is None:
-				continue
-			sales.append({
-				'name': order_item.product.title,
-				'quantity': order_item.quantity
-			})
-	sales = sorted(sales, key=lambda x: x['name'])
-	products_sale = {}
-	for group in groupby(sales, key=lambda x: x['name']):
-		name = group[0]
-		items = group[1]
-		item_quantity = 0
-		for item in items:
-			item_quantity += item['quantity']
-		products_sale.update({
-			name: item_quantity
-		})
-	return JsonResponse(products_sale)
-
-
 def insta(request):
 	public_list = parse_insta()
 	return JsonResponse({"public_list": public_list})
