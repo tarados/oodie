@@ -81,18 +81,19 @@
         v-show="cartProducts.length > 0">{{ $t('BasketCheckout') }}
       </div>
     </div>
-<!--    <Modal-->
-<!--      :warningList="warningList"-->
-<!--      :header-text="headerText"-->
-<!--      :commit-text="commitText"-->
-<!--      :in-stock="inStock"-->
-<!--    />-->
+    <Modal
+      :warningList="warningList"
+      :header-text="headerText"
+      :commit-text="commitText"
+      :in-stock="inStock"
+    />
 
   </div>
 </template>
 
 <script>
 import * as cart from "~/assets/js/cart";
+import Modal from '~/components/Modal'
 
 export default {
   name: "Cart",
@@ -104,6 +105,9 @@ export default {
       commitText: null,
       inStock: null
     }
+  },
+  components: {
+    Modal
   },
   computed: {
     productsList() {
@@ -170,7 +174,9 @@ export default {
         commit.style.display = 'none';
         this.headerText = 'ModalTitleForQuantity';
         this.inStock = 'InStockOnly';
-        // this.$vm2.open('modal-4');
+        console.log('total quantity: ', currentProductAvailable);
+        console.log(this.$vm2);
+        this.$vm2.open('modal-4');
       }
     },
     toCheckout() {
@@ -188,7 +194,7 @@ export default {
                   'title': el.title,
                   'currentAvailability': size.quantity
                 });
-                // this.$vm2.open('modal-4');
+                this.$vm2.open('modal-4');
               } else if (this.warningList.length === 0) {
                 this.$router.push('/checkout');
               }
@@ -461,6 +467,7 @@ p {
 }
 
 .checkout-button {
+  cursor: pointer;
   display: flex;
   padding: 16px;
   text-transform: uppercase;

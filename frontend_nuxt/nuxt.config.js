@@ -25,7 +25,8 @@ export default {
   plugins: [
     '~/plugins/myplugin.js',
     '~/plugins/vuelidate.js',
-    '~/plugins/autocomplite.js'
+    '~/plugins/autocomplite.js',
+    '~/plugins/modal.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -56,7 +57,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/myplugin/, /vuelidate/, /autocomplite/]
+    transpile: [/myplugin/, /vuelidate/, /autocomplite/, /modal/]
   },
 
   middleware: ['localization'],
