@@ -89,7 +89,7 @@
         <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
           <autocomplete
             class="autocomplete"
-            :placeholder=`${$t('CheckoutSelectWarehouseInput')}`
+            :placeholder="$t('CheckoutSelectWarehouseInput')"
             autocomplete="nope"
             :search="searchWarehouse"
             @submit="setWarehouse"
@@ -145,16 +145,9 @@
 
 <script>
 import {required, email, minLength} from 'vuelidate/lib/validators';
-import {post} from '~/assets/js/api';
 
 export default {
   name: "Checkout",
-  // async asyncData({$axios}) {
-  //   const data = await $axios.get('https://hoodiyalko.avallon.im/app/cities');
-  //   const product = data.data;
-  //   console.log(product);
-  //   return {product}
-  // },
   data() {
     return {
       "deliveryMethod": "",
