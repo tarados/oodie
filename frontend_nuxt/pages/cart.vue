@@ -174,8 +174,6 @@ export default {
         commit.style.display = 'none';
         this.headerText = 'ModalTitleForQuantity';
         this.inStock = 'InStockOnly';
-        console.log('total quantity: ', currentProductAvailable);
-        console.log(this.$vm2);
         this.$vm2.open('modal-4');
       }
     },

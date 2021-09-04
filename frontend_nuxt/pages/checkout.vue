@@ -148,6 +148,10 @@ import {required, email, minLength} from 'vuelidate/lib/validators';
 
 export default {
   name: "Checkout",
+  async asyncData({$axios}) {
+    const citiesList = await $axios.$get('https://hoodiyalko.avallon.im/app/cities');
+    return {citiesList}
+  },
   data() {
     return {
       "deliveryMethod": "",
@@ -195,10 +199,6 @@ export default {
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts'];
-    },
-    citiesList() {
-      console.log(this.$store.getters['cities/cities']);
-      return this.$store.getters['cities/cities'];
     },
     warehousesList() {
       return this.$store.getters['warehouses/warehouses'];
