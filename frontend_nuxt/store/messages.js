@@ -1,3 +1,5 @@
+import {get} from '~/assets/js/api'
+
 export const state = () => ({
   messages: {}
 })
@@ -10,7 +12,7 @@ export const mutations = {
 
 export const actions = {
   async fetch({commit}) {
-    const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/locales');
+    const data = await get('locales');
     const messages = processLocalization(data);
     commit('setMessages', messages);
   }

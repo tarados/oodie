@@ -1,3 +1,5 @@
+import {get} from '~/assets/js/api'
+
 export const state = () => ({
   product: {}
 })
@@ -10,7 +12,7 @@ export const mutations = {
 
 export const actions = {
   async fetch({commit}, id) {
-    const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/products/product' + '/' + id);
+    const data = await get('products/product/' + id);
     const product = data.product;
     commit('setProduct', product);
   }

@@ -1,3 +1,5 @@
+import {get} from '~/assets/js/api'
+
 export const state = () => ({
   locales: []
 })
@@ -10,7 +12,7 @@ export const mutations = {
 
 export const actions = {
   async fetch({commit}) {
-    const data = await this.$axios.$get('https://hoodiyalko.avallon.im/app/locales');
+    const data = await get('locales');
     let localesKey = Object.keys(data);
     let locales = [];
     localesKey.forEach(item => {

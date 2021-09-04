@@ -145,11 +145,13 @@
 
 <script>
 import {required, email, minLength} from 'vuelidate/lib/validators';
+import {get} from '~/assets/js/api'
+import {post} from '~/assets/js/api'
 
 export default {
   name: "Checkout",
-  async asyncData({$axios}) {
-    const citiesList = await $axios.$get('https://hoodiyalko.avallon.im/app/cities');
+  async asyncData() {
+    const citiesList = await get('cities');
     return {citiesList}
   },
   data() {
@@ -269,9 +271,6 @@ export default {
     toCart() {
       this.$router.push('/cart')
     },
-    deliveryState() {
-      this.$store.dispatch('cities/fetch');
-    },
     search(input) {
       let cityList = this.citiesList.map(city => {
         return city.name
@@ -369,9 +368,6 @@ export default {
         this.deliveryMethod = 'Самовывоз';
       }
     }
-  },
-  mounted() {
-    this.deliveryState();
   }
 }
 </script>

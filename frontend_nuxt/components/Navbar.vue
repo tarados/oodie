@@ -218,6 +218,8 @@ export default {
 }
 
 .navbar-item .navbar-item__brands .navbar-item__sub-menu p {
+  margin: 1rem;
+  width: max-content;
   font-weight: normal;
 }
 

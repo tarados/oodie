@@ -64,6 +64,9 @@ export default {
 
   router: {
     middleware: 'localization'
+  },
+  env: {
+    VUE_APP_API: process.env.VUE_APP_API || 'https://hoodiyalko.avallon.im/app'
   }
 }
 
