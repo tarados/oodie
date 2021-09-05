@@ -21,8 +21,10 @@ export const mutations = {
   decrement(state, index) {
     changeQuantity(state, index, -1);
     cart.setItems(state.cartProducts);
-
   },
+  clearBasket(state) {
+    state.cartProducts = [];
+  }
 }
 
 export const getters = {

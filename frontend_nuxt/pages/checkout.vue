@@ -257,7 +257,7 @@ export default {
         if (!this.invalidAddress || this.deliveryMethod === 'Самовывоз') {
           const response = await post("order", order);
           if (response) {
-            await this.$router.push({name: 'Successful'});
+            await this.$router.push('/successful');
             clearLocalStorage();
             this.$store.commit('clearBasket');
           }
