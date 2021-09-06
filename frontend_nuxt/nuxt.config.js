@@ -66,7 +66,8 @@ export default {
     middleware: 'localization'
   },
   env: {
-    VUE_APP_API: process.env.VUE_APP_API || 'https://hoodiyalko.avallon.im/app'
+    VUE_APP_API: process.env.VUE_APP_API || 'https://hoodiyalko.avallon.im/app',
+    VUE_APP_INSTA: process.env.VUE_APP_INSTA || "http://localhost:8000/app/insta"
   }
 }
 

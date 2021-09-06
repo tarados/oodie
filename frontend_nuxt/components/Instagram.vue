@@ -1,0 +1,102 @@
+<template>
+  <div class="instagram-wrapper">
+    <div class="slider-title">Мы в Instagram</div>
+    <section v-if="slides">
+      <Slider :slides="slides"/>
+    </section>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: "Instagram",
+  async asyncData({$axios}) {
+    const data = await $axios.get(process.env.VUE_APP_INSTA);
+    console.log('ww');
+    const slides = data.data;
+    return {slides}
+  },
+  data() {
+    return {
+      slides: [
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/e35/c0.80.640.640a/156354194_433419507716913_3934593845244982614_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=109&_nc_ohc=_DOueZdyUHYAX-p6kU6&edm=APU89FABAAAA&ccb=7-4&oh=5fa0d27676cefb0be939175ec6673c93&oe=6138BB4B&_nc_sid=86f79a",
+          "comment": "❤️ @maryna_fit",
+          "shortcode": "CMBtnoJniU1"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/155550362_261566242094763_2067305950562693687_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=103&_nc_ohc=sPRncrEPI4oAX8Ctams&edm=APU89FABAAAA&ccb=7-4&oh=332bc1e1ffccec5101df18c6a8977ebb&oe=613D7D1E&_nc_sid=86f79a",
+          "comment": "Худиялко это самая мягкая, тёплая и уютная одежда, которая у вас когда-либо была☁️",
+          "shortcode": "CL69EZzH2CW"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/149571226_1138690059923783_3709359299744995075_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=RPcRdAzwyWAAX8_JvOk&edm=APU89FABAAAA&ccb=7-4&oh=984c19afa1b7e963b03be5285e6447a4&oe=613D30D9&_nc_sid=86f79a",
+          "comment": "St. Valentine's Day mood ❤️",
+          "shortcode": "CLMph2Kn-37"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/147545909_569012540726296_2483393142346734111_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=104&_nc_ohc=C-nQsBmJmaQAX87NcAP&edm=APU89FABAAAA&ccb=7-4&oh=0a07f009af94e4005a68e188781910b0&oe=613DFDF9&_nc_sid=86f79a",
+          "comment": "Keep calm and wear #худиялко ❄️",
+          "shortcode": "CLHKMlTHAap"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.179.1440.1440a/s640x640/147407427_1390827431262002_2259495954186864761_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=8TXxbedb-BgAX8DP0aP&edm=APU89FABAAAA&ccb=7-4&oh=dbd9bd375bf270ccfe88fad19532d229&oe=613CB14D&_nc_sid=86f79a",
+          "comment": "Let’s get cozy☁️",
+          "shortcode": "CLCQP8LH-aF"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c31.0.1017.1017a/s640x640/145205563_446078139874859_2401400949682134628_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=PjtXIaZpNa8AX_beBBw&tn=iAmC1xfubgF5bMzj&edm=APU89FABAAAA&ccb=7-4&oh=0f34e0bc07d2e7351befc4fe23cb9d20&oe=613CF28D&_nc_sid=86f79a",
+          "comment": "#худиялко",
+          "shortcode": "CKvw7HdniMS"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.76.1440.1440a/s640x640/139732546_335970397517723_4947290486393753810_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=VkIS1BpiBd0AX8Tex5D&edm=APU89FABAAAA&ccb=7-4&oh=5305ec712131d2c49b0fcdd348a9ec62&oe=613D36AA&_nc_sid=86f79a",
+          "comment": "Когда за окном -16 настроение спасает ароматное какао, хороший фильм и теплое худиялко☁️",
+          "shortcode": "CKJRUmfnztb"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/133787162_311157740224043_8151251165480394021_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=E0pyoQ0I5IcAX_gqHoO&edm=APU89FABAAAA&ccb=7-4&oh=db945172ce05fa5a3112d0db0aa9a259&oe=613D09C1&_nc_sid=86f79a",
+          "comment": "Чтобы праздники были ещё уютнее☁️ #худиялко \nСегодня отправляем посылки Новой почтой по Киеву и отдаём заказы возле Контрактовой площади до 21.00🙌🏻",
+          "shortcode": "CJaph_THRx5"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/132614100_118775860062873_6799575794273800255_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=109&_nc_ohc=VOCt-oex8TUAX_j2vng&edm=APU89FABAAAA&ccb=7-4&oh=5aed83b89dff73a57ab678e574e09fd5&oe=613CB637&_nc_sid=86f79a",
+          "comment": "•Все посылки отправляем в день заказа\n•Работаем ежедневно с 10.00 до 20.00 \n•31-го декабря работаем до 16.00, возможен самовывоз возле Контрактовой площади \n•1 января выходной, со 2-го января работаем в обычном режиме",
+          "shortcode": "CJTAwIQHkYQ"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/132617546_149439256688508_2235176075598264972_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=100&_nc_ohc=9G_PODlL5-8AX8H0yZE&tn=iAmC1xfubgF5bMzj&edm=APU89FABAAAA&ccb=7-4&oh=5469698d7a714ed5e4156b64e431b277&oe=613C7DE9&_nc_sid=86f79a",
+          "comment": "A warm hug is inside this bag 🎁",
+          "shortcode": "CJQYL1Jnx8F"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.180.1440.1440a/s640x640/132708874_727732891498538_3178079870923275354_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=QZfft2AoDOwAX-zb2Cs&edm=APU89FABAAAA&ccb=7-4&oh=7289196a076f8203064b4829775e35c7&oe=613D46E2&_nc_sid=86f79a",
+          "comment": "В худиялке утро будет комфортным даже в самые морозные дни☁️",
+          "shortcode": "CJQYABXnPdr"
+        },
+        {
+          "image": "https://scontent-iev1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/132430782_244124963763144_2481372225834307130_n.jpg?_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=100&_nc_ohc=0YdI8UVjRKIAX8dfDss&tn=iAmC1xfubgF5bMzj&edm=APU89FABAAAA&ccb=7-4&oh=8c309b4d9cc9c3b1d2f830c96164af75&oe=613DD0AE&_nc_sid=86f79a",
+          "comment": "Что такое худиялко?\r\nЭто двухслойное домашнее оверсайз худи. Сверхмягкий ворсистый внешний слой в сочетании с легким воздушным внутренним слоем расслабляет и дает ощущение как будто вы в облачке.\n\r\nИдеально подходит:\r\n-Холодным утром, когда так сложно выбраться из под одеяла\r\n-Для просмотра фильмов зимними вечерами\r\n-Во время пикников в прохладное время года\r\n-Для расслабления и отдыха\n-В качестве подарка \nОдин размер, который подходит всем от XXS до 6XL.\n\nЗаказ можно оформить на сайте hoodiyalko.com.ua (активная ссылка в шапке профиля) или написав в директ💌\n\nУспей заказать по акционной цене 1499 грн вместо 2̶1̶0̶0̶ 🔥",
+          "shortcode": "CJQQQixnTET"
+        }
+      ]
+    }
+  },
+  mounted() {
+    console.log(this.slides);
+  }
+};
+</script>
+
+<style>
+.instagram-wrapper .slider-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 32px;
+  padding: 24px 10px;
+}
+
+
+</style>

@@ -37,6 +37,7 @@
       </div>
     </div>
     <ProductsList :ctg="1"/>
+    <Instagram />
   </div>
 </template>
 

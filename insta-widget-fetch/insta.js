@@ -11,7 +11,7 @@ const download = (url, path, callback) => {
     })
 };
 
-const client = new Instagram({username: 'zvada53', password: 'root2827'});
+const client = new Instagram({username: 'zvada53', password: 'Tarados1601'});
 
 (async () => {
     await client.login();
@@ -25,11 +25,12 @@ const client = new Instagram({username: 'zvada53', password: 'root2827'});
             console.log('✅ Done!')
         });
         photosList.push({
-            image: process.env.SITE_URL + process.env.PATH_MEDIA + path,
+            image: url,
             comment: item.node.edge_media_to_caption.edges[0].node.text,
             shortcode: item.node.shortcode
         });
     });
+    // console.log(photosList);
     let file = fs.createWriteStream(process.env.RESULT_FILE);
     file.on('error', function (err) { /* error handling */
     });
