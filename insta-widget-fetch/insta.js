@@ -20,12 +20,13 @@ const client = new Instagram({username: 'zvada53', password: 'Tarados1601'});
     let photosList = [];
     publicList.forEach((item, index) => {
         const url = item.node.thumbnail_src;
-        const path = `image${index}.jpeg`;
-        download(url, process.env.PATH_FILE_IMAGE + path, () => {
+        let file_name = `image${index}.jpeg`;
+        let image = process.env.PATH_FILE_IMAGE + file_name;
+        download(url, image, () => {
             console.log('✅ Done!')
         });
         photosList.push({
-            image: url,
+            image: process.env.SITE_URL + '/media/images/insta/' + file_name,
             comment: item.node.edge_media_to_caption.edges[0].node.text,
             shortcode: item.node.shortcode
         });

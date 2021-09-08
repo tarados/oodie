@@ -10,5 +10,4 @@ urlpatterns = [
 	path('report', report),
 	path('locales', locales),
 	path('invoice', novaposhta_api_invoice),
-	path('insta', insta),
 ]

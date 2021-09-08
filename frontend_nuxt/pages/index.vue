@@ -37,14 +37,19 @@
       </div>
     </div>
     <ProductsList :ctg="1"/>
-    <Instagram />
+    <Slider :slides="slides" />
   </div>
 </template>
 
 <script>
 
 export default {
-  name: "Home"
+  name: "Home",
+  async asyncData({$axios}) {
+    const data = await $axios.get(process.env.VUE_APP_INSTA);
+    const slides = data.data;
+    return {slides}
+  }
 }
 </script>
 <style scoped>

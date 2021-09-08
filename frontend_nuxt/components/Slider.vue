@@ -1,14 +1,16 @@
 <template>
-  <div class="slider" ref="slider">
-    <div class="slider-list"
-         ref="slider_list"
-         @mousedown="mousedown"
-         @mouseup="mouseup"
-         v-touchstart="touchstart"
-         v-touchend="touchend"
-    >
-      <div class="slider-track" ref="slider_track">
-        <div
+  <div>
+    <div class="slider-title">Мы в Instagram</div>
+    <div class="slider" ref="slider">
+      <div class="slider-list"
+           ref="slider_list"
+           @mousedown="mousedown"
+           @mouseup="mouseup"
+           v-touchstart="touchstart"
+           v-touchend="touchend"
+      >
+        <div class="slider-track" ref="slider_track">
+          <div
             class="slider-track_section"
             ref="slider-track_section"
             v-for="(section, index) in sections" :key="index"
@@ -16,36 +18,38 @@
              transform: index === prevSection ? `translateX(${direction}%)` : '',
              zIndex: index === currentSection ? 3 : 1
             }"
-        >
-          <div class="slider-item"
-               ref="slider_item"
-               v-for="(slider, index) in section" :key="index"
-               @click="instagram(slider.shortcode)"
-               :style="{backgroundImage: `url(${slider.image})`}"
           >
-            <div class="slider-item__background">
-              <span>{{ slider.comment }}</span>
+            <div class="slider-item"
+                 ref="slider_item"
+                 v-for="(slider, index) in section" :key="index"
+                 @click="instagram(slider.shortcode)"
+                 :style="{backgroundImage: `url(${slider.image})`}"
+            >
+              <div class="slider-item__background">
+                <span>{{ slider.comment }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="prev"
-         @click="prevSlide">
-      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
-        <path d="M4.3,8.7l6,5.9c0.4,0.4,1.1,0.4,1.5,0c0.4-0.4,0.4-1.1,0-1.5L6.5,8l5.2-5.2c0.4-0.4,0.4-1.1,0-1.5
+      <div class="prev"
+           @click="prevSlide">
+        <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
+          <path d="M4.3,8.7l6,5.9c0.4,0.4,1.1,0.4,1.5,0c0.4-0.4,0.4-1.1,0-1.5L6.5,8l5.2-5.2c0.4-0.4,0.4-1.1,0-1.5
         c-0.4-0.4-1.1-0.4-1.5,0l-6,6C3.9,7.7,3.9,8.3,4.3,8.7z"></path>
-      </svg>
-      <div class="radius-prev"></div>
-    </div>
-    <div class="next" @click="nextSlide">
-      <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
-        <path d="M11.7,7.3l-6-5.9c-0.4-0.4-1.1-0.4-1.5,0c-0.4,0.4-0.4,1.1,0,1.5L9.5,8l-5.2,5.2
+        </svg>
+        <div class="radius-prev"></div>
+      </div>
+      <div class="next" @click="nextSlide">
+        <svg viewBox="4 0 8 16" class="eapps-instagram-feed-posts-slider-nav-icon">
+          <path d="M11.7,7.3l-6-5.9c-0.4-0.4-1.1-0.4-1.5,0c-0.4,0.4-0.4,1.1,0,1.5L9.5,8l-5.2,5.2
         c-0.4,0.4-0.4,1.1,0,1.5c0.4,0.4,1.1,0.4,1.5,0l6-6C12.1,8.3,12.1,7.7,11.7,7.3z"></path>
-      </svg>
-      <div class="radius-next"></div>
+        </svg>
+        <div class="radius-next"></div>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -70,7 +74,7 @@ export default {
   },
   computed: {
     sectionCount() {
-      if (process.browser){
+      if (process.browser) {
         console.log(window.innerWidth);
         console.log(window.screen.width);
       }
@@ -201,6 +205,14 @@ export default {
 </script>
 
 <style scoped>
+.slider-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 32px;
+  padding: 24px 10px;
+}
+
 .slider {
   position: relative;
   user-select: none;

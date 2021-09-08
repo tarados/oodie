@@ -211,8 +211,3 @@ def locales(request):
 		'ua-UA': key_ua
 	})
 	return JsonResponse(locale)
-
-
-def insta(request):
-	public_list = parse_insta()
-	return JsonResponse({"public_list": public_list})
