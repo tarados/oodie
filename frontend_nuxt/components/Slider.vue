@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="slider-title">Мы в Instagram</div>
-    <div class="slider" ref="slider">
+    <div class="slider" ref="slider" v-if="clientRenderer">
       <div class="slider-list"
            ref="slider_list"
            @mousedown="mousedown"
            @mouseup="mouseup"
-           v-touchstart="touchstart"
-           v-touchend="touchend"
+           touchstart="touchstart"
+           touchend="touchend"
       >
         <div class="slider-track" ref="slider_track">
           <div
@@ -69,16 +69,14 @@ export default {
       animationTimer: -1,
       posInit: 0,
       posFinal: 0,
+      clientRenderer: false,
       slideIndex: 0
     }
   },
   computed: {
     sectionCount() {
-      if (process.browser) {
-        console.log(window.innerWidth);
-        console.log(window.screen.width);
-      }
-      let screenWidth = 1500;
+      // let screenWidth = 1500;
+      let screenWidth = window.innerWidth;
       if (screenWidth > 768) {
         return 5
       } else if (screenWidth > 450) {
@@ -200,6 +198,9 @@ export default {
     instagram(code) {
       window.open(`https://instagram.com/p/${code}`, '_blank');
     }
+  },
+  mounted() {
+    this.clientRenderer = process.browser;
   }
 }
 </script>
