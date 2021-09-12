@@ -15,7 +15,13 @@
           <Dropdown/>
         </div>
         <div class="navbar_header__basket">
-          <img src="~/assets/img/cart.svg">
+          <nuxt-link to="/cart">
+            <img src="~/assets/img/cart.svg">
+            <span v-show="cartProducts.length > 0">
+              {{ cartProducts.length }}
+            </span>
+          </nuxt-link>
+
         </div>
       </div>
     </div>
@@ -62,12 +68,13 @@
 
 <script>
 import links from '~/assets/js/linkList'
+
 export default {
   name: "Navbar",
   data() {
     return {
       isOpen: false,
-      basketVisible: false
+      basketVisible: true
     };
   },
   computed: {
@@ -77,6 +84,9 @@ export default {
     },
     categories() {
       return this.$store.getters['categories/categories']
+    },
+    cartProducts() {
+      return this.$store.getters['cart/cartProducts']
     }
   },
   methods: {
@@ -150,8 +160,19 @@ export default {
   padding-right: calc(16px + 32 * ((100vw - 375px) / 1837));
 }
 
-.navbar_header__basket img {
+.navbar_header__basket a {
+  display: flex;
+  text-decoration: none;
+}
+
+.navbar_header__basket a img {
   height: 1.5rem;
+}
+
+.navbar_header__basket a span {
+  padding-left: 15%;
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
+
 }
 
 .navbar_header__lang {
@@ -232,9 +253,11 @@ export default {
   .navbar_items {
     display: none;
   }
+
   .navbar_header__hamburg {
     display: inline;
   }
+
   .navbar_header__phone {
     padding-left: 0;
     padding-right: calc(0.7 * 60 * ((100vw + 375px) / 1838));

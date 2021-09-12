@@ -45,10 +45,10 @@
 
 export default {
   name: "Home",
-  async asyncData({$axios}) {
-    const data = await $axios.get(process.env.VUE_APP_INSTA);
-    const slides = data.data;
-    return {slides}
+  computed: {
+    slides() {
+      return this.$store.getters['instagram/slides']
+    }
   }
 }
 </script>
