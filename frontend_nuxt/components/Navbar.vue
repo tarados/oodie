@@ -14,7 +14,7 @@
         <div class="navbar_header__lang">
           <Dropdown/>
         </div>
-        <div class="navbar_header__basket">
+        <div class="navbar_header__basket" v-if="cartVisible">
           <nuxt-link to="/cart">
             <img src="~/assets/img/cart.svg">
             <span v-show="cartProducts.length > 0">
@@ -74,7 +74,6 @@ export default {
   data() {
     return {
       isOpen: false,
-      basketVisible: true
     };
   },
   computed: {
@@ -87,6 +86,9 @@ export default {
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
+    },
+    cartVisible() {
+      return !(this.$route.name === 'cart' || this.$route.name === 'checkout');
     }
   },
   methods: {
