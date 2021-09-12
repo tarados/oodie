@@ -45,6 +45,7 @@
 
 export default {
   name: "Home",
+  middleware: ['products', 'insta'],
   computed: {
     slides() {
       return this.$store.getters['instagram/slides']
