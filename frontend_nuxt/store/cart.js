@@ -24,6 +24,13 @@ export const mutations = {
   },
   clearBasket(state) {
     state.cartProducts = [];
+  },
+  addProductToCart(state, product) {
+    state.cartProducts.push(product);
+    cart.setItems(state.cartProducts);
+  },
+  addProductFromCart(state) {
+    state.cartProducts = cart.getItems();
   }
 }
 
