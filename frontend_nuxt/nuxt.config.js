@@ -64,10 +64,10 @@ export default {
 
   router: {
     middleware: 'localization'
+  },
+  env: {
+    VUE_APP_API: process.env.VUE_APP_API || 'https://hoodiyalko.avallon.im/app',
+    APP_INSTA: process.env.VUE_APP_INSTA || "http://localhost:8000/static/photosFromInstagram.json"
   }
-  // env: {
-  //   VUE_APP_API: process.env.VUE_APP_API || 'https://hoodiyalko.avallon.im/app',
-  //   APP_INSTA: process.env.VUE_APP_INSTA || "http://localhost:8000/static/photosFromInstagram.json"
-  // }
 }
 

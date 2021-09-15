@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import * as cart from "~/assets/js/cart";
+import * as cart from "assets/js/localStorage";
 
 export const state = () => ({
   cartProducts: []

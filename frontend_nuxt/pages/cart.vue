@@ -1,98 +1,100 @@
 <template>
   <div class="wrapper-cart">
-    <div class="header">
-      <h1 v-if="cartProducts.length > 0">{{ $t('ProductCard') }}</h1>
-      <h1 v-else>{{ $t('ProductCardEmpty') }}</h1>
-    </div>
-    <div v-for="(product, index) in cartProducts" :key="index">
-      <div class="grid-container second">
-        <div class="item image">
-          <img :src="product.image">
-        </div>
-        <div class="item product">
-          <div class="name">
-            {{ product.title }}
-            <strong v-if="needShowSize(product)">
-              {{ product.size }}
-            </strong>
-          </div>
-        </div>
-        <div class="item quantity-val">
-          <div>
-            {{ product.quantity }}
-          </div>
-          <div class="triangle">
-            <div class="triangle-up" @click="plusQuantity(index)"></div>
-            <div class="triangle-down" @click="minusQuantity(index)"></div>
-          </div>
-        </div>
-        <div class="item total-val">{{ product.total }} грн</div>
-        <div class="item close">
-          <button @click="deleteOrder(index)">X</button>
-        </div>
+    <client-only>
+      <div class="header">
+        <h1 v-if="cartProducts.length > 0">{{ $t('ProductCard') }}</h1>
+        <h1 v-else>{{ $t('ProductCardEmpty') }}</h1>
       </div>
-      <div class="mobile">
-        <div class="mobile-content">
-          <div class="image">
+      <div v-for="(product, index) in cartProducts" :key="index">
+        <div class="grid-container second">
+          <div class="item image">
             <img :src="product.image">
           </div>
-          <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{
-              product.size
-            }}</span></div>
-          <div class="total-val">{{ product.total }} грн</div>
-        </div>
-        <div class="mobile-edit">
-          <div class="remove-mobile" @click="deleteOrder(index)">{{ $t('ProductDelete') }}</div>
-          <div class="quantity-val-mobile">
-            <div class="down">
-              <div class="quantity-button" @click="minusQuantity(index)">-</div>
-            </div>
-            <div class="product-quantity">
-              {{ product.quantity }}
-            </div>
-            <div class="up">
-              <div class="quantity-button" @click="plusQuantity(index)">+</div>
+          <div class="item product">
+            <div class="name">
+              {{ product.title }}
+              <strong v-if="needShowSize(product)">
+                {{ product.size }}
+              </strong>
             </div>
           </div>
-          <div></div>
+          <div class="item quantity-val">
+            <div>
+              {{ product.quantity }}
+            </div>
+            <div class="triangle">
+              <div class="triangle-up" @click="plusQuantity(index)"></div>
+              <div class="triangle-down" @click="minusQuantity(index)"></div>
+            </div>
+          </div>
+          <div class="item total-val">{{ product.total }} грн</div>
+          <div class="item close">
+            <button @click="deleteOrder(index)">X</button>
+          </div>
+        </div>
+        <div class="mobile">
+          <div class="mobile-content">
+            <div class="image">
+              <img :src="product.image">
+            </div>
+            <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{
+                product.size
+              }}</span></div>
+            <div class="total-val">{{ product.total }} грн</div>
+          </div>
+          <div class="mobile-edit">
+            <div class="remove-mobile" @click="deleteOrder(index)">{{ $t('ProductDelete') }}</div>
+            <div class="quantity-val-mobile">
+              <div class="down">
+                <div class="quantity-button" @click="minusQuantity(index)">-</div>
+              </div>
+              <div class="product-quantity">
+                {{ product.quantity }}
+              </div>
+              <div class="up">
+                <div class="quantity-button" @click="plusQuantity(index)">+</div>
+              </div>
+            </div>
+            <div></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="subtotal-mobile-box" v-show="cartProducts.length > 0">
-      <div class="subtotal-mobile-title">{{ $t('BasketTotalPrice') }}:</div>
-      <div class="item subtotal-mobile" v-text="totalPrice"></div>
-    </div>
-    <div class="container container-border">
-      <div class="subtotal-box" v-show="cartProducts.length > 0">
-        <span>{{ $t('BasketTotalPrice') }} </span>
-        <span v-text="totalPrice"></span>
+      <div class="subtotal-mobile-box" v-show="cartProducts.length > 0">
+        <div class="subtotal-mobile-title">{{ $t('BasketTotalPrice') }}:</div>
+        <div class="item subtotal-mobile" v-text="totalPrice"></div>
       </div>
-    </div>
-    <div class="container" v-if="isPreorder">
-      <p>{{ $t('BasketPreorderDescription') }}</p>
-    </div>
-    <div class="container checkout-buttons">
-      <nuxt-link to="/" class="checkout-button continue-shopping button">
-        {{ $t('ContinueShopping') }}
-      </nuxt-link>
-      <div
-        @click="toCheckout"
-        class="checkout-button checkout button"
-        v-show="cartProducts.length > 0">{{ $t('BasketCheckout') }}
+      <div class="container container-border">
+        <div class="subtotal-box" v-show="cartProducts.length > 0">
+          <span>{{ $t('BasketTotalPrice') }} </span>
+          <span v-text="totalPrice"></span>
+        </div>
       </div>
-    </div>
-    <Modal
-      :warningList="warningList"
-      :header-text="headerText"
-      :commit-text="commitText"
-      :in-stock="inStock"
-    />
+      <div class="container" v-if="isPreorder">
+        <p>{{ $t('BasketPreorderDescription') }}</p>
+      </div>
+      <div class="container checkout-buttons">
+        <nuxt-link to="/" class="checkout-button continue-shopping button">
+          {{ $t('ContinueShopping') }}
+        </nuxt-link>
+        <div
+          @click="toCheckout"
+          class="checkout-button checkout button"
+          v-show="cartProducts.length > 0">{{ $t('BasketCheckout') }}
+        </div>
+      </div>
+      <Modal
+        :warningList="warningList"
+        :header-text="headerText"
+        :commit-text="commitText"
+        :in-stock="inStock"
+      />
+    </client-only>
 
   </div>
 </template>
 
 <script>
-import * as cart from "~/assets/js/cart";
+import * as cart from "assets/js/localStorage";
 import Modal from '~/components/Modal'
 
 export default {
