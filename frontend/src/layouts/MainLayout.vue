@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style>
-
+.wrapper-layout {
+  overflow-x: hidden;
+}
 </style>

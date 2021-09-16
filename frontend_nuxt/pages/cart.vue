@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper-cart">
-    <client-only>
+  <client-only>
+    <div class="wrapper-cart">
       <div class="header">
         <h1 v-if="cartProducts.length > 0">{{ $t('ProductCard') }}</h1>
         <h1 v-else>{{ $t('ProductCardEmpty') }}</h1>
@@ -88,9 +88,8 @@
         :commit-text="commitText"
         :in-stock="inStock"
       />
-    </client-only>
-
-  </div>
+    </div>
+  </client-only>
 </template>
 
 <script>

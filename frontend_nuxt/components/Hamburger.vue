@@ -12,7 +12,7 @@
                 v-for="item in links" :key="item.route"
                 @click="closeHamburger"
             >
-              <router-link :to="item.route">{{ item.title }}</router-link>
+              <router-link :to="item.route">{{ $t(`${item.title}`) }}</router-link>
             </li>
           </ul>
         </div>

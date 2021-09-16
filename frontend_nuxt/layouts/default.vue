@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="default">
     <Navbar/>
     <nuxt/>
     <Footer/>
@@ -13,5 +13,7 @@ export default {
 </script>
 
 <style scoped>
-
+.default {
+  overflow-x: hidden;
+}
 </style>
