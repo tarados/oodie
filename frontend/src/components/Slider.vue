@@ -129,6 +129,7 @@ export default {
       }
     },
     touchstart(event) {
+      console.log(event);
       if (event) {
         this.posInit = event.touches[0].screenX;
       }

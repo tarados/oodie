@@ -26,6 +26,7 @@ export default {
     '~/plugins/myplugin.js',
     '~/plugins/vuelidate.js',
     '~/plugins/autocomplite.js',
+    '~/plugins/touch.js',
     '~/plugins/modal.js'
   ],
 
@@ -57,7 +58,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/myplugin/, /vuelidate/, /autocomplite/, /modal/]
+    transpile: [/myplugin/, /vuelidate/, /autocomplite/, /modal/, /touch/]
   },
 
   middleware: ['localization'],
