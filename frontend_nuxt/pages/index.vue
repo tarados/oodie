@@ -2,14 +2,14 @@
   <div class="home">
     <header class="showcase">
       <div class="container showcase-inner">
-        <img src="~/assets/img/banner4.jpg"/>
+        <img alt="" src="~/assets/img/banner4.jpg"/>
       </div>
     </header>
     <div class="content-wrapper">
       <div class="info">
         <div class="info-content">
           <div class="wrapper-image">
-            <img src="~/assets/img/size.png">
+            <img alt="" src="~/assets/img/size.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoSize') }}</h4>
@@ -18,7 +18,7 @@
         </div>
         <div class="info-content">
           <div class="wrapper-image cat">
-            <img src="~/assets/img/cat.png">
+            <img alt="" src="~/assets/img/cat.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoCat') }}</h4>
@@ -27,7 +27,7 @@
         </div>
         <div class="info-content">
           <div class="wrapper-image footer-content__item">
-            <img src="~/assets/img/delivery.png">
+            <img alt="" src="~/assets/img/delivery.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoDelivery') }}</h4>
@@ -165,7 +165,7 @@ export default {
 
 .info-content .info-title span {
   font-size: calc(8px + 4 * (100vw / 1838));
-  color: #b0b0b0;
+  color: #424141;
 }
 
 .info-content .info-title span,

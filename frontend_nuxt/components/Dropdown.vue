@@ -2,7 +2,7 @@
   <div class="langSelector"
        @mouseover="mouseoverLang"
        @mouseleave="mouseleaveLang">
-    <img :src="require(`~/assets/img/${selectedLanguageIcon}.svg`)"/>
+    <img alt="" :src="require(`~/assets/img/${selectedLanguageIcon}.svg`)"/>
     <span>{{ selectedLanguage }}</span>
     <div class="langSelector_item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -19,7 +19,7 @@
           v-for="(item, index) in this.$i18n.locales" :key="index"
           @click="setLocale(index)"
         >
-          <img :src="require(`~/assets/img/${item}.svg`)"/>
+          <img alt="" :src="require(`~/assets/img/${item}.svg`)"/>
           <span>{{ item | capitalize}}</span>
         </div>
       </div>

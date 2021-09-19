@@ -280,6 +280,7 @@ export default {
 
 span {
   font-size: calc(10px + 4 * (100vw / 1838));
+  color: white;
 }
 
 .next {
@@ -350,7 +351,7 @@ span {
   }
 
   span {
-    font-size: calc(10px + 4 * 4 * 0.7 * ((100vw - 320px) / 1838));
+    font-size: calc(12px + 4 * 4 * 0.7 * ((100vw - 320px) / 1838));
   }
 
   .slider-item .slider-item__background {

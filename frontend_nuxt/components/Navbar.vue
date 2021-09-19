@@ -16,7 +16,7 @@
         </div>
         <div class="navbar_header__basket" v-if="cartVisible">
           <nuxt-link to="/cart">
-            <img src="~/assets/img/cart.svg">
+            <img alt="" src="~/assets/img/cart.svg">
             <span v-show="cartProducts.length > 0">
               {{ cartProducts.length }}
             </span>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="navbar_logo">
-      <img src="~/assets/img/logo2.png">
+      <img alt="" src="~/assets/img/logo2.png">
     </div>
     <div class="navbar_items">
       <div class="navbar-item"

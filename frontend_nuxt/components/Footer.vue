@@ -7,13 +7,13 @@
             <span>{{ $t('FooterContacts') }}:</span>
           </div>
           <div class="footer-content__item--contacts">
-            <img src="~/assets/img/phone-receiver.svg"/>
+            <img alt="" src="~/assets/img/phone-receiver.svg"/>
             <a href="tel:+380507204066">
               <span>+380507204066</span>
             </a>
           </div>
           <div class="footer-content__item--contacts">
-            <img src="~/assets/img/email.svg">
+            <img alt="" src="~/assets/img/email.svg">
             <a href="mailto:hoodiyalko@gmail.com" rel="noopener">
               <span>hoodiyalko@gmail.com</span>
             </a>
@@ -26,8 +26,8 @@
             </nuxt-link>
           </div>
           <div
-              class="footer-content__item--delivery"
-              @click="errorForSentry"
+            class="footer-content__item--delivery"
+            @click="errorForSentry"
           >
             <span>{{ $t('FooterCooperation') }}</span>
           </div>
@@ -43,21 +43,21 @@
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://www.facebook.com/hoodiyalko/" rel="noopener">
-                  <img src="~/assets/img/facebook.png">
+                  <img alt="" src="~/assets/img/facebook.png">
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://www.instagram.com/hoodiyalko/" rel="noopener">
-                  <img src="~/assets/img/instagram.png">
+                  <img alt="" src="~/assets/img/instagram.png">
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/" rel="noopener">
-                  <img src="~/assets/img/tik-tok.png">
+                  <img alt="" src="~/assets/img/tik-tok.png">
                 </a>
               </div>
             </div>

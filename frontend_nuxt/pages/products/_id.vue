@@ -19,7 +19,7 @@
 
         <div class="item-left-slider">
           <div class="slider" v-for="(image, index) in selectedProduct.image_list" :key="image">
-            <img :src="image" @click="$refs.vueperslides1.goToSlide(index)">
+            <img :alt="selectedProduct.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default {
     return /^\d+$/.test(params.id);
   },
   async asyncData({$axios, params}) {
-    const data = await $axios.get('https://hoodiyalko.avallon.im/app/products/product/' + params.id);
+    const data = await $axios.get(process.env.VUE_APP_API + '/products/product/' + params.id);
     const product = data.data.product;
     return {product}
   },
