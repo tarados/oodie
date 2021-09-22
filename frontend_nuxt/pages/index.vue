@@ -2,14 +2,14 @@
   <div class="home">
     <header class="showcase">
       <div class="container showcase-inner">
-        <img alt="" src="~/assets/img/banner4.jpg"/>
+        <img alt="banner" src="~/assets/img/banner4.jpg"/>
       </div>
     </header>
     <div class="content-wrapper">
       <div class="info">
         <div class="info-content">
           <div class="wrapper-image">
-            <img alt="" src="~/assets/img/size.png">
+            <img alt="size" src="~/assets/img/size.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoSize') }}</h4>
@@ -18,7 +18,7 @@
         </div>
         <div class="info-content">
           <div class="wrapper-image cat">
-            <img alt="" src="~/assets/img/cat.png">
+            <img alt="cat" src="~/assets/img/cat.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoCat') }}</h4>
@@ -27,7 +27,7 @@
         </div>
         <div class="info-content">
           <div class="wrapper-image footer-content__item">
-            <img alt="" src="~/assets/img/delivery.png">
+            <img alt="delivery" src="~/assets/img/delivery.png">
           </div>
           <div class="info-title">
             <h4>{{ $t('InfoDelivery') }}</h4>
@@ -142,13 +142,13 @@ export default {
 }
 
 .wrapper-image {
-  width: 40px;
-  height: 40px;
+  width: 3.5rem;
+  height: 2.5rem;
   position: relative;
 }
 
 .wrapper-image.footer-content__item {
-  margin-right: 16px;
+  margin-right: 1rem;
 }
 
 .wrapper-image img {
