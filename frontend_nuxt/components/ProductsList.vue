@@ -7,7 +7,7 @@
          :class="{product: large, brand: small}"
       >
         <img
-          alt=""
+          :alt="product.title"
           :src="product.image"
           :class="{black: productAvailability(product) <= 0}"
         >
