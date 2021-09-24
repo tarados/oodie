@@ -1,6 +1,12 @@
 <template>
   <div class="menu-wrap">
-    <input type="checkbox" class="toggler" v-model="checked"/>
+    <div class="label">
+      <label>
+        <input value="toggler" type="checkbox" class="toggler" v-model="checked"/>
+        h
+      </label>
+    </div>
+
     <div class="hamburger">
       <div></div>
     </div>
@@ -53,6 +59,15 @@ export default {
   position: fixed;
   left: 0;
   z-index: 1;
+}
+
+.menu-wrap .label {
+  position: relative;
+}
+
+.menu-wrap .label label {
+  position: absolute;
+  left: 10px;
 }
 
 .menu-wrap .toggler {

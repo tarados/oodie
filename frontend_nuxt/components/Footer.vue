@@ -7,13 +7,13 @@
             <span>{{ $t('FooterContacts') }}:</span>
           </div>
           <div class="footer-content__item--contacts">
-            <img alt="" src="~/assets/img/phone-receiver.svg"/>
+            <img alt="phone" src="~/assets/img/phone-receiver.svg"/>
             <a href="tel:+380507204066">
               <span>+380507204066</span>
             </a>
           </div>
           <div class="footer-content__item--contacts">
-            <img alt="" src="~/assets/img/email.svg">
+            <img alt="email" src="~/assets/img/email.svg">
             <a href="mailto:hoodiyalko@gmail.com" rel="noopener">
               <span>hoodiyalko@gmail.com</span>
             </a>
@@ -43,21 +43,24 @@
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://www.facebook.com/hoodiyalko/" rel="noopener">
-                  <img alt="" src="~/assets/img/facebook.png">
+                  <img alt="facebook" src="~/assets/img/facebook.png">
+                  <span>f</span>
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://www.instagram.com/hoodiyalko/" rel="noopener">
-                  <img alt="" src="~/assets/img/instagram.png">
+                  <img alt="instagram" src="~/assets/img/instagram.png">
+                  <span>i</span>
                 </a>
               </div>
             </div>
             <div class="icon">
               <div class="icon__circl">
                 <a target="_blank" href="https://vm.tiktok.com/ZS9y5cnx/" rel="noopener">
-                  <img alt="" src="~/assets/img/tik-tok.png">
+                  <img alt="tiktok" src="~/assets/img/tik-tok.png">
+                  <span>t</span>
                 </a>
               </div>
             </div>
@@ -150,12 +153,18 @@ export default {
 }
 
 .icon__circl {
+  position: relative;
   margin: 2% 5% 1% 0;
   width: 40px;
   height: 40px;
   text-align: center;
   background: white;
   border-radius: 50%;
+}
+
+.icon__circl a span {
+  position: absolute;
+  color: white;
 }
 
 .footer-content__item a {
