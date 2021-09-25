@@ -374,13 +374,13 @@ export default {
 
 .size-table a {
   cursor: pointer;
-  color: #908383;
+  color: #777676;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
 
 .preorder {
-  color: #d24e49;
+  color: #9f0b05;
   margin: 20px 0;
 }
 
@@ -394,7 +394,7 @@ export default {
 
 .product-category span {
   font-size: 1rem;
-  color: #9b9b9b;
+  color: #777676;
 }
 
 .product-category div {
@@ -403,7 +403,7 @@ export default {
 }
 
 .product-title {
-  border-bottom: 2px solid #9a9a9a;
+  border-bottom: 2px solid #777676;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
@@ -418,7 +418,7 @@ export default {
 .current {
   text-decoration: line-through;
   margin-bottom: 1rem;
-  color: #9b9b9b;
+  color: #777676;
 }
 
 .button-block {
@@ -433,7 +433,7 @@ export default {
 }
 
 .notActive {
-  background-color: #9a9a9a;
+  background-color: #777676;
   pointer-events: none;
   cursor: default;
 }
