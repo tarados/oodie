@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 	'app',
 	'corsheaders',
 	'django.contrib.staticfiles',
-	'adminsortable2'
+	'adminsortable2',
+	'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [

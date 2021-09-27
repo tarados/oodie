@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.db.models.signals import post_save
+from sorl.thumbnail import get_thumbnail
 
 
 class Category(models.Model):
@@ -77,8 +78,9 @@ class Product(models.Model):
 
 	def get_first_image_url(self):
 		try:
-			first_image = ProductImage.objects.filter(product=self.id)[0]
-			return settings.SITE_URL + first_image.image.url
+			first_image = ProductImage.objects.filter(product=self.id)[0].image
+			im = get_thumbnail(first_image, '600x600', crop='center', quality=99)
+			return settings.SITE_URL + im.url
 		except IndexError:
 			return None
 
