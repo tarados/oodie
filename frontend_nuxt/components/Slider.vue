@@ -135,9 +135,8 @@ export default {
       }
     },
     touchstart(event) {
-      console.log(event);
       if (event) {
-        this.posInit = event.touches[0].screenX;
+        this.posInit = event.screenX;
       }
     },
     touchend(event) {
@@ -145,7 +144,7 @@ export default {
         if (this.animationTimer) {
           clearTimeout(this.animationTimer);
         }
-        this.posFinal = event.changedTouches[0].screenX;
+        this.posFinal = event.screenX;
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
         if (interval < 0) {
