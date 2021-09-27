@@ -8,15 +8,17 @@
         >
          {{ $t(`${item.title}`) }}
         </nuxt-link>
-        <a v-if="index === breadcrumbs.length - 1" class="breadcrumbs__link breadcrumbs__link--active">{{ item.title}}</a>
+        <span v-if="index === breadcrumbs.length - 1">{{ item.title}}</span>
       </li>
     </ul>
 </template>
 
 <script>
 
+import About from "@/pages/about";
 export default {
   name: "Breadcrumbs",
+  components: {About},
   props: {
     currentCategory: {
       type: String
@@ -72,6 +74,10 @@ export default {
   display: inline-block;
 }
 
+.breadcrumbs__item span {
+  text-transform: uppercase;
+}
+
 .breadcrumbs__item:not(:last-of-type)::after {
   content: '>';
   margin: 0 5px;
@@ -81,7 +87,7 @@ export default {
 .breadcrumbs__link {
   text-transform: uppercase;
   text-decoration: none;
-  color: #999999;
+  color: #777676;
 }
 
 .breadcrumbs__link:hover {
