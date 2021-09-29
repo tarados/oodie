@@ -89,7 +89,7 @@
         <div class="new-post-office" v-if="deliveryMethod === 'Новая почта'" :class="{invalid: invalidOffice}">
           <autocomplete
             class="autocomplete"
-            :placeholder="$t('CheckoutSelectWarehouseInput')"
+            :placeholder="$t(CheckoutSelectWarehouseInput)"
             autocomplete="nope"
             :search="searchWarehouse"
             @submit="setWarehouse"
@@ -150,10 +150,6 @@ import {post} from '~/assets/js/api'
 
 export default {
   name: "Checkout",
-  async asyncData() {
-    const citiesList = await get('cities');
-    return {citiesList}
-  },
   data() {
     return {
       "deliveryMethod": "",
@@ -201,6 +197,9 @@ export default {
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts'];
+    },
+    citiesList() {
+      return this.$store.getters['cities/cities'];
     },
     warehousesList() {
       return this.$store.getters['warehouses/warehouses'];
