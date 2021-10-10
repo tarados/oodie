@@ -1,12 +1,6 @@
 <template>
   <div class="menu-wrap">
-    <div class="label">
-      <label>
-        <input value="toggler" type="checkbox" class="toggler" v-model="checked"/>
-        h
-      </label>
-    </div>
-
+    <input value="toggler" type="checkbox" class="toggler" v-model="checked"/>
     <div class="hamburger">
       <div></div>
     </div>
