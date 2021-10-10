@@ -146,7 +146,7 @@ export default {
 }
 
 .navbar_header__phone a {
-  font-size: 16px;
+  font-size: calc(12px + 2 * ((100vw - 320px) / 1518));
   margin-left: 5px;
   text-decoration: none;
   color: #000000;
