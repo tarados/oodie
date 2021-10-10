@@ -45,10 +45,14 @@
 
 export default {
   name: "Home",
-  middleware: ['products', 'insta'],
+  middleware: ['products'],
   computed: {
     slides() {
-      return this.$store.getters['instagram/slides']
+      if (this.$store.getters['instagram/slides'].length > 0) {
+        return this.$store.getters['instagram/slides']
+      } else {
+        return []
+      }
     }
   }
 }

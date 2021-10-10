@@ -7,7 +7,8 @@
 <script>
 
 export default {
-  name: "index"
+  name: "index",
+  middleware: ['products']
 }
 </script>
 
