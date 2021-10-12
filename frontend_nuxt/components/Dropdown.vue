@@ -104,6 +104,7 @@ export default {
   grid-template-rows: 2rem;
   align-items: baseline;
   justify-items: center;
+  cursor: pointer;
 }
 
 .langSelector .sub-menu .lang img {
