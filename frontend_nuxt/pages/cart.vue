@@ -179,10 +179,10 @@ export default {
       }
     },
     toCheckout() {
-      this.warningList.length = 0;
-      this.headerText = 'ModalTitleForCheckout';
-      this.commitText = 'ModalCommentForCheckout';
-      this.inStock = 'InStock'
+      // this.warningList.length = 0;
+      // this.headerText = 'ModalTitleForCheckout';
+      // this.commitText = 'ModalCommentForCheckout';
+      // this.inStock = 'InStock'
       const localStorageAvailability = cart.getItems();
       this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {
