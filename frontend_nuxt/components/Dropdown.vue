@@ -68,6 +68,7 @@ export default {
       locale = this.$i18n.locales[index] ;
       this.$i18n.locale = this.$i18n.defaultLocale = this.$i18n.fallbackLocale = this.selectedLanguageIcon = locale;
       this.selectedLanguage = locale.toUpperCase();
+      this.isOpenLang = !this.isOpenLang;
     }
   }
 }
@@ -93,9 +94,14 @@ export default {
 }
 
 .langSelector .sub-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
   position: absolute;
   width: 100%;
   top: calc(60% + 18px);
+  right: 10px;
 }
 
 .langSelector .sub-menu .lang {
@@ -107,8 +113,16 @@ export default {
   cursor: pointer;
 }
 
+.langSelector .sub-menu .lang:hover {
+  font-weight: bold;
+}
+
 .langSelector .sub-menu .lang img {
   width: 100%;
+}
+
+.langSelector .sub-menu .lang img:hover {
+  width: 105%;
 }
 
 </style>

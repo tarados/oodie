@@ -230,7 +230,7 @@ export default {
 .navbar-item .navbar-item__brands .navbar-item__sub-menu {
   z-index: 1;
   position: absolute;
-  background-color: white;
+  background-color: #f5f5f5;
   top: calc(100% + 0.5rem);
   left: 0;
   width: 80%;
