@@ -50,7 +50,7 @@
           >
             <div
               class="menu-item"
-              v-for="category in categories" :key="category.id"
+              v-for="(category, index) in categories" :key="index"
               v-show="category.slug !== 'hoodiyalko'"
             >
               <nuxt-link
@@ -82,7 +82,16 @@ export default {
       return lnk
     },
     categories() {
-      return this.$store.getters['categories/categories']
+      const categories = this.$store.getters['categories/categories'];
+      let categoryList = [];
+      this.$store.getters['products/products'].forEach(item => {
+        categories.forEach(category => {
+          if (item.category === category.id) {
+            categoryList.push(category);
+          }
+        })
+      })
+      return categoryList
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']

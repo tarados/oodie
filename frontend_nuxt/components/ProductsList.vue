@@ -41,6 +41,7 @@
 
 export default {
   name: "Collections",
+  middleware: ['products'],
   props: {
     ctg: {
       type: Number

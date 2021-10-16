@@ -17,6 +17,7 @@
 
 export default {
   name: "Brandlist",
+  middleware: ['products'],
   computed: {
     brands() {
       let brandsList = [];

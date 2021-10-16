@@ -98,6 +98,7 @@ import Modal from '~/components/Modal'
 
 export default {
   name: "Cart",
+  middleware: ['products'],
   data() {
     return {
       isVisible: false,
@@ -184,6 +185,7 @@ export default {
       // this.commitText = 'ModalCommentForCheckout';
       // this.inStock = 'InStock'
       const localStorageAvailability = cart.getItems();
+      console.log(localStorageAvailability);
       this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {
           if (el.id === item.id) {
