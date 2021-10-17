@@ -150,6 +150,7 @@ import {post} from '~/assets/js/api'
 
 export default {
   name: "Checkout",
+  middleware: ['products'],
   data() {
     return {
       "deliveryMethod": "",

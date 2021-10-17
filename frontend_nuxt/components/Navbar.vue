@@ -50,7 +50,7 @@
           >
             <div
               class="menu-item"
-              v-for="category in categories" :key="category.id"
+              v-for="(category, index) in categories" :key="index"
               v-show="category.slug !== 'hoodiyalko'"
             >
               <nuxt-link
@@ -82,7 +82,16 @@ export default {
       return lnk
     },
     categories() {
-      return this.$store.getters['categories/categories']
+      const categories = this.$store.getters['categories/categories'];
+      let categoryList = [];
+      this.$store.getters['products/products'].forEach(item => {
+        categories.forEach(category => {
+          if (item.category === category.id) {
+            categoryList.push(category);
+          }
+        })
+      })
+      return categoryList
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
@@ -146,7 +155,7 @@ export default {
 }
 
 .navbar_header__phone a {
-  font-size: calc(12px + 2 * ((100vw - 320px) / 1518));
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
   margin-left: 5px;
   text-decoration: none;
   color: #000000;
@@ -159,6 +168,7 @@ export default {
 }
 
 .navbar_header__basket {
+  margin: auto;
   padding-right: calc(16px + 32 * ((100vw - 375px) / 1837));
 }
 
@@ -173,7 +183,7 @@ export default {
 
 .navbar_header__basket a span {
   padding-left: 15%;
-  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
+  font-size: calc(16px + 2 * ((100vw - 320px) / 1518));
 
 }
 
@@ -198,6 +208,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: baseline;
 }
 
 .navbar_items .navbar-item {
@@ -264,6 +275,30 @@ export default {
     padding-left: 0;
     padding-right: calc(0.7 * 60 * ((100vw + 375px) / 1838));
   }
+}
 
+@media screen and (max-width: 370px){
+  .navbar_header__basket a img {
+    height: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .navbar_header__lang-basket {
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 280px){
+  .navbar_header__phone {
+    padding: 0;
+  }
+  .navbar_header__phone img {
+    margin-left: 10px;
+  }
+
+  .navbar_header__phone a {
+    margin: 0 5px 0 0;
+  }
 }
 </style>
