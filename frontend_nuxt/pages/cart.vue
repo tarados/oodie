@@ -98,6 +98,7 @@ import Modal from '~/components/Modal'
 
 export default {
   name: "Cart",
+  middleware: ['products'],
   data() {
     return {
       isVisible: false,
@@ -179,7 +180,7 @@ export default {
       }
     },
     toCheckout() {
-      // this.warningList.length = 0;
+      this.warningList.length = 0;
       // this.headerText = 'ModalTitleForCheckout';
       // this.commitText = 'ModalCommentForCheckout';
       // this.inStock = 'InStock'
