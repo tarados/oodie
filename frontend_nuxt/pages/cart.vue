@@ -181,11 +181,7 @@ export default {
     },
     toCheckout() {
       this.warningList.length = 0;
-      // this.headerText = 'ModalTitleForCheckout';
-      // this.commitText = 'ModalCommentForCheckout';
-      // this.inStock = 'InStock'
       const localStorageAvailability = cart.getItems();
-      console.log(localStorageAvailability);
       this.productsList.forEach(item => {
         localStorageAvailability.forEach(el => {
           if (el.id === item.id) {
@@ -326,7 +322,7 @@ img {
 p {
   margin: 25px 0;
   color: #f1410b;
-  letter-spacing: 0.96px;
+  letter-spacing: 1px;
   line-height: 25px;
   text-transform: uppercase;
 }
@@ -492,8 +488,6 @@ p {
   color: black;
 }
 
-/*media queries*************************************************************************************/
-
 @media screen and (max-width: 680px) {
   .wrapper-cart {
     margin: 5vw;
@@ -527,7 +521,6 @@ p {
   }
 
   .product {
-
     justify-content: left;
   }
 
