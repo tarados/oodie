@@ -67,7 +67,6 @@
             <option disabled value="">{{ $t('CheckoutSelectDeliveryMethod') }}</option>
             <option>{{ $t('CheckoutNovaPoshta') }}</option>
             <option>{{ $t('CheckoutCourier') }}</option>
-            <option>{{ $t('CheckoutPickup') }}</option>
           </select>
           <small v-if="invalidDelivery">{{ $t('CheckoutSelectDeliveryMethodError') }}</small>
         </div>
@@ -121,9 +120,6 @@
         <div class="description-content">
           <textarea v-model="comment" rows="4"></textarea>
         </div>
-        <div class="button-block" v-if="deliveryMethod === 'Самовывоз'">
-          <strong>{{ $t('CheckoutPickupDescription') }}</strong>
-        </div>
       </div>
       <div class="subtotal">
         <div class="subtotal-title">{{ $t('CheckoutPay') }}</div>
@@ -145,7 +141,6 @@
 
 <script>
 import {required, email, minLength} from 'vuelidate/lib/validators';
-import {get} from '~/assets/js/api'
 import {post} from '~/assets/js/api'
 
 export default {
@@ -586,12 +581,6 @@ textarea {
 
 .new-post-city div {
   width: 100%;
-}
-
-@media screen and (max-width: 1200px) {
-  .submit-box {
-    /*margin: 0 10%;*/
-  }
 }
 
 @media screen and (max-width: 960px) {
