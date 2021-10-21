@@ -85,12 +85,20 @@ export default {
 }
 
 .langSelector img {
+  margin: auto;
   width: 100%;
+}
+.langSelector .langSelector_item {
+  margin: auto;
 }
 
 .langSelector svg {
   width: 18px;
   height: 18px;
+}
+
+.langSelector span {
+  margin: auto;
 }
 
 .langSelector .sub-menu {
@@ -125,4 +133,14 @@ export default {
   width: 105%;
 }
 
+@media screen and (max-width: 370px){
+  .langSelector {
+    grid-template-columns: 1rem 25px auto;
+  }
+
+  .langSelector svg {
+    width: 14px;
+    height: 14px;
+  }
+}
 </style>

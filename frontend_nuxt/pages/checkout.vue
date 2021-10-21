@@ -46,7 +46,7 @@
             {{ $t('CheckoutEnterPhone') }}
           </small>
           <small v-show="$v.phone.required && !$v.phone.minLength">
-            {{ $t('CheckoutPhoneWarning') }} {{ phone.length }}
+            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum.length + 2 }}
           </small>
         </div>
         <div class="form-title">
@@ -150,6 +150,7 @@ import {post} from '~/assets/js/api'
 
 export default {
   name: "Checkout",
+  middleware: ['products'],
   data() {
     return {
       "deliveryMethod": "",
@@ -170,6 +171,7 @@ export default {
       "postOfficeError": '',
       "postOfficeRef": '',
       "phone": "",
+      "phoneNum": "",
       "email": '',
       "comment": '',
       "invalidName": false,
@@ -188,7 +190,7 @@ export default {
     userSurname: {required},
     selectedPayment: {required},
     deliveryMethod: {required},
-    phone: {required, minLength: minLength(12)},
+    phone: {required, minLength: minLength(13)},
     email: {email}
   },
   computed: {
@@ -309,6 +311,7 @@ export default {
     },
     handleUserInput(e) {
       let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+      this.phoneNum = replacedInput.input;
       this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
         + (replacedInput[3] ? '-' + replacedInput[3] : '') + (replacedInput[4] ? '-' + replacedInput[4] : '');
     },

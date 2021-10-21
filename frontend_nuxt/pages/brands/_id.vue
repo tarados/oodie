@@ -8,6 +8,7 @@
 
 export default {
   name: "Brand",
+  middleware: ['products'],
   computed: {
     ctgId() {
       return Number(this.$route.params.id);
