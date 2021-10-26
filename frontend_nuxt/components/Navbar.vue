@@ -26,7 +26,6 @@
           </div>
         </div>
       </div>
-      <<<<<<< HEAD
     </div>
     <div class="navbar_logo" @click="toMain">
       <img alt="" src="~/assets/img/logo2.png">
@@ -49,22 +48,7 @@
           </svg>
           <div
             class="navbar-item__sub-menu"
-            v-if="isOpen"
-          =======
-          <div class="navbar_logo" @click="toMain">
-            <img alt="" src="~/assets/img/logo2.png">
-          </div>
-          <div class="navbar_items">
-            <div class="navbar-item"
-                 v-for="(item, index) in links" :key="index">
-              <nuxt-link :to="item.route">
-                <p>{{ $t(`${item.title}`) }}</p>
-              </nuxt-link>
-              <div class="navbar-item__brands" v-if="item.nestedRoutes"
-                   @mouseover="mouseover"
-                   @mouseleave="mouseleave"
-              >>>>>>> 94f81dc956306fa97e15ab15f32bfdd1d818ef90
-                >
+            v-if="isOpen">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                      fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
