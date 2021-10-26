@@ -1,29 +1,32 @@
 <template>
   <div class="navbar">
-    <div class="navbar_header">
-      <div class="navbar_header__hamburg">
-        <Hamburger/>
-      </div>
-      <div class="navbar_header__phone">
-        <img src="~/assets/img/phone-receiver.svg" alt=""/>
-        <a href="#" class="phone">
-          <span>+380507204066</span>
-        </a>
-      </div>
-      <div class="navbar_header__lang-basket">
-        <div class="navbar_header__lang">
-          <Dropdown/>
+    <div class="container-nav">
+      <div class="navbar_header">
+        <div class="navbar_header__hamburg">
+          <Hamburger/>
         </div>
-        <div class="navbar_header__basket" v-if="cartVisible">
-          <nuxt-link to="/cart">
-            <img alt="" src="~/assets/img/cart.svg">
-            <span v-show="cartProducts.length > 0">
+        <div class="navbar_header__phone">
+          <img src="~/assets/img/phone-receiver.svg" alt=""/>
+          <a href="#" class="phone">
+            <span>+380507204066</span>
+          </a>
+        </div>
+        <div class="navbar_header__lang-basket">
+          <div class="navbar_header__lang">
+            <Dropdown/>
+          </div>
+          <div class="navbar_header__basket" v-if="cartVisible">
+            <nuxt-link to="/cart">
+              <img alt="" src="~/assets/img/cart.svg">
+              <span v-show="cartProducts.length > 0">
               {{ cartProducts.length }}
             </span>
-          </nuxt-link>
+            </nuxt-link>
 
+          </div>
         </div>
       </div>
+      <<<<<<< HEAD
     </div>
     <div class="navbar_logo" @click="toMain">
       <img alt="" src="~/assets/img/logo2.png">
@@ -47,23 +50,49 @@
           <div
             class="navbar-item__sub-menu"
             v-if="isOpen"
-          >
-            <div
-              class="menu-item"
-              v-for="(category, index) in categories" :key="index"
-              v-show="category.slug !== 'hoodiyalko'"
-            >
-              <nuxt-link
-                :to="item.nestedRoutes.route + category.id"
-              >
-                <p>{{ category.title }}</p>
+          =======
+          <div class="navbar_logo" @click="toMain">
+            <img alt="" src="~/assets/img/logo2.png">
+          </div>
+          <div class="navbar_items">
+            <div class="navbar-item"
+                 v-for="(item, index) in links" :key="index">
+              <nuxt-link :to="item.route">
+                <p>{{ $t(`${item.title}`) }}</p>
               </nuxt-link>
+              <div class="navbar-item__brands" v-if="item.nestedRoutes"
+                   @mouseover="mouseover"
+                   @mouseleave="mouseleave"
+              >>>>>>> 94f81dc956306fa97e15ab15f32bfdd1d818ef90
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                     fill="none"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z"/>
+                  <path d="M9 14l3 3l3 -3"/>
+                </svg>
+                <div
+                  class="navbar-item__sub-menu"
+                  v-if="isOpen"
+                >
+                  <div
+                    class="menu-item"
+                    v-for="(category, index) in categories" :key="index"
+                    v-show="category.slug !== 'hoodiyalko'"
+                  >
+                    <nuxt-link
+                      :to="item.nestedRoutes.route + category.id"
+                    >
+                      <p>{{ category.title }}</p>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -117,7 +146,7 @@ export default {
       }, 500);
     },
     toMain() {
-      this.$router.push('/');
+      this.$router.push('/')
     }
   }
 }
@@ -126,6 +155,11 @@ export default {
 <style scoped>
 .navbar {
   position: relative;
+}
+
+.container-nav {
+  display: inline-block;
+  width: 100%
 }
 
 .navbar_header {
@@ -198,15 +232,16 @@ export default {
   align-self: center;
   align-items: center;
   margin: 50px 0 40px 0;
-  cursor: pointer;
 }
 
 .navbar_logo img {
+  margin: 0 auto;
   width: 80%;
   max-width: 400px;
 }
 
 .navbar_items {
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -216,10 +251,10 @@ export default {
 }
 
 .navbar_items .navbar-item {
-  padding: 0 calc(3vw + 12 * (100vw / 1838));
+  padding: 0 2vw;
+  /*padding: 0 calc(3vw + 12 * (100vw / 1838));*/
   position: relative;
   display: flex;
-  align-items: baseline;
   transition: 0.4s;
 }
 
@@ -229,7 +264,7 @@ export default {
 }
 
 .navbar_items .navbar-item a:hover {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .navbar_items .navbar-item .nuxt-link-exact-active {
@@ -281,22 +316,23 @@ export default {
   }
 }
 
-@media screen and (max-width: 370px){
+@media screen and (max-width: 370px) {
   .navbar_header__basket a img {
     height: 1.4rem;
   }
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 320px) {
   .navbar_header__lang-basket {
     gap: 0;
   }
 }
 
-@media screen and (max-width: 280px){
+@media screen and (max-width: 280px) {
   .navbar_header__phone {
     padding: 0;
   }
+
   .navbar_header__phone img {
     margin-left: 10px;
   }
