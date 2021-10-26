@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="navbar_logo">
+    <div class="navbar_logo" @click="toMain">
       <img alt="" src="~/assets/img/logo2.png">
     </div>
     <div class="navbar_items">
@@ -115,6 +115,9 @@ export default {
       this.timer = setTimeout(() => {
         this.isOpen = false;
       }, 500);
+    },
+    toMain() {
+      this.$router.push('/');
     }
   }
 }
@@ -122,13 +125,11 @@ export default {
 
 <style scoped>
 .navbar {
-  width: 100%;
-  margin: 0 auto 20px;
   position: relative;
 }
 
 .navbar_header {
-  height: 4rem;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -155,7 +156,7 @@ export default {
 }
 
 .navbar_header__phone a {
-  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
+  font-size: calc(16px + 2 * ((100vw - 320px) / 1518));
   margin-left: 5px;
   text-decoration: none;
   color: #000000;
@@ -178,12 +179,12 @@ export default {
 }
 
 .navbar_header__basket a img {
-  height: 1.5rem;
+  height: 30px;
 }
 
 .navbar_header__basket a span {
   padding-left: 15%;
-  font-size: calc(16px + 2 * ((100vw - 320px) / 1518));
+  font-size: calc(20px + 2 * ((100vw - 320px) / 1848));
 
 }
 
@@ -192,11 +193,12 @@ export default {
 }
 
 .navbar_logo {
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-  max-height: 3rem;
-
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  margin: 50px 0 40px 0;
+  cursor: pointer;
 }
 
 .navbar_logo img {
@@ -208,7 +210,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
+  margin-bottom: 40px;
+  max-height: 19px;
 }
 
 .navbar_items .navbar-item {

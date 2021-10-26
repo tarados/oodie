@@ -75,7 +75,7 @@ export default {
 
 .menu-wrap .hamburger {
   position: fixed;
-  left: 2vw;
+  left: 0;
   z-index: 1;
   width: 50px;
   height: 40px;
@@ -189,6 +189,13 @@ export default {
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.4s ease;
+}
+
+@media screen and (max-width: 280px){
+  .menu-wrap .hamburger {
+    left: -10px;
+    /*width: 45px;*/
+  }
 }
 
 </style>
