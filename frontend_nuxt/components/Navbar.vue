@@ -37,9 +37,9 @@
           <p>{{ $t(`${item.title}`) }}</p>
         </nuxt-link>
         <div class="navbar-item__brands" v-if="item.nestedRoutes"
-             @mouseover="mouseover"
-             @mouseleave="mouseleave"
-        >
+                       @mouseover="mouseover"
+                       @mouseleave="mouseleave"
+                  >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                fill="none"
                stroke-linecap="round" stroke-linejoin="round">
@@ -48,35 +48,24 @@
           </svg>
           <div
             class="navbar-item__sub-menu"
-            v-if="isOpen">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                     fill="none"
-                     stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z"/>
-                  <path d="M9 14l3 3l3 -3"/>
-                </svg>
-                <div
-                  class="navbar-item__sub-menu"
-                  v-if="isOpen"
-                >
-                  <div
-                    class="menu-item"
-                    v-for="(category, index) in categories" :key="index"
-                    v-show="category.slug !== 'hoodiyalko'"
-                  >
-                    <nuxt-link
-                      :to="item.nestedRoutes.route + category.id"
-                    >
-                      <p>{{ category.title }}</p>
-                    </nuxt-link>
-                  </div>
-                </div>
-              </div>
-
+            v-if="isOpen"
+          >
+            <div
+              class="menu-item"
+              v-for="(category, index) in categories" :key="index"
+              v-show="category.slug !== 'hoodiyalko'"
+            >
+              <nuxt-link
+                :to="item.nestedRoutes.route + category.id"
+              >
+                <p>{{ category.title }}</p>
+              </nuxt-link>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
