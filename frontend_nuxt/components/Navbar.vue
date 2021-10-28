@@ -163,10 +163,14 @@ export default {
 }
 
 .navbar_header__phone a {
-  font-size: calc(16px + 2 * ((100vw - 320px) / 1518));
+
   margin-left: 5px;
   text-decoration: none;
   color: #000000;
+}
+
+.navbar_header__phone a span {
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
 }
 
 .navbar_header__lang-basket {
@@ -204,7 +208,9 @@ export default {
   justify-content: center;
   align-self: center;
   align-items: center;
-  margin: 50px 0 40px 0;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  /*margin: 50px 0 40px 0;*/
 }
 
 .navbar_logo img {
@@ -219,13 +225,12 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
-  max-height: 19px;
+  margin-bottom: 7vmin;
+  /*max-height: 19px;*/
 }
 
 .navbar_items .navbar-item {
-  padding: 0 2vw;
-  /*padding: 0 calc(3vw + 12 * (100vw / 1838));*/
+  padding: 0 calc(3vw + 12 * (100vw / 1838));
   position: relative;
   display: flex;
   transition: 0.4s;

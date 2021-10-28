@@ -371,7 +371,7 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
-  max-width: 600px;
+  width: 600px;
   margin: 0 auto;
   padding: 0 16px 64px 16px;
 }
@@ -558,14 +558,17 @@ textarea:focus {
   text-decoration: none;
 }
 
-.continue-shipping {
+.button-block .continue-shipping {
   flex: 1;
   background-color: green;
   border: 0;
-  color: white;
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 400;
+}
+
+.button-block .continue-shipping span {
+  color: white;
 }
 
 textarea {
