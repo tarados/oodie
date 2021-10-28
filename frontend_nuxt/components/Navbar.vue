@@ -232,6 +232,7 @@ export default {
 }
 
 .navbar_items .navbar-item a {
+  align-self: center;
   text-decoration: none;
   text-transform: uppercase;
 }
