@@ -208,11 +208,12 @@ export default {
 <style scoped>
 
 .wrapper-cart {
-  margin: 0 5vw 5vw;
+  margin: 10px;
 }
 
 
 .header {
+  margin: 32px auto;
   text-align: center;
 }
 
