@@ -208,7 +208,7 @@ export default {
 <style scoped>
 
 .wrapper-cart {
-  margin: 10px;
+  margin: -10px;
 }
 
 
