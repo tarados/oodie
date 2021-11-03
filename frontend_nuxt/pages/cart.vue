@@ -461,7 +461,7 @@ p {
 
 .checkout-buttons {
   margin-top: 32px;
-  margin-bottom: 64px;
+  margin-bottom: 90px;
 }
 
 .checkout-button {
