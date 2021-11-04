@@ -460,8 +460,8 @@ p {
 }
 
 .checkout-buttons {
-  margin-top: 32px;
-  margin-bottom: 90px;
+  margin-top: 30px;
+  margin-bottom: 100px;
 }
 
 .checkout-button {

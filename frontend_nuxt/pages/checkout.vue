@@ -455,7 +455,7 @@ h2 {
 
 .form-content__phone input.country {
   border-right: none;
-  width: 15%;
+  width: 16%;
 }
 
 .form-content__phone input.phone-context {

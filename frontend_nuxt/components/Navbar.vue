@@ -244,6 +244,7 @@ export default {
 
 .navbar_items .navbar-item a:hover {
   font-weight: 700;
+  transform: scaleX(0.98);
 }
 
 .navbar_items .navbar-item .nuxt-link-exact-active {
