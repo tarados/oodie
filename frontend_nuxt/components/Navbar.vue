@@ -32,7 +32,7 @@
       <div class="navbar_items">
         <div class="navbar-item"
              v-for="(item, index) in links" :key="index">
-          <nuxt-link :to="item.route">
+          <nuxt-link :to="item.route" :title="$t(`${item.title}`)">
             <p>{{ $t(`${item.title}`) }}</p>
           </nuxt-link>
           <div class="navbar-item__brands" v-if="item.nestedRoutes"
@@ -237,14 +237,23 @@ export default {
 }
 
 .navbar_items .navbar-item a {
+  text-align: center;
   align-self: center;
   text-decoration: none;
   text-transform: uppercase;
 }
 
 .navbar_items .navbar-item a:hover {
-  font-weight: 700;
-  transform: scaleX(0.98);
+  font-weight: bold;
+}
+
+.navbar_items .navbar-item a::before {
+  display: block;
+  content: attr(title);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
 }
 
 .navbar_items .navbar-item .nuxt-link-exact-active {
