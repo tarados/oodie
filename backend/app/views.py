@@ -16,6 +16,7 @@ from .insta_parse import parse_insta
 
 def products(request):
 	category_id = request.GET.get('category_id', None)
+	print('category_id from request: ', category_id)
 	products_list = []
 	categories_list = []
 
@@ -23,8 +24,10 @@ def products(request):
 	if category_id:
 		all_products = all_products.filter(category_id=category_id)
 	all_products = list(all_products)
+	print('all_products: ', all_products)
 
 	all_categories = list(Category.objects.all())
+	print('all_categories: ', all_categories)
 
 	for category in all_categories:
 		categories_list.append({
@@ -32,8 +35,10 @@ def products(request):
 			'title': category.name,
 			'slug': category.slug
 		})
+	print('categories_list: ', categories_list)
 
 	for prod in all_products:
+		print('product: ', prod)
 		if prod.title_locale is None:
 			title_translate = None
 		else:
@@ -51,7 +56,7 @@ def products(request):
 				'image': prod.get_first_image_url()
 			}
 		)
-
+	print('products_list: ', products_list)
 	return JsonResponse({'products': products_list, 'categories': categories_list})
 
 
