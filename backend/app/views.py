@@ -34,8 +34,10 @@ def products(request):
 		})
 
 	for prod in all_products:
-		print('productCategory: ', prod.category.id)
-		print('productCategory: ', prod.category_id)
+		print(
+			prod.title, ', availability: ', prod.availability_dict(),
+			', table: ', prod.get_table_of_size(), ', image: ', prod.get_first_image_url()
+		)
 		if prod.title_locale is None:
 			title_translate = None
 		else:
@@ -53,7 +55,7 @@ def products(request):
 				'image': prod.get_first_image_url()
 			}
 		)
-	print('products_list: ', products_list)
+	print('successful')
 	return JsonResponse({'products': products_list, 'categories': categories_list})
 
 

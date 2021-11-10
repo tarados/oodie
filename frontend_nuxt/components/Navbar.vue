@@ -84,16 +84,7 @@ export default {
       return lnk
     },
     categories() {
-      const categories = this.$store.getters['categories/categories'];
-      let categoryList = [];
-      this.$store.getters['products/products'].forEach(item => {
-        categories.forEach(category => {
-          if (item.category === category.id) {
-            categoryList.push(category);
-          }
-        })
-      })
-      return categoryList
+      return this.$store.getters['categories/categories'];
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
