@@ -4,6 +4,11 @@ from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.db.models.signals import post_save
 from sorl.thumbnail import get_thumbnail
+import logging
+from .log import my_logger
+
+my_logger()
+log = logging.getLogger('my_logger')
 
 
 class Category(models.Model):
@@ -80,8 +85,10 @@ class Product(models.Model):
 		try:
 			first_image = ProductImage.objects.filter(product=self.id)[0].image
 			im = get_thumbnail(first_image, '600x600', crop='center', quality=99)
+			log.debug('get_first_image_url - %s' % (settings.SITE_URL + im.url))
 			return settings.SITE_URL + im.url
 		except IndexError:
+			logging.exception("error")
 			return None
 
 	def get_price(self):
@@ -125,6 +132,7 @@ class Product(models.Model):
 				'quantity': availability.quantity,
 				'preorder': availability.preorder
 			})
+		log.debug("availability_dict - %s" % availability_list)
 		return availability_list
 
 	def availability_info(self):
@@ -140,6 +148,7 @@ class Product(models.Model):
 
 	def get_table_of_size(self):
 		if self.table_id:
+			log.debug("get_table_of_size - %s" % (settings.SITE_URL + self.table.image.url))
 			return settings.SITE_URL + self.table.image.url
 		return None
 
