@@ -521,7 +521,7 @@ select {
   background-color: white;
   padding-left: 8px;
   padding-right: 8px;
-  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
+  font-size: calc(12px + 2 * ((100vw - 320px) / 1518));
 }
 
 
