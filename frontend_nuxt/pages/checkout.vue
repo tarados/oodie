@@ -371,7 +371,7 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 16px 64px 16px;
 }
@@ -521,7 +521,7 @@ select {
   background-color: white;
   padding-left: 8px;
   padding-right: 8px;
-  font-size: 14px;
+  font-size: calc(14px + 2 * ((100vw - 320px) / 1518));
 }
 
 
