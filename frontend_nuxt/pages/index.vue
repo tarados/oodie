@@ -60,7 +60,6 @@ export default {
 <style scoped>
 .home {
   margin: 0 auto 2rem;
-  text-align: center;
 }
 
 .content-wrapper {
@@ -133,6 +132,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  text-align: start;
 }
 
 .info-content + .info-content {
@@ -169,7 +169,7 @@ export default {
 
 .info-content .info-title span {
   font-size: calc(8px + 4 * (100vw / 1838));
-  color: #424141;
+  color: #b0b0b0;
 }
 
 .info-content .info-title span,
