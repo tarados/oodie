@@ -164,6 +164,11 @@ ADMIN_EMAILS = [
 	"hoodiyalko@gmail.com",
 ]
 
+THUMBNAIL_FORMAT = 'PNG'
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+THUMBNAIL_REDIS_HOST = 'localhost'
+THUMBNAIL_REDIS_PORT = 6379
+
 sentry_sdk.init(
 	dsn="https://6df622b069b8449fbe56509e5546f5a6@o498785.ingest.sentry.io/5578609",
 	integrations=[DjangoIntegration()],
@@ -173,3 +178,4 @@ sentry_sdk.init(
 	# django.contrib.auth) you may enable sending PII data.
 	send_default_pii=True
 )
+
