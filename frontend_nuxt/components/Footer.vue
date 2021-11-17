@@ -188,13 +188,13 @@ export default {
 
 @media screen and (max-width: 375px) {
   .wrapper-footer {
-    padding: 32px 0;
+    padding: 32px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .footer-content__item {
-    padding: 10px 0;
+    padding: 10px;
     min-height: 100px;
   }
 
