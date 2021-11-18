@@ -35,7 +35,7 @@ export default {
 <style scoped>
 .wrapper {
   margin: 0 auto;
-  max-width: 800px;
+  width: min(100%, 800px);
   padding: 16px 16px 40px 16px;
 }
 

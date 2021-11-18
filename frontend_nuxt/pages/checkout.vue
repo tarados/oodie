@@ -371,7 +371,7 @@ export default {
 
 <style scoped>
 .wrapper-checkout {
-  max-width: 600px;
+  width: min(100%, 600px);
   margin: 0 auto;
   padding: 0 16px 64px 16px;
 }
