@@ -208,13 +208,18 @@ export default {
 <style scoped>
 
 .wrapper-cart {
-  margin-top: 5px;
+  margin-top: -0.8%;
 }
 
 
 .header {
+  max-height: 38px;
   margin: 2% auto;
   text-align: center;
+}
+
+.grid-container {
+  margin: -15px;
 }
 
 h1 {
