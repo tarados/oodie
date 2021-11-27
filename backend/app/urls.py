@@ -2,6 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
+	path('home', home),
 	path('products', products),
 	path('products/product/<int:product_id>', product),
 	path('cities', novaposhta_api_city),

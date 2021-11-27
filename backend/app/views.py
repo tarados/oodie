@@ -10,13 +10,18 @@ from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
 from django.db import transaction
-from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size, Localization
+from .models import ProductImage, Product, Order, OrderItem, Category, ProductAvailability, Size, Localization, Translates
 from .novaposhta_api import invoice, get_errors
 from .insta_parse import parse_insta
 from .log import my_logger
 
 my_logger()
 log = logging.getLogger('my_logger')
+
+
+def home(request):
+    translates = Translates.objects.get(name='Домашняя страница')
+    return JsonResponse({'home_page': str(translates.name_locale)})
 
 
 def products(request):
@@ -77,7 +82,11 @@ def products(request):
             }
         )
     logging.info('end products request')
-    return JsonResponse({'products': products_list, 'categories': categories_list})
+
+    return JsonResponse({
+        'products': products_list,
+        'categories': categories_list
+    })
 
 
 def product(request, product_id):

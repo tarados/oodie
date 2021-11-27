@@ -25,6 +25,18 @@ class Localization(models.Model):
 		return self.key
 
 
+class Translates(models.Model):
+	name = models.CharField(max_length=255, verbose_name=u'название перевода')
+	name_locale = models.ForeignKey(Localization, verbose_name=u'ключ для перевода', null=True, blank=True, on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name = "Перевод"
+		verbose_name_plural = "Переводы"
+
+	def __str__(self):
+		return self.name
+
+
 class Category(models.Model):
 	name = models.CharField(max_length=255, verbose_name=u'название категории')
 	name_locale = models.ForeignKey(Localization, verbose_name=u'перевод категории', null=True, blank=True, on_delete=models.CASCADE, related_name='name_translate')

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .novaposhta_api import invoice
-from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize, Localization
+from .models import Category, Product, ProductImage, Order, OrderItem, Size, ProductAvailability, TableOfSize, Localization, Translates
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib.admin.templatetags.admin_modify import register, submit_row as original_submit_row
@@ -169,10 +169,15 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "slug", "pk",)
 
 
+class TranslateAdmin(admin.ModelAdmin):
+    list_display = ("name", "name_locale", "pk",)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Localization, LocalizationAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Translates, TranslateAdmin)
 admin.site.register(TableOfSize)
 admin.site.register(Size)
 admin.site.register(ProductAvailability, ProductAvailabilityAdmin)

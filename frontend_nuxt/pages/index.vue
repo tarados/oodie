@@ -46,7 +46,33 @@
 export default {
   name: "Home",
   middleware: ['products'],
+  data() {
+    return {
+      title: ''
+    }
+  },
+  head() {
+    return {
+      title: this.$t(`${this.title}`),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
+  },
   computed: {
+    headTitle() {
+      if (this.$store.getters['home/home']) {
+        this.title = this.$store.getters['home/home']
+        return this.$store.getters['home/home']
+      } else {
+        return ''
+      }
+
+    },
     slides() {
       if (this.$store.getters['instagram/slides'].length > 0) {
         return this.$store.getters['instagram/slides']
@@ -54,6 +80,9 @@ export default {
         return []
       }
     }
+  },
+  mounted() {
+    this.headTitle;
   }
 }
 </script>
