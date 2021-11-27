@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="product-title">
-          <div>{{ this.selectedProduct.title }}</div>
+          <div>{{ $t(`${title}`) }}</div>
         </div>
         <div class="size-block" v-if="!this.hideSize">
           <div
@@ -97,7 +97,21 @@ export default {
       inStockNo: null,
       slides: [],
       hideSize: false,
+      title: '',
+      categoryForHead: ''
     };
+  },
+  head() {
+    return {
+      title: this.$t(`${this.categoryForHead}`) + " / " + this.$t(`${this.title}`),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
   },
   validations: {
     size: {required},
@@ -109,14 +123,24 @@ export default {
   computed: {
     selectedProduct() {
       if (this.product) {
-        return this.product;
+        if (this.product.title_translate) {
+          this.title = this.product.title_translate;
+        }  else {
+          this.title = this.product.title;
+        }
+       return this.product;
       } else {
         return {};
       }
     },
     currentCategory() {
       const category = this.$store.getters['categories/categories'].find(category => category.id === this.selectedProduct.category);
-      if (category && category.title) {
+      if (category) {
+        if (category.title_translate) {
+          this.categoryForHead = category.title_translate;
+        }  else {
+          this.categoryForHead = category.title;
+        }
         return category.title;
       } else {
         return "";
@@ -141,7 +165,6 @@ export default {
       if (this.selectedProduct.image_list) {
         images = this.selectedProduct.image_list;
       }
-
       images.forEach(image => {
         this.slides.push({
           "image": image,

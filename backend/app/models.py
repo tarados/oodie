@@ -11,8 +11,23 @@ my_logger()
 log = logging.getLogger('my_logger')
 
 
+class Localization(models.Model):
+	key = models.CharField("Ключ текста", max_length=255, null=True, blank=True)
+	value = models.TextField("Значение на русском", null=True, blank=True)
+	value_ua = models.TextField("Значение на украинском", null=True, blank=True)
+	# value_en = models.TextField("Значение на английском", null=True, blank=True)
+
+	class Meta:
+		verbose_name = "Локализация"
+		verbose_name_plural = "Локализации"
+
+	def __str__(self):
+		return self.key
+
+
 class Category(models.Model):
-	name = models.CharField(max_length=255, verbose_name=u'название')
+	name = models.CharField(max_length=255, verbose_name=u'название категории')
+	name_locale = models.ForeignKey(Localization, verbose_name=u'перевод категории', null=True, blank=True, on_delete=models.CASCADE, related_name='name_translate')
 	slug = models.SlugField(null=True)
 
 	class Meta:
@@ -44,20 +59,6 @@ class TableOfSize(models.Model):
 
 	def __str__(self):
 		return self.name
-
-
-class Localization(models.Model):
-	key = models.CharField("Ключ текста", max_length=255, null=True, blank=True)
-	value = models.TextField("Значение на русском", null=True, blank=True)
-	value_ua = models.TextField("Значение на украинском", null=True, blank=True)
-	# value_en = models.TextField("Значение на английском", null=True, blank=True)
-
-	class Meta:
-		verbose_name = "Локализация"
-		verbose_name_plural = "Локализации"
-
-	def __str__(self):
-		return self.key
 
 
 class Product(models.Model):

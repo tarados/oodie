@@ -36,9 +36,14 @@ def products(request):
     log.info('get categories from db - len_all_categories - %s' % len(all_categories))
 
     for category in all_categories:
+        if category.name_locale is None:
+            name_translate = None
+        else:
+            name_translate = str(category.name_locale)
         categories_list.append({
             'id': category.id,
             'title': category.name,
+            'title_translate': name_translate,
             'slug': category.slug
         })
     log.info('iterate products')

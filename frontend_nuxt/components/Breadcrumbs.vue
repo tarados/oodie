@@ -1,21 +1,22 @@
 <template>
-    <ul class="breadcrumbs">
-      <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
-        <nuxt-link
-            v-if="index < breadcrumbCount"
-            to="/"
-             class="breadcrumbs__link"
-        >
-         {{ $t(`${item.title}`) }}
-        </nuxt-link>
-        <span v-if="index === breadcrumbs.length - 1">{{ item.title}}</span>
-      </li>
-    </ul>
+  <ul class="breadcrumbs">
+    <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
+      <nuxt-link
+        v-if="index < breadcrumbCount"
+        :to= item.routeName
+        class="breadcrumbs__link"
+      >
+        {{ $t(`${item.title}`) }}
+      </nuxt-link>
+      <span v-if="index === breadcrumbs.length - 1">{{ $t(`${item.title}`) }}</span>
+    </li>
+  </ul>
 </template>
 
 <script>
 
 import About from "@/pages/about";
+
 export default {
   name: "Breadcrumbs",
   components: {About},
@@ -27,25 +28,40 @@ export default {
       type: Object
     }
   },
+  data() {
+    return {
+      title: '',
+      categoryTitle: ''
+    }
+  },
   computed: {
     breadcrumbs() {
       const categoriesList = this.$store.getters['categories/categories'];
       const result = [];
       if (this.currentProduct && this.currentProduct.category === 1) {
-        result.push({ title: "MenuHome", routeName: "Home" });
+        result.push({title: "MenuHome", routeName: "/"});
       } else {
-        result.push({ title: "MenuBrandsFriends", routeName: "Brands" });
-
+        result.push({title: "MenuBrandsFriends", routeName: "/brands"});
         if (this.currentProduct) {
           const category = categoriesList.find(category => category.id === this.currentProduct.category);
           if (category) {
-            result.push({ title: category.title, routeName: "Brand", routeParams: { slug: category.slug } });
+            if (category.title_translate) {
+              this.categoryTitle = category.title_translate;
+            }  else {
+              this.categoryTitle = category.title;
+            }
+            const idCategory = parseInt(category.id);
+            result.push({title: this.categoryTitle, routeName: "/brands/" + `${idCategory}`, routeParams: {slug: category.slug}});
           }
         }
       }
-
       if (this.currentProduct) {
-        result.push({ title: this.currentProduct.title });
+        if (this.currentProduct.title_translate) {
+          this.title = this.currentProduct.title_translate;
+        }  else {
+          this.title = this.currentProduct.title;
+        }
+        result.push({title: this.title});
       }
 
       return result;
