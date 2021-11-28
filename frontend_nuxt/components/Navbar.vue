@@ -57,7 +57,7 @@
                 <nuxt-link
                   :to="item.nestedRoutes.route + category.id"
                 >
-                  <p>{{ category.title }}</p>
+                  <p>{{ $t(`${category.title_translate}`) }}</p>
                 </nuxt-link>
               </div>
             </div>
