@@ -13,6 +13,18 @@
 
 export default {
   name: "Successful",
+  head() {
+    return {
+      title: this.$t('SuccessfulMessageOne'),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
+  },
   components: {},
   methods: {
     backToMain() {

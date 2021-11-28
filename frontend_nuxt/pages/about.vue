@@ -6,7 +6,19 @@
 
 <script>
 export default {
-  name: "About"
+  name: "About",
+  head() {
+    return {
+      title: this.$t('AboutPage'),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
+  }
 }
 </script>
 

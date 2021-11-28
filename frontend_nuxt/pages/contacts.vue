@@ -28,7 +28,19 @@
 
 <script>
 export default {
-  name: "Contacts"
+  name: "Contacts",
+  head() {
+    return {
+      title: this.$t('ContactsPage'),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
+  }
 }
 </script>
 

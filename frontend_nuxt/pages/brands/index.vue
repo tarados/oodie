@@ -8,7 +8,19 @@
 
 export default {
   name: "index",
-  middleware: ['products']
+  middleware: ['products'],
+  head() {
+    return {
+      title: this.$t('MenuBrandsFriends'),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'My custom description'
+        }
+      ]
+    }
+  }
 }
 </script>
 
