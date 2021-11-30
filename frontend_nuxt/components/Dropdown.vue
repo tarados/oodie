@@ -2,8 +2,8 @@
   <div class="langSelector"
        @mouseover="mouseoverLang"
        @mouseleave="mouseleaveLang">
-    <img alt="" :src="require(`~/assets/img/${selectedLanguageIcon}.svg`)"/>
-    <span>{{ selectedLanguage }}</span>
+    <img alt="" :src="require(`~/assets/img/${$i18n.locale}.svg`)"/>
+    <span>{{ $i18n.locale | capitalize }}</span>
     <div class="langSelector_item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
            fill="none"
@@ -34,8 +34,6 @@ export default {
   name: "Dropdown",
   data() {
     return {
-      selectedLanguageIcon: this.$i18n.locale,
-      selectedLanguage: this.$i18n.locale.toUpperCase(),
       isOpenLang: false,
       flag: ''
     }
@@ -66,8 +64,7 @@ export default {
     setLocale(index) {
       let locale = '';
       locale = this.$i18n.locales[index] ;
-      this.$i18n.locale = this.$i18n.defaultLocale = this.$i18n.fallbackLocale = this.selectedLanguageIcon = locale;
-      this.selectedLanguage = locale.toUpperCase();
+      this.$i18n.locale = locale;
       this.isOpenLang = !this.isOpenLang;
     }
   }

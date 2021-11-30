@@ -242,6 +242,6 @@ def locales(request):
         key_ua.update({el.key: el.value_ua})
     locale.update({
         'ru-RU': key_ru,
-        'ua-UA': key_ua
+        'uk-UA': key_ua
     })
     return JsonResponse(locale)

@@ -6,13 +6,13 @@ export default {
       lang: 'en'
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'hoodiyalko' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'hoodiyalko'},
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -34,8 +34,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-  ],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -48,12 +47,15 @@ export default {
   axios: {},
 
   i18n: {
-    locales: ['ru', 'ua'],
+    locales: ['ru', 'uk'],
     strategy: 'no_prefix',
     defaultLocale: 'ru',
     vueI18n: {
       fallbackLocale: 'ru',
       messages: {}
+    },
+    detectBrowserLanguage: {
+      useCookie: false
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
