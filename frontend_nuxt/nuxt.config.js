@@ -55,7 +55,8 @@ export default {
       messages: {}
     },
     detectBrowserLanguage: {
-      useCookie: false
+      useCookie: true,
+      cookieKey: 'my'
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
