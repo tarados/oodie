@@ -1,3 +1,5 @@
+import {locale} from "moment/moment";
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -49,14 +51,14 @@ export default {
   i18n: {
     locales: ['ru', 'uk'],
     strategy: 'no_prefix',
-    defaultLocale: 'ru',
+    defaultLocale: 'uk',
     vueI18n: {
-      fallbackLocale: 'ru',
+      fallbackLocale: 'uk',
       messages: {}
     },
     detectBrowserLanguage: {
       useCookie: true,
-      cookieKey: 'my'
+      cookieKey: 'i18n_redirected'
     }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -65,6 +65,7 @@ export default {
       let locale = '';
       locale = this.$i18n.locales[index] ;
       this.$i18n.locale = locale;
+      document.cookie = `i18n_redirected=${locale}`
       this.isOpenLang = !this.isOpenLang;
     }
   }

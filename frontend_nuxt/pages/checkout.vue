@@ -173,6 +173,7 @@ export default {
       "phoneNum": "",
       "email": '',
       "comment": '',
+      "title": 'CheckoutTitle',
       "invalidName": false,
       "invalidSurname": false,
       "invalidCity": false,
@@ -183,6 +184,18 @@ export default {
       "invalidDelivery": false,
       "invalidPayment": false,
       "invalidAddress": false
+    }
+  },
+  head() {
+    return {
+      title: this.$t(`${this.title}`),
+      meta: [
+        {
+          hid: 'Hoodiyalko',
+          name: 'Hoodiyalko',
+          content: 'Hoodiyalko'
+        }
+      ]
     }
   },
   validations: {

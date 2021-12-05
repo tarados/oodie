@@ -103,9 +103,22 @@ export default {
     return {
       isVisible: false,
       warningList: [],
+      title: 'CartTitle',
       headerText: null,
       commitText: null,
       inStock: null
+    }
+  },
+  head() {
+    return {
+      title: this.$t(`${this.title}`),
+      meta: [
+        {
+          hid: 'Hoodiyalko',
+          name: 'Hoodiyalko',
+          content: 'Hoodiyalko'
+        }
+      ]
     }
   },
   components: {
