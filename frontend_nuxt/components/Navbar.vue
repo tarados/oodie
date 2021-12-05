@@ -177,16 +177,17 @@ export default {
 
 .navbar_header__basket a {
   display: flex;
+  align-items: center;
   text-decoration: none;
 }
 
 .navbar_header__basket a img {
-  height: 30px;
+  height: 1.4rem;
 }
 
 .navbar_header__basket a span {
   padding-left: 15%;
-  font-size: calc(20px + 2 * ((100vw - 320px) / 1848));
+  font-size: calc(18px + 2 * ((100vw - 320px) / 1848));
 
 }
 

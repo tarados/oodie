@@ -15,8 +15,17 @@ export default {
     }
   },
   head() {
+    let categoryTitle = '';
+    this.$store.getters['categories/categories'].forEach(item => {
+      if (item.id === this.ctgId) {
+        categoryTitle = item.title
+      }
+    });
+    if (this.$t(`${this.title}`)) {
+      categoryTitle = this.$t(`${this.title}`)
+    }
     return {
-      title: this.$t('MenuBrandsFriends') + " / " + this.$t(`${this.title}`),
+      title: categoryTitle,
       meta: [
         {
           hid: 'description',

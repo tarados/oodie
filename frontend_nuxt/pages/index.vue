@@ -56,9 +56,9 @@ export default {
       title: this.$t(`${this.title}`),
       meta: [
         {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
+          hid: 'Hoodiyalko',
+          name: 'Hoodiyalko',
+          content: 'Hoodiyalko'
         }
       ]
     }

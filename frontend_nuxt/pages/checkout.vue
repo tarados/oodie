@@ -27,7 +27,10 @@
           <span>{{ $t('ChecoutPhone') }}:</span>
         </div>
         <div class="form-content phone">
-          <div class="form-content__phone">
+          <div class="form-content__phone"
+               v-model="phoneBlock"
+               :class="{invalid: invalidPhoneBlock}"
+          >
             <input
               v-model="country"
               class="country"
@@ -35,7 +38,6 @@
               @input="handleUserInputCountry"
             >
             <input
-              v-model="phone"
               placeholder="__-___-__-__"
               :class="{invalid: invalidPhone}"
               class="phone-context"
@@ -142,6 +144,7 @@
 <script>
 import {required, email, minLength} from 'vuelidate/lib/validators';
 import {post} from '~/assets/js/api'
+import {clearLocalStorage} from "@/assets/js/localStorage";
 
 export default {
   name: "Checkout",
@@ -166,6 +169,7 @@ export default {
       "postOfficeError": '',
       "postOfficeRef": '',
       "phone": "",
+      "phoneBlock": "",
       "phoneNum": "",
       "email": '',
       "comment": '',
@@ -175,6 +179,7 @@ export default {
       "invalidOffice": false,
       "invalidEmail": false,
       "invalidPhone": false,
+      "invalidPhoneBlock": false,
       "invalidDelivery": false,
       "invalidPayment": false,
       "invalidAddress": false
@@ -186,6 +191,7 @@ export default {
     selectedPayment: {required},
     deliveryMethod: {required},
     phone: {required, minLength: minLength(13)},
+    phoneBlock: {required},
     email: {email}
   },
   computed: {
@@ -200,6 +206,18 @@ export default {
     },
     warehousesList() {
       return this.$store.getters['warehouses/warehouses'];
+    },
+    focusPhone() {
+      let inputPhone = document.querySelector('.form-content__phone');
+      inputPhone.children[1].onblur = function () {
+        inputPhone.children[0].style.boxShadow = 'none';
+        inputPhone.children[0].style.border = '1px solid #bbb';
+        inputPhone.children[0].style.borderRight = 'none';
+      };
+      inputPhone.children[1].onfocus = function () {
+        inputPhone.children[0].style.boxShadow = '0 2px 2px #c7d9d8';
+        inputPhone.children[0].style.borderColor = '#c7d9d8';
+      };
     }
   },
   methods: {
@@ -207,6 +225,7 @@ export default {
       this.invalidName = this.$v.userName.$invalid;
       this.invalidSurname = this.$v.userSurname.$invalid;
       this.invalidPhone = this.$v.phone.$invalid;
+      this.invalidPhoneBlock = this.$v.phoneBlock.$invalid;
       this.invalidEmail = this.$v.email.$invalid;
       this.invalidDelivery = this.$v.deliveryMethod.$invalid;
       this.invalidPayment = this.$v.selectedPayment.$invalid;
@@ -254,8 +273,8 @@ export default {
           const response = await post("order", order);
           if (response) {
             await this.$router.push('/successful');
+            this.$store.commit("cart/clearBasket");
             clearLocalStorage();
-            this.$store.commit('clearBasket');
           }
         }
       }
@@ -326,6 +345,12 @@ export default {
     },
     phone: function (newValue) {
       if (this.$v.phone.$invalid) {
+        let inputPhoneBlock = document.querySelector('.form-content__phone');
+        inputPhoneBlock.children[1].onblur = function () {
+          inputPhoneBlock.children[0].style.borderColor = 'red';
+          inputPhoneBlock.children[0].style.boxShadow = 'none';
+        };
+
         this.invalidPhone = this.$v.phone.required;
       } else {
         this.invalidPhone = !this.$v.phone.required;
@@ -365,6 +390,9 @@ export default {
         this.deliveryMethod = 'Самовывоз';
       }
     }
+  },
+  mounted() {
+    this.focusPhone;
   }
 }
 </script>
@@ -498,7 +526,6 @@ textarea {
 
 small {
   color: red;
-  padding-left: 8px;
   position: relative;
   top: 4px;
   right: 0;

@@ -97,13 +97,12 @@ export default {
       inStockNo: null,
       slides: [],
       hideSize: false,
-      title: '',
-      categoryForHead: ''
+      title: ''
     };
   },
   head() {
     return {
-      title: this.$t(`${this.categoryForHead}`) + " / " + this.$t(`${this.title}`),
+      title: this.$t(`${this.title}`),
       meta: [
         {
           hid: 'description',
@@ -153,7 +152,7 @@ export default {
       if (this.preorder) {
         return 'ProductStatusPreorder'
       } else if (this.inStockNo) {
-        return 'InStockNo'
+        return 'AvailabilityNo'
       } else {
         return 'ProductStatusBasket'
       }
