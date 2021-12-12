@@ -10,7 +10,11 @@ export default {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'hoodiyalko', name: 'hoodiyalko', content: 'hoodiyalko'},
+      {
+        hid: 'hoodiyalko',
+        name: 'hoodiyalko',
+        content: 'Худиялко - это супермягкое двухслойное худи одного размера, который подходит для всех' +
+          ' от XSS до 6XL. Носибельное одеяло, которое создано дарить уют и тепло, где бы вы ни находились'},
       {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
