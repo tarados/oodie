@@ -65,7 +65,7 @@
         <div class="preorder" v-if="preorder">{{ $t('ProductStatusPreorderDescription') }}</div>
         <div class="preorder" v-if="!preorder">{{ $t('ProductStatusBasketDescription') }}</div>
         <div class="product-description">
-          <div class="description">{{ $t('ProductDescription') }}</div>
+          <div class="description">{{ this.description }}</div>
         </div>
       </div>
     </div>
@@ -97,7 +97,8 @@ export default {
       inStockNo: null,
       slides: [],
       hideSize: false,
-      title: ''
+      title: '',
+      description: ''
     };
   },
   head() {
@@ -126,6 +127,11 @@ export default {
           this.title = this.product.title_translate;
         }  else {
           this.title = this.product.title;
+        }
+        if (this.product.description_locale) {
+          this.description = this.$t(`${this.product.description_locale}`);
+        } else {
+          this.description = this.product.description;
         }
        return this.product;
       } else {
