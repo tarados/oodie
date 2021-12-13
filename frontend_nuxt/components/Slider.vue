@@ -7,8 +7,8 @@
              ref="slider_list"
              @mousedown="mousedown"
              @mouseup="mouseup"
-             v-touch:start="touchstart"
-             v-touch:end="touchend"
+             v-touch:start="startHandler"
+             v-touch:end="endHandler"
         >
           <div class="slider-track" ref="slider_track">
             <div
@@ -134,17 +134,17 @@ export default {
         }, 1000)
       }
     },
-    touchstart(event) {
+    startHandler(event) {
       if (event) {
-        this.posInit = event.screenX;
+        this.posInit = event.touches[0].screenX;
       }
     },
-    touchend(event) {
+    endHandler(event) {
       if (event) {
         if (this.animationTimer) {
           clearTimeout(this.animationTimer);
         }
-        this.posFinal = event.screenX;
+        this.posFinal = event.changedTouches[0].screenX;
         let interval = this.posFinal - this.posInit;
         this.prevSection = this.currentSection;
         if (interval < 0) {
