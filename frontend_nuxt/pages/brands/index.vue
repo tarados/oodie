@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-brands">
-    <BrandsList/>
+    <BrandsList />
   </div>
 </template>
 
@@ -14,9 +14,9 @@ export default {
       title: this.$t('MenuBrandsFriends'),
       meta: [
         {
-          hid: 'description',
+          hid: 'brandFriends',
           name: 'description',
-          content: 'My custom description'
+          content: `${this.$t('DescriptionForBrandsFriends')}`
         }
       ]
     }

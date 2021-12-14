@@ -106,9 +106,9 @@ export default {
       title: this.$t(`${this.title}`),
       meta: [
         {
-          hid: 'description',
+          hid: 'product',
           name: 'description',
-          content: 'My custom description'
+          content: this.description
         }
       ]
     }

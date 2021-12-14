@@ -12,10 +12,11 @@ export default {
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {
         hid: 'hoodiyalko',
-        name: 'hoodiyalko',
-        content: 'Худиялко - это супермягкое двухслойное худи одного размера, который подходит для всех' +
-          ' от XSS до 6XL. Носибельное одеяло, которое создано дарить уют и тепло, где бы вы ни находились'},
-      {name: 'format-detection', content: 'telephone=no'}
+        name: 'description',
+        content: 'Худиялко - это супермягкое двухслойное худи одного размера, который подходит для всех'
+      },
+      {name: 'format-detection', content: 'telephone=no'},
+      {name: 'keywords', content: 'худиялко, бренды друзья'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}

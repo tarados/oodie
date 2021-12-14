@@ -56,10 +56,9 @@ export default {
       title: this.$t(`${this.title}`),
       meta: [
         {
-          hid: 'Hoodiyalko',
-          name: 'Hoodiyalko',
-          content: 'Что такое худиялко? - Это супермягкое двухслойное худи одного размера, который подходит для всех ' +
-            'от XSS до 6XL. Носибельное одеяло, которое создано дарить уют и тепло, где бы вы ни находились'
+          hid: 'home',
+          name: 'description',
+          content: this.$t('DescriptionForHomePage')
         }
       ]
     }

@@ -41,6 +41,7 @@ export default {
     },
     categoryForHead() {
       const category = this.$store.getters['categories/categories'].find(category => category.id === this.ctgId);
+      console.log(this.product);
       if (category) {
         if (category.title_translate) {
           this.title = category.title_translate;
