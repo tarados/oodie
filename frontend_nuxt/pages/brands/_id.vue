@@ -12,25 +12,17 @@ export default {
   data() {
     return {
       title: '',
+      description: '',
     }
   },
   head() {
-    let categoryTitle = '';
-    this.$store.getters['categories/categories'].forEach(item => {
-      if (item.id === this.ctgId) {
-        categoryTitle = item.title
-      }
-    });
-    if (this.$t(`${this.title}`)) {
-      categoryTitle = this.$t(`${this.title}`)
-    }
     return {
-      title: categoryTitle,
+      title: this.$t(`${this.title}`),
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'My custom description'
+          content: this.$t(`${this.title}`)
         }
       ]
     }
@@ -41,16 +33,15 @@ export default {
     },
     categoryForHead() {
       const category = this.$store.getters['categories/categories'].find(category => category.id === this.ctgId);
-      console.log(this.product);
       if (category) {
         if (category.title_translate) {
           this.title = category.title_translate;
         }  else {
           this.title = category.title;
         }
-        return category.title;
-      } else {
-        return "";
+        if (category.category_description) {
+          this.description = category.category_description;
+        }
       }
     }
   },

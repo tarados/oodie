@@ -45,10 +45,16 @@ def products(request):
             name_translate = None
         else:
             name_translate = str(category.name_locale)
+
+        if category.category_description is None:
+            category_description = None
+        else:
+            category_description = str(category.category_description)
         categories_list.append({
             'id': category.id,
             'title': category.name,
             'title_translate': name_translate,
+            'category_description': category_description,
             'slug': category.slug
         })
     log.info('iterate products')
