@@ -15,14 +15,7 @@ export default {
   name: "Successful",
   head() {
     return {
-      title: this.$t('SuccessfulMessageOne'),
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
-        }
-      ]
+      title: this.$t('SuccessfulMessageOne')
     }
   },
   components: {},

@@ -9,14 +9,7 @@ export default {
   name: "About",
   head() {
     return {
-      title: this.$t('AboutPage'),
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
-        }
-      ]
+      title: this.$t('AboutPage')
     }
   }
 }

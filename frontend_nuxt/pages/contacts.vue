@@ -31,14 +31,7 @@ export default {
   name: "Contacts",
   head() {
     return {
-      title: this.$t('ContactsPage'),
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'My custom description'
-        }
-      ]
+      title: this.$t('ContactsPage')
     }
   }
 }

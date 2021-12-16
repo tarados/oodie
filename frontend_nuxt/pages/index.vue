@@ -46,20 +46,15 @@
 export default {
   name: "Home",
   middleware: ['products'],
-  data() {
-    return {
-      title: ''
-    }
-  },
   head() {
     return {
-      title: this.$t(`${this.title}`),
       meta: [
         {
-          hid: 'home',
+          hid: 'description',
           name: 'description',
           content: this.$t('DescriptionForHomePage')
-        }
+        },
+        {name: 'keywords', content: 'худиялко, бренды друзья'}
       ]
     }
   },

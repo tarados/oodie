@@ -3,20 +3,14 @@ import {locale} from "moment/moment";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "HOODIYALKO",
+    title: 'Худиялко',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {
-        hid: 'hoodiyalko',
-        name: 'description',
-        content: 'Худиялко - это супермягкое двухслойное худи одного размера, который подходит для всех'
-      },
-      {name: 'format-detection', content: 'telephone=no'},
-      {name: 'keywords', content: 'худиялко, бренды друзья'}
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}

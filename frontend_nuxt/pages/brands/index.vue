@@ -12,13 +12,6 @@ export default {
   head() {
     return {
       title: this.$t('MenuBrandsFriends'),
-      meta: [
-        {
-          hid: 'brandFriends',
-          name: 'description',
-          content: `${this.$t('DescriptionForBrandsFriends')}`
-        }
-      ]
     }
   }
 }

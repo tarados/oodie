@@ -188,14 +188,7 @@ export default {
   },
   head() {
     return {
-      title: this.$t(`${this.title}`),
-      meta: [
-        {
-          hid: 'Hoodiyalko',
-          name: 'Hoodiyalko',
-          content: 'Hoodiyalko'
-        }
-      ]
+      title: this.$t(`${this.title}`)
     }
   },
   validations: {
