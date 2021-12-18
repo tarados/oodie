@@ -12,7 +12,7 @@ export const mutations = {
 
 export const actions = {
   async fetch({commit}) {
-    const data = await get('products');
+    const data = await get('categories');
     const categories = data.categories;
     commit('setCategories', categories);
   }

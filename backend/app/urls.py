@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
 	path('home', home),
 	path('products', products),
+	path('categories', categories),
 	path('products/product/<int:product_id>', product),
 	path('cities', novaposhta_api_city),
 	path('warehouse', novaposhta_api_warehouse),

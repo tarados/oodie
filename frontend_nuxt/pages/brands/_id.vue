@@ -8,11 +8,11 @@
 
 export default {
   name: "Brand",
-  middleware: ['products'],
+  middleware: ['products', 'categories'],
   data() {
     return {
       title: '',
-      description: '',
+      description: ''
     }
   },
   head() {
@@ -22,7 +22,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.$t(`${this.title}`)
+          content: this.description
         }
       ]
     }
@@ -45,8 +45,20 @@ export default {
       }
     }
   },
+  methods: {
+    middleware({app}) {
+      app.head.title = this.title;
+      app.head.meta.append({
+        hid: 'description',
+        name: 'description',
+        content: this.description
+      })
+    }
+  },
   mounted() {
     this.categoryForHead;
+    console.log(this.title);
+    console.log(this.description);
   }
 }
 </script>

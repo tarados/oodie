@@ -26,37 +26,8 @@ def home(request):
 
 def products(request):
     logging.info('start products request')
-    category_id = request.GET.get('category_id', None)
     products_list = []
-    categories_list = []
-
     all_products = Product.objects.filter(hidden=False)
-
-    if category_id:
-        all_products = all_products.filter(category_id=category_id)
-    all_products = list(all_products)
-    log.info('get products from db - len_all_products_list - %s' % len(all_products))
-
-    all_categories = list(Category.objects.all())
-    log.info('get categories from db - len_all_categories - %s' % len(all_categories))
-
-    for category in all_categories:
-        if category.name_locale is None:
-            name_translate = None
-        else:
-            name_translate = str(category.name_locale)
-
-        if category.category_description is None:
-            category_description = None
-        else:
-            category_description = str(category.category_description)
-        categories_list.append({
-            'id': category.id,
-            'title': category.name,
-            'title_translate': name_translate,
-            'category_description': category_description,
-            'slug': category.slug
-        })
     log.info('iterate products')
     for prod in all_products:
         if prod.title_locale is None:
@@ -91,6 +62,37 @@ def products(request):
 
     return JsonResponse({
         'products': products_list,
+    })
+
+
+def categories(request):
+    logging.info('start categories request')
+    category_id = request.GET.get('category_id', None)
+    categories_list = []
+    all_categories = list(Category.objects.all())
+    log.info('get categories from db - len_all_categories - %s' % len(all_categories))
+    log.info('iterate categories')
+    for category in all_categories:
+        if category.name_locale is None:
+            name_translate = None
+        else:
+            name_translate = str(category.name_locale)
+
+        if category.category_description is None:
+            category_description = None
+        else:
+            category_description = str(category.category_description)
+        categories_list.append({
+            'id': category.id,
+            'title': category.name,
+            'title_translate': name_translate,
+            'category_description': category_description,
+            'slug': category.slug
+        })
+
+    logging.info('end categories request')
+
+    return JsonResponse({
         'categories': categories_list
     })
 
