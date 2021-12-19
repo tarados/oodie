@@ -12,24 +12,48 @@ export default {
   validate({params}) {
     return /^\d+$/.test(params.id);
   },
-  async asyncData({$axios, app, $i18n, params}) {
+  async asyncData({$axios, params}) {
     const data = await $axios.get(process.env.VUE_APP_API + '/categories/category/' + params.id);
     const category = data.data.category;
-    app.head.title = category.title;
-    app.head.meta.push(
-      {
-        hid: 'description',
-        name: 'description',
-        content: category.description
-      }
-    )
     return {category}
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.description
+        }
+      ]
+    }
   },
   computed: {
     ctgId() {
       return Number(this.$route.params.id);
     },
+    title() {
+      if (!this.category) {
+        return '';
+      }
+      if (this.category.title_translate) {
+        return this.$t(this.category.title_translate);
+      }
+      return this.category.title;
+    },
+    description() {
+      if (!this.category) {
+        return '';
+      }
+      if (this.category.description_locale) {
+        return this.$t(this.category.description_locale);
+      }
+      return this.category.description;
+    },
+
   }
+
 }
 </script>
 
