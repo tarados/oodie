@@ -166,7 +166,6 @@ export default {
   },
   methods: {
     loadProduct() {
-      console.log(this.title);
       let images = [];
       if (this.selectedProduct.image_list) {
         images = this.selectedProduct.image_list;

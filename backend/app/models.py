@@ -40,6 +40,7 @@ class Translates(models.Model):
 class Category(models.Model):
 	name = models.CharField(max_length=255, verbose_name=u'название категории')
 	name_locale = models.ForeignKey(Localization, verbose_name=u'перевод категории', null=True, blank=True, on_delete=models.CASCADE, related_name='name_translate')
+	description = models.TextField(verbose_name=u'описание', null=True, blank=True)
 	category_description = models.ForeignKey(Localization, verbose_name=u'описание категории', null=True, blank=True, on_delete=models.CASCADE, related_name='category_description_translate')
 	slug = models.SlugField(null=True)
 

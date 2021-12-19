@@ -65,38 +65,6 @@ def products(request):
     })
 
 
-def categories(request):
-    logging.info('start categories request')
-    category_id = request.GET.get('category_id', None)
-    categories_list = []
-    all_categories = list(Category.objects.all())
-    log.info('get categories from db - len_all_categories - %s' % len(all_categories))
-    log.info('iterate categories')
-    for category in all_categories:
-        if category.name_locale is None:
-            name_translate = None
-        else:
-            name_translate = str(category.name_locale)
-
-        if category.category_description is None:
-            category_description = None
-        else:
-            category_description = str(category.category_description)
-        categories_list.append({
-            'id': category.id,
-            'title': category.name,
-            'title_translate': name_translate,
-            'category_description': category_description,
-            'slug': category.slug
-        })
-
-    logging.info('end categories request')
-
-    return JsonResponse({
-        'categories': categories_list
-    })
-
-
 def product(request, product_id):
     prod = Product.objects.get(id=int(product_id))
     images_url = []
@@ -124,6 +92,60 @@ def product(request, product_id):
         'image_list': images_url
     }
     return JsonResponse({'product': product_case})
+
+
+def categories(request):
+    logging.info('start categories request')
+    category_id = request.GET.get('category_id', None)
+    categories_list = []
+    all_categories = list(Category.objects.all())
+    log.info('get categories from db - len_all_categories - %s' % len(all_categories))
+    log.info('iterate categories')
+    for category in all_categories:
+        if category.name_locale is None:
+            name_translate = None
+        else:
+            name_translate = str(category.name_locale)
+
+        if category.category_description is None:
+            category_description_locale = None
+        else:
+            category_description_locale = str(category.category_description)
+        categories_list.append({
+            'id': category.id,
+            'title': category.name,
+            'title_translate': name_translate,
+            'category_description_locale': category_description_locale,
+            'category_description': category.description,
+            'slug': category.slug
+        })
+
+    logging.info('end categories request')
+
+    return JsonResponse({
+        'categories': categories_list
+    })
+
+
+def category(request, category_id):
+    ctg = Category.objects.get(id=int(category_id))
+
+    if ctg.name_locale is None:
+        name_locale = None
+    else:
+        name_locale = str(ctg.name_locale)
+    if ctg.category_description is None:
+        description_locale = None
+    else:
+        description_locale = str(ctg.category_description)
+    category_case = {
+        'id': ctg.id,
+        'title': ctg.name,
+        'title_translate': name_locale,
+        'description': ctg.description,
+        'description_locale': description_locale
+    }
+    return JsonResponse({'category': category_case})
 
 
 @transaction.atomic

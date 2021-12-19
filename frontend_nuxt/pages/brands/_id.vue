@@ -8,57 +8,27 @@
 
 export default {
   name: "Brand",
-  middleware: ['products', 'categories'],
-  data() {
-    return {
-      title: '',
-      description: ''
-    }
+  middleware: ['products'],
+  validate({params}) {
+    return /^\d+$/.test(params.id);
   },
-  head() {
-    return {
-      title: this.$t(`${this.title}`),
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.description
-        }
-      ]
-    }
+  async asyncData({$axios, app, $i18n, params}) {
+    const data = await $axios.get(process.env.VUE_APP_API + '/categories/category/' + params.id);
+    const category = data.data.category;
+    app.head.title = category.title;
+    app.head.meta.push(
+      {
+        hid: 'description',
+        name: 'description',
+        content: category.description
+      }
+    )
+    return {category}
   },
   computed: {
     ctgId() {
       return Number(this.$route.params.id);
     },
-    categoryForHead() {
-      const category = this.$store.getters['categories/categories'].find(category => category.id === this.ctgId);
-      if (category) {
-        if (category.title_translate) {
-          this.title = category.title_translate;
-        }  else {
-          this.title = category.title;
-        }
-        if (category.category_description) {
-          this.description = category.category_description;
-        }
-      }
-    }
-  },
-  methods: {
-    middleware({app}) {
-      app.head.title = this.title;
-      app.head.meta.append({
-        hid: 'description',
-        name: 'description',
-        content: this.description
-      })
-    }
-  },
-  mounted() {
-    this.categoryForHead;
-    console.log(this.title);
-    console.log(this.description);
   }
 }
 </script>
