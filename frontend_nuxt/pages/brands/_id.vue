@@ -50,8 +50,7 @@ export default {
         return this.$t(this.category.description_locale);
       }
       return this.category.description;
-    },
-
+    }
   }
 
 }

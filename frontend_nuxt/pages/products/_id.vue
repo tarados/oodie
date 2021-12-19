@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper-product" v-if="this.selectedProduct">
+  <div class="wrapper-product" v-if="this.product">
     <div class="breadcrumbs-wrapper">
-      <Breadcrumbs :current-product="selectedProduct"/>
+      <Breadcrumbs :current-product="product"/>
     </div>
-    <div class="row" v-if="this.selectedProduct">
+    <div class="row" v-if="this.product">
       <div class="item left">
         <div class="item-left">
           <vueper-slides
@@ -18,8 +18,8 @@
         </div>
 
         <div class="item-left-slider">
-          <div class="slider" v-for="(image, index) in selectedProduct.image_list" :key="image">
-            <img :alt="selectedProduct.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">
+          <div class="slider" v-for="(image, index) in product.image_list" :key="image">
+            <img :alt="product.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">
           </div>
         </div>
       </div>
@@ -30,17 +30,17 @@
         </div>
         <div class="product-price">
           <div class="price">
-            <div class="current" v-if="this.selectedProduct.new_price">
-              {{ this.selectedProduct.price }} грн
+            <div class="current" v-if="this.product.new_price">
+              {{ this.product.price }} грн
             </div>
             <div v-else>
-              {{ this.selectedProduct.price }} грн
+              {{ this.product.price }} грн
             </div>
             <div
-              :class="{ markdown: !selectedProduct.new_price}"
+              :class="{ markdown: !product.new_price}"
               class="red"
             >
-              {{ this.selectedProduct.new_price }} грн
+              {{ this.product.new_price }} грн
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="size-block" v-if="!this.hideSize">
           <div
             class="square"
-            v-for="(availability, index) in selectedProduct.availability"
+            v-for="(availability, index) in product.availability"
             :class="{selected: index === size, notActive: availability.quantity <= 0 && !availability.preorder}"
             :key="index"
             @click="select(index)"
@@ -58,8 +58,8 @@
             {{ availability.size }}
           </div>
         </div>
-        <div class="size-table" v-if="this.selectedProduct.table">
-          <a :href="this.selectedProduct.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
+        <div class="size-table" v-if="this.product.table">
+          <a :href="this.product.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
         </div>
         <div class="btn" @click="toCart">{{ $t(`${getStatus}`) }}</div>
         <div class="preorder" v-if="preorder">{{ $t('ProductStatusPreorderDescription') }}</div>
@@ -96,9 +96,7 @@ export default {
       preorder: null,
       inStockNo: null,
       slides: [],
-      hideSize: false,
-      title: '',
-      description: ''
+      hideSize: false
     };
   },
   head() {
@@ -121,25 +119,26 @@ export default {
     VueperSlide
   },
   computed: {
-    selectedProduct() {
-      if (this.product) {
-        if (this.product.title_translate) {
-          this.title = this.product.title_translate;
-        }  else {
-          this.title = this.product.title;
-        }
-        if (this.product.description_locale) {
-          this.description = this.$t(`${this.product.description_locale}`);
-        } else {
-          this.description = this.product.description;
-        }
-       return this.product;
-      } else {
-        return {};
+    title() {
+      if (!this.product) {
+        return '';
       }
+      if (this.product.title_translate) {
+        return this.$t(this.product.title_translate);
+      }
+      return this.product.title;
+    },
+    description() {
+      if (!this.product) {
+        return '';
+      }
+      if (this.product.description_locale) {
+        return this.$t(this.product.description_locale);
+      }
+      return this.product.description;
     },
     currentCategory() {
-      const category = this.$store.getters['categories/categories'].find(category => category.id === this.selectedProduct.category);
+      const category = this.$store.getters['categories/categories'].find(category => category.id === this.product.category);
       if (category) {
         if (category.title_translate) {
           this.categoryForHead = category.title_translate;
@@ -167,8 +166,8 @@ export default {
   methods: {
     loadProduct() {
       let images = [];
-      if (this.selectedProduct.image_list) {
-        images = this.selectedProduct.image_list;
+      if (this.product.image_list) {
+        images = this.product.image_list;
       }
       images.forEach(image => {
         this.slides.push({
@@ -191,20 +190,20 @@ export default {
       this.imageIndex = index;
     },
     toCart() {
-      const availability = this.selectedProduct.availability.length > 0 ? this.selectedProduct.availability[this.size] : {
+      const availability = this.product.availability.length > 0 ? this.product.availability[this.size] : {
         "size": "",
         "quantity": "0",
         "preorder": false
       };
       if (availability.quantity > 0) {
         const productToCart = {
-          "id": this.selectedProduct.id,
-          "title": this.statusProduct ? this.selectedProduct.title + ' (предзаказ!)' : this.selectedProduct.title,
-          "price": this.selectedProduct.new_price ? this.selectedProduct.new_price : this.selectedProduct.price,
+          "id": this.product.id,
+          "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title,
+          "price": this.product.new_price ? this.product.new_price : this.product.price,
           "quantity": 1,
           "preorder": availability.preorder,
           "size": availability.size,
-          "image": this.selectedProduct.image_list[this.imageIndex],
+          "image": this.product.image_list[this.imageIndex],
         };
         if (productToCart.size === "") {
           delete productToCart.size;
@@ -217,12 +216,12 @@ export default {
     },
     select(index) {
       this.size = index;
-      this.preorder = this.selectedProduct.availability[index].preorder;
+      this.preorder = this.product.availability[index].preorder;
     }
   },
   watch: {
     size: function () {
-      if (this.selectedProduct.availability[this.size].preorder) {
+      if (this.product.availability[this.size].preorder) {
         this.statusProduct = true
       } else {
         this.statusProduct = false
