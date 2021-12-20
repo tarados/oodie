@@ -24,6 +24,11 @@ def home(request):
     return JsonResponse({'home_page': str(translates.name_locale)})
 
 
+def description(request):
+    translates = Translates.objects.get(name='Описание для главной страницы')
+    return JsonResponse({'description': str(translates.name_locale)})
+
+
 def products(request):
     logging.info('start products request')
     products_list = []

@@ -48,36 +48,36 @@ export default {
   middleware: ['products'],
   head() {
     return {
+      title: this.title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.$t('DescriptionForHomePage')
+          content: this.description
         },
         {name: 'keywords', content: 'худиялко, бренды друзья'}
       ]
     }
   },
   computed: {
-    headTitle() {
-      if (this.$store.getters['home/home']) {
-        this.title = this.$store.getters['home/home']
-        return this.$store.getters['home/home']
-      } else {
-        return ''
+    title() {
+      if (!this.$store.getters['home/home']) {
+        return '';
       }
-
+      return this.$t(this.$store.getters['home/home']);
+    },
+    description() {
+      if (!this.$store.getters['description/description']) {
+        return '';
+      }
+      return this.$t(this.$store.getters['description/description']);
     },
     slides() {
-      if (this.$store.getters['instagram/slides'].length > 0) {
-        return this.$store.getters['instagram/slides']
-      } else {
-        return []
+      if (!this.$store.getters['instagram/slides'].length > 0) {
+        return [];
       }
+      return this.$store.getters['instagram/slides']
     }
-  },
-  mounted() {
-    this.headTitle;
   }
 }
 </script>

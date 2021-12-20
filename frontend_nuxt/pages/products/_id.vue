@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="product-title">
-          <div>{{ $t(`${title}`) }}</div>
+          <div>{{ title }}</div>
         </div>
         <div class="size-block" v-if="!this.hideSize">
           <div
@@ -101,7 +101,7 @@ export default {
   },
   head() {
     return {
-      title: this.$t(`${this.title}`),
+      title: this.title,
       meta: [
         {
           hid: 'description',
