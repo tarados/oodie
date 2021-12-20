@@ -5,23 +5,24 @@
     </div>
     <div class="row" v-if="product">
       <div class="item left">
-        <div class="item-left">
-          <vueper-slides
-            :touchable="false"
-            :bullets="false"
-            :slide-ratio="841 / 561"
-            :initSlide="imageIndex"
-            ref="vueperslides1"
-          >
-            <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>
-          </vueper-slides>
-        </div>
+        <ProductImages :slides="slides" />
+<!--        <div class="item-left">-->
+<!--          <vueper-slides-->
+<!--            :touchable="false"-->
+<!--            :bullets="false"-->
+<!--            :slide-ratio="841 / 561"-->
+<!--            :initSlide="imageIndex"-->
+<!--            ref="vueperslides1"-->
+<!--          >-->
+<!--            <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>-->
+<!--          </vueper-slides>-->
+<!--        </div>-->
 
-        <div class="item-left-slider">
-          <div class="slider" v-for="(image, index) in product.image_list" :key="image">
-            <img :alt="product.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">
-          </div>
-        </div>
+<!--        <div class="item-left-slider">-->
+<!--          <div class="slider" v-for="(image, index) in product.image_list" :key="image">-->
+<!--            <img :alt="product.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <div class="item right">
         <div class="product-category">
