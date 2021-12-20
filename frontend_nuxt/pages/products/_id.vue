@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper-product" v-if="this.product">
+  <div class="wrapper-product" v-if="product">
     <div class="breadcrumbs-wrapper">
       <Breadcrumbs :current-product="product"/>
     </div>
-    <div class="row" v-if="this.product">
+    <div class="row" v-if="product">
       <div class="item left">
         <div class="item-left">
           <vueper-slides
@@ -30,24 +30,24 @@
         </div>
         <div class="product-price">
           <div class="price">
-            <div class="current" v-if="this.product.new_price">
-              {{ this.product.price }} грн
+            <div class="current" v-if="product.new_price">
+              {{ product.price }} грн
             </div>
             <div v-else>
-              {{ this.product.price }} грн
+              {{ product.price }} грн
             </div>
             <div
               :class="{ markdown: !product.new_price}"
               class="red"
             >
-              {{ this.product.new_price }} грн
+              {{ product.new_price }} грн
             </div>
           </div>
         </div>
         <div class="product-title">
           <div>{{ title }}</div>
         </div>
-        <div class="size-block" v-if="!this.hideSize">
+        <div class="size-block" v-if="!hideSize">
           <div
             class="square"
             v-for="(availability, index) in product.availability"
@@ -58,14 +58,14 @@
             {{ availability.size }}
           </div>
         </div>
-        <div class="size-table" v-if="this.product.table">
-          <a :href="this.product.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
+        <div class="size-table" v-if="product.table">
+          <a :href="product.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
         </div>
         <div class="btn" @click="toCart">{{ $t(`${getStatus}`) }}</div>
         <div class="preorder" v-if="preorder">{{ $t('ProductStatusPreorderDescription') }}</div>
         <div class="preorder" v-if="!preorder">{{ $t('ProductStatusBasketDescription') }}</div>
         <div class="product-description">
-          <div class="description">{{ this.description }}</div>
+          <div class="description">{{ description }}</div>
         </div>
       </div>
     </div>
