@@ -16,12 +16,11 @@
 
       <vueper-slides
         ref="vueperslides2"
-        :slide-ratio="1 / 8"
-        :dragging-distance="50"
+        :slide-ratio="1 / 3.5"
+        :gap="2"
+        :dragging-distance="120"
         @slide="$refs.vueperslides1 && $refs.vueperslides1.goToSlide($event.currentSlide.index, { emit: false })"
         :visible-slides="3"
-        fixed-height="120px"
-        fixed-width="120px"
       >
         <vueper-slide
           v-for="(slide, i) in slides"
