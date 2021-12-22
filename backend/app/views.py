@@ -21,11 +21,16 @@ log = logging.getLogger('my_logger')
 
 def home(request):
     translates = Translates.objects.get(name='Домашняя страница')
+    if translates is None:
+        return JsonResponse({'home_page': ''})
     return JsonResponse({'home_page': str(translates.name_locale)})
 
 
 def description(request):
     translates = Translates.objects.get(name='Описание для главной страницы')
+    print(translates)
+    if translates is None:
+        return JsonResponse({'description': ''})
     return JsonResponse({'description': str(translates.name_locale)})
 
 

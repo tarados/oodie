@@ -4,7 +4,6 @@
       <vueper-slides
         class="slider1"
         ref="vueperslides1"
-        @slide="$refs.vueperslides2 && $refs.vueperslides2.goToSlide($event.currentSlide.index, { emit: false })"
         :slide-ratio="841 / 561"
         :bullets="false">
         <vueper-slide
@@ -13,22 +12,11 @@
           :image="slide.image"
         />
       </vueper-slides>
-
-      <vueper-slides
-        ref="vueperslides2"
-        :slide-ratio="1 / 3.5"
-        :gap="2"
-        :dragging-distance="120"
-        @slide="$refs.vueperslides1 && $refs.vueperslides1.goToSlide($event.currentSlide.index, { emit: false })"
-        :visible-slides="3"
-      >
-        <vueper-slide
-          v-for="(slide, i) in slides"
-          :key="i"
-          :image="slide.image"
-          @click.native="$refs.vueperslides2 && $refs.vueperslides2.goToSlide(i)">
-        </vueper-slide>
-      </vueper-slides>
+      <div class="item-left-slider">
+        <div class="slider" v-for="(image, index) in slides" :key="index">
+          <img alt="" :src="image.image" @click="$refs.vueperslides1.goToSlide(index)">
+        </div>
+      </div>
     </div>
   </client-only>
 
@@ -58,7 +46,7 @@ export default {
   margin-bottom: 15px;
 }
 
-.slider2 {
+.item-left-slider {
   display: flex;
   flex-wrap: wrap;
   margin-top: 0.25rem;
@@ -71,4 +59,15 @@ export default {
   margin-right: 8px;
   margin-bottom: 12px;
 }
+
+.slider img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider img:hover {
+  border: 1px solid black;
+}
+
+
 </style>

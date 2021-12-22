@@ -6,23 +6,6 @@
     <div class="row" v-if="product">
       <div class="item left">
         <ProductImages :slides="slides" />
-<!--        <div class="item-left">-->
-<!--          <vueper-slides-->
-<!--            :touchable="false"-->
-<!--            :bullets="false"-->
-<!--            :slide-ratio="841 / 561"-->
-<!--            :initSlide="imageIndex"-->
-<!--            ref="vueperslides1"-->
-<!--          >-->
-<!--            <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image"/>-->
-<!--          </vueper-slides>-->
-<!--        </div>-->
-
-<!--        <div class="item-left-slider">-->
-<!--          <div class="slider" v-for="(image, index) in product.image_list" :key="image">-->
-<!--            <img :alt="product.title" :src="image" @click="$refs.vueperslides1.goToSlide(index)">-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
       <div class="item right">
         <div class="product-category">
@@ -75,8 +58,6 @@
 </template>
 
 <script>
-import { VueperSlides, VueperSlide } from 'vueperslides'
-import "vueperslides/dist/vueperslides.css";
 import {required} from "vuelidate/lib/validators";
 
 export default {
@@ -114,10 +95,6 @@ export default {
   },
   validations: {
     size: {required},
-  },
-  components: {
-    VueperSlides,
-    VueperSlide
   },
   computed: {
     title() {
@@ -241,12 +218,6 @@ export default {
   margin-bottom: 40px;
 }
 
-.wrapper__slider {
-  background-color: yellow;
-  width: 100%;
-  height: 570px;
-}
-
 .breadcrumbs-wrapper {
   padding-left: 15px;
   max-width: 1200px;
@@ -275,46 +246,6 @@ export default {
   width: calc((100% / 12) * 6 - 30px);
   margin: 0 15px;
   overflow: hidden;
-}
-
-.item img {
-  width: 100%;
-  overflow: hidden;
-}
-
-.content {
-  width: 100%;
-  height: 100%;
-}
-
-.item-left {
-  margin-bottom: 15px;
-}
-
-.image-container {
-  width: 500px;
-}
-
-.item-left-slider {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0.25rem;
-}
-
-.slider {
-  width: 120px;
-  height: 120px;
-  overflow: hidden;
-  margin-right: 8px;
-  margin-bottom: 12px;
-}
-
-.slider img:hover {
-  border: 1px solid black;
-}
-
-.slide-image:hover {
-  border: 1px solid black;
 }
 
 .price {
