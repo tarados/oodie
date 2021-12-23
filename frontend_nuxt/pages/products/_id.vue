@@ -10,7 +10,7 @@
       <div class="item right">
         <div class="product-category">
           <span>{{ $t('ProductBrand') }}: </span>
-          <div>{{ this.currentCategory }}</div>
+          <div>{{ currentCategory }}</div>
         </div>
         <div class="product-price">
           <div class="price">
@@ -117,19 +117,13 @@ export default {
     },
     currentCategory() {
       const category = this.$store.getters['categories/categories'].find(category => category.id === this.product.category);
-      if (category) {
-        if (category.title_translate) {
-          this.categoryForHead = category.title_translate;
-        }  else {
-          this.categoryForHead = category.title;
-        }
-        return category.title;
-      } else {
-        return "";
+      if (!category) {
+        return '';
       }
-    },
-    selectedImage() {
-      return this.imageIndex;
+      if (category.title_translate) {
+          return this.$t(category.title_translate);
+        }
+      return category.title;
     },
     getStatus() {
       if (this.preorder) {
@@ -143,15 +137,13 @@ export default {
   },
   methods: {
     loadProduct() {
-      let images = [];
       if (this.product.image_list) {
-        images = this.product.image_list;
-      }
-      images.forEach(image => {
-        this.slides.push({
-          "image": image,
+        this.product.image_list.forEach(item => {
+          this.slides.push({
+            "image": item,
+          });
         });
-      });
+      }
       if (!this.product.availability || (this.product.availability.length === 1 && this.product.availability[0].size === "ONE SIZE")) {
         this.hideSize = true;
         this.preorder = this.product.availability[0].preorder;
@@ -163,9 +155,6 @@ export default {
           buttonToCart.style.border = '1px solid black';
         }
       }
-    },
-    showImage(index) {
-      this.imageIndex = index;
     },
     toCart() {
       const availability = this.product.availability.length > 0 ? this.product.availability[this.size] : {
