@@ -5,7 +5,7 @@
     </div>
     <div class="row" v-if="product">
       <div class="item left">
-        <ProductImages :slides="slides" />
+        <ProductImages :slides="slides"/>
       </div>
       <div class="item right">
         <div class="product-category">
@@ -121,18 +121,18 @@ export default {
         return '';
       }
       if (category.title_translate) {
-          return this.$t(category.title_translate);
-        }
+        return this.$t(category.title_translate);
+      }
       return category.title;
     },
     getStatus() {
       if (this.preorder) {
-        return 'ProductStatusPreorder'
-      } else if (this.inStockNo) {
-        return 'AvailabilityNo'
-      } else {
-        return 'ProductStatusBasket'
+        return 'ProductStatusPreorder';
       }
+      if (this.inStockNo) {
+        return 'AvailabilityNo';
+      }
+      return 'ProductStatusBasket';
     }
   },
   methods: {
