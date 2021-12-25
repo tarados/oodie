@@ -28,7 +28,6 @@ def home(request):
 
 def description(request):
     translates = Translates.objects.get(name='Описание для главной страницы')
-    print(translates)
     if translates is None:
         return JsonResponse({'description': ''})
     return JsonResponse({'description': str(translates.name_locale)})

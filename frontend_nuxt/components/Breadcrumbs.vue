@@ -3,7 +3,7 @@
     <li class="breadcrumbs__item" v-for="(item, index) in breadcrumbs" :key="index">
       <nuxt-link
         v-if="index < breadcrumbCount"
-        :to= item.routeName
+        :to=item.routeName
         class="breadcrumbs__link"
       >
         {{ $t(`${item.title}`) }}
@@ -40,25 +40,28 @@ export default {
       const result = [];
       if (this.currentProduct && this.currentProduct.category === 1) {
         result.push({title: "MenuHome", routeName: "/"});
-      } else {
-        result.push({title: "MenuBrandsFriends", routeName: "/brands"});
-        if (this.currentProduct) {
-          const category = categoriesList.find(category => category.id === this.currentProduct.category);
-          if (category) {
-            if (category.title_translate) {
-              this.categoryTitle = category.title_translate;
-            }  else {
-              this.categoryTitle = category.title;
-            }
-            const idCategory = parseInt(category.id);
-            result.push({title: this.categoryTitle, routeName: "/brands/" + `${idCategory}`, routeParams: {slug: category.slug}});
+      }
+      result.push({title: "MenuBrandsFriends", routeName: "/brands"});
+      if (this.currentProduct) {
+        const category = categoriesList.find(category => category.id === this.currentProduct.category);
+        if (category) {
+          if (category.title_translate) {
+            this.categoryTitle = category.title_translate;
+          } else {
+            this.categoryTitle = category.title;
           }
+          const idCategory = parseInt(category.id);
+          result.push({
+            title: this.categoryTitle,
+            routeName: "/brands/" + `${idCategory}`,
+            routeParams: {slug: category.slug}
+          });
         }
       }
       if (this.currentProduct) {
         if (this.currentProduct.title_translate) {
           this.title = this.currentProduct.title_translate;
-        }  else {
+        } else {
           this.title = this.currentProduct.title;
         }
         result.push({title: this.title});
