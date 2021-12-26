@@ -37,7 +37,7 @@
             v-for="(availability, index) in product.availability"
             :class="{selected: index === size, notActive: availability.quantity <= 0 && !availability.preorder}"
             :key="index"
-            @click="select(index)"
+            @click="selectSize(index)"
           >
             {{ availability.size }}
           </div>
@@ -197,7 +197,7 @@ export default {
       this.$router.push("/cart");
 
     },
-    select(index) {// TODO: rename to selectSize
+    selectSize(index) {
       this.size = index;
       this.preorder = this.product.availability[index].preorder; // TODO: move to computed
     }

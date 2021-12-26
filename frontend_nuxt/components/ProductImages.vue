@@ -1,6 +1,5 @@
 <template>
   <client-only>
-    <!-- TODO consistent code style - slide, index -->
     <div class="wrapper-slider">
       <vueper-slides
         class="slider1"
@@ -8,8 +7,8 @@
         :slide-ratio="841 / 561"
         :bullets="false">
         <vueper-slide
-          v-for="(slide, i) in slides"
-          :key="i"
+          v-for="(slide, index) in slides"
+          :key="index"
           :image="slide.image"
         />
       </vueper-slides>

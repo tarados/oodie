@@ -24,7 +24,7 @@
           <small v-show="invalidSurname">{{ $t('CheckoutSurnameError') }}</small>
         </div>
         <div class="form-title required">
-          <span>{{ $t('ChecoutPhone') }}:</span> <!-- TODO: fix typo Checout-->
+          <span>{{ $t('CheckoutPhone') }}:</span>
         </div>
         <div class="form-content phone">
           <div class="form-content__phone"
@@ -101,7 +101,7 @@
         <div class="form-title required" v-if="deliveryMethod === 'Курьером Новой почты'">
           <span>{{ $t('CheckoutAddress') }}:</span>
         </div>
-        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAddress}"><!-- TODO: fix typo adress-->
+        <div class="address required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAddress}">
           <textarea v-model="address" rows="4"></textarea>
           <small v-if="invalidAddress">{{ $t('CheckoutAddressError') }}</small>
         </div>
