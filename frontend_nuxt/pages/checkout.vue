@@ -24,7 +24,7 @@
           <small v-show="invalidSurname">{{ $t('CheckoutSurnameError') }}</small>
         </div>
         <div class="form-title required">
-          <span>{{ $t('ChecoutPhone') }}:</span>
+          <span>{{ $t('ChecoutPhone') }}:</span> <!-- TODO: fix typo Checout-->
         </div>
         <div class="form-content phone">
           <div class="form-content__phone"
@@ -101,7 +101,7 @@
         <div class="form-title required" v-if="deliveryMethod === 'Курьером Новой почты'">
           <span>{{ $t('CheckoutAddress') }}:</span>
         </div>
-        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAddress}">
+        <div class="adress required" v-if="deliveryMethod === 'Курьером Новой почты'" :class="{invalid: invalidAddress}"><!-- TODO: fix typo adress-->
           <textarea v-model="address" rows="4"></textarea>
           <small v-if="invalidAddress">{{ $t('CheckoutAddressError') }}</small>
         </div>
@@ -150,7 +150,7 @@ export default {
   name: "Checkout",
   middleware: ['products'],
   data() {
-    return {
+    return {// TODO: don't use quotes for fields
       "deliveryMethod": "",
       "selectDeliveryMethod": "",
       "delivery": null,
@@ -214,6 +214,7 @@ export default {
       return this.$store.getters['warehouses/warehouses'];
     },
     focusPhone() {
+      // TODO: remove this use CSS
       let inputPhone = document.querySelector('.form-content__phone');
       inputPhone.children[1].onblur = function () {
         inputPhone.children[0].style.boxShadow = 'none';

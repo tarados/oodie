@@ -72,11 +72,11 @@ export default {
   },
   data() {
     return {
-      imageIndex: 0,
+      imageIndex: 0, // TODO: remove this
       size: 0,
-      availabilities: [],
+      availabilities: [], // TODO: remove this
       preorder: null,
-      inStockNo: null,
+      inStockNo: null, // TODO: rename
       slides: [],
       hideSize: false
     };
@@ -116,6 +116,8 @@ export default {
       return this.product.description;
     },
     currentCategory() {
+      // TODO: use getCategoryById
+      // TODO: add check product
       const category = this.$store.getters['categories/categories'].find(category => category.id === this.product.category);
       if (!category) {
         return '';
@@ -137,6 +139,8 @@ export default {
   },
   methods: {
     loadProduct() {
+      // TODO: if no product?
+
       if (this.product.image_list) {
         this.product.image_list.forEach(item => {
           this.slides.push({
@@ -144,11 +148,15 @@ export default {
           });
         });
       }
+
+      // TODO: move to separate method loadAvailability
       if (!this.product.availability || (this.product.availability.length === 1 && this.product.availability[0].size === "ONE SIZE")) {
         this.hideSize = true;
         this.preorder = this.product.availability[0].preorder;
         if (this.product.availability[0].quantity === 0) {
           this.inStockNo = true;
+
+          // TODO: remove this use normal vue.js
           let buttonToCart = document.querySelector('.btn');
           buttonToCart.style.color = 'black';
           buttonToCart.style.backgroundColor = 'white';
@@ -157,37 +165,45 @@ export default {
       }
     },
     toCart() {
-      const availability = this.product.availability.length > 0 ? this.product.availability[this.size] : {
-        "size": "",
-        "quantity": "0",
-        "preorder": false
-      };
-      if (availability.quantity > 0) {
-        const productToCart = {
-          "id": this.product.id,
-          "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title,
-          "price": this.product.new_price ? this.product.new_price : this.product.price,
-          "quantity": 1,
-          "preorder": availability.preorder,
-          "size": availability.size,
-          "image": this.product.image_list[this.imageIndex],
-        };
-        if (productToCart.size === "") {
-          delete productToCart.size;
-        }
-        const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1);
-        productToCart.total = total;
-        this.$store.commit("cart/setCartProducts", productToCart);
-        this.$router.push("/cart");
+      if (!this.product.availability.length) {
+        // show error
+        return;
       }
+
+      if (availability.quantity > 0) {
+        // show error
+        return;
+      }
+
+      const availability = this.product.availability[this.size];
+
+      const { id, title, new_price, price } = this.product;
+
+      const productToCart = {
+        id,
+        "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title, // TODO: remove statusProduct
+        "price": new_price ? new_price : price,
+        "quantity": 1,
+        "preorder": availability.preorder,
+        "size": availability.size,
+        "image": this.product.image_list[this.imageIndex], // TODO: remove imageIndex
+      };
+      if (productToCart.size === "") { // TODO: what?
+        delete productToCart.size;
+      }
+      const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1); // TODO: remove this
+      productToCart.total = total;
+      this.$store.commit("cart/setCartProducts", productToCart);
+      this.$router.push("/cart");
+
     },
-    select(index) {
+    select(index) {// TODO: rename to selectSize
       this.size = index;
-      this.preorder = this.product.availability[index].preorder;
+      this.preorder = this.product.availability[index].preorder; // TODO: move to computed
     }
   },
   watch: {
-    size: function () {
+    size: function () { // TODO: remove this
       if (this.product.availability[this.size].preorder) {
         this.statusProduct = true
       } else {
@@ -202,6 +218,7 @@ export default {
 </script>
 
 <style scoped>
+/* TODO: move slider styles to proper component */
 .wrapper-product {
   margin-top: 55px;
   margin-bottom: 40px;

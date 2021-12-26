@@ -37,7 +37,7 @@
       </div>
     </div>
     <ProductsList :ctg="1"/>
-    <Slider :slides="slides" />
+    <Slider :slides="slides" /><!-- TODO: create component InstagramSlider and move slides to this component -->
   </div>
 </template>
 

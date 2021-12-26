@@ -6,6 +6,8 @@
         <h1 v-else>{{ $t('ProductCardEmpty') }}</h1>
       </div>
       <div v-for="(product, index) in cartProducts" :key="index">
+        <!-- TODO: move to separate component CartItem -->
+
         <div class="grid-container second">
           <div class="item image">
             <img :src="product.image">
@@ -119,7 +121,7 @@ export default {
   },
   computed: {
     productsList() {
-      return this.$store.getters['products/products']
+      return this.$store.getters['products/products'] // TODO: remove this
     },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
@@ -134,7 +136,7 @@ export default {
       return el
     },
     totalPrice() {
-      return this.$store.getters['cart/totalPrice']
+      return this.$store.getters['cart/totalPrice'] // TODO: calculate
     }
   },
   methods: {
@@ -156,7 +158,9 @@ export default {
       }
     },
     plusQuantity(index) {
-      this.warningList.length = 0;
+      this.warningList.length = 0; // TODO: wtf?
+
+      // TODO: use  getQuantity(productId, size)
       const item = this.cartProducts[index];
       let currentProductAvailable = 0;
       let currentProductTitle = '';
@@ -170,6 +174,7 @@ export default {
           currentProductTitle = product.title;
         }
       });
+
       let newAvailability = item.quantity + 1;
       if (newAvailability <= currentProductAvailable) {
         this.$store.commit('cart/increment', index);
@@ -188,7 +193,7 @@ export default {
     toCheckout() {
       this.warningList.length = 0;
       const localStorageAvailability = cart.getItems();
-      this.productsList.forEach(item => {
+      this.productsList.forEach(item => { // TODO: why?
         localStorageAvailability.forEach(el => {
           if (el.id === item.id) {
             item.availability.forEach(size => {
@@ -200,7 +205,7 @@ export default {
                 this.$vm2.open('modal-4');
               } else if (this.warningList.length === 0) {
                 this.$router.push('/checkout');
-                this.$store.dispatch('cities/fetch');
+                this.$store.dispatch('cities/fetch'); // TODO: move to checkout
               }
             });
           }

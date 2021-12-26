@@ -1,5 +1,6 @@
 <template>
   <client-only>
+    <!-- TODO consistent code style - slide, index -->
     <div class="wrapper-slider">
       <vueper-slides
         class="slider1"

@@ -20,4 +20,5 @@ export const actions = {
 
 export const getters = {
   products: s => s.products
+  // TODO: add getQuantity(productId, size)
 }
