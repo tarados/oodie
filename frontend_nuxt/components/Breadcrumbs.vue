@@ -15,11 +15,8 @@
 
 <script>
 
-import About from "@/pages/about";
-
 export default {
   name: "Breadcrumbs",
-  components: {About},
   props: {
     currentCategory: {
       type: String
@@ -36,20 +33,18 @@ export default {
   },
   computed: {
     breadcrumbs() {
-      const categoriesList = this.$store.getters['categories/categories'];
       const result = [];
-      if (this.currentProduct && this.currentProduct.category === 1) {
-        result.push({title: "MenuHome", routeName: "/"});
-      }
-      result.push({title: "MenuBrandsFriends", routeName: "/brands"});
       if (this.currentProduct) {
-        const category = categoriesList.find(category => category.id === this.currentProduct.category);
+        result.push({title: "MenuHome", routeName: "/"});
+        if (this.currentProduct.category !== 1) {
+          result.push({title: "MenuBrandsFriends", routeName: "/brands"});
+        }
+        const category = this.$store.getters['categories/getCategory'](this.currentProduct.category);
         if (category) {
           if (category.title_translate) {
             this.categoryTitle = category.title_translate;
-          } else {
-            this.categoryTitle = category.title;
           }
+          this.categoryTitle = category.title;
           const idCategory = parseInt(category.id);
           result.push({
             title: this.categoryTitle,
@@ -57,24 +52,13 @@ export default {
             routeParams: {slug: category.slug}
           });
         }
-      }
-      if (this.currentProduct) {
         if (this.currentProduct.title_translate) {
           this.title = this.currentProduct.title_translate;
-        } else {
-          this.title = this.currentProduct.title;
         }
+        this.title = this.currentProduct.title;
         result.push({title: this.title});
       }
-
       return result;
-    },
-    slug() {
-      try {
-        return this.$store.getters['categories/categories'].find(item => item.title === this.currentCategory).slug;
-      } catch (TypeError) {
-        return ''
-      }
     },
     breadcrumbCount() {
       return this.breadcrumbs.length - 1

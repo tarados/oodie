@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-product" v-if="product">
     <div class="breadcrumbs-wrapper">
-      <Breadcrumbs :current-product="product"/>
+      <Breadcrumbs :current-product="product" :current-category="currentCategory"/>
     </div>
     <div class="row" v-if="product">
       <div class="item left">
@@ -116,9 +116,10 @@ export default {
       return this.product.description;
     },
     currentCategory() {
-      // TODO: use getCategoryById
-      // TODO: add check product
-      const category = this.$store.getters['categories/categories'].find(category => category.id === this.product.category);
+      if (!this.product.category) {
+        return '';
+      }
+      const category = this.$store.getters['categories/getCategory'](this.product.category);
       if (!category) {
         return '';
       }

@@ -19,5 +19,11 @@ export const actions = {
 }
 
 export const getters = {
-  categories: s => s.categories
+  categories: (state) => state.categories,
+  getCategory: (state) => (id) => {
+    if (!state.categories.find(todo => todo.id === id)) {
+      return '';
+    }
+    return state.categories.find(todo => todo.id === id);
+  }
 }
