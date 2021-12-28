@@ -6,9 +6,9 @@
         :to=item.routeName
         class="breadcrumbs__link"
       >
-        {{ $t(`${item.title}`) }}
+        {{ item.title }}
       </nuxt-link>
-      <span v-if="index === breadcrumbs.length - 1">{{ $t(`${item.title}`) }}</span>
+      <span v-if="index === breadcrumbs.length - 1">{{ item.title }}</span>
     </li>
   </ul>
 </template>
@@ -35,27 +35,29 @@ export default {
     breadcrumbs() {
       const result = [];
       if (this.currentProduct) {
-        result.push({title: "MenuHome", routeName: "/"});
+        result.push({title: this.$t('MenuHome'), routeName: '/'});
         if (this.currentProduct.category !== 1) {
-          result.push({title: "MenuBrandsFriends", routeName: "/brands"});
+          result.push({title: this.$t('MenuBrandsFriends'), routeName: '/brands'});
         }
         const category = this.$store.getters['categories/getCategory'](this.currentProduct.category);
         if (category) {
           if (category.title_translate) {
-            this.categoryTitle = category.title_translate;
+            this.categoryTitle = this.$t(category.title_translate);
+          } else {
+            this.categoryTitle = category.title;
           }
-          this.categoryTitle = category.title;
           const idCategory = parseInt(category.id);
           result.push({
             title: this.categoryTitle,
-            routeName: "/brands/" + `${idCategory}`,
+            routeName: '/brands/' + `${idCategory}`,
             routeParams: {slug: category.slug}
           });
         }
         if (this.currentProduct.title_translate) {
-          this.title = this.currentProduct.title_translate;
+          this.title = this.$t(this.currentProduct.title_translate);
+        } else {
+          this.title = this.currentProduct.title;
         }
-        this.title = this.currentProduct.title;
         result.push({title: this.title});
       }
       return result;

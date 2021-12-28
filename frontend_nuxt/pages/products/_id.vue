@@ -5,7 +5,7 @@
     </div>
     <div class="row" v-if="product">
       <div class="item left">
-        <ProductImages :slides="slides"/>
+        <ProductImages :slides="slides" />
       </div>
       <div class="item right">
         <div class="product-category">
@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      imageIndex: 0, // TODO: remove this
+      imageIndex: 0,
       size: 0,
       availabilities: [], // TODO: remove this
       preorder: null,
@@ -95,6 +95,11 @@ export default {
   },
   validations: {
     size: {required},
+  },
+  created() {
+    this.$nuxt.$on('image-index', (index) => {
+      this.imageIndex = index;
+    })
   },
   computed: {
     title() {
@@ -140,6 +145,7 @@ export default {
   },
   methods: {
     loadProduct() {
+
       // TODO: if no product?
 
       if (this.product.image_list) {
@@ -166,20 +172,19 @@ export default {
       }
     },
     toCart() {
-      if (!this.product.availability.length) {
-        // show error
-        return;
-      }
-
-      if (availability.quantity > 0) {
-        // show error
-        return;
-      }
+      // if (!this.product.availability.length) {
+      //   // show error
+      //   return;
+      // }
+      //
+      // if (availability.quantity > 0) {
+      //   // show error
+      //   return;
+      // }
 
       const availability = this.product.availability[this.size];
 
       const { id, title, new_price, price } = this.product;
-
       const productToCart = {
         id,
         "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title, // TODO: remove statusProduct
@@ -187,7 +192,7 @@ export default {
         "quantity": 1,
         "preorder": availability.preorder,
         "size": availability.size,
-        "image": this.product.image_list[this.imageIndex], // TODO: remove imageIndex
+        "image": this.product.image_list[this.imageIndex],
       };
       if (productToCart.size === "") { // TODO: what?
         delete productToCart.size;
@@ -196,7 +201,6 @@ export default {
       productToCart.total = total;
       this.$store.commit("cart/setCartProducts", productToCart);
       this.$router.push("/cart");
-
     },
     selectSize(index) {
       this.size = index;

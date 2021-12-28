@@ -14,7 +14,7 @@
       </vueper-slides>
       <div class="item-left-slider">
         <div class="slider" v-for="(image, index) in slides" :key="index">
-          <img alt="" :src="image.image" @click="$refs.vueperslides1.goToSlide(index)">
+          <img alt="" :src="image.image" @click="selectedImage(index)">
         </div>
       </div>
     </div>
@@ -36,6 +36,13 @@ export default {
   components: {
     VueperSlides,
     VueperSlide
+  },
+  methods: {
+    selectedImage(index) {
+      this.$nuxt.$emit('image-index', index);
+      this.$refs['vueperslides1'].goToSlide(index);
+
+    }
   }
 }
 </script>
