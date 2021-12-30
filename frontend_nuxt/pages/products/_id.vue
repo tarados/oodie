@@ -5,7 +5,7 @@
     </div>
     <div class="row" v-if="product">
       <div class="item left">
-        <ProductImages :slides="slides" />
+        <ProductImages :slides="slides"/>
       </div>
       <div class="item right">
         <div class="product-category">
@@ -147,6 +147,29 @@ export default {
     loadProduct() {
 
       // TODO: if no product?
+      if (!this.product) {
+        this.product = {
+          'id': 36,
+          'title': '',
+          'title_translate': 'ProductNameNavy',
+          'price': 0,
+          'category': 1,
+          'availability': [
+            {
+              'size': '',
+              'quantity': 0,
+              'preorder': false
+            }
+          ],
+          'table': null,
+          'new_price': 1499,
+          'description': '',
+          'description_locale': null,
+          'image_list': [
+            'http://localhost:8000/media/images/navy-blanket-hoodie.156eaf8b914-957e-40dd-854e-5447f1dbc2a2_wDnvduf.jpg'
+          ]
+        }
+      }
 
       if (this.product.image_list) {
         this.product.image_list.forEach(item => {
@@ -184,7 +207,7 @@ export default {
 
       const availability = this.product.availability[this.size];
 
-      const { id, title, new_price, price } = this.product;
+      const {id, title, new_price, price} = this.product;
       const productToCart = {
         id,
         "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title, // TODO: remove statusProduct

@@ -158,10 +158,13 @@ export default {
       }
     },
     plusQuantity(index) {
+      console.log(this.cartProducts[index]);
+
       this.warningList.length = 0; // TODO: wtf?
 
       // TODO: use  getQuantity(productId, size)
       const item = this.cartProducts[index];
+      console.log(this.$store.getters['products/getQuantity'](item.id, item.size));
       let currentProductAvailable = 0;
       let currentProductTitle = '';
       this.productsList.forEach(product => {
@@ -212,6 +215,9 @@ export default {
         });
       });
     }
+  },
+  mounted() {
+    console.log('dd');
   }
 }
 </script>
