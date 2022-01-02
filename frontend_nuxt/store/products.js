@@ -33,5 +33,4 @@ export const getters = {
     }
     return  product.availability.find(el => el.size === size).quantity;
   }
-  // TODO: add getQuantity(productId, size)
 }

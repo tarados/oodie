@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import * as cart from "assets/js/localStorage";
+import * as storage from "assets/js/localStorage";
 import Modal from '~/components/Modal'
 
 export default {
@@ -120,9 +120,6 @@ export default {
     Modal
   },
   computed: {
-    productsList() {
-      return this.$store.getters['products/products'] // TODO: remove this
-    },
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
     },
@@ -156,30 +153,17 @@ export default {
     },
     plusQuantity(index) {
       this.warningList = [];
-      // TODO: use  getQuantity(productId, size)
       const item = this.cartProducts[index];
-      let currentProductAvailable = 0;
-      let currentProductTitle = '';
-      this.productsList.forEach(product => {
-        if (product.id === item.id) {
-          product.availability.forEach(el => {
-            if (el.size === item.size) {
-              currentProductAvailable = el.quantity;
-            }
-          });
-          currentProductTitle = product.title;
-        }
-      });
-
+      const quantity = this.$store.getters['products/getQuantity'](item.id, item.size);
       let newAvailability = item.quantity + 1;
-      if (newAvailability <= currentProductAvailable) {
+      if (newAvailability <= quantity) {
         this.$store.commit('cart/increment', index);
       } else {
         this.warningList.push({
-          'title': currentProductTitle,
-          'currentAvailability': currentProductAvailable
+          'title': item.title,
+          'currentAvailability': quantity
         });
-        let commit = document.querySelector('.modal_petition');
+        let commit = this.$el.querySelector('.modal_petition');
         commit.style.display = 'none';
         this.headerText = 'ModalTitleForQuantity';
         this.inStock = 'InStockOnly';
@@ -188,25 +172,26 @@ export default {
     },
     toCheckout() {
       this.warningList.length = 0;
-      const localStorageAvailability = cart.getItems();
-      this.productsList.forEach(item => { // TODO: why?
-        localStorageAvailability.forEach(el => {
-          if (el.id === item.id) {
-            item.availability.forEach(size => {
-              if (el.quantity > size.quantity) {
-                this.warningList.push({
-                  'title': el.title,
-                  'currentAvailability': size.quantity
-                });
-                this.$vm2.open('modal-4');
-              } else if (this.warningList.length === 0) {
-                this.$router.push('/checkout');
-                this.$store.dispatch('cities/fetch');
-              }
-            });
+      const localStorageAvailabilities = storage.getItems();
+      for (let i = 0; i < this.cartProducts.length; i++) { // сравниваем количество в наличии - реальное, с тем, что сохранено в хранилище
+        const product = this.cartProducts[i];
+        const quantity = this.$store.getters['products/getQuantity'](product.id, product.size);
+        localStorageAvailabilities.forEach(item => {
+          const quantityStorage = this.$store.getters['cart/getQuantityCart'](item.id, item.size);
+          if (quantityStorage > quantity) {
+            this.warningList.push({
+              'title': item.title,
+              'currentAvailability': quantity
+            })
           }
-        });
-      });
+        })
+      }
+      if (this.warningList.length > 0) {
+        this.$vm2.open('modal-4');
+      } else {
+        this.$router.push('/checkout');
+        this.$store.dispatch('cities/fetch');
+      }
     }
   }
 }

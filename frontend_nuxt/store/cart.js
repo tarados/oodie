@@ -42,6 +42,17 @@ export const getters = {
       sum += item.total;
     });
     return sum + ' грн';
+  },
+  getQuantityCart: (state) => (id, size) => {
+    if (!state.cartProducts.find(item => item.id === id)) {
+      return null;
+    }
+    const product = state.cartProducts.find(item => item.id === id);
+
+    if (product.size !== size) {
+      return null;
+    }
+    return  product.quantity;
   }
 }
 
