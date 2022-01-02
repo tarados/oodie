@@ -127,13 +127,10 @@ export default {
       return this.$store.getters['cart/cartProducts']
     },
     isPreorder() {
-      let el = false
-      this.cartProducts.forEach(product => {
-        if (product.preorder) {
-          el = true
-        }
-      })
-      return el
+      if (this.cartProducts.find(item => item.preorder === true)){
+        return true;
+      }
+      return false;
     },
     totalPrice() {
       return this.$store.getters['cart/totalPrice'] // TODO: calculate
@@ -158,13 +155,9 @@ export default {
       }
     },
     plusQuantity(index) {
-      console.log(this.cartProducts[index]);
-
-      this.warningList.length = 0; // TODO: wtf?
-
+      this.warningList = [];
       // TODO: use  getQuantity(productId, size)
       const item = this.cartProducts[index];
-      console.log(this.$store.getters['products/getQuantity'](item.id, item.size));
       let currentProductAvailable = 0;
       let currentProductTitle = '';
       this.productsList.forEach(product => {
@@ -208,16 +201,13 @@ export default {
                 this.$vm2.open('modal-4');
               } else if (this.warningList.length === 0) {
                 this.$router.push('/checkout');
-                this.$store.dispatch('cities/fetch'); // TODO: move to checkout
+                this.$store.dispatch('cities/fetch');
               }
             });
           }
         });
       });
     }
-  },
-  mounted() {
-    console.log('dd');
   }
 }
 </script>

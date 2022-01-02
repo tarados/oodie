@@ -35,7 +35,7 @@ export const mutations = {
 }
 
 export const getters = {
-  cartProducts: s => s.cartProducts,
+  cartProducts: state => state.cartProducts,
   totalPrice(state) {
     let sum = 0;
     state.cartProducts.forEach(function (item) {

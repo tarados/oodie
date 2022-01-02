@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper-product" v-if="product">
+  <div class="wrapper-product" v-if="currentProduct">
     <div class="breadcrumbs-wrapper">
-      <Breadcrumbs :current-product="product" :current-category="currentCategory"/>
+      <Breadcrumbs :current-product="currentProduct" :current-category="currentCategory"/>
     </div>
-    <div class="row" v-if="product">
+    <div class="row" v-if="currentProduct">
       <div class="item left">
         <ProductImages :slides="slides"/>
       </div>
@@ -14,36 +14,36 @@
         </div>
         <div class="product-price">
           <div class="price">
-            <div class="current" v-if="product.new_price">
-              {{ product.price }} грн
+            <div class="current" v-if="currentProduct.new_price">
+              {{ currentProduct.price }} грн
             </div>
             <div v-else>
-              {{ product.price }} грн
+              {{ currentProduct.price }} грн
             </div>
             <div
-              :class="{ markdown: !product.new_price}"
+              :class="{ markdown: !currentProduct.new_price}"
               class="red"
             >
-              {{ product.new_price }} грн
+              {{ currentProduct.new_price }} грн
             </div>
           </div>
         </div>
         <div class="product-title">
           <div>{{ title }}</div>
         </div>
-        <div class="size-block" v-if="!hideSize">
+        <div class="size-block" v-if="!hideSizeBlock">
           <div
             class="square"
-            v-for="(availability, index) in product.availability"
-            :class="{selected: index === size, notActive: availability.quantity <= 0 && !availability.preorder}"
+            v-for="(availability, index) in currentProduct.availability"
+            :class="{selected: index === productSizeIndex, notActive: availability.quantity <= 0 && !availability.preorder}"
             :key="index"
             @click="selectSize(index)"
           >
             {{ availability.size }}
           </div>
         </div>
-        <div class="size-table" v-if="product.table">
-          <a :href="product.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
+        <div class="size-table" v-if="currentProduct.table">
+          <a :href="currentProduct.table" target="_blank">{{ $t('ProductSizeTable') }}</a>
         </div>
         <div class="btn" @click="toCart">{{ $t(`${getStatus}`) }}</div>
         <div class="preorder" v-if="preorder">{{ $t('ProductStatusPreorderDescription') }}</div>
@@ -73,12 +73,11 @@ export default {
   data() {
     return {
       imageIndex: 0,
-      size: 0,
-      availabilities: [], // TODO: remove this
+      productSizeIndex: 0,
       preorder: null,
-      inStockNo: null, // TODO: rename
+      notAvailable: null,
       slides: [],
-      hideSize: false
+      hideSizeBlock: false,
     };
   },
   head() {
@@ -102,29 +101,44 @@ export default {
     })
   },
   computed: {
-    title() {
+    currentProduct() {
       if (!this.product) {
-        return '';
+        return {
+          'id': null,
+          'title': 'NoName',
+          'title_translate': null,
+          'price': null,
+          'category': null,
+          'availability': [
+            {
+              'size': null,
+              'quantity': null,
+              'preorder': false
+            }
+          ],
+          'table': null,
+          'new_price': null,
+          'description': 'no description',
+          'description_locale': null,
+          'image_list': null
+        }
       }
-      if (this.product.title_translate) {
-        return this.$t(this.product.title_translate);
+      return this.product;
+    },
+    title() {
+      if (this.currentProduct.title_translate) {
+        return this.$t(this.currentProduct.title_translate);
       }
-      return this.product.title;
+      return this.currentProduct.title;
     },
     description() {
-      if (!this.product) {
-        return '';
+      if (this.currentProduct.description_locale) {
+        return this.$t(this.currentProduct.description_locale);
       }
-      if (this.product.description_locale) {
-        return this.$t(this.product.description_locale);
-      }
-      return this.product.description;
+      return this.currentProduct.description;
     },
     currentCategory() {
-      if (!this.product.category) {
-        return '';
-      }
-      const category = this.$store.getters['categories/getCategory'](this.product.category);
+      const category = this.$store.getters['categories/getCategory'](this.currentProduct.category);
       if (!category) {
         return '';
       }
@@ -137,65 +151,47 @@ export default {
       if (this.preorder) {
         return 'ProductStatusPreorder';
       }
-      if (this.inStockNo) {
+      if (this.notAvailable) {
         return 'AvailabilityNo';
       }
       return 'ProductStatusBasket';
+    },
+    getPreorder() {
+      return this.currentProduct.availability[this.productSizeIndex].preorder;
     }
   },
   methods: {
-    loadProduct() {
-
-      // TODO: if no product?
-      if (!this.product) {
-        this.product = {
-          'id': 36,
-          'title': '',
-          'title_translate': 'ProductNameNavy',
-          'price': 0,
-          'category': 1,
-          'availability': [
-            {
-              'size': '',
-              'quantity': 0,
-              'preorder': false
-            }
-          ],
-          'table': null,
-          'new_price': 1499,
-          'description': '',
-          'description_locale': null,
-          'image_list': [
-            'http://localhost:8000/media/images/navy-blanket-hoodie.156eaf8b914-957e-40dd-854e-5447f1dbc2a2_wDnvduf.jpg'
-          ]
-        }
+    buttonStatus() {
+      if (this.currentProduct.availability[this.productSizeIndex].quantity === 0) {
+        this.notAvailable = true;
+        let buttonToCart = this.$el.querySelector('.btn');
+        buttonToCart.style.color = 'black';
+        buttonToCart.style.backgroundColor = 'white';
+        buttonToCart.style.border = '1px solid black';
+      }
+    },
+    loadAvailability() {
+      if (!this.currentProduct.availability || (this.currentProduct.availability.length === 1 &&
+        this.currentProduct.availability[0].size === "ONE SIZE")) {
+        this.hideSizeBlock = true;
+        this.preorder = this.currentProduct.availability[0].preorder;
+        this.buttonStatus();
+      } else {
+        this.preorder = this.getPreorder;
       }
 
-      if (this.product.image_list) {
-        this.product.image_list.forEach(item => {
+    },
+    loadImageForSliders() {
+      if (this.currentProduct.image_list) {
+        this.currentProduct.image_list.forEach(item => {
           this.slides.push({
             "image": item,
           });
         });
       }
-
-      // TODO: move to separate method loadAvailability
-      if (!this.product.availability || (this.product.availability.length === 1 && this.product.availability[0].size === "ONE SIZE")) {
-        this.hideSize = true;
-        this.preorder = this.product.availability[0].preorder;
-        if (this.product.availability[0].quantity === 0) {
-          this.inStockNo = true;
-
-          // TODO: remove this use normal vue.js
-          let buttonToCart = document.querySelector('.btn');
-          buttonToCart.style.color = 'black';
-          buttonToCart.style.backgroundColor = 'white';
-          buttonToCart.style.border = '1px solid black';
-        }
-      }
     },
     toCart() {
-      // if (!this.product.availability.length) {
+      // if (!this.currentProduct.availability.length) {
       //   // show error
       //   return;
       // }
@@ -205,42 +201,30 @@ export default {
       //   return;
       // }
 
-      const availability = this.product.availability[this.size];
-
-      const {id, title, new_price, price} = this.product;
+      const availability = this.currentProduct.availability;
+      const {id, title, new_price, price, image_list} = this.currentProduct;
       const productToCart = {
         id,
-        "title": this.statusProduct ? this.product.title + ' (предзаказ!)' : this.product.title, // TODO: remove statusProduct
-        "price": new_price ? new_price : price,
-        "quantity": 1,
-        "preorder": availability.preorder,
-        "size": availability.size,
-        "image": this.product.image_list[this.imageIndex],
+        'title': this.getPreorder ? title + ' (предзаказ!)' : title,
+        'price': new_price ? new_price : price,
+        'quantity': 1,
+        'preorder': this.getPreorder,
+        'size': availability[this.productSizeIndex].size,
+        'image': image_list[this.imageIndex]
       };
-      if (productToCart.size === "") { // TODO: what?
-        delete productToCart.size;
-      }
-      const total = parseFloat(productToCart.price).toFixed(1) * parseFloat(productToCart.quantity).toFixed(1); // TODO: remove this
-      productToCart.total = total;
+      productToCart.total = productToCart.price;
       this.$store.commit("cart/setCartProducts", productToCart);
-      this.$router.push("/cart");
+      if (!this.notAvailable) {
+        this.$router.push("/cart");
+      }
     },
     selectSize(index) {
-      this.size = index;
-      this.preorder = this.product.availability[index].preorder; // TODO: move to computed
-    }
-  },
-  watch: {
-    size: function () { // TODO: remove this
-      if (this.product.availability[this.size].preorder) {
-        this.statusProduct = true
-      } else {
-        this.statusProduct = false
-      }
+      this.productSizeIndex = index;
     }
   },
   mounted() {
-    this.loadProduct();
+    this.loadImageForSliders();
+    this.loadAvailability();
   }
 };
 </script>
