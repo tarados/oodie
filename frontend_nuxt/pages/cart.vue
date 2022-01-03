@@ -130,7 +130,7 @@ export default {
       return false;
     },
     totalPrice() {
-      return this.$store.getters['cart/totalPrice'] // TODO: calculate
+      return this.$store.getters['cart/totalPrice'];
     }
   },
   methods: {
@@ -681,9 +681,13 @@ p {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 325px) {
   .checkout-button {
     padding: 8px;
+  }
+
+  img {
+    width: 6vmax;
   }
 }
 </style>

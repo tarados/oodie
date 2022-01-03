@@ -192,7 +192,7 @@ export default {
     },
     toCart() {
       // if (!this.currentProduct.availability.length) {
-      //   // show error
+      //   // show error сделать модальное окно с объяснением
       //   return;
       // }
       //
@@ -230,7 +230,6 @@ export default {
 </script>
 
 <style scoped>
-/* TODO: move slider styles to proper component */
 .wrapper-product {
   margin-top: 55px;
   margin-bottom: 40px;
@@ -430,42 +429,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 960px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 278px);
-  }
-
-}
-
-@media screen and (max-width: 750px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 318px);
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 372px);
-  }
-}
-
-@media screen and (max-width: 560px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 424px);
-  }
-
-  .slider {
-    width: 78px;
-    height: 78px;
-  }
-}
-
-
 @media screen and (max-width: 460px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 250px);
-  }
-
   .item {
     width: calc(100% - 30px);
   }
@@ -486,19 +450,5 @@ export default {
   .item + .item {
     margin-top: 40px;
   }
-
 }
-
-@media screen and (max-width: 375px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 324px);
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .vueperslides--fixed-height {
-    height: calc(100vh - 370px);
-  }
-}
-
 </style>

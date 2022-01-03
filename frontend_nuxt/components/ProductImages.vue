@@ -76,5 +76,76 @@ export default {
   border: 1px solid black;
 }
 
+@media screen and (max-width: 960px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 278px);
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 318px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 372px);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 424px);
+  }
+
+  .slider {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+
+@media screen and (max-width: 460px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 250px);
+  }
+
+  .item {
+    width: calc(100% - 30px);
+  }
+
+  .viewer {
+    display: contents;
+  }
+
+  .btn,
+  .size-block {
+    width: auto;
+  }
+
+  .size-block .square {
+    min-width: 2rem;
+  }
+
+  .item + .item {
+    margin-top: 40px;
+  }
+
+}
+
+@media screen and (max-width: 375px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 324px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 370px);
+  }
+}
+
 
 </style>

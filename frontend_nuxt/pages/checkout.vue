@@ -150,40 +150,40 @@ export default {
   name: "Checkout",
   middleware: ['products'],
   data() {
-    return {// TODO: don't use quotes for fields
-      "deliveryMethod": "",
-      "selectDeliveryMethod": "",
-      "delivery": null,
-      "selectedPayment": '',
-      "isVisible": true,
-      "userName": "",
-      "userSurname": "",
-      "address": '',
-      "city": '',
-      "CheckoutSelectCityInput": "CheckoutSelectCityInput",
-      "CheckoutSelectWarehouseInput": "CheckoutSelectWarehouseInput",
-      "cityError": '',
-      "country": '+(38)',
-      "cityRef": '',
-      "postOffice": '',
-      "postOfficeError": '',
-      "postOfficeRef": '',
-      "phone": "",
-      "phoneBlock": "",
-      "phoneNum": "",
-      "email": '',
-      "comment": '',
-      "title": 'CheckoutTitle',
-      "invalidName": false,
-      "invalidSurname": false,
-      "invalidCity": false,
-      "invalidOffice": false,
-      "invalidEmail": false,
-      "invalidPhone": false,
-      "invalidPhoneBlock": false,
-      "invalidDelivery": false,
-      "invalidPayment": false,
-      "invalidAddress": false
+    return {
+      'deliveryMethod': '',
+      'selectDeliveryMethod': '',
+      'delivery': null,
+      'selectedPayment': '',
+      'isVisible': true,
+      'userName': '',
+      'userSurname': '',
+      'address': '',
+      'city': '',
+      'CheckoutSelectCityInput': 'CheckoutSelectCityInput',
+      'CheckoutSelectWarehouseInput': 'CheckoutSelectWarehouseInput',
+      'cityError': '',
+      'country': '+(38)',
+      'cityRef': '',
+      'postOffice': '',
+      'postOfficeError': '',
+      'postOfficeRef': '',
+      'phone': '',
+      'phoneBlock': '',
+      'phoneNum': '',
+      'email': '',
+      'comment': '',
+      'title': 'CheckoutTitle',
+      'invalidName': false,
+      'invalidSurname': false,
+      'invalidCity': false,
+      'invalidOffice': false,
+      'invalidEmail': false,
+      'invalidPhone': false,
+      'invalidPhoneBlock': false,
+      'invalidDelivery': false,
+      'invalidPayment': false,
+      'invalidAddress': false
     }
   },
   head() {
@@ -215,7 +215,7 @@ export default {
     },
     focusPhone() {
       // TODO: remove this use CSS
-      let inputPhone = document.querySelector('.form-content__phone');
+      let inputPhone = this.$el.querySelector('.form-content__phone');
       inputPhone.children[1].onblur = function () {
         inputPhone.children[0].style.boxShadow = 'none';
         inputPhone.children[0].style.border = '1px solid #bbb';
@@ -352,7 +352,7 @@ export default {
     },
     phone: function (newValue) {
       if (this.$v.phone.$invalid) {
-        let inputPhoneBlock = document.querySelector('.form-content__phone');
+        let inputPhoneBlock = this.$el.querySelector('.form-content__phone');
         inputPhoneBlock.children[1].onblur = function () {
           inputPhoneBlock.children[0].style.borderColor = 'red';
           inputPhoneBlock.children[0].style.boxShadow = 'none';
@@ -497,6 +497,10 @@ h2 {
   border-left: none;
   margin: 0;
   padding: 0;
+}
+
+.form-content__phone:focus {
+  border: 3px solid #ff0059;
 }
 
 input {
