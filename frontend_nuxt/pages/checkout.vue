@@ -32,13 +32,8 @@
                :class="{invalid: invalidPhoneBlock}"
           >
             <input
-              v-model="country"
-              class="country"
-              :class="{invalid: invalidPhone}"
-              @input="handleUserInputCountry"
-            >
-            <input
-              placeholder="__-___-__-__"
+              v-model="phone"
+              placeholder="___-___-__-__"
               :class="{invalid: invalidPhone}"
               class="phone-context"
               @input="handleUserInput"
@@ -48,7 +43,7 @@
             {{ $t('CheckoutEnterPhone') }}
           </small>
           <small v-show="$v.phone.required && !$v.phone.minLength">
-            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum.length + 2 }}
+            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum.length }}
           </small>
         </div>
         <div class="form-title">
@@ -212,19 +207,6 @@ export default {
     },
     warehousesList() {
       return this.$store.getters['warehouses/warehouses'];
-    },
-    focusPhone() {
-      // TODO: remove this use CSS
-      let inputPhone = this.$el.querySelector('.form-content__phone');
-      inputPhone.children[1].onblur = function () {
-        inputPhone.children[0].style.boxShadow = 'none';
-        inputPhone.children[0].style.border = '1px solid #bbb';
-        inputPhone.children[0].style.borderRight = 'none';
-      };
-      inputPhone.children[1].onfocus = function () {
-        inputPhone.children[0].style.boxShadow = '0 2px 2px #c7d9d8';
-        inputPhone.children[0].style.borderColor = '#c7d9d8';
-      };
     }
   },
   methods: {
@@ -335,10 +317,6 @@ export default {
       this.phoneNum = replacedInput.input;
       this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
         + (replacedInput[3] ? '-' + replacedInput[3] : '') + (replacedInput[4] ? '-' + replacedInput[4] : '');
-    },
-    handleUserInputCountry(e) {
-      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,1})/);
-      this.country = !replacedInput[2] ? replacedInput[1] : '+' + '(' + replacedInput[1] + replacedInput[2] + (replacedInput[3] ? replacedInput[3] + ')' : '');
     }
   },
   watch: {
@@ -353,9 +331,9 @@ export default {
     phone: function (newValue) {
       if (this.$v.phone.$invalid) {
         let inputPhoneBlock = this.$el.querySelector('.form-content__phone');
-        inputPhoneBlock.children[1].onblur = function () {
-          inputPhoneBlock.children[0].style.borderColor = 'red';
-          inputPhoneBlock.children[0].style.boxShadow = 'none';
+        inputPhoneBlock.onblur = function () {
+          this.$el.querySelector('.form-content__phone input').style.borderColor = 'red';
+          this.$el.querySelector('.form-content__phone input').style.boxShadow = 'none';
         };
 
         this.invalidPhone = this.$v.phone.required;
@@ -399,7 +377,7 @@ export default {
     }
   },
   mounted() {
-    this.focusPhone;
+    // this.focusPhone;
   }
 }
 </script>
@@ -494,9 +472,9 @@ h2 {
 }
 
 .form-content__phone input.phone-context {
-  border-left: none;
+  /*border-left: none;*/
   margin: 0;
-  padding: 0;
+  padding-left: 10px;
 }
 
 .form-content__phone:focus {

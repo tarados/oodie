@@ -116,9 +116,9 @@ export default {
       title: this.$t(`${this.title}`)
     }
   },
-  components: {
-    Modal
-  },
+  // components: {
+  //   Modal
+  // },
   computed: {
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
