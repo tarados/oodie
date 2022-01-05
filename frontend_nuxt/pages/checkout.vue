@@ -27,23 +27,21 @@
           <span>{{ $t('CheckoutPhone') }}:</span>
         </div>
         <div class="form-content phone">
+
           <div class="form-content__phone"
                v-model="phoneBlock"
                :class="{invalid: invalidPhoneBlock}"
           >
-            <input
+            <vue-tel-input
               v-model="phone"
-              placeholder="___-___-__-__"
-              :class="{invalid: invalidPhone}"
-              class="phone-context"
-              @input="handleUserInput"
-            >
+              :defaultCountry="defaultCountry"
+              :inputOptions="inputOptions"
+              :invalidMsg="$t(invalidMsg)"
+              :mode="mode"
+            ></vue-tel-input>
           </div>
-          <small v-if="!$v.phone.required && $v.phone.minLength && invalidPhone">
-            {{ $t('CheckoutEnterPhone') }}
-          </small>
           <small v-show="$v.phone.required && !$v.phone.minLength">
-            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum.length }}
+            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum + 3 }}
           </small>
         </div>
         <div class="form-title">
@@ -138,18 +136,28 @@
 
 <script>
 import {required, email, minLength} from 'vuelidate/lib/validators';
-import {post} from '~/assets/js/api'
+import {post} from '~/assets/js/api';
 import {clearLocalStorage} from "@/assets/js/localStorage";
+import { VueTelInput } from 'vue-tel-input';
+import {allCountries} from "assets/js/allCountries";
 
 export default {
   name: "Checkout",
   middleware: ['products'],
   data() {
     return {
+      'defaultCountry': 'ua',
+      'mode': 'international',
       'deliveryMethod': '',
       'selectDeliveryMethod': '',
       'delivery': null,
       'selectedPayment': '',
+      'inputOptions': {
+        maxlength: 12,
+        placeholder: '__ ___ ____',
+        required: true
+      },
+      'invalidMsg': 'CheckoutPhoneWarning2',
       'isVisible': true,
       'userName': '',
       'userSurname': '',
@@ -246,7 +254,7 @@ export default {
         'products': productsList,
         'username': this.userName,
         'userSurname': this.userSurname,
-        'phone': this.country + this.phone,
+        'phone': this.phone,
         'payment': this.selectedPayment,
         'delivery': this.deliveryMethod,
         'city': this.city,
@@ -311,12 +319,6 @@ export default {
       this.postOfficeRef = this.warehousesList.find(el => el.warehouse === warehouse).warehouseRef;
       this.postOffice = warehouse;
       this.invalidOffice = false;
-    },
-    handleUserInput(e) {
-      let replacedInput = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-      this.phoneNum = replacedInput.input;
-      this.phone = !replacedInput[2] ? replacedInput[1] : replacedInput[1] + '-' + replacedInput[2]
-        + (replacedInput[3] ? '-' + replacedInput[3] : '') + (replacedInput[4] ? '-' + replacedInput[4] : '');
     }
   },
   watch: {
@@ -330,12 +332,6 @@ export default {
     },
     phone: function (newValue) {
       if (this.$v.phone.$invalid) {
-        let inputPhoneBlock = this.$el.querySelector('.form-content__phone');
-        inputPhoneBlock.onblur = function () {
-          this.$el.querySelector('.form-content__phone input').style.borderColor = 'red';
-          this.$el.querySelector('.form-content__phone input').style.boxShadow = 'none';
-        };
-
         this.invalidPhone = this.$v.phone.required;
       } else {
         this.invalidPhone = !this.$v.phone.required;
@@ -375,9 +371,6 @@ export default {
         this.deliveryMethod = 'Самовывоз';
       }
     }
-  },
-  mounted() {
-    // this.focusPhone;
   }
 }
 </script>
@@ -466,9 +459,10 @@ h2 {
   flex-wrap: nowrap;
 }
 
-.form-content__phone input.country {
-  border-right: none;
-  width: 16%;
+.form-content__phone .vue-tel-input {
+  width: 100%;
+  height: 35px;
+  border-radius: 0;
 }
 
 .form-content__phone input.phone-context {

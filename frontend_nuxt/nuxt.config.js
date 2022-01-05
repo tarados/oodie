@@ -28,7 +28,8 @@ export default {
     '~/plugins/vuelidate.js',
     '~/plugins/autocomplite.js',
     '~/plugins/touch.js',
-    '~/plugins/modal.js'
+    '~/plugins/modal.js',
+    '~/plugins/vue-tel-input.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
