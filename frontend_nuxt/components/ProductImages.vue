@@ -111,28 +111,6 @@ export default {
   .vueperslides--fixed-height {
     height: calc(100vh - 250px);
   }
-
-  .item {
-    width: calc(100% - 30px);
-  }
-
-  .viewer {
-    display: contents;
-  }
-
-  .btn,
-  .size-block {
-    width: auto;
-  }
-
-  .size-block .square {
-    min-width: 2rem;
-  }
-
-  .item + .item {
-    margin-top: 40px;
-  }
-
 }
 
 @media screen and (max-width: 375px) {

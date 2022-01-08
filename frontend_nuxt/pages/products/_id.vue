@@ -1,10 +1,9 @@
 <template>
   <div class="wrapper-product">
-    <div class="breadcrumbs-wrapper" v-if="product">
+    <div class="breadcrumbs-wrapper">
       <Breadcrumbs :current-product="product" :current-category="currentCategory"/>
-      <Product :product="product" />
     </div>
-    <div class="row" v-else>Loading...</div>
+    <Product :product="product" />
   </div>
 </template>
 

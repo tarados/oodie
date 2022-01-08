@@ -336,28 +336,9 @@ export default {
   cursor: default;
 }
 
-.unavailable {
-  width: 200px;
-  padding: 16px 8px;
-  border: 2px solid #565555;
-  color: #565555;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-@media screen and (max-width: 2800px) {
-  .viewer {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 460px) {
   .item {
     width: calc(100% - 30px);
-  }
-
-  .viewer {
-    display: contents;
   }
 
   .btn,
