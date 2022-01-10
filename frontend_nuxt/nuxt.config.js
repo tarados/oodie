@@ -29,7 +29,7 @@ export default {
     '~/plugins/autocomplite.js',
     '~/plugins/touch.js',
     '~/plugins/modal.js',
-    '~/plugins/vue-tel-input.js'
+    '~/plugins/vue-input-facade.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

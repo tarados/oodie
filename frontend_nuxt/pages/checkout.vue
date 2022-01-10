@@ -28,20 +28,21 @@
         </div>
         <div class="form-content phone">
 
-          <div class="form-content__phone"
-               v-model="phoneBlock"
-               :class="{invalid: invalidPhoneBlock}"
-          >
-            <vue-tel-input
+          <div class="form-content__phone">
+            <input
+              id="phone"
+              :class="{invalid: invalidPhone}"
+              v-facade="'(###)-###-##-##'"
+              type="text"
               v-model="phone"
-              :defaultCountry="defaultCountry"
-              :inputOptions="inputOptions"
-              :invalidMsg="$t(invalidMsg)"
-              :mode="mode"
-            ></vue-tel-input>
+              placeholder="(###)-###-##-##"
+            >
           </div>
-          <small v-show="$v.phone.required && !$v.phone.minLength">
-            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum + 3 }}
+          <small v-if="!$v.phone.required && $v.phone.minLength && invalidPhone">
+            {{ $t('CheckoutEnterPhone') }}
+          </small>
+          <small v-show="$v.phone.required && (phoneNum < 10)">
+            {{ $t('CheckoutPhoneWarning') }} {{ phoneNum }}
           </small>
         </div>
         <div class="form-title">
@@ -138,8 +139,7 @@
 import {required, email, minLength} from 'vuelidate/lib/validators';
 import {post} from '~/assets/js/api';
 import {clearLocalStorage} from "@/assets/js/localStorage";
-import { VueTelInput } from 'vue-tel-input';
-import {allCountries} from "assets/js/allCountries";
+
 
 export default {
   name: "Checkout",
@@ -147,7 +147,7 @@ export default {
   data() {
     return {
       'defaultCountry': 'ua',
-      'mode': 'international',
+      'mode': 'national',
       'deliveryMethod': '',
       'selectDeliveryMethod': '',
       'delivery': null,
@@ -183,7 +183,6 @@ export default {
       'invalidOffice': false,
       'invalidEmail': false,
       'invalidPhone': false,
-      'invalidPhoneBlock': false,
       'invalidDelivery': false,
       'invalidPayment': false,
       'invalidAddress': false
@@ -200,7 +199,6 @@ export default {
     selectedPayment: {required},
     deliveryMethod: {required},
     phone: {required, minLength: minLength(13)},
-    phoneBlock: {required},
     email: {email}
   },
   computed: {
@@ -222,7 +220,6 @@ export default {
       this.invalidName = this.$v.userName.$invalid;
       this.invalidSurname = this.$v.userSurname.$invalid;
       this.invalidPhone = this.$v.phone.$invalid;
-      this.invalidPhoneBlock = this.$v.phoneBlock.$invalid;
       this.invalidEmail = this.$v.email.$invalid;
       this.invalidDelivery = this.$v.deliveryMethod.$invalid;
       this.invalidPayment = this.$v.selectedPayment.$invalid;
@@ -264,7 +261,6 @@ export default {
         'others': this.address,
         'comment': this.comment
       };
-
       if (!this.$v.$invalid) {
         if (!this.invalidAddress || this.deliveryMethod === 'Самовывоз') {
           const response = await post("order", order);
@@ -331,6 +327,7 @@ export default {
       localStorage.setItem('userSurname', newValue);
     },
     phone: function (newValue) {
+      this.phoneNum = this.$v.phone.$model.replace(/[^\d]/g, '').length;
       if (this.$v.phone.$invalid) {
         this.invalidPhone = this.$v.phone.required;
       } else {
