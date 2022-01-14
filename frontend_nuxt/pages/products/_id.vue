@@ -21,7 +21,6 @@ export default {
      return {product}
    } catch (e) {
      await app.store.commit("error/setError", e);
-     alert(e);
      await app.router.push('/');
    }
   },
