@@ -16,10 +16,11 @@ export default {
   },
   async asyncData({$axios, params, app}) {
    try {
-     const data = await $axios.get(process.env.VUE_APP_API + '/products/product/' + params.id);
+     const data = await $axios.get(process.env.VUE_APP_API + '/products/produc/' + params.id);
      const product = data.data.product;
      return {product}
    } catch (e) {
+     await app.store.commit("error/setError", e);
      alert(e);
      await app.router.push('/');
    }
