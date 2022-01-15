@@ -11,16 +11,7 @@
           id="modalTitle"
         >
           <slot name="header">
-            This is the default tile!
-
-            <button
-              type="button"
-              class="btn-close"
-              @click="close"
-              aria-label="Close modal"
-            >
-              x
-            </button>
+            {{ $t(`${headerText}`) }}
           </slot>
         </header>
         <section
@@ -28,22 +19,18 @@
           id="modalDescription"
         >
           <slot name="body">
-            I'm the default body!
+            {{ warningContent }}
           </slot>
         </section>
         <footer class="modal-footer">
-          <slot name="footer">
-            I'm the default footer!
-
-            <button
-              type="button"
-              class="btn-green"
-              @click="close"
-              aria-label="Close modal"
-            >
-              Close me!
-            </button>
-          </slot>
+          <button
+            type="button"
+            class="btn"
+            @click="close"
+            aria-label="Close modal"
+          >
+            OK
+          </button>
         </footer>
       </div>
     </div>
@@ -53,6 +40,14 @@
 <script>
 export default {
   name: "ModalError",
+  props: {
+    warningContent: {
+      type: String
+    },
+    headerText: {
+      type: String
+    }
+  },
   methods: {
     close() {
       this.$nuxt.$emit('close');
@@ -80,6 +75,8 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+  margin: 0 15px;
+  border-radius: 3px;
 }
 
 .modal-header,
@@ -91,12 +88,12 @@ export default {
 .modal-header {
   border-bottom: 1px solid #eeeeee;
   color: #4AAE9B;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .modal-footer {
   border-top: 1px solid #eeeeee;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .modal-body {
@@ -104,20 +101,13 @@ export default {
   padding: 20px 10px;
 }
 
-.btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4AAE9B;
-  background: transparent;
-}
 
-.btn-green {
-  color: white;
-  background: #4AAE9B;
-  border: 1px solid #4AAE9B;
-  border-radius: 2px;
+.btn {
+  height: 5vh;
+  width: 10vh;
+  color: black;
+  background: rgb(239, 239, 239);
+  border: none;
+  border-radius: 3px;
 }
 </style>

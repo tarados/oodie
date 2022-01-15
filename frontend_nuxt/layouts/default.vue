@@ -3,7 +3,12 @@
     <Navbar/>
     <nuxt/>
     <Footer/>
-    <ModalError v-show="showModal" @close="closeModal" />
+    <ModalError
+      v-show="showModal"
+      @close="closeModal"
+      :warning-content="warningContent"
+      :header-text="headerText"
+    />
   </div>
 </template>
 
@@ -14,6 +19,8 @@ export default {
   data() {
     return {
       isModalVisible: false,
+      warningContent: '',
+      headerText: 'ErrorHeaderText'
     };
   },
   created() {
@@ -25,6 +32,7 @@ export default {
   computed: {
     showModal() {
       if (this.$store.getters['error/getError']) {
+        this.warningContent = String(this.$store.getters['error/getError']);
         return true;
       }
       return false;
