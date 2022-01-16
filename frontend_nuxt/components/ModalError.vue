@@ -1,40 +1,19 @@
 <template>
-  <transition name="modal-fade">
-    <div class="modal-backdrop">
-      <div class="modal"
-           role="dialog"
-           aria-labelledby="modalTitle"
-           aria-describedby="modalDescription"
-      >
-        <header
-          class="modal-header"
-          id="modalTitle"
-        >
-          <slot name="header">
-            {{ $t(`${headerText}`) }}
-          </slot>
-        </header>
-        <section
-          class="modal-body"
-          id="modalDescription"
-        >
-          <slot name="body">
-            {{ warningContent }}
-          </slot>
-        </section>
-        <footer class="modal-footer">
-          <button
-            type="button"
-            class="btn"
-            @click="close"
-            aria-label="Close modal"
-          >
-            OK
-          </button>
-        </footer>
-      </div>
+  <div class="modal-backdrop">
+    <div class="modal">
+      <header class="modal-header">
+        {{ $t(`${headerText}`) }}
+      </header>
+      <section class="modal-body">
+        {{ warningContent }}
+      </section>
+      <footer class="modal-footer">
+        <button @click="close">
+          OK
+        </button>
+      </footer>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -87,7 +66,8 @@ export default {
 
 .modal-header {
   border-bottom: 1px solid #eeeeee;
-  color: #4AAE9B;
+  color: black;
+  text-transform: uppercase;
   justify-content: center;
 }
 
@@ -99,14 +79,14 @@ export default {
 .modal-body {
   position: relative;
   padding: 20px 10px;
+  text-transform: uppercase;
 }
 
-
-.btn {
+button {
   height: 5vh;
   width: 10vh;
   color: black;
-  background: rgb(239, 239, 239);
+  background: rgb(75, 218, 70);
   border: none;
   border-radius: 3px;
 }

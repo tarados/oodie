@@ -5,7 +5,6 @@
     <Footer/>
     <ModalError
       v-show="showModal"
-      @close="closeModal"
       :warning-content="warningContent"
       :header-text="headerText"
     />
@@ -36,11 +35,6 @@ export default {
         return true;
       }
       return false;
-    }
-  },
-  methods: {
-    closeModal() {
-      this.isModalVisible = !this.isModalVisible;
     }
   }
 }
