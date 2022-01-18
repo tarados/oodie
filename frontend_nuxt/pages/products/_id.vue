@@ -3,7 +3,7 @@
     <div class="breadcrumbs-wrapper">
       <Breadcrumbs :current-product="product" :current-category="currentCategory"/>
     </div>
-    <Product :product="product" />
+    <Product :product="product"/>
   </div>
 </template>
 
@@ -15,14 +15,9 @@ export default {
     return /^\d+$/.test(params.id);
   },
   async asyncData({$axios, params, app}) {
-   try {
-     const data = await $axios.get(process.env.VUE_APP_API + '/products/produc/' + params.id);
-     const product = data.data.product;
-     return {product}
-   } catch (e) {
-     await app.store.commit("error/setError", e);
-     await app.router.push('/');
-   }
+    const data = await $axios.get(process.env.VUE_APP_API + '/products/product/' + params.id);
+    const product = data.data.product;
+    return {product}
   },
   head() {
     return {
@@ -80,4 +75,5 @@ export default {
   align-content: center;
 }
 
-</style>
+<
+/
