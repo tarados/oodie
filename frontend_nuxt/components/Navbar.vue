@@ -11,10 +11,7 @@
             <span>+380507204066</span>
           </a>
         </div>
-        <div class="navbar_header__lang-basket">
-          <div class="navbar_header__lang">
-            <Dropdown/>
-          </div>
+        <div class="navbar_header__lang-basket" :class="{active: !cartVisible}">
           <div class="navbar_header__basket" v-if="cartVisible">
             <nuxt-link to="/cart">
               <img alt="" src="~/assets/img/cart.svg">
@@ -23,6 +20,9 @@
             </span>
             </nuxt-link>
 
+          </div>
+          <div class="navbar_header__lang">
+            <Dropdown/>
           </div>
         </div>
       </div>
@@ -165,14 +165,19 @@ export default {
 }
 
 .navbar_header__lang-basket {
+  margin: 0 8px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10%;
+  gap: 5%;
+}
+
+.active {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .navbar_header__basket {
   margin: auto;
-  padding-right: calc(16px + 32 * ((100vw - 375px) / 1837));
 }
 
 .navbar_header__basket a {
@@ -202,7 +207,6 @@ export default {
   align-items: center;
   margin-top: 50px;
   margin-bottom: 40px;
-  /*margin: 50px 0 40px 0;*/
 }
 
 .navbar_logo img {
@@ -263,12 +267,14 @@ export default {
   position: absolute;
   background-color: #f5f5f5;
   top: calc(100% + 0.5rem);
-  left: 0;
-  width: 80%;
+  left: 50%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 0 calc(3vw + 12 * (100vw / 1838));
+}
+
+.navbar-item .navbar-item__brands .navbar-item__sub-menu .menu-item {
+  align-self: flex-start;
 }
 
 .navbar-item .navbar-item__brands .navbar-item__sub-menu p {

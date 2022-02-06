@@ -74,6 +74,4 @@ export default {
   align-items: inherit;
   align-content: center;
 }
-
-<
-/
+</style>

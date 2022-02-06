@@ -6,7 +6,7 @@ import re
 
 API_URL = 'https://api.novaposhta.ua/v2.0/json/'
 
-NOVAPOSHTA_API_KEY = '0dfcb26f26a8b36a211887975c95d7fe'
+NOVAPOSHTA_API_KEY = '6eae917af47e70d13360720a31c33d0a'
 
 
 def get_city(name=None):

@@ -1,7 +1,6 @@
 <template>
   <client-only>
     <div>
-      <div class="slider-title">Мы в Instagram</div>
       <div class="slider" ref="slider" v-if="clientRenderer">
         <div class="slider-list"
              ref="slider_list"
