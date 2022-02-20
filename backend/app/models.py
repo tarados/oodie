@@ -99,7 +99,7 @@ class Product(models.Model):
 	def get_first_image_url(self):
 		try:
 			first_image = ProductImage.objects.filter(product=self.id)[0].image
-			im = get_thumbnail(first_image, '600x600', crop='center', quality=99)
+			im = get_thumbnail(first_image, '600x600', crop='top', quality=99)
 			log.debug('get_first_image_url - %s' % (settings.SITE_URL + im.url))
 			return settings.SITE_URL + im.url
 		except IndexError:

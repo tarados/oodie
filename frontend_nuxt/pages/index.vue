@@ -37,7 +37,7 @@
       </div>
     </div>
     <ProductsList :ctg="1"/>
-    <Slider :slides="slides" />
+    <InstagramSlider />
   </div>
 </template>
 
@@ -71,12 +71,6 @@ export default {
         return '';
       }
       return this.$t(this.$store.getters['description/description']);
-    },
-    slides() {
-      if (!this.$store.getters['instagram/slides'].length > 0) {
-        return [];
-      }
-      return this.$store.getters['instagram/slides']
     }
   }
 }

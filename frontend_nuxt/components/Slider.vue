@@ -1,7 +1,6 @@
 <template>
   <client-only>
     <div>
-      <div class="slider-title">Мы в Instagram</div>
       <div class="slider" ref="slider" v-if="clientRenderer">
         <div class="slider-list"
              ref="slider_list"
@@ -340,8 +339,8 @@ span {
   }
 
   .slider-item {
-    width: calc(10vw + 180 * (100vw / 1200));
-    height: calc(10vw + 180 * (100vw / 1200));
+    width: calc(11vw + 175 * (100vw / 1200));
+    height: calc(11vw + 175 * (100vw / 1200));
   }
 
   .next,
@@ -359,15 +358,27 @@ span {
 
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 450px) {
   .slider,
   .slider-list {
-    height: calc(10vw + 180 * (100vw / 770));
+    height: calc(11vw + 165 * (100vw / 770));
   }
 
   .slider-item {
-    width: calc(10vw + 180 * (100vw / 770));
-    height: calc(10vw + 180 * (100vw / 770));
+    width: calc(11vw + 165 * (100vw / 770));
+    height: calc(11vw + 165 * (100vw / 770));
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .slider,
+  .slider-list {
+    height: calc(10vw + 175 * (100vw / 770));
+  }
+
+  .slider-item {
+    width: calc(10vw + 175 * (100vw / 770));
+    height: calc(10vw + 175 * (100vw / 770));
   }
 
   .next,

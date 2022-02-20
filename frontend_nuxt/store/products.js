@@ -19,5 +19,18 @@ export const actions = {
 }
 
 export const getters = {
-  products: s => s.products
+  products: (state) => state.products,
+  getQuantity: (state) => (id, size) => {
+    if (!state.products.find(item => item.id === id)) {
+      return null
+    }
+    const product = state.products.find(item => item.id === id);
+    if (!product.availability.find(el => el.size === size)) {
+      return null
+    }
+    if (!product.availability.find(el => el.size === size).quantity) {
+      return null
+    }
+    return  product.availability.find(el => el.size === size).quantity;
+  }
 }

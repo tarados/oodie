@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
 export default {
   name: "default"
 }
@@ -21,4 +22,5 @@ export default {
   justify-content: space-between;
   overflow-x: hidden;
 }
+
 </style>

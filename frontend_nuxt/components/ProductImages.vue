@@ -7,14 +7,14 @@
         :slide-ratio="841 / 561"
         :bullets="false">
         <vueper-slide
-          v-for="(slide, i) in slides"
-          :key="i"
+          v-for="(slide, index) in slides"
+          :key="index"
           :image="slide.image"
         />
       </vueper-slides>
       <div class="item-left-slider">
         <div class="slider" v-for="(image, index) in slides" :key="index">
-          <img alt="" :src="image.image" @click="$refs.vueperslides1.goToSlide(index)">
+          <img alt="" :src="image.image" @click="selectedImage(index)">
         </div>
       </div>
     </div>
@@ -36,6 +36,13 @@ export default {
   components: {
     VueperSlides,
     VueperSlide
+  },
+  methods: {
+    selectedImage(index) {
+      this.$nuxt.$emit('image-index', index);
+      this.$refs['vueperslides1'].goToSlide(index);
+
+    }
   }
 }
 </script>
@@ -67,6 +74,55 @@ export default {
 
 .slider img:hover {
   border: 1px solid black;
+}
+
+@media screen and (max-width: 960px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 278px);
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 318px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 372px);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 424px);
+  }
+
+  .slider {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+
+@media screen and (max-width: 460px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 250px);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 324px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .vueperslides--fixed-height {
+    height: calc(100vh - 370px);
+  }
 }
 
 

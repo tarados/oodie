@@ -1,123 +1,127 @@
 <template>
-  <client-only>
-    <div class="wrapper-cart">
-      <div class="header">
-        <h1 v-if="cartProducts.length > 0">{{ $t('ProductCard') }}</h1>
-        <h1 v-else>{{ $t('ProductCardEmpty') }}</h1>
+  <div>
+    <div class="grid-container second">
+      <div class="item image">
+        <img :src="product.image">
       </div>
-      <div v-for="(product, index) in cartProducts" :key="index">
-        <CartItem :product="product" :index="index"/>
-      </div>
-      <div class="subtotal-mobile-box" v-show="cartProducts.length > 0">
-        <div class="subtotal-mobile-title">{{ $t('BasketTotalPrice') }}:</div>
-        <div class="item subtotal-mobile" v-text="totalPrice"></div>
-      </div>
-      <div class="container container-border">
-        <div class="subtotal-box" v-show="cartProducts.length > 0">
-          <span>{{ $t('BasketTotalPrice') }} </span>
-          <span v-text="totalPrice"></span>
+      <div class="item product">
+        <div class="name">
+          {{ product.title }}
+          <strong v-if="needShowSize(product)">
+            {{ product.size }}
+          </strong>
         </div>
       </div>
-      <div class="container" v-if="isPreorder">
-        <p>{{ $t('BasketPreorderDescription') }}</p>
-      </div>
-      <div class="container checkout-buttons">
-        <nuxt-link to="/" class="checkout-button continue-shopping button">
-          {{ $t('ContinueShopping') }}
-        </nuxt-link>
-        <div
-          @click="toCheckout"
-          class="checkout-button checkout button"
-          v-show="cartProducts.length > 0">{{ $t('BasketCheckout') }}
+      <div class="item quantity-val">
+        <div>
+          {{ product.quantity }}
+        </div>
+        <div class="triangle">
+          <div class="triangle-up" @click="plusQuantity(index)"></div>
+          <div class="triangle-down" @click="minusQuantity(index)"></div>
         </div>
       </div>
-      <Modal
-        :warningList="warningList"
-        :header-text="headerText"
-        :in-stock="inStock"
-      />
+      <div class="item total-val">{{ product.total }} грн</div>
+      <div class="item close">
+        <button @click="deleteOrder(index)">X</button>
+      </div>
     </div>
-  </client-only>
+    <div class="mobile">
+      <div class="mobile-content">
+        <div class="image">
+          <img :src="product.image">
+        </div>
+        <div class="product"><span>{{ product.title }}</span><span v-if="needShowSize(product)">{{
+            product.size
+          }}</span></div>
+        <div class="total-val">{{ product.total }} грн</div>
+      </div>
+      <div class="mobile-edit">
+        <div class="remove-mobile" @click="deleteOrder(index)">{{ $t('ProductDelete') }}</div>
+        <div class="quantity-val-mobile">
+          <div class="down">
+            <div class="quantity-button" @click="minusQuantity(index)">-</div>
+          </div>
+          <div class="product-quantity">
+            {{ product.quantity }}
+          </div>
+          <div class="up">
+            <div class="quantity-button" @click="plusQuantity(index)">+</div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
 import * as storage from "assets/js/localStorage";
-import Modal from '~/components/Modal'
+import Modal from '~/components/Modal';
 
 export default {
-  name: "Cart",
+  name: "CartItem",
+  props: {
+    product: {
+      type: Object
+    },
+    index: {
+      type: Number
+    }
+  },
   middleware: ['products'],
   data() {
     return {
       isVisible: false,
-      warningList: [],
-      title: 'CartTitle',
-      modalContent: false,
-      headerText: null,
-      inStock: null
+      wList: [],
+      hText: null,
+      stock: null
     }
-  },
-  head() {
-    return {
-      title: this.$t(`${this.title}`)
-    }
-  },
-  created() {
-    this.$nuxt.$on('modal-content', (item) => {
-      if (item) {
-        this.warningList = item.warningList;
-        this.headerText = item.headerText;
-        this.inStock = item.inStock;
-        this.modalContent = !this.modalContent;
-      }
-    });
   },
   computed: {
     cartProducts() {
       return this.$store.getters['cart/cartProducts']
-    },
-    isPreorder() {
-      if (this.cartProducts.find(item => item.preorder === true)){
-        return true;
-      }
-      return false;
-    },
-    totalPrice() {
-      return this.$store.getters['cart/totalPrice'];
     }
   },
   methods: {
-    toCheckout() {
-      this.warningList.length = 0;
-      const localStorageAvailabilities = storage.getItems();
-      for (let i = 0; i < this.cartProducts.length; i++) { // сравниваем количество в наличии - реальное, с тем, что сохранено в хранилище
-        const product = this.cartProducts[i];
-        const quantity = this.$store.getters['products/getQuantity'](product.id, product.size);
-        localStorageAvailabilities.forEach(item => {
-          const quantityStorage = this.$store.getters['cart/getQuantityCart'](item.id, item.size);
-          if (quantityStorage > quantity) {
-            this.warningList.push({
-              'title': item.title,
-              'currentAvailability': quantity
-            })
-          }
-        })
+    needShowSize(product) {
+      let result = '';
+      if (product.size !== 'ONE SIZE') {
+        result = product.size;
       }
-      if (this.warningList.length > 0) {
-        this.headerText = 'ModalTitleForQuantity';
-        this.inStock = 'InStockOnly';
-        this.$vm2.open('modal-4');
+      return result;
+    },
+    deleteOrder(index) {
+      this.$store.commit('cart/delProduct', index);
+    },
+    minusQuantity(index) {
+      const item = this.cartProducts[index];
+      let newAvailability = item.quantity - 1;
+      if (newAvailability > 0) {
+        this.$store.commit('cart/decrement', index);
+      }
+    },
+    plusQuantity(index) {
+      this.wList = [];
+      const item = this.cartProducts[index];
+      const quantity = this.$store.getters['products/getQuantity'](item.id, item.size);
+      let newAvailability = item.quantity + 1;
+      if (newAvailability <= quantity) {
+        this.$store.commit('cart/increment', index);
       } else {
-        this.$router.push('/checkout');
-        this.$store.dispatch('cities/fetch');
-      }
-    }
-  },
-  watch: {
-    modalContent: function () {
-      if (this.modalContent) {
-        this.$vm2.open('modal-4');
-        this.modalContent = !this.modalContent;
+        this.wList.push({
+          'title': item.title,
+          'currentAvailability': quantity
+        });
+        this.hText = 'ModalTitleForQuantity';
+        this.stock = 'InStockOnly';
+        let contentForModal = {
+          'warningList': this.wList,
+          'headerText': this.hText,
+          'inStock': this.stock
+        };
+        this.$nuxt.$emit('modal-content', contentForModal);
       }
     }
   }
@@ -125,56 +129,11 @@ export default {
 </script>
 
 <style scoped>
-
-.wrapper-cart {
-  margin-top: -0.8%;
-}
-
-
-.header {
-  max-height: 38px;
-  margin: 2% auto;
-  text-align: center;
-}
-
-.grid-container {
-  margin: -15px;
-}
-
-h1 {
-  font-size: 2rem;
-  color: rgb(61, 66, 70);
-  text-transform: uppercase;
-  letter-spacing: 0;
-}
-
 .grid-container {
   display: grid;
   max-width: 900px;
   margin: 15px auto;
   grid-template-columns: 10% 55% 10% 19% 6%;
-}
-
-.container-border {
-  border-top: 1px solid black;
-}
-
-.container {
-  width: 100%;
-  display: flex;
-  max-width: 900px;
-  margin: auto;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 0px 16px;
-}
-
-.first {
-  grid-template-rows: 78px;
-}
-
-.title, .price, .quantity, .total {
-  font-weight: 600;
 }
 
 .second {
@@ -617,4 +576,5 @@ p {
     width: 6vmax;
   }
 }
+
 </style>

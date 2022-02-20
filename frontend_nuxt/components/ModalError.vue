@@ -5,7 +5,7 @@
         {{ $t(`${headerText}`) }}
       </header>
       <section class="modal-body">
-        {{ message }}
+        {{ warningContent }}
       </section>
       <footer class="modal-footer">
         <button @click="close">
@@ -18,19 +18,18 @@
 
 <script>
 export default {
-  name: "error",
-  data() {
-    return {
-      message: '',
-      headerText: 'ErrorHeaderText'
+  name: "ModalError",
+  props: {
+    warningContent: {
+      type: String
+    },
+    headerText: {
+      type: String
     }
-  },
-  created() {
-    this.message = this.$nuxt.nuxt.err.message;
   },
   methods: {
     close() {
-      this.$router.push('/');
+      this.$nuxt.$emit('close');
     }
   }
 }

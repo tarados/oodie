@@ -27,9 +27,6 @@
           <p>{{ $t(inStock) }} - {{ warning.currentAvailability }}</p>
         </div>
       </section>
-      <div class="modal_petition">
-        <span>{{ $t(commitText) }}</span>
-      </div>
     </modal-vue>
   </div>
 </template>
@@ -42,9 +39,6 @@ export default {
       type: Array
     },
     headerText: {
-      type: String
-    },
-    commitText: {
       type: String
     },
     inStock: {
