@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 
 import requests
+import os
 from .models import Order
 import re
 
-API_URL = 'https://api.novaposhta.ua/v2.0/json/'
+API_URL = os.environ['API_URL']
 
-NOVAPOSHTA_API_KEY = '6eae917af47e70d13360720a31c33d0a'
+NOVAPOSHTA_API_KEY = os.environ['NOVAPOSHTA_API_KEY']
 
 
 def get_city(name=None):

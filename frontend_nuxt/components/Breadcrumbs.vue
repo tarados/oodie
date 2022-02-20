@@ -25,12 +25,6 @@ export default {
       type: Object
     }
   },
-  data() {
-    return {
-      title: '',
-      categoryTitle: ''
-    }
-  },
   computed: {
     breadcrumbs() {
       const result = [];
@@ -40,11 +34,12 @@ export default {
           result.push({title: this.$t('MenuBrandsFriends'), routeName: '/brands'});
         }
         const category = this.$store.getters['categories/getCategory'](this.currentProduct.category);
+        let categoryTitle = '';
         if (category) {
           if (category.title_translate) {
-            this.categoryTitle = this.$t(category.title_translate);
+            categoryTitle = this.$t(category.title_translate);
           } else {
-            this.categoryTitle = category.title;
+            categoryTitle = category.title;
           }
           const idCategory = parseInt(category.id);
           result.push({
@@ -53,12 +48,13 @@ export default {
             routeParams: {slug: category.slug}
           });
         }
+        let title= '';
         if (this.currentProduct.title_translate) {
-          this.title = this.$t(this.currentProduct.title_translate);
+          title = this.$t(this.currentProduct.title_translate);
         } else {
-          this.title = this.currentProduct.title;
+          title = this.currentProduct.title;
         }
-        result.push({title: this.title});
+        result.push({title: title});
       }
       return result;
     },
