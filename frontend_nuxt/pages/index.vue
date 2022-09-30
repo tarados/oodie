@@ -48,30 +48,18 @@ export default {
   middleware: ['products'],
   head() {
     return {
-      title: this.title,
+      title: this.$t('HOODIYALKO'),
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.description
+          content: this.$t('MainDescription')
         },
         {name: 'keywords', content: 'худиялко, бренды друзья'}
       ]
     }
   },
   computed: {
-    title() {
-      if (!this.$store.getters['home/home']) {
-        return '';
-      }
-      return this.$t(this.$store.getters['home/home']);
-    },
-    description() {
-      if (!this.$store.getters['description/description']) {
-        return '';
-      }
-      return this.$t(this.$store.getters['description/description']);
-    },
     slides() {
       if (!this.$store.getters['instagram/slides'].length > 0) {
         return [];
