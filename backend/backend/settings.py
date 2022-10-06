@@ -32,53 +32,54 @@ DEBUG = bool(int(os.environ.get('DEBUG', '0')))
 
 
 ALLOWED_HOSTS = [
-	"hoodiyalko.com.ua",
-	"hoodiyalko.avallon.im",
-	"localhost",
+    "hoodiyalko.com.ua",
+    "hoodiyalko.avallon.im",
+    "localhost",
+    "127.0.0.1",
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.messages',
-	'app',
-	'corsheaders',
-	'django.contrib.staticfiles',
-	'adminsortable2',
-	'sorl.thumbnail',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'app',
+    'corsheaders',
+    'django.contrib.staticfiles',
+    'adminsortable2',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
-	'django.middleware.security.SecurityMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'corsheaders.middleware.CorsMiddleware',
-	'django.middleware.common.CommonMiddleware',
-	# 'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
-	{
-		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'templates')],
-		'APP_DIRS': True,
-		'OPTIONS': {
-			'context_processors': [
-				'django.template.context_processors.debug',
-				'django.template.context_processors.request',
-				'django.contrib.auth.context_processors.auth',
-				'django.contrib.messages.context_processors.messages',
-			],
-		},
-	},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
@@ -86,24 +87,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
+DATABASES = {'default': dj_database_url.config(
+    default=os.environ['DATABASE_URL'])}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-	{
-		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-	},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # Internationalization
@@ -129,7 +131,7 @@ MEDIA_URL = '/media/'
 # STATIC_ROOT = os.environ['STATIC_ROOT']
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_ROOT = os.environ['MEDIA_ROOT']
@@ -137,14 +139,14 @@ MEDIA_ROOT = os.environ['MEDIA_ROOT']
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
-	'sentry-trace',
-	'Access-Control-Allow-Headers',
-	'Access-Control-Allow-Credentials',
+    'sentry-trace',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Credentials',
 ]
 
 CORS_ORIGIN_WHITELIST = [
-	'http://localhost:8080',
-	'https://hoodiyalko.avallon.im',
+    'http://localhost:8080',
+    'https://hoodiyalko.avallon.im',
 ]
 
 SITE_URL = os.environ['SITE_URL']
@@ -160,8 +162,8 @@ EMAIL_USE_TLS = True
 FROM_EMAIL = 'admin <lith2009@mail.ru>'
 
 ADMIN_EMAILS = [
-	"dmitryzvada@gmail.com",
-	"hoodiyalko@gmail.com",
+    "dmitryzvada@gmail.com",
+    "hoodiyalko@gmail.com",
 ]
 
 THUMBNAIL_FORMAT = 'PNG'
@@ -170,12 +172,11 @@ THUMBNAIL_REDIS_HOST = 'localhost'
 THUMBNAIL_REDIS_PORT = 6379
 
 sentry_sdk.init(
-	dsn="https://6df622b069b8449fbe56509e5546f5a6@o498785.ingest.sentry.io/5578609",
-	integrations=[DjangoIntegration()],
-	traces_sample_rate=1.0,
+    dsn="https://6df622b069b8449fbe56509e5546f5a6@o498785.ingest.sentry.io/5578609",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
 
-	# If you wish to associate users to errors (assuming you are using
-	# django.contrib.auth) you may enable sending PII data.
-	send_default_pii=True
+    # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
 )
-
