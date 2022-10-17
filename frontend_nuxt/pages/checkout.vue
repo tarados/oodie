@@ -195,7 +195,7 @@ export default {
       postOfficeRef: "",
       phone: "",
       phoneNum: "",
-      placeholder: "(___)-___-__-__",
+      placeholder: "",
       email: "",
       comment: "",
       title: "CheckoutTitle",
@@ -221,8 +221,7 @@ export default {
     userSurname: { required },
     selectedPayment: { required },
     deliveryMethod: { required },
-    phone: { required, minLength: minLength(13) },
-    phoneBlock: { required },
+    phone: { required, minLength: minLength(10) },
     email: { email },
   },
   computed: {
@@ -244,7 +243,6 @@ export default {
       this.invalidName = this.$v.userName.$invalid;
       this.invalidSurname = this.$v.userSurname.$invalid;
       this.invalidPhone = this.$v.phone.$invalid;
-      this.invalidPhoneBlock = this.$v.phoneBlock.$invalid;
       this.invalidEmail = this.$v.email.$invalid;
       this.invalidDelivery = this.$v.deliveryMethod.$invalid;
       this.invalidPayment = this.$v.selectedPayment.$invalid;
