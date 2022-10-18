@@ -236,6 +236,9 @@ export default {
     warehousesList() {
       return this.$store.getters["warehouses/warehouses"];
     },
+    validPhone(phone) {
+
+    }
   },
   methods: {
     async submitHandler() {
