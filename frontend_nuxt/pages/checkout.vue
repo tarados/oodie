@@ -28,8 +28,8 @@
         <div class="form-content phone">
           <div class="form-content__phone">
             <input
-              v-model="placeholder"
-              :placeholder="placeholder"
+              v-model="phone"
+              placeholder="___-___-__-__"
               class="phone-context"
               @input="handleUserInput"
             />
@@ -195,7 +195,6 @@ export default {
       postOfficeRef: "",
       phone: "",
       phoneNum: "",
-      placeholder: "",
       email: "",
       comment: "",
       title: "CheckoutTitle",
@@ -221,7 +220,7 @@ export default {
     userSurname: { required },
     selectedPayment: { required },
     deliveryMethod: { required },
-    phone: { required, minLength: minLength(10) },
+    phone: { required, minLength: minLength(13) },
     email: { email },
   },
   computed: {
@@ -368,8 +367,6 @@ export default {
         this.invalidPhone = this.$v.phone.required;
       } else {
         this.invalidPhone = !this.$v.phone.required;
-        this.placeholder = this.phone;
-        console.log(this.placeholder);
         localStorage.setItem("phone", newValue);
       }
     },
