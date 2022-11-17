@@ -12,12 +12,13 @@ django-dotenv==1.4.2
 django-liststyle==0.2b0
 django-redis==5.0.0
 django-request==1.5.5
+djangorestframework==3.14.0
 envdir==0.7
 funcy==1.16
 idna==2.10
 oauthlib==3.1.1
-Pillow==9.2.0
-psycopg2-binary==2.8.6
+Pillow==7.1.2
+psycopg2==2.8.5
 python-dateutil==2.8.1
 python3-openid==3.2.0
 pytz==2020.1

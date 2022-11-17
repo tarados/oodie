@@ -6,6 +6,9 @@ import logging
 from itertools import groupby
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+
 from .logic.order_notification import send_order_notification
 from .novaposhta_api import *
 from django.http import JsonResponse, HttpResponse
@@ -14,9 +17,15 @@ from .models import ProductImage, Product, Order, OrderItem, Category, ProductAv
 from .novaposhta_api import invoice, get_errors
 from .insta_parse import parse_insta
 from .log import my_logger
+from .serrializers import UserSerializer
 
 my_logger()
 log = logging.getLogger('my_logger')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 def products(request):
