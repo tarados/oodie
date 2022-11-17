@@ -48,7 +48,7 @@ export default {
   middleware: ['products'],
   head() {
     return {
-      title: this.$t('HOODIYALKO'),
+      title: this.$t('Hoodiyalko'),
       meta: [
         {
           hid: 'description',

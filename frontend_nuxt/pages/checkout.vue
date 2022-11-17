@@ -30,7 +30,7 @@
             <input
               v-model="phone"
               placeholder="___-___-__-__"
-              class="phone-context"
+              :class="{invalid: invalidPhone}"
               @input="handleUserInput"
             />
           </div>
@@ -276,7 +276,7 @@ export default {
         products: productsList,
         username: this.userName,
         userSurname: this.userSurname,
-        phone: this.country + this.phone,
+        phone: this.phone,
         payment: this.selectedPayment,
         delivery: this.deliveryMethod,
         city: this.city,
@@ -286,6 +286,7 @@ export default {
         others: this.address,
         comment: this.comment,
       };
+      console.log(order);
 
       if (!this.$v.$invalid) {
         if (!this.invalidAddress || this.deliveryMethod === "Самовывоз") {
