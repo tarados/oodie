@@ -32,10 +32,9 @@ DEBUG = bool(int(os.environ.get('DEBUG', '0')))
 
 
 ALLOWED_HOSTS = [
-    "hoodiyalko.com.ua",
-    "hoodiyalko.avallon.im",
+    "10.64.59.238",
+    "192.168.0.105",
     "localhost",
-    "127.0.0.1",
 ]
 
 # Application definition
@@ -125,16 +124,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 
 # STATIC_ROOT = os.environ['STATIC_ROOT']
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#]
 
-MEDIA_ROOT = os.environ['MEDIA_ROOT']
+#MEDIA_ROOT = os.environ['MEDIA_ROOT']
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
